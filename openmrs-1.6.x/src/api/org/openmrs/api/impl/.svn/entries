@@ -1,0 +1,140 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/src/api/org/openmrs/api/impl
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+AdministrationServiceImpl.java
+file
+
+
+
+add
+
+BaseOpenmrsService.java
+file
+
+
+
+add
+
+CohortServiceImpl.java
+file
+
+
+
+add
+
+ConceptServiceImpl.java
+file
+
+
+
+add
+
+EncounterServiceImpl.java
+file
+
+
+
+add
+
+FormServiceImpl.java
+file
+
+
+
+add
+
+GlobalLocaleList.java
+file
+
+
+
+add
+
+LocationServiceImpl.java
+file
+
+
+
+add
+
+ObsServiceImpl.java
+file
+
+
+
+add
+
+OrderServiceImpl.java
+file
+
+
+
+add
+
+PatientServiceImpl.java
+file
+
+
+
+add
+
+PatientSetServiceImpl.java
+file
+
+
+
+add
+
+PersonServiceImpl.java
+file
+
+
+
+add
+
+ProgramWorkflowServiceImpl.java
+file
+
+
+
+add
+
+SerializationServiceImpl.java
+file
+
+
+
+add
+
+UserServiceImpl.java
+file
+
+
+
+add
+

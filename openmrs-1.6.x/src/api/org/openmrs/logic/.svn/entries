@@ -1,0 +1,126 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/src/api/org/openmrs/logic
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+Duration.java
+file
+
+
+
+add
+
+LogicContext.java
+file
+
+
+
+add
+
+LogicCriteria.java
+file
+
+
+
+add
+
+LogicException.java
+file
+
+
+
+add
+
+LogicExpression.java
+file
+
+
+
+add
+
+LogicService.java
+file
+
+
+
+add
+
+LogicTransform.java
+file
+
+
+
+add
+
+Rule.java
+file
+
+
+
+add
+
+datasource
+dir
+
+
+
+add
+
+db
+dir
+
+
+
+add
+
+op
+dir
+
+
+
+add
+
+package.html
+file
+
+
+
+add
+
+result
+dir
+
+
+
+add
+
+rule
+dir
+
+
+
+add
+

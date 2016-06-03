@@ -1,0 +1,91 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/src/web/org/openmrs/web/controller/user
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+PrivilegeFormController.java
+file
+
+
+
+add
+
+PrivilegeListController.java
+file
+
+
+
+add
+
+PrivilegeValidator.java
+file
+
+
+
+add
+
+RoleFormController.java
+file
+
+
+
+add
+
+RoleListController.java
+file
+
+
+
+add
+
+RoleValidator.java
+file
+
+
+
+add
+
+UserFormController.java
+file
+
+
+
+add
+
+UserListController.java
+file
+
+
+
+add
+
+UserValidator.java
+file
+
+
+
+add
+

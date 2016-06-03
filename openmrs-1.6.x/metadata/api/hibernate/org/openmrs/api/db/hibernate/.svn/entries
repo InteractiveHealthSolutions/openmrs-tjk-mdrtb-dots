@@ -1,0 +1,385 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/metadata/api/hibernate/org/openmrs/api/db/hibernate
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+Cohort.hbm.xml
+file
+
+
+
+add
+
+Concept.hbm.xml
+file
+
+
+
+add
+
+ConceptAnswer.hbm.xml
+file
+
+
+
+add
+
+ConceptClass.hbm.xml
+file
+
+
+
+add
+
+ConceptDatatype.hbm.xml
+file
+
+
+
+add
+
+ConceptDescription.hbm.xml
+file
+
+
+
+add
+
+ConceptMap.hbm.xml
+file
+
+
+
+add
+
+ConceptName.hbm.xml
+file
+
+
+
+add
+
+ConceptNameTag.hbm.xml
+file
+
+
+
+add
+
+ConceptProposal.hbm.xml
+file
+
+
+
+add
+
+ConceptSet.hbm.xml
+file
+
+
+
+add
+
+ConceptSetDerived.hbm.xml
+file
+
+
+
+add
+
+ConceptSource.hbm.xml
+file
+
+
+
+add
+
+ConceptStateConversion.hbm.xml
+file
+
+
+
+add
+
+ConceptWord.hbm.xml
+file
+
+
+
+add
+
+Drug.hbm.xml
+file
+
+
+
+add
+
+DrugIngredient.hbm.xml
+file
+
+
+
+add
+
+Encounter.hbm.xml
+file
+
+
+
+add
+
+EncounterType.hbm.xml
+file
+
+
+
+add
+
+Field.hbm.xml
+file
+
+
+
+add
+
+FieldAnswer.hbm.xml
+file
+
+
+
+add
+
+FieldType.hbm.xml
+file
+
+
+
+add
+
+Form.hbm.xml
+file
+
+
+
+add
+
+FormField.hbm.xml
+file
+
+
+
+add
+
+GlobalProperty.hbm.xml
+file
+
+
+
+add
+
+Location.hbm.xml
+file
+
+
+
+add
+
+LocationTag.hbm.xml
+file
+
+
+
+add
+
+LoginCredential.hbm.xml
+file
+
+
+
+add
+
+MimeType.hbm.xml
+file
+
+
+
+add
+
+Obs.hbm.xml
+file
+
+
+
+add
+
+Order.hbm.xml
+file
+
+
+
+add
+
+OrderType.hbm.xml
+file
+
+
+
+add
+
+Patient.hbm.xml
+file
+
+
+
+add
+
+PatientIdentifier.hbm.xml
+file
+
+
+
+add
+
+PatientIdentifierType.hbm.xml
+file
+
+
+
+add
+
+PatientProgram.hbm.xml
+file
+
+
+
+add
+
+PatientState.hbm.xml
+file
+
+
+
+add
+
+Person.hbm.xml
+file
+
+
+
+add
+
+PersonAddress.hbm.xml
+file
+
+
+
+add
+
+PersonAttribute.hbm.xml
+file
+
+
+
+add
+
+PersonAttributeType.hbm.xml
+file
+
+
+
+add
+
+PersonName.hbm.xml
+file
+
+
+
+add
+
+Privilege.hbm.xml
+file
+
+
+
+add
+
+Program.hbm.xml
+file
+
+
+
+add
+
+ProgramWorkflow.hbm.xml
+file
+
+
+
+add
+
+ProgramWorkflowState.hbm.xml
+file
+
+
+
+add
+
+Relationship.hbm.xml
+file
+
+
+
+add
+
+RelationshipType.hbm.xml
+file
+
+
+
+add
+
+Role.hbm.xml
+file
+
+
+
+add
+
+SerializedObject.hbm.xml
+file
+
+
+
+add
+
+User.hbm.xml
+file
+
+
+
+add
+

@@ -1,0 +1,623 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/web/WEB-INF/view/scripts/dojo/src/widget/templates
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+DemoEngine.html
+file
+
+
+
+add
+
+HslColorPicker.svg
+file
+
+
+
+add
+
+HtmlButtonTemplate.css
+file
+
+
+
+add
+
+HtmlButtonTemplate.html
+file
+
+
+
+add
+
+HtmlCheckBox.html
+file
+
+
+
+add
+
+HtmlCiviCrmDatePicker.html
+file
+
+
+
+add
+
+HtmlComboBox.css
+file
+
+
+
+add
+
+HtmlComboBox.html
+file
+
+
+
+add
+
+HtmlComboButtonTemplate.html
+file
+
+
+
+add
+
+HtmlContextMenuTemplate.html
+file
+
+
+
+add
+
+HtmlDatePicker.css
+file
+
+
+
+add
+
+HtmlDatePicker.html
+file
+
+
+
+add
+
+HtmlDialog.html
+file
+
+
+
+add
+
+HtmlDocPane.css
+file
+
+
+
+add
+
+HtmlDocPane.html
+file
+
+
+
+add
+
+HtmlDropDownButtonTemplate.html
+file
+
+
+
+add
+
+HtmlEditorToolbar.css
+file
+
+
+
+add
+
+HtmlEditorToolbar.html
+file
+
+
+
+add
+
+HtmlEditorToolbarOneline.html
+file
+
+
+
+add
+
+HtmlFisheyeList.css
+file
+
+
+
+add
+
+HtmlFloatingPane.css
+file
+
+
+
+add
+
+HtmlFloatingPane.html
+file
+
+
+
+add
+
+HtmlInlineEditBox.css
+file
+
+
+
+add
+
+HtmlInlineEditBox.html
+file
+
+
+
+add
+
+HtmlMenu2.css
+file
+
+
+
+add
+
+HtmlMenuItemTemplate.html
+file
+
+
+
+add
+
+HtmlMonthlyCalendar.css
+file
+
+
+
+add
+
+HtmlMonthlyCalendar.html
+file
+
+
+
+add
+
+HtmlResizableTextarea.css
+file
+
+
+
+add
+
+HtmlResizableTextarea.html
+file
+
+
+
+add
+
+HtmlResizeHandle.css
+file
+
+
+
+add
+
+HtmlShow.css
+file
+
+
+
+add
+
+HtmlShow.html
+file
+
+
+
+add
+
+HtmlShowSlide.css
+file
+
+
+
+add
+
+HtmlShowSlide.html
+file
+
+
+
+add
+
+HtmlSimpleDropdownButtons.css
+file
+
+
+
+add
+
+HtmlSlideShow.css
+file
+
+
+
+add
+
+HtmlSlideShow.html
+file
+
+
+
+add
+
+HtmlSlider.css
+file
+
+
+
+add
+
+HtmlSlider.html
+file
+
+
+
+add
+
+HtmlSliderHorizontal.html
+file
+
+
+
+add
+
+HtmlSliderVertical.html
+file
+
+
+
+add
+
+HtmlSpinner.css
+file
+
+
+
+add
+
+HtmlSpinner.html
+file
+
+
+
+add
+
+HtmlSplitContainer.css
+file
+
+
+
+add
+
+HtmlTabContainer.css
+file
+
+
+
+add
+
+HtmlTabContainer.html
+file
+
+
+
+add
+
+HtmlTaskBar.css
+file
+
+
+
+add
+
+HtmlTaskBarItemTemplate.html
+file
+
+
+
+add
+
+HtmlTimePicker.css
+file
+
+
+
+add
+
+HtmlTimePicker.html
+file
+
+
+
+add
+
+HtmlToolbar.css
+file
+
+
+
+add
+
+HtmlTooltipTemplate.css
+file
+
+
+
+add
+
+HtmlTooltipTemplate.html
+file
+
+
+
+add
+
+Menu.css
+file
+
+
+
+add
+
+PopUpButton.css
+file
+
+
+
+add
+
+TitlePane.html
+file
+
+
+
+add
+
+Tree.css
+file
+
+
+
+add
+
+Wizard.css
+file
+
+
+
+add
+
+Wizard.html
+file
+
+
+
+add
+
+buttons
+dir
+
+
+
+add
+
+check_disabled_off.gif
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+check_disabled_on.gif
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+check_hover_off.gif
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+check_hover_on.gif
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+check_off.gif
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+check_on.gif
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+decrementMonth.gif
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+decrementWeek.gif
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+grabCorner.gif
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+images
+dir
+
+
+
+add
+
+incrementMonth.gif
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+incrementWeek.gif
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+richtextframe.html
+file
+
+
+
+add
+

@@ -1,0 +1,231 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/test/api/org/openmrs/api/include
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+AdministrationServiceTest-general.xml
+file
+
+
+
+add
+
+AdministrationServiceTest-globalproperties.xml
+file
+
+
+
+add
+
+CohortServiceTest-cohort.xml
+file
+
+
+
+add
+
+ConceptServiceTest-initialConcepts.xml
+file
+
+
+
+add
+
+ConceptServiceTest-numerics.xml
+file
+
+
+
+add
+
+ConceptServiceTest-tags.xml
+file
+
+
+
+add
+
+ConceptServiceTest-words.xml
+file
+
+
+
+add
+
+EncounterServiceTest-initialData.xml
+file
+
+
+
+add
+
+FormServiceTest-formFields.xml
+file
+
+
+
+add
+
+FormServiceTest-initialFieldTypes.xml
+file
+
+
+
+add
+
+LocationServiceTest-initialData.xml
+file
+
+
+
+add
+
+ObsServiceTest-complex.xml
+file
+
+
+
+add
+
+ObsServiceTest-initial.xml
+file
+
+
+
+add
+
+PatientServiceTest-createPatient.xml
+file
+
+
+
+add
+
+PatientServiceTest-createPatientIdentifierType.xml
+file
+
+
+
+add
+
+PatientServiceTest-createPatientValidIdent.xml
+file
+
+
+
+add
+
+PatientServiceTest-findPatients.xml
+file
+
+
+
+add
+
+PatientServiceTest-lotsOfJohns.xml
+file
+
+
+
+add
+
+PatientServiceTest-usersWhoArePatients.xml
+file
+
+
+
+add
+
+PatientSetServiceTest-extraData.xml
+file
+
+
+
+add
+
+PersonServiceTest-createPersonPurgeVoidTest.xml
+file
+
+
+
+add
+
+PersonServiceTest-createRelationship.xml
+file
+
+
+
+add
+
+PersonServiceTest-createRetiredPersonAttributeType.xml
+file
+
+
+
+add
+
+PersonServiceTest-createRetiredRelationship.xml
+file
+
+
+
+add
+
+PersonServiceTest-extranames.xml
+file
+
+
+
+add
+
+PersonServiceTest-names.xml
+file
+
+
+
+add
+
+ProgramWorkflowServiceTest-createPatientProgram.xml
+file
+
+
+
+add
+
+UserServiceTest.xml
+file
+
+
+
+add
+
+formfield.xml
+file
+
+
+
+add
+

@@ -1,0 +1,63 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/metadata/api/hibernate
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+c3p0-config.xml
+file
+
+
+
+add
+
+ehcache.xml
+file
+
+
+
+add
+
+hibernate.cfg.xml
+file
+
+
+
+add
+
+hibernate.default.properties
+file
+
+
+
+add
+
+org
+dir
+
+
+
+add
+

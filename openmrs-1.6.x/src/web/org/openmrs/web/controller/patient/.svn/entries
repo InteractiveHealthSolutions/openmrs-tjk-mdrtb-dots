@@ -1,0 +1,98 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/src/web/org/openmrs/web/controller/patient
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+MergePatientsFormController.java
+file
+
+
+
+add
+
+NewPatientFormController.java
+file
+
+
+
+add
+
+PatientDashboardController.java
+file
+
+
+
+add
+
+PatientFormController.java
+file
+
+
+
+add
+
+PatientIdentifierTypeFormController.java
+file
+
+
+
+add
+
+PatientIdentifierTypeListController.java
+file
+
+
+
+add
+
+PatientIdentifierTypeValidator.java
+file
+
+
+
+add
+
+PatientListController.java
+file
+
+
+
+add
+
+ShortPatientModel.java
+file
+
+
+
+add
+
+TribeFormController.java
+file
+
+
+
+add
+

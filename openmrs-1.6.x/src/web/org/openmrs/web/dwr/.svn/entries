@@ -1,0 +1,266 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/src/web/org/openmrs/web/dwr
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+CohortListItem.java
+file
+
+
+
+add
+
+ConceptDrugListItem.java
+file
+
+
+
+add
+
+ConceptListItem.java
+file
+
+
+
+add
+
+DWRAdministrationService.java
+file
+
+
+
+add
+
+DWRCohortService.java
+file
+
+
+
+add
+
+DWRConceptService.java
+file
+
+
+
+add
+
+DWREncounterService.java
+file
+
+
+
+add
+
+DWRException.java
+file
+
+
+
+add
+
+DWRFormService.java
+file
+
+
+
+add
+
+DWRObsService.java
+file
+
+
+
+add
+
+DWROrderService.java
+file
+
+
+
+add
+
+DWRPatientService.java
+file
+
+
+
+add
+
+DWRPatientSetService.java
+file
+
+
+
+add
+
+DWRPersonService.java
+file
+
+
+
+add
+
+DWRProgramWorkflowService.java
+file
+
+
+
+add
+
+DWRRelationshipService.java
+file
+
+
+
+add
+
+DWRUserService.java
+file
+
+
+
+add
+
+DrugOrderListItem.java
+file
+
+
+
+add
+
+DrugSetItem.java
+file
+
+
+
+add
+
+EncounterListItem.java
+file
+
+
+
+add
+
+EnteredField.java
+file
+
+
+
+add
+
+FieldListItem.java
+file
+
+
+
+add
+
+FormFieldListItem.java
+file
+
+
+
+add
+
+FormListItem.java
+file
+
+
+
+add
+
+ListItem.java
+file
+
+
+
+add
+
+LocationListItem.java
+file
+
+
+
+add
+
+ObsListItem.java
+file
+
+
+
+add
+
+OpenmrsDWRServlet.java
+file
+
+
+
+add
+
+PatientListItem.java
+file
+
+
+
+add
+
+PatientProgramItem.java
+file
+
+
+
+add
+
+PatientStateItem.java
+file
+
+
+
+add
+
+PersonListItem.java
+file
+
+
+
+add
+
+RelationshipListItem.java
+file
+
+
+
+add
+
+UserListItem.java
+file
+
+
+
+add
+

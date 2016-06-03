@@ -1,0 +1,294 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/lib
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+ant-contrib
+dir
+
+
+
+add
+
+antlr
+dir
+
+
+
+add
+
+asm
+dir
+
+
+
+add
+
+benerator
+dir
+
+
+
+add
+
+c3p0
+dir
+
+
+
+add
+
+cglib
+dir
+
+
+
+add
+
+commons-beanutils
+dir
+
+
+
+add
+
+commons-collections
+dir
+
+
+
+add
+
+commons-digester
+dir
+
+
+
+add
+
+commons-fileupload
+dir
+
+
+
+add
+
+commons-io
+dir
+
+
+
+add
+
+commons-lang
+dir
+
+
+
+add
+
+commons-pool
+dir
+
+
+
+add
+
+dom4j
+dir
+
+
+
+add
+
+dwr
+dir
+
+
+
+add
+
+ehcache
+dir
+
+
+
+add
+
+hibernate
+dir
+
+
+
+add
+
+hl7api
+dir
+
+
+
+add
+
+jakarta-log4j
+dir
+
+
+
+add
+
+jakarta-taglibs
+dir
+
+
+
+add
+
+jfreechart
+dir
+
+
+
+add
+
+jstl
+dir
+
+
+
+add
+
+jta
+dir
+
+
+
+add
+
+junit
+dir
+
+
+
+add
+
+lib.properties
+file
+
+
+
+add
+
+liquibase
+dir
+
+
+
+add
+
+mail
+dir
+
+
+
+add
+
+mysql-connector-java
+dir
+
+
+
+add
+
+poi
+dir
+
+
+
+add
+
+saxon
+dir
+
+
+
+add
+
+simple
+dir
+
+
+
+add
+
+slf4j
+dir
+
+
+
+add
+
+spring-framework
+dir
+
+
+
+add
+
+stax
+dir
+
+
+
+add
+
+tomcat
+dir
+
+
+
+add
+
+velocity
+dir
+
+
+
+add
+
+xerces
+dir
+
+
+
+add
+
+xstream
+dir
+
+
+
+add
+

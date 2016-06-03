@@ -1,0 +1,98 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/web/WEB-INF/view/admin/patients
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+findDuplicatePatients.jsp
+file
+
+
+
+add
+
+include
+dir
+
+
+
+add
+
+index.jsp
+file
+
+
+
+add
+
+localHeader.jsp
+file
+
+
+
+add
+
+mergePatientsForm.jsp
+file
+
+
+
+add
+
+newPatientForm.jsp
+file
+
+
+
+add
+
+patientForm.jsp
+file
+
+
+
+add
+
+patientIdentifierTypeForm.jsp
+file
+
+
+
+add
+
+patientIdentifierTypeList.jsp
+file
+
+
+
+add
+
+tribeList.jsp
+file
+
+
+
+add
+

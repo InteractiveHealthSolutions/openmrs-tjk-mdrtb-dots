@@ -1,0 +1,189 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/web/WEB-INF/view/portlets
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+addPersonForm.jsp
+file
+
+
+
+add
+
+addressLayout.jsp
+file
+
+
+
+add
+
+cohort.jsp
+file
+
+
+
+add
+
+customMostRecentObs.jsp
+file
+
+
+
+add
+
+findObservation.jsp
+file
+
+
+
+add
+
+findPatient.jsp
+file
+
+
+
+add
+
+globalProperties.jsp
+file
+
+
+
+add
+
+login.jsp
+file
+
+
+
+add
+
+nameLayout.jsp
+file
+
+
+
+add
+
+patientDemographics.jsp
+file
+
+
+
+add
+
+patientEncounters.jsp
+file
+
+
+
+add
+
+patientGraphs.jsp
+file
+
+
+
+add
+
+patientHeader.jsp
+file
+
+
+
+add
+
+patientIdentifiers.jsp
+file
+
+
+
+add
+
+patientOverview.jsp
+file
+
+
+
+add
+
+patientPrograms.jsp
+file
+
+
+
+add
+
+patientRegimen.jsp
+file
+
+
+
+add
+
+patientRegimenCompleted.jsp
+file
+
+
+
+add
+
+patientRegimenCurrent.jsp
+file
+
+
+
+add
+
+personFormEntry.jsp
+file
+
+
+
+add
+
+personHeader.jsp
+file
+
+
+
+add
+
+personRelationships.jsp
+file
+
+
+
+add
+
+welcome.jsp
+file
+
+
+
+add
+

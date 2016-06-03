@@ -1,0 +1,91 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/web/WEB-INF/view/admin/users
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+alertForm.jsp
+file
+
+
+
+add
+
+alertList.jsp
+file
+
+
+
+add
+
+localHeader.jsp
+file
+
+
+
+add
+
+privilegeForm.jsp
+file
+
+
+
+add
+
+privilegeList.jsp
+file
+
+
+
+add
+
+roleForm.jsp
+file
+
+
+
+add
+
+roleList.jsp
+file
+
+
+
+add
+
+userForm.jsp
+file
+
+
+
+add
+
+userList.jsp
+file
+
+
+
+add
+

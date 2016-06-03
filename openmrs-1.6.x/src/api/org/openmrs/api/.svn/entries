@@ -1,0 +1,301 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/src/api/org/openmrs/api
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+APIAuthenticationException.java
+file
+
+
+
+add
+
+APIException.java
+file
+
+
+
+add
+
+AdministrationService.java
+file
+
+
+
+add
+
+BlankIdentifierException.java
+file
+
+
+
+add
+
+CohortService.java
+file
+
+
+
+add
+
+ConceptService.java
+file
+
+
+
+add
+
+ConceptsLockedException.java
+file
+
+
+
+add
+
+DataSetService.java
+file
+
+
+
+add
+
+DuplicateIdentifierException.java
+file
+
+
+
+add
+
+EncounterService.java
+file
+
+
+
+add
+
+EventListeners.java
+file
+
+
+
+add
+
+FormService.java
+file
+
+
+
+add
+
+GlobalPropertyListener.java
+file
+
+
+
+add
+
+IdentifierNotUniqueException.java
+file
+
+
+
+add
+
+InsufficientIdentifiersException.java
+file
+
+
+
+add
+
+InvalidCharactersPasswordException.java
+file
+
+
+
+add
+
+InvalidCheckDigitException.java
+file
+
+
+
+add
+
+InvalidIdentifierFormatException.java
+file
+
+
+
+add
+
+LocationService.java
+file
+
+
+
+add
+
+MissingRequiredIdentifierException.java
+file
+
+
+
+add
+
+ObsService.java
+file
+
+
+
+add
+
+OpenmrsService.java
+file
+
+
+
+add
+
+OrderService.java
+file
+
+
+
+add
+
+PasswordException.java
+file
+
+
+
+add
+
+PatientIdentifierException.java
+file
+
+
+
+add
+
+PatientService.java
+file
+
+
+
+add
+
+PatientSetService.java
+file
+
+
+
+add
+
+PersonService.java
+file
+
+
+
+add
+
+ProgramWorkflowService.java
+file
+
+
+
+add
+
+ReportService.java
+file
+
+
+
+add
+
+SerializationService.java
+file
+
+
+
+add
+
+ShortPasswordException.java
+file
+
+
+
+add
+
+UserService.java
+file
+
+
+
+add
+
+WeakPasswordException.java
+file
+
+
+
+add
+
+context
+dir
+
+
+
+add
+
+db
+dir
+
+
+
+add
+
+handler
+dir
+
+
+
+add
+
+impl
+dir
+
+
+
+add
+
+package.html
+file
+
+
+
+add
+

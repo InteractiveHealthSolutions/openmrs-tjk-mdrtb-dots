@@ -1,0 +1,91 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/web/WEB-INF/view/admin/maintenance
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+auditPatientIdentifiers.jsp
+file
+
+
+
+add
+
+databaseChangesInfo.jsp
+file
+
+
+
+add
+
+globalPropsForm.jsp
+file
+
+
+
+add
+
+implementationIdForm.jsp
+file
+
+
+
+add
+
+localHeader.jsp
+file
+
+
+
+add
+
+mrnGenerator.jsp
+file
+
+
+
+add
+
+quickReport.jsp
+file
+
+
+
+add
+
+serverLog.jsp
+file
+
+
+
+add
+
+systemInfo.jsp
+file
+
+
+
+add
+

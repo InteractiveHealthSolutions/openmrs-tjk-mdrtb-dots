@@ -1,0 +1,161 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/web/WEB-INF
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+bundledModules
+dir
+
+
+
+add
+
+dwr-modules.xml
+file
+
+
+
+add
+
+dwr.xml
+file
+
+
+
+add
+
+messages.properties
+file
+
+
+
+add
+
+messages_en_GB.properties
+file
+
+
+
+add
+
+messages_es.properties
+file
+
+
+
+add
+
+messages_fr.properties
+file
+
+
+
+add
+
+messages_it.properties
+file
+
+
+
+add
+
+messages_kh.properties
+file
+
+
+
+add
+
+messages_pt.properties
+file
+
+
+
+add
+
+messages_ru.properties
+file
+
+
+
+add
+
+openmrs-servlet.xml
+file
+
+
+
+add
+
+openmrs_static_content-servlet.xml
+file
+
+
+
+add
+
+standard_theme.properties
+file
+
+
+
+add
+
+taglibs
+dir
+
+
+
+add
+
+tags
+dir
+
+
+
+add
+
+template
+dir
+
+
+
+add
+
+view
+dir
+
+
+
+add
+
+web.xml
+file
+
+
+
+add
+

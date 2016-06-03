@@ -1,0 +1,77 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/web/test
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+dojo.jsp
+file
+
+
+
+add
+
+dojo_test.jsp
+file
+
+
+
+add
+
+dwr_message_test.jsp
+file
+
+
+
+add
+
+mailer_test.jsp
+file
+
+
+
+add
+
+message_sender_test.jsp
+file
+
+
+
+add
+
+readme.txt
+file
+
+
+
+add
+
+velocity_test.jsp
+file
+
+
+
+add
+

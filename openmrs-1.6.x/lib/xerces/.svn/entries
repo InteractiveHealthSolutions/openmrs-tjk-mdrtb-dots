@@ -1,0 +1,126 @@
+10
+
+dir
+0
+http://199.172.1.29/svn/openmrstjk/lib/xerces
+http://199.172.1.29/svn
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+80b92b61-5a4c-4797-adb2-c77371d9bb0d
+
+LICENSE
+file
+
+
+
+add
+
+LICENSE-SAX.html
+file
+
+
+
+add
+
+LICENSE.DOM-documentation.html
+file
+
+
+
+add
+
+LICENSE.DOM-software.html
+file
+
+
+
+add
+
+LICENSE.resolver.txt
+file
+
+
+
+add
+
+NOTICE
+file
+
+
+
+add
+
+resolver.jar
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+xercesImpl.jar
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+xercesSamples.jar
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+xml-apis.jar
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
