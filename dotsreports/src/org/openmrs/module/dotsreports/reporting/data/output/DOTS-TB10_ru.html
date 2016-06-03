@@ -1,0 +1,142 @@
+﻿<html>
+	<head>
+		<title>ТБ 10</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;border: 1px solid #000000}
+			border {border: 1px solid #000000}
+
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%" border="0"><tr>
+				
+				<td width="90%" align="center" style="font-size:14px; font-weight:bold;border:0px">
+						Квартальный отчет о негативации мокроты после завершения интенсивной фазы лечения 
+				</td>
+				<td width="10%" align="right" style="font-size:14px; font-weight:bold;border:0px" valign="top">ТБ 10</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%" style="border: 1px #000000 solid;">
+				<tr>
+					<td>Район/код района:  #location# &nbsp;&nbsp; Лечебное учреждение:__________<br><br>
+					Ф.И.О./подпись районного координатора/фтизиатра _____________ &nbsp;&nbsp; подпись ____________</td>
+				
+					<td>Больные, зарегистрированные в #quarter# квартале года #year#<br>
+					Дата заполнения отчета:  #generationDate|dd/MMM/yyyy#<br>
+					Completed By:  #generatedBy#</td>
+				</tr>
+			</table>
+			
+			<table style="border: 1px #000000 solid;" cellpadding="5" width="100%">
+				<tr>
+					<td rowspan="3">Типы пациентов</td>
+					<td rowspan="3">Число зарегистрированных случаев с МТ+</td>
+					<td colspan="8">Негативация мокроты</td>
+					<td rowspan="3">Мазок остался положительным</td>
+					<td rowspan="3">Не сделан контрольный мазок</td>
+					
+				</tr>
+				<tr>
+					<td colspan="2">Через 2 мес.</td>
+					<td colspan="2">Через 3 мес.</td> 
+					<td colspan="2">Через 4 мес.</td>
+					<td colspan="2">Всего</td>
+				</tr>
+				<tr>
+					<td>№</td>
+					<td>%</td>
+					<td>№</td>
+					<td>%</td>
+					<td>№</td>
+					<td>%</td>
+					<td>№</td>
+					<td>%</td>
+				</tr>
+				<tr>
+					<td>Новые случаи</td>
+					<td>#labDetections.New.Positive#</td>
+					<td>#labDetections.New.ConvertedAtTwo#</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.New.ConvertedAtThree#</td>
+					<td>&nbsp;</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.New.NotConverted#</td>
+					<td>#labDetections.New.NoFollowup#</td>
+					
+				</tr>
+				<tr>
+					<td>Рецидивы</td>
+					<td>#labDetections.Relapse.Positive#</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td>#labDetections.Relapse.ConvertedAtThree#</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.Relapse.ConvertedAtFour#</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.Relapse.NotConverted#</td>
+					<td>#labDetections.Relapse.NoFollowup#</td>
+					
+				</tr>
+				<tr>
+					<td>Неудача лечения</td>
+					<td>#labDetections.AfterFailure.Positive#</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td>#labDetections.AfterFailure.ConvertedAtThree#</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.AfterFailure.ConvertedAtFour#</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.AfterFailure.NotConverted#</td>
+					<td>#labDetections.AfterFailure.NoFollowup#</td>
+					
+				</tr>
+				<tr>
+					<td>Нарушение режима</td>
+					<td>#labDetections.AfterDefault.Positive#</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td>#labDetections.AfterDefault.ConvertedAtThree#</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.AfterDefault.ConvertedAtFour#</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.AfterDefault.NotConverted#</td>
+					<td>#labDetections.AfterDefault.NoFollowup#</td>
+					
+				</tr>
+				<tr>
+					<td>Другие</td>
+					<td>#labDetections.Other.Positive#</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td>#labDetections.Other.ConvertedAtThree#</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.Other.ConvertedAtFour#</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.Other.NotConverted#</td>
+					<td>#labDetections.Other.NoFollowup#</td>
+					
+				</tr>
+			</table>
+			<p>Из числа новых случаев, которым не сделана контрольная микроскопия мокроты: умершие (из гр.10, стр.1) #lowerSet.NoFollowupDead# 1, переведенные (выбывшие)<br>
+			(из гр.10, стр.1) #lowerSet.NoFollowupTransferOut# 2, прерывание лечения (из гр.10, стр.1) #lowerSet.NoFollowupDefaulted#, нет мокроты (из гр.10, стр.1) _______4, диагноз активного туберкулеза<br>снят (из гр.10, стр.1) #lowerSet.NoFollowupCanceled# 5.<br><br>
+			Примечание: ____________________________________________________________________________________________________________________________________<br>
+			__________________________________________________________________________________________________________________________________________<br>
+			__________________________________________________________________________________________________________________________________________<br>
+			__________________________________________________________________________________________________________________________________________
+			</p>
+		</div>
+	</body>
+</html>

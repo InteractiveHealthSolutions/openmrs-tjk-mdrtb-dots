@@ -1,0 +1,185 @@
+﻿<html>
+	<head>
+		<title>ТБ07-у</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;}
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%"><tr>
+				<td width="10%">&nbsp;</td>
+				<td width="50%" align="center" style="font-size:14px; font-weight:bold;">Ҳисоботи семоҳа оид ба дарёфти ҳодисаҳои Сили МД ва оғози табобати беморон бо реҷаи ДЗҚД</td>
+				<td width="10%" align="right">ТБ07-у</td>
+			</tr></table>
+			<br/><br/>
+			<center>
+			<table border="1" width="80%">
+				<tr>
+					<td>Вилоят/ноҳия&nbsp;<u> #location# </u><br/>
+					Беморони дарёфтшуда дар<br/>
+					семоҳаи&nbsp;<u> #quarter# </u>&nbsp;соли&nbsp;<u> #year# </u>  
+					</td>
+					<td>Ному насаби хамоҳангсози вилоят/ноҳия<br/>
+					_________________________________<br/>
+					Сана ____________________________ <br/>
+					</td>
+				</tr>
+			</table>
+			</center>
+			<br/>
+			<br/>
+			<span style="font-weight:bold;">
+				1. Шумораи беморони сили бо МД дарёфтшуда дар муддати семоҳа<br/><br/>
+				<center><table>
+					<tr>
+						<td>МР/ШМС</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.mdr#
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>ШВМС</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.xdr#
+						</td>
+					</tr>
+				</table></center>
+			</span>
+			<br/><br/>
+			
+			<span style="font-weight:bold;">
+				2. Шумораи беморони МР/ШМС, ки табобатро бо  ДЗКД дар семоҳа оғоз намуданд 
+			</span>
+			<br/><br/>
+			<table border="1" cellpadding="5" width="100%">
+				<tr align="center">
+				    <td>&nbsp;</td>
+					<td colspan="5">Сили шушҳо</td>
+					<td rowspan="3">Дигар намудҳо* (бо таърихи номаълум)*</td>
+					<td rowspan="3">Ҳамагӣ</td>
+				</tr>
+				<tr align="center">
+					<td rowspan="2">&nbsp;</td>
+					<td rowspan="2">Беморони бори авал дарёфтгардида</td> <!-- new -->
+					<td colspan="4">Пештар табобат гирифта</td> <!-- treated -->
+				</tr>
+				<tr align="center">
+					<td>Хурӯҷ</td> <!-- relapse -->
+					<td>Баъди кандашавӣ аз табобат</td> <!-- after default -->
+					<td>Баъди табобати бесамар бо реҷаи I</td> <!-- previously treated with Cat 1 -->
+					<td>Баъди табобати бесамар бо реҷаи II</td>  <!-- previously treated with Cat 2 -->
+				</tr>
+				<tr>
+				    <td>МР/ШМС</td>
+					<td>#startedTreatment.mdr.New#</td>
+					<td>#startedTreatment.mdr.Relapse#</td>
+					<td>#startedTreatment.mdr.AfterDefault#</td>
+					<td>#startedTreatment.mdr.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.mdr.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.mdr.Other#</td>
+					<td>#startedTreatment.mdr.newTotal#</td>
+				</tr>
+				<tr>
+				    <td>ШПР</td>
+					<td>#startedTreatment.xdr.New#</td>
+					<td>#startedTreatment.xdr.Relapse#</td>
+					<td>#startedTreatment.xdr.AfterDefault#</td>
+					<td>#startedTreatment.xdr.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.xdr.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.xdr.Other#</td>
+					<td>#startedTreatment.xdr.newTotal#</td>
+				</tr>
+				<tr>
+				    <td>Аз онҳо ВНМО</td>
+					<td>#startedTreatment.tbhiv.New#</td>
+					<td>#startedTreatment.tbhiv.Relapse#</td>
+					<td>#startedTreatment.tbhiv.AfterDefault#</td>
+					<td>#startedTreatment.tbhiv.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.tbhiv.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.tbhiv.Other#</td>
+					<td>#startedTreatment.tbhiv.newTotal#</td>
+				</tr>
+				<tr>
+				    <td>Аз онҳо кӯдакон</td>
+					<td>#startedTreatment.children.New#</td>
+					<td>#startedTreatment.children.Relapse#</td>
+					<td>#startedTreatment.children.AfterDefault#</td>
+					<td>#startedTreatment.children.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.children.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.children.Other#</td>
+					<td>#startedTreatment.children.newTotal#</td>
+				</tr>
+				
+			</table>
+			<br/><br/>
+			
+			<span style="font-weight:bold;" align="left">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Шумораи беморони ШМС, ки пештар ДЗҚД қабул намудаанд
+			</span>
+			<br/><br/>
+			
+			
+			<center>
+			<table border="1" cellpadding="5" width="80%">
+				<tr align="center">
+				    <td rowspan="2">&nbsp;</td>
+					<td colspan="4">Пештар табобат гирифта</td>
+					<td>Ҳамагӣ</td>
+					
+				</tr>
+				<tr align="center">
+					<td>Хуруҷи ШМС</td>
+					<td>Баъди кандашавӣ аз табобати ШМС</td>
+					<td>Табобати бесамари ШМС</td>
+					<td>ШВМС</td>
+					<td>&nbsp;</td>
+					
+					
+				</tr>
+				
+				<tr>
+				    <td>ШМС</td>
+					<td>#startedTreatment.mdr.relapseMDR#</td>
+					<td>#startedTreatment.mdr.defaultMDR#</td>
+					<td>#startedTreatment.mdr.failureMDR#</td>
+					<td>#startedTreatment.mdr.prevXDR#</td>
+					<td>#startedTreatment.mdr.prevTotal#</td>
+					
+					
+				</tr>
+				<tr>
+				    <td>ШВМС</td>
+					<td>#startedTreatment.xdr.relapseMDR#</td>
+					<td>#startedTreatment.xdr.defaultMDR#</td>
+					<td>#startedTreatment.xdr.failureMDR#</td>
+					<td>#startedTreatment.xdr.prevXDR#</td>
+					<td>#startedTreatment.xdr.prevTotal#</td>
+					
+				</tr>
+				<tr>
+				    <td>Аз он ВНМО</td>
+					<td>#startedTreatment.tbhiv.relapseMDR#</td>
+					<td>#startedTreatment.tbhiv.defaultMDR#</td>
+					<td>#startedTreatment.tbhiv.failureMDR#</td>
+					<td>#startedTreatment.tbhiv.prevXDR#</td>
+					<td>#startedTreatment.tbhiv.prevTotal#</td>
+					
+				</tr>
+				<tr>
+				    <td>Аз он кӯдакон</td>
+					<td>#startedTreatment.children.relapseMDR#</td>
+					<td>#startedTreatment.children.defaultMDR#</td>
+					<td>#startedTreatment.children.failureMDR#</td>
+					<td>#startedTreatment.children.prevXDR#</td>
+					<td>#startedTreatment.children.prevTotal#</td>
+					
+				</tr>
+				
+			</table>
+			</center>
+			
+			<br/><br/>			<table width="100%"><tr><td align="right">Имзо ______________________________</td></tr></table>
+		</div>
+	</body>
+</html>

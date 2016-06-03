@@ -1,0 +1,87 @@
+<html>
+	<head>
+		<title>Forme 05 d'OMS</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;}
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%"><tr>
+				<td width="10%">&nbsp;</td>
+				<td width="50%" align="center" style="font-size:14px; font-weight:bold;">Rapport de dépistage de la TB-MR et de l’instauration du traitement de catégorie IV</td>
+				<td width="10%" align="right">Forme 05</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%">
+				<tr>
+					<td>Nom de l’Institution:  #locationName#</td>
+					<td>Nom du  Responsable:  ________________</td>
+				</tr>
+				<tr>
+					<td>Patients identifiés lors du Q#quarter# #year# (#startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#)</td>
+					<td>Date: #generationDate|dd/MMM/yyyy#</td>
+				</tr>
+			</table>
+			<br/>
+			<br/>
+			<span style="font-weight:bold;">
+				1. Nombre de patients chez lesquels on a dépisté une TB-PolyR/TB-MR/TB-UR au laboratoire (par date des résultats dans le registre du laboratoire) au cours du trimestre:<br/><br/>
+				<table>
+					<tr>
+						<td>TB-PolyR</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.polydr#
+						</td>
+						<td>TB-MR</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.mdr#
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>TB-UR</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.xdr#
+						</td>
+					</tr>
+				</table>
+			</span>
+			<br/><br/>
+			
+			<span style="font-weight:bold;">
+				2. Nombre de patients atteints de TB-MR qui ont commencé un traitement de catégorie IV au cours du trimestre 
+			</span>
+			<br/><br/>
+			<table border="1" cellpadding="5" width="100%">
+				<tr>
+					<td></td>
+					<td>Nouveaux Cas</td>
+					<td>Patients ayant déjà reçu des antituberculeux de 1ère intention</td>
+					<td>Patients ayant déjà reçu des antituberculeux de 2e intention</td>
+					<td>Inconnu</td>
+				</tr>
+				<tr>
+					<td>Cas Confirmés</td>
+					<td>#startedTreatment.confirmed.New#</td>
+					<td>#startedTreatment.confirmed.PreviousFirstLine#</td>
+					<td>#startedTreatment.confirmed.PreviousSecondLine#</td>
+					<td>#startedTreatment.confirmed.Unknown#</td>
+				</tr>
+				<tr>
+					<td>Cas Suspectés</td>
+					<td>#startedTreatment.suspected.New#</td>
+					<td>#startedTreatment.suspected.PreviousFirstLine#</td>
+					<td>#startedTreatment.suspected.PreviousSecondLine#</td>
+					<td>#startedTreatment.suspected.Unknown#</td>
+				</tr>
+			</table>
+			<br/><br/>
+			1er trimestre: 1 Janvier-31 Mars<br/>
+			2e trimestre: 1 Avril-30 Juin<br/>
+			3ème trimestre: 1 Juillet-30 Septembre<br/>
+			4e trimestre: 1 Octobre-31 Décembre<br/>
+			<br/><br/>
+			<table width="100%"><tr><td align="right">Signature ______________________________</td></tr></table>
+		</div>
+	</body>
+</html>

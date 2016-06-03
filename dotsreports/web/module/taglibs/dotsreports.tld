@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+
+	<description>DOTS Reports Taglib</description>
+	<tlib-version>0.1</tlib-version>
+	<short-name>dotsreports</short-name>
+
+	<tag>
+		<description>
+			Regimen History Table
+		</description>
+		<name>regimenHistory</name>
+		<tag-class>org.openmrs.module.dotsreports.web.taglib.RegimenHistoryTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>history</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>messagePrefix</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>activeCssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>futureCssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>graphicResourcePath</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>invert</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>timeDescending</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>	
+		<attribute>
+			<name>dateFormat</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>editLink</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<description>
+			Loops over all the records specified of the type 
+			specified by the name attribute
+		</description>
+		<name>forEachRecord</name>
+		<tag-class>org.openmrs.module.dotsreports.web.taglib.MdrtbForEachRecordTagController</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>filterList</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>select</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>if you set name to 'answer', you must specify which concept (by name or id)</description>
+			<name>concept</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>if you set name to 'conceptSet', you must specify which set (by name or id)</description>
+			<name>conceptSet</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>if you set name to reportObject, you can limit them to a specific type</description>
+			<name>reportObjectType</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>if you set name to 'state', you must specify which program by name</description>
+			<name>programName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>if you set name to 'state', you must specify which workflows (pipe-separated names)</description>
+			<name>workflowNames</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<description>
+			Diffs two dates -- format can be "D" for days (default), "M" for months, "Y" for years,
+			"h" for hours, "m" for minutes.
+		</description>
+		<name>dateDiff</name>
+		<tag-class>org.openmrs.module.dotsreports.web.taglib.DateDiffTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>fromDate</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.Date</type>
+		</attribute>
+		<attribute>
+			<name>toDate</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.Date</type>
+		</attribute>
+		<attribute>
+			<name>format</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<description>
+			Gets the concept with the given mdrtb mapping.  If the var parameter is passed, 
+			it places it into the pageContext with that variable.  If the nameVar parameter is
+			passed, it places the concept name for the concept in the pageContext.
+			If neither are passed, it prints it.	
+		</description>
+		<name>concept</name>
+		<tag-class>org.openmrs.module.dotsreports.web.taglib.MdrtbConceptTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>concept</name>
+			<required>true</required>
+			<type>org.openmrs.Concept</type>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>nameTag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>nameVar</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>mappingVar</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+<tag>
+	<description>
+		Renders a smear cell for display in the patient chart
+	</description>
+	<name>smearCell</name>
+	<tag-class>org.openmrs.module.dotsreports.web.taglib.patientchart.SmearCellTag</tag-class>
+	<body-content>JSP</body-content>
+	<attribute>
+		<name>smears</name>
+		<required>true</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>parameters</name>
+		<required>false</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>style</name>
+		<required>false</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>clazz</name>
+		<required>false</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>showTooltip</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>
+		Renders a culture cell for display in the patient chart
+	</description>
+	<name>cultureCell</name>
+	<tag-class>org.openmrs.module.dotsreports.web.taglib.patientchart.CultureCellTag</tag-class>
+	<body-content>JSP</body-content>
+	<attribute>
+		<name>cultures</name>
+		<required>true</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>parameters</name>
+		<required>false</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>style</name>
+		<required>false</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>clazz</name>
+		<required>false</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>showTooltip</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+	
+<tag>
+	<description>
+		Renders a DST results cell for display in the patient chart
+	</description>
+	<name>dstResultsCell</name>
+	<tag-class>org.openmrs.module.dotsreports.web.taglib.patientchart.DstResultsCellTag</tag-class>
+	<body-content>JSP</body-content>
+	<attribute>
+		<name>dstResults</name>
+		<required>true</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>regimens</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>drug</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>style</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>showTooltip</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>
+		Renders a Germ cell for display in the patient chart
+	</description>
+	<name>germCell</name>
+	<tag-class>org.openmrs.module.dotsreports.web.taglib.patientchart.GermCellTag</tag-class>
+	<body-content>JSP</body-content>
+	<attribute>
+		<name>cultures</name>
+		<required>true</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>
+		Renders a Drug cell for display in the patient chart
+	</description>
+	<name>drugCell</name>
+	<tag-class>org.openmrs.module.dotsreports.web.taglib.patientchart.DrugCellTag</tag-class>
+	<body-content>JSP</body-content>
+	<attribute>
+		<name>drug</name>
+		<required>true</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>regimens</name>
+		<required>true</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>style</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>showTooltip</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>
+		Renders a Lab cell for display in the patient chart
+	</description>
+	<name>labCell</name>
+	<tag-class>org.openmrs.module.dotsreports.web.taglib.patientchart.LabCellTag</tag-class>
+	<body-content>JSP</body-content>
+	<attribute>
+		<name>specimen</name>
+		<required>true</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+
+<tag>
+	<description>
+		Renders display text for the status of a Test, or a set of Tests
+	</description>
+	<name>testStatus</name>
+	<tag-class>org.openmrs.module.dotsreports.web.taglib.TestStatusTag</tag-class>
+	<body-content>JSP</body-content>
+	<attribute>
+		<name>test</name>
+		<required>false</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>tests</name>
+		<required>false</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>type</name>
+		<required>false</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>
+		Renders a flag for a StatusItem if applicable
+	</description>
+	<name>flag</name>
+	<tag-class>org.openmrs.module.dotsreports.web.taglib.FlagTag</tag-class>
+	<body-content>JSP</body-content>
+	<attribute>
+		<name>item</name>
+		<required>true</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>
+		Custom "a" tag that only renders the tag if the href is not blank
+	</description>
+	<name>a</name>
+	<tag-class>org.openmrs.module.dotsreports.web.taglib.ATag</tag-class>
+	<body-content>JSP</body-content>
+	<attribute>
+		<name>href</name>
+		<required>true</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>
+		Determines the difference between two days and renders the difference in the specified format
+	</description>
+	<name>duration</name>
+	<tag-class>org.openmrs.module.dotsreports.web.taglib.DurationTag</tag-class>
+	<body-content>JSP</body-content>
+	<attribute>
+		<name>startDate</name>
+		<required>true</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>endDate</name>
+		<required>true</required> 
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>format</name>
+		<required>true</required> 
+		<rtexprvalue>false</rtexprvalue>
+	</attribute>
+</tag>
+
+<tag>
+	<description>
+		Formats an object to a pretty string
+	</description>
+	<name>format</name>
+	<tag-class>org.openmrs.module.dotsreports.web.taglib.FormatTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>obj</name>
+			<required>true</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>separator</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>defaultVal</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>tagName</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<description>
+			Portlet that provides access to RegimenHistory data
+		</description>
+		<name>regimenPortlet</name>
+		<tag-class>org.openmrs.module.dotsreports.web.taglib.RegimenPortletTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>url</name>
+			<required>true</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>patientId</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>type</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>history</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>changeDate</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>parameters</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<description>
+			Portlet that provides a modal dialog
+		</description>
+		<name>dialog</name>
+		<tag-class>org.openmrs.module.dotsreports.web.taglib.ModalDialogTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>targetId</name>
+			<required>true</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>sourceId</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>event</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>modal</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>autoOpen</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>draggable</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>resizable</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>closeOnEscape</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>height</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>position</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>zIndex</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>title</name>
+			<required>false</required> 
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<function>
+	    <description>
+	      Tests if a collection contains a specified object
+	    </description>
+	    <name>collectionContains</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>boolean collectionContains(java.util.Collection, java.lang.Object)</function-signature>
+	    <example>
+	      &lt;c:if test="${mdrtb:collectionContains(myList, myObject)}">
+	    </example>
+	</function>
+	
+	<function>
+	    <description>
+	      Tests if an Object[] contains a specified object
+	    </description>
+	    <name>arrayContains</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>boolean arrayContains(java.lang.Object[], java.lang.Object)</function-signature>
+	    <example>
+	      &lt;c:if test="${mdrtb:arrayContains(myArray, myObject)}">
+	    </example>
+	</function>
+
+	<function>
+	    <description>
+	      Tests if an Object is an instance of a given class
+	    </description>
+	    <name>instanceOf</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>boolean instanceOf(java.lang.Object, java.lang.String)</function-signature>
+	    <example>
+	      &lt;c:if test="${mdrtb:instanceOf(myObject, myClassName)}">
+	    </example>
+	</function>
+
+	<function>
+	    <description>
+	      Reverses a Collection and returns it as a List
+	    </description>
+	    <name>reverse</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>boolean reverse(java.util.Collection)</function-signature>
+	    <example>
+	      &lt;c:forEach items="${mdrtb:reverse(myCollection)}"&gt;
+	    </example>
+	</function>
+	
+	<function>
+	    <description>
+	      Sorts a Collection and returns it as a List
+	    </description>
+	    <name>sort</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>boolean sort(java.util.Collection)</function-signature>
+	    <example>
+	      &lt;c:forEach items="${mdrtb:sort(myCollection)}"&gt;
+	    </example>
+	</function>
+	
+	<function>
+	    <description>
+	      Compares two objects
+	    </description>
+	    <name>compare</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>int compare(java.lang.Comparable, java.lang.Comparable)</function-signature>
+	    <example>
+	      &lt;c:if test="${mdrtb:compare(o1, o2) >= 0}"&gt;
+	    </example>
+	</function>
+	
+	<function>
+	    <description>
+	      Tests if a Date is in the future
+	    </description>
+	    <name>isFutureDate</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>boolean isFutureDate(java.util.Date)</function-signature>
+	    <example>
+	      &lt;c:if test="${mdrtb:isFutureDate(d)}"&gt;
+	    </example>
+	</function>
+	
+	<function>
+	    <description>
+	      Returns a Regimen from a RegimenHistory on a given Date
+	    </description>
+	    <name>regimenOnDate</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>org.openmrs.module.dotsreports.regimen.Regimen regimenOnDate(org.openmrs.module.dotsreports.regimen.RegimenHistory, java.util.Date, java.lang.Boolean)</function-signature>
+	</function>
+	
+	<function>
+	    <description>
+	      Returns a RegimenChange from a RegimenHistory on a given Date
+	    </description>
+	    <name>changeOnDate</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>org.openmrs.module.dotsreports.regimen.RegimenChange changeOnDate(org.openmrs.module.dotsreports.regimen.RegimenHistory, java.util.Date)</function-signature>
+	</function>	
+
+	<function>
+	    <description>
+	      Returns a Date Formatted with the passed format
+	    </description>
+	    <name>formatDate</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>java.lang.String formatDate(java.util.Date, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+	    <description>
+	      Returns a Date Formatted with the default format
+	    </description>
+	    <name>formatDateDefault</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>java.lang.String formatDateDefault(java.util.Date)</function-signature>
+	</function>
+	
+	<function>
+	    <description>
+	      Parses a Date with the passed format
+	    </description>
+	    <name>parseDate</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>java.util.Date parseDate(java.lang.String, java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+	    <description>
+	      Returns a List of Drugs in the passed set
+	    </description>
+	    <name>genericsInSet</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>java.util.List genericsInSet(java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+	    <description>
+	      Returns a List of Drugs in the passed set
+	    </description>
+	    <name>drugsInSet</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>java.util.List drugsInSet(java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+	    <description>
+	      Returns a Concept by checking many possible sources
+	    </description>
+	    <name>getConcept</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>org.openmrs.Concept getConcept(java.lang.String)</function-signature>
+	</function>
+	
+	<function>
+	    <description>
+	      Returns all answers to the passed question
+	    </description>
+	    <name>answersToQuestion</name>
+	    <function-class>org.openmrs.module.dotsreports.web.taglib.Functions</function-class>
+	    <function-signature>java.util.List answersToQuestion(java.lang.String)</function-signature>
+	</function>
+
+</taglib>

@@ -1,0 +1,220 @@
+<html>
+	<head>
+		<title>TB-08u</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;}
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%"><tr>
+				<td width="100%" align="center" style="font-size:14px; font-weight:bold;">
+					Quarterly report on results of treatment of MDR TB patients started treatment on Category IV <br/>
+					
+				</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%">
+				
+				<tr>
+					<td>Period of Treatment Start:  #startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#</td>
+					
+				</tr>
+				<tr><td>Total Detected #totaldetected#</td></tr>
+				<tr><td>Total Evaluated #totalevaluated#</td></tr>
+			</table>
+			<table border="1" cellpadding="5" width="100%">
+				<tr>
+					<th rowspan="2" colspan="2">Registration Group</th>
+					<th rowspan="2">Registered</th>
+					<th rowspan="2">Cured</th>
+					<th rowspan="2">Treatment<br/>Completed</th>
+					<th rowspan="2">Successful<br/>Treatment</th>
+					<th rowspan="2">Failed</th>
+					<th rowspan="2">Defaulted</th>
+					<th colspan="2">Died</th>
+					
+					<th rowspan="2">Still Enrolled</th>
+					<th rowspan="2">Total</th>
+				</tr>
+				<tr>
+					<th>TB</th>
+					<th>Non-TB</th>
+				</tr>
+				<tr>
+					<td rowspan="7">MDR or PDR receiving SLD first time</td>
+					<td>New</td>
+					<td>#results.New.Registered#</td>
+					<td>#results.New.Cured#</td>
+					<td>#results.New.TreatmentCompleted#</td>
+					<td>#results.New.SuccessfulTreatment#</td>
+					<td>#results.New.Failed#</td>
+					<td>#results.New.Defaulted#</td>
+					<td>#results.New.DiedTB#</td>
+					<td>#results.New.DiedNonTB#</td>
+					
+					<td>#results.New.StillEnrolled#</td>
+					<td>#results.New.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Relapse</td>
+					<td>#results.Relapse.Registered#</td>
+					<td>#results.Relapse.Cured#</td>
+					<td>#results.Relapse.TreatmentCompleted#</td>
+					<td>#results.Relapse.SuccessfulTreatment#</td>
+					<td>#results.Relapse.Failed#</td>
+					<td>#results.Relapse.Defaulted#</td>
+					<td>#results.Relapse.DiedTB#</td>
+					<td>#results.Relapse.DiedNonTB#</td>
+					
+					<td>#results.Relapse.StillEnrolled#</td>
+					<td>#results.Relapse.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>After Default</td>
+					<td>#results.AfterDefault.Registered#</td>
+					<td>#results.AfterDefault.Cured#</td>
+					<td>#results.AfterDefault.TreatmentCompleted#</td>
+					<td>#results.AfterDefault.SuccessfulTreatment#</td>
+					<td>#results.AfterDefault.Failed#</td>
+					<td>#results.AfterDefault.Defaulted#</td>
+					<td>#results.AfterDefault.DiedTB#</td>
+					<td>#results.AfterDefault.DiedNonTB#</td>
+					
+					<td>#results.AfterDefault.StillEnrolled#</td>
+					<td>#results.AfterDefault.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>After failure of<br/>Category I treatment</td>
+					<td>#results.AfterFailureCategoryI.Registered#</td>
+					<td>#results.AfterFailureCategoryI.Cured#</td>
+					<td>#results.AfterFailureCategoryI.TreatmentCompleted#</td>
+					<td>#results.AfterFailureCategoryI.SuccessfulTreatment#</td>
+					<td>#results.AfterFailureCategoryI.Failed#</td>
+					<td>#results.AfterFailureCategoryI.Defaulted#</td>
+					<td>#results.AfterFailureCategoryI.DiedTB#</td>
+					<td>#results.AfterFailureCategoryI.DiedNonTB#</td>
+					
+					<td>#results.AfterFailureCategoryI.StillEnrolled#</td>
+					<td>#results.AfterFailureCategoryI.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>After failure of<br/>Category II treatment</td>
+					<td>#results.AfterFailureCategoryII.Registered#</td>
+					<td>#results.AfterFailureCategoryII.Cured#</td>
+					<td>#results.AfterFailureCategoryII.TreatmentCompleted#</td>
+					<td>#results.AfterFailureCategoryII.SuccessfulTreatment#</td>
+					<td>#results.AfterFailureCategoryII.Failed#</td>
+					<td>#results.AfterFailureCategoryII.Defaulted#</td>
+					<td>#results.AfterFailureCategoryII.DiedTB#</td>
+					<td>#results.AfterFailureCategoryII.DiedNonTB#</td>
+					
+					<td>#results.AfterFailureCategoryII.StillEnrolled#</td>
+					<td>#results.AfterFailureCategoryII.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Other (with Unknown TB History)</td>
+					<td>#results.Unknown.Registered#</td>
+					<td>#results.Unknown.Cured#</td>
+					<td>#results.Unknown.TreatmentCompleted#</td>
+					<td>#results.Unknown.SuccessfulTreatment#</td>
+					<td>#results.Unknown.Failed#</td>
+					<td>#results.Unknown.Defaulted#</td>
+					<td>#results.Unknown.DiedTB#</td>
+					<td>#results.Unknown.DiedNonTB#</td>
+					
+					<td>#results.Unknown.StillEnrolled#</td>
+					<td>#results.Unknown.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>SubTotal</td>
+					<td>#results.SubTotal.Registered#</td>
+					<td>#results.SubTotal.Cured#</td>
+					<td>#results.SubTotal.TreatmentCompleted#</td>
+					<td>#results.SubTotal.SuccessfulTreatment#</td>
+					<td>#results.SubTotal.Failed#</td>
+					<td>#results.SubTotal.Defaulted#</td>
+					<td>#results.SubTotal.DiedTB#</td>
+					<td>#results.SubTotal.DiedNonTB#</td>
+					
+					<td>#results.SubTotal.StillEnrolled#</td>
+					<td>#results.SubTotal.ColTotal#</td>
+				</tr>	
+				<tr>
+					<td rowspan=5">MDR Earlier Received SLD</td>
+					<td>Relapse MDR</td>
+					<td>#results.RelapseMDR.Registered#</td>
+					<td>#results.RelapseMDR.Cured#</td>
+					<td>#results.RelapseMDR.TreatmentCompleted#</td>
+					<td>#results.RelapseMDR.SuccessfulTreatment#</td>
+					<td>#results.RelapseMDR.Failed#</td>
+					<td>#results.RelapseMDR.Defaulted#</td>
+					<td>#results.RelapseMDR.DiedTB#</td>
+					<td>#results.RelapseMDR.DiedNonTB#</td>
+					
+					<td>#results.RelapseMDR.StillEnrolled#</td>
+					<td>#results.RelapseMDR.ColTotal#</td>
+					
+				</tr>
+				<tr>
+					<td>Default MDR</td>
+					<td>#results.DefaultMDR.Registered#</td>
+					<td>#results.DefaultMDR.Cured#</td>
+					<td>#results.DefaultMDR.TreatmentCompleted#</td>
+					<td>#results.DefaultMDR.SuccessfulTreatment#</td>
+					<td>#results.DefaultMDR.Failed#</td>
+					<td>#results.DefaultMDR.Defaulted#</td>
+					<td>#results.DefaultMDR.DiedTB#</td>
+					<td>#results.DefaultMDR.DiedNonTB#</td>
+					
+					<td>#results.DefaultMDR.StillEnrolled#</td>
+					<td>#results.DefaultMDR.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Failure MDR</td>
+					<td>#results.FailureMDR.Registered#</td>
+					<td>#results.FailureMDR.Cured#</td>
+					<td>#results.FailureMDR.TreatmentCompleted#</td>
+					<td>#results.FailureMDR.SuccessfulTreatment#</td>
+					<td>#results.FailureMDR.Failed#</td>
+					<td>#results.FailureMDR.Defaulted#</td>
+					<td>#results.FailureMDR.DiedTB#</td>
+					<td>#results.FailureMDR.DiedNonTB#</td>
+					
+					<td>#results.FailureMDR.StillEnrolled#</td>
+					<td>#results.FailureMDR.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td>#results.PrevTotal.Registered#</td>
+					<td>#results.PrevTotal.Cured#</td>
+					<td>#results.PrevTotal.TreatmentCompleted#</td>
+					<td>#results.PrevTotal.SuccessfulTreatment#</td>
+					<td>#results.PrevTotal.Failed#</td>
+					<td>#results.PrevTotal.Defaulted#</td>
+					<td>#results.PrevTotal.DiedTB#</td>
+					<td>#results.PrevTotal.DiedNonTB#</td>
+					
+					<td>#results.PrevTotal.StillEnrolled#</td>
+					<td>#results.PrevTotal.ColTotal#</td>
+				</tr>
+				<tr>
+					<td><b>Total</b></td>
+					<td>#results.Total.Registered#</td>
+					<td>#results.Total.Cured#</td>
+					<td>#results.Total.TreatmentCompleted#</td>
+					<td>#results.Total.SuccessfulTreatment#</td>
+					<td>#results.Total.Failed#</td>
+					<td>#results.Total.Defaulted#</td>
+					<td>#results.Total.DiedTB#</td>
+					<td>#results.Total.DiedNonTB#</td>
+					
+					<td>#results.Total.StillEnrolled#</td>
+					<td>#results.Total.ColTotal#</td>
+				</tr>
+				
+			</table>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,226 @@
+<html>
+	<head>
+		<title>DST Form</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;}
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%" align="center">
+			<tr><td width="100%" align="center" style="font-size:14px; font-weight:bold;">
+			DST Report
+			</td>
+			</tr>
+			</table>
+			<table border="1" cellpadding="5" width="100%">
+				<tr align="center">
+				    <td>Patient Type</td>
+					<td colspan="3">New Cases</td>
+					<td colspan="3">Relapses</td>
+					<td colspan="3">Default</td>
+					<td colspan="3">Failure</td>
+					<td colspan="3">Other (with Unknown History)</td>
+					<td colspan="3">Total</td>
+				</tr>
+				<tr align="center">
+					<td>&nbsp;</td>
+					<td>SS+</td>
+					<td>SS-</td>
+					<td>EP TB</td>
+					<td>SS+</td>
+					<td>SS-</td>
+					<td>EP TB</td>
+					<td>SS+</td>
+					<td>SS-</td>
+					<td>EP TB</td>
+					<td>SS+</td>
+					<td>SS-</td>
+					<td>EP TB</td>
+					<td>SS+</td>
+					<td>SS-</td>
+					<td>EP TB</td>
+					<td>SS+</td>
+					<td>SS-</td>
+					<td>EP TB</td>
+				</tr>
+				<tr align="center">
+					<td>Of which</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr align="center">
+					<td>Referred to GeneXpert</td>
+					<td>#results.referredXpert.NewSSPos#</td>
+					<td>#results.referredXpert.NewSSNeg#</td>
+					<td>#results.referredXpert.NewExtra#</td>
+					<td>#results.referredXpert.RelapseSSPos#</td>
+					<td>#results.referredXpert.RelapseSSNeg#</td>
+					<td>#results.referredXpert.RelapseExtra#</td>
+					<td>#results.referredXpert.DefaultSSPos#</td>
+					<td>#results.referredXpert.DefaultSSNeg#</td>
+					<td>#results.referredXpert.DefaultExtra#</td>
+					<td>#results.referredXpert.FailureSSPos#</td>
+					<td>#results.referredXpert.FailureSSPos#</td>
+					<td>#results.referredXpert.FailureExtra#</td>
+					<td>#results.referredXpert.OtherSSPos#</td>
+					<td>#results.referredXpert.OtherSSNeg#</td>
+					<td>#results.referredXpert.OtherExtra#</td>
+					<td>#results.referredXpert.TotalSSPos#</td>
+					<td>#results.referredXpert.TotalSSNeg#</td>
+					<td>#results.referredXpert.TotalExtra#</td>
+				</tr>
+			<tr align="center">
+					<td>Referred to XT</td>
+					<td>#results.referredHAIN.NewSSPos#</td>
+					<td>#results.referredHAIN.NewSSNeg#</td>
+					<td>#results.referredHAIN.NewExtra#</td>
+					<td>#results.referredHAIN.RelapseSSPos#</td>
+					<td>#results.referredHAIN.RelapseSSNeg#</td>
+					<td>#results.referredHAIN.RelapseExtra#</td>
+					<td>#results.referredHAIN.DefaultSSPos#</td>
+					<td>#results.referredHAIN.DefaultSSNeg#</td>
+					<td>#results.referredHAIN.DefaultExtra#</td>
+					<td>#results.referredHAIN.FailureSSPos#</td>
+					<td>#results.referredHAIN.FailureSSNeg#</td>
+					<td>#results.referredHAIN.FailureExtra#</td>
+					<td>#results.referredHAIN.OtherSSPos#</td>
+					<td>#results.referredHAIN.OtherSSNeg#</td>
+					<td>#results.referredHAIN.OtherExtra#</td>
+					<td>#results.referredHAIN.TotalSSPos#</td>
+					<td>#results.referredHAIN.TotalSSNeg#</td>
+					<td>#results.referredHAIN.TotalExtra#</td>
+				</tr>
+				<tr align="center">
+					<td>Referred to Sputum Culture</td>
+					<td>#results.referredCulture.NewSSPos#</td>
+					<td>#results.referredCulture.NewSSNeg#</td>
+					<td>#results.referredCulture.NewExtra#</td>
+					<td>#results.referredCulture.RelapseSSPos#</td>
+					<td>#results.referredCulture.RelapseSSNeg#</td>
+					<td>#results.referredCulture.RelapseExtra#</td>
+					<td>#results.referredCulture.DefaultSSPos#</td>
+					<td>#results.referredCulture.DefaultSSNeg#</td>
+					<td>#results.referredCulture.DefaultExtra#</td>
+					<td>#results.referredCulture.FailureSSPos#</td>
+					<td>#results.referredCulture.FailureSSNeg#</td>
+					<td>#results.referredCulture.FailureExtra#</td>
+					<td>#results.referredCulture.OtherSSPos#</td>
+					<td>#results.referredCulture.OtherSSNeg#</td>
+					<td>#results.referredCulture.OtherExtra#</td>
+					<td>#results.referredCulture.TotalSSPos#</td>
+					<td>#results.referredCulture.TotalSSNeg#</td>
+					<td>#results.referredCulture.TotalExtra#</td>
+				</tr>
+				<tr align="center">
+					<td>Sputum Culture Positive</td>
+					<td>#results.culturePositive.NewSSPos#</td>
+					<td>#results.culturePositive.NewSSNeg#</td>
+					<td>#results.culturePositive.NewExtra#</td>
+					<td>#results.culturePositive.RelapseSSPos#</td>
+					<td>#results.culturePositive.RelapseSSNeg#</td>
+					<td>#results.culturePositive.RelapseExtra#</td>
+					<td>#results.culturePositive.DefaultSSPos#</td>
+					<td>#results.culturePositive.DefaultSSNeg#</td>
+					<td>#results.culturePositive.DefaultExtra#</td>
+					<td>#results.culturePositive.FailureSSPos#</td>
+					<td>#results.culturePositive.FailureSSNeg#</td>
+					<td>#results.culturePositive.FailureExtra#</td>
+					<td>#results.culturePositive.OtherSSPos#</td>
+					<td>#results.culturePositive.OtherSSNeg#</td>
+					<td>#results.culturePositive.OtherExtra#</td>
+					<td>#results.culturePositive.TotalSSPos#</td>
+					<td>#results.culturePositive.TotalSSNeg#</td>
+					<td>#results.culturePositive.TotalExtra#</td>
+				</tr>
+				<tr align="center">
+					<td>DST Result Available</td>
+					<td>#results.dstResultExists.NewSSPos#</td>
+					<td>#results.dstResultExists.NewSSNeg#</td>
+					<td>#results.dstResultExists.NewExtra#</td>
+					<td>#results.dstResultExists.RelapseSSPos#</td>
+					<td>#results.dstResultExists.RelapseSSNeg#</td>
+					<td>#results.dstResultExists.RelapseExtra#</td>
+					<td>#results.dstResultExists.DefaultSSPos#</td>
+					<td>#results.dstResultExists.DefaultSSNeg#</td>
+					<td>#results.dstResultExists.DefaultExtra#</td>
+					<td>#results.dstResultExists.FailureSSPos#</td>
+					<td>#results.dstResultExists.FailureSSNeg#</td>
+					<td>#results.dstResultExists.FailureExtra#</td>
+					<td>#results.dstResultExists.OtherSSPos#</td>
+					<td>#results.dstResultExists.OtherSSNeg#</td>
+					<td>#results.dstResultExists.OtherExtra#</td>
+					<td>#results.dstResultExists.TotalSSPos#</td>
+					<td>#results.dstResultExists.TotalSSNeg#</td>
+					<td>#results.dstResultExists.TotalExtra#</td>
+				</tr>
+				
+				<tr align="center">
+					<td>Confirmed MDR-TB</td>
+					<td>#results.mdr.NewSSPos#</td>
+					<td>#results.mdr.NewSSNeg#</td>
+					<td>#results.mdr.NewExtra#</td>
+					<td>#results.mdr.RelapseSSPos#</td>
+					<td>#results.mdr.RelapseSSNeg#</td>
+					<td>#results.mdr.RelapseExtra#</td>
+					<td>#results.mdr.DefaultSSPos#</td>
+					<td>#results.mdr.DefaultSSNeg#</td>
+					<td>#results.mdr.DefaultExtra#</td>
+					<td>#results.mdr.FailureSSPos#</td>
+					<td>#results.mdr.FailureExtra#</td>
+					<td>#results.mdr.FailureExtra#</td>
+					<td>#results.mdr.OtherSSPos#</td>
+					<td>#results.mdr.OtherSSNeg#</td>
+					<td>#results.mdr.OtherExtra#</td>
+					<td>#results.mdr.TotalSSPos#</td>
+					<td>#results.mdr.TotalSSNeg#</td>
+					<td>#results.mdr.TotalExtra#</td>
+				</tr>
+				<tr align="center">
+					<td>Became MDR-TB  during treatment</td>
+					<td>#results.mdrafter.NewSSPos#</td>
+					<td>#results.mdrafter.NewSSNeg#</td>
+					<td>#results.mdrafter.NewExtra#</td>
+					<td>#results.mdrafter.RelapseSSPos#</td>
+					<td>#results.mdrafter.RelapseSSNeg#</td>
+					<td>#results.mdrafter.RelapseExtra#</td>
+					<td>#results.mdrafter.DefaultSSPos#</td>
+					<td>#results.mdrafter.DefaultSSNeg#</td>
+					<td>#results.mdrafter.DefaultExtra#</td>
+					<td>#results.mdrafter.FailureSSPos#</td>
+					<td>#results.mdrafter.FailureSSNeg#</td>
+					<td>#results.mdrafter.FailureExtra#</td>
+					<td>#results.mdrafter.OtherSSPos#</td>
+					<td>#results.mdrafter.OtherSSNeg#</td>
+					<td>#results.mdrafter.OtherExtra#</td>
+					<td>#results.mdrafter.TotalSSPos#</td>
+					<td>#results.mdrafter.TotalSSNeg#</td>
+					<td>#results.mdrafter.TotalExtra#</td>
+				</tr>
+			</table>
+			<br/><br/>
+			1st quarter:  26 December-25 March<br/>
+			2nd quarter:  26 March-25 June<br/>
+			3rd quarter:  26 June-25 September<br/>
+			4th quarter:  26 September-25 December<br/>
+			<table width="100%"><tr><td align="right">Signature ______________________________</td></tr></table>
+		</div>
+	</body>
+</html>

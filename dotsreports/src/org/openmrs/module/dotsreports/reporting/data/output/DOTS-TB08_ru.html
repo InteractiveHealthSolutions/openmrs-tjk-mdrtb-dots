@@ -1,0 +1,260 @@
+<html>
+	<head>
+		<title>ТБ 08</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:center;}
+			th, td {font-size:smaller;border: 1px solid #000000}
+			border {border: 1px solid #000000}
+
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%" border="0">
+			<tr>
+				<td align="left" width="90%" style="font-size:14px; font-weight:bold;border:0px">Министерство здравоохранения Республики Таджикистан<br/>Программа борьбы с туберкулезом   
+				</td>
+				<td align="right" width="10%" style="font-size:14px; font-weight:bold;border:0px">ТБ 08</td>
+			</tr>
+			<tr><td style="font-size:14px; font-weight:bold;border:0px">&nbsp;</td><td style="font-size:14px; font-weight:bold;border:0px">&nbsp;</td></tr>
+			<tr>
+				
+				<td width="90%" align="center" style="font-size:14px; font-weight:bold;border:0px">
+						КВАРТАЛЬНЫЙ ОТЧЕТ ПО РЕЗУЛЬТАТАМ ЛЕЧЕНИЯ БОЛЬНЫХ ТУБЕРКУЛЕЗОМ ЛЕГКИХ, ЗАРЕГИСТРИРОВАННЫХ 12-15 МЕСЯЦЕВ НАЗАД
+				</td>
+				<td width="10%" align="right" style="font-size:14px; font-weight:bold;border:0px;" valign="top" border="0">&nbsp;</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%" style="border: 1px #000000 solid;">
+				<tr>
+					<td>Район: #location# &nbsp;&nbsp; Район №:__________<br><br>
+					Имя районного координатора _____________ &nbsp;&nbsp; Подпись ____________</td>
+				
+					<td>Больные, зарегистрированные за #quarter# квартал года #year#<br>
+					Дата заполнения отчета:  #generationDate|dd/MMM/yyyy#<br>
+					Completed By:  #generatedBy#</td>
+				</tr>
+			</table>
+			
+			<h3>TB Treatment Outcomes</h3>
+			
+			<table style="border: 1px #000000 solid;" cellpadding="5" width="100%">
+				<tr>
+					<th colspan="3">Общее ко-во больных туберкулезом легких за отчетный период </th>
+					<th rowspan="2">Категория</th>	
+					<th rowspan="2">Вылечено (отрицательный мазок) (1)<br>
+					<th rowspan="2">Лечение завершено (нет результатов мазка) (2) </th>
+					<th rowspan="2">Умерло (3) </th>
+					<th rowspan="2">Неблагоприятный исход (положитель ный мазок) (4) </th>
+					<th rowspan="2">Нарушение режима (отрицательный мазок) (5) </th>
+					<th rowspan="2">Переведено в другой  район (6)</th>
+					<th rowspan="2">Всего<br>
+(сумма колонок<br>
+с 1 по 6)</th>
+				<th rowspan="2">Снято (диагноз не подтвержден) (6)</th
+				</tr>
+				<tr>
+				   <td colspan="3" align="center">Новые случаи</td>
+				</tr>
+				<tr>
+					<td align="center">М</td>
+					<td align="center">Ж</td>
+					<td align="center">Всего</td>
+					<td>1. Новые случаи</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td> 
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td> 
+				</tr>
+				<tr>
+					<td>#NewPulmonarySmearPositive.Male#</td>
+					<td>#NewPulmonarySmearPositive.Female#</td>
+					<td>#NewPulmonarySmearPositive.Total#</td>
+					<td>1.1. С положительным мазком</td>
+					<td>#NewPulmonarySmearPositive.Cured#</td>
+					<td>#NewPulmonarySmearPositive.TreatmentCompleted#</td>
+					<td>#NewPulmonarySmearPositive.Died#</td> 
+					<td>#NewPulmonarySmearPositive.Failed#</td>
+					<td>#NewPulmonarySmearPositive.Defaulted#</td>
+					<td>#NewPulmonarySmearPositive.TransferredOut#</td>
+					<td>#NewPulmonarySmearPositive.TotalEval#</td>
+					<td>#NewPulmonarySmearPositive.Canceled#</td> 
+				</tr>
+				<tr>
+					<td>#NewPulmonarySmearNegative.Male#</td>
+					<td>#NewPulmonarySmearNegative.Female#</td>
+					<td>#NewPulmonarySmearNegative.Total#</td>
+					<td>1.2. С отрицательным мазком</td>
+					<td>#NewPulmonarySmearNegative.Cured#</td>
+					<td>#NewPulmonarySmearNegative.TreatmentCompleted#</td>
+					<td>#NewPulmonarySmearNegative.Died#</td> 
+					<td>#NewPulmonarySmearNegative.Failed#</td>
+					<td>#NewPulmonarySmearNegative.Defaulted#</td>
+					<td>#NewPulmonarySmearNegative.TransferredOut#</td>
+					<td>#NewPulmonarySmearNegative.TotalEval#</td>
+					<td>#NewPulmonarySmearNegative.Canceled#</td> 
+				</tr>
+				<tr>
+					<td>#NewExtrapulmonary.Male#</td>
+					<td>#NewExtrapulmonary.Female#</td>
+					<td>#NewExtrapulmonary.Total#</td>
+					<td>1.3. Внелегочный ТБ</td>
+					<td>#NewExtrapulmonary.Cured#</td>
+					<td>#NewExtrapulmonary.TreatmentCompleted#</td>
+					<td>#NewExtrapulmonary.Died#</td> 
+					<td>#NewExtrapulmonary.Failed#</td>
+					<td>#NewExtrapulmonary.Defaulted#</td>
+					<td>#NewExtrapulmonary.TransferredOut#</td>
+					<td>#NewExtrapulmonary.TotalEval#</td>
+					<td>#NewExtrapulmonary.Canceled#</td>
+				</tr>
+				<tr>
+					<td>#NewTotal.Male#</td>
+					<td>#NewTotal.Female#</td>
+					<td>#NewTotal.Total#</td>
+					<td><b>1.4. Всего (1.1 + 1.3.)</b></td>
+					<td>#NewTotal.Cured#</td>
+					<td>#NewTotal.TreatmentCompleted#</td>
+					<td>#NewTotal.Died#</td> 
+					<td>#NewTotal.Failed#</td>
+					<td>#NewTotal.Defaulted#</td>
+					<td>#NewTotal.TransferredOut#</td>
+					<td>#NewTotal.TotalEval#</td>
+					<td>#NewTotal.Canceled#</td>
+				</tr>
+				<tr>
+					<td colspan="3" align="center">Рецидивы</td>
+					<td>2. Повторное лечение</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td> 
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td> 
+				</tr>
+				<tr>
+				    <td align="center">М</td>
+					<td align="center">Ж</td>
+					<td align="center">Всего</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td> 
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td> </tr>
+				<tr>
+					<td>#Relapse.Male#</td>
+					<td>#Relapse.Female#</td>
+					<td>#Relapse.Total#</td>
+					<td>2.1. Рецидивы </td>
+					<td>#Relapse.Cured#</td>
+					<td>#Relapse.TreatmentCompleted#</td>
+					<td>#Relapse.Died#</td> 
+					<td>#Relapse.Failed#</td>
+					<td>#Relapse.Defaulted#</td>
+					<td>#Relapse.TransferredOut#</td>
+					<td>#Relapse.TotalEval#</td>
+					<td>#Relapse.Canceled#</td>
+				</tr>
+				<tr>
+					<td>#PositiveTxAfterFailure.Male#</td>
+					<td>#PositiveTxAfterFailure.Female#</td>
+					<td>#PositiveTxAfterFailure.Total#</td>
+					<td>2.2. неудача лечения МТ+</td>
+					<td>#PositiveTxAfterFailure.Cured#</td>
+					<td>#PositiveTxAfterFailure.TreatmentCompleted#</td>
+					<td>#PositiveTxAfterFailure.Died#</td> 
+					<td>#PositiveTxAfterFailure.Failed#</td>
+					<td>#PositiveTxAfterFailure.Defaulted#</td>
+					<td>#PositiveTxAfterFailure.TransferredOut#</td>
+					<td>#PositiveTxAfterFailure.TotalEval#</td>
+					<td>#PositiveTxAfterFailure.Canceled#</td>
+				</tr>
+				<tr>
+					<td>#PositiveAfterDefault.Male#</td>
+					<td>#PositiveAfterDefault.Female#</td>
+					<td>#PositiveAfterDefault.Total#</td>
+					<td>2.3. Нарушение режима МТ+</td>
+					<td>#PositiveAfterDefault.Cured#</td>
+					<td>#PositiveAfterDefault.TreatmentCompleted#</td>
+					<td>#PositiveAfterDefault.Died#</td> 
+					<td>#PositiveAfterDefault.Failed#</td>
+					<td>#PositiveAfterDefault.Defaulted#</td>
+					<td>#PositiveAfterDefault.TransferredOut#</td>
+					<td>#PositiveAfterDefault.TotalEval#</td>
+					<td>#PositiveAfterDefault.Canceled#</td>
+				<tr>
+					<td>#OtherPositive.Male#</td>
+					<td>#OtherPositive.Female#</td>
+					<td>#OtherPositive.Total#</td>
+					<td>2.4. Другие МБТ+</td>
+					<td>#OtherPositive.Cured#</td>
+					<td>#OtherPositive.TreatmentCompleted#</td>
+					<td>#OtherPositive.Died#</td> 
+					<td>#OtherPositive.Failed#</td>
+					<td>#OtherPositive.Defaulted#</td>
+					<td>#OtherPositive.TransferredOut#</td>
+					<td>#OtherPositive.TotalEval#</td>
+					<td>#OtherPositive.Canceled#</td>
+				</tr>
+				<tr>
+					<td>#NegativeTxAfterFailure.Male#</td>
+					<td>#NegativeTxAfterFailure.Female#</td>
+					<td>#NegativeTxAfterFailure.Total#</td>
+					<td>2.5. Нарушение режима МТ- </td>
+					<td>#NegativeTxAfterFailure.Cured#</td>
+					<td>#NegativeTxAfterFailure.TreatmentCompleted#</td>
+					<td>#NegativeTxAfterFailure.Died#</td> 
+					<td>#NegativeTxAfterFailure.Failed#</td>
+					<td>#NegativeTxAfterFailure.Defaulted#</td>
+					<td>#NegativeTxAfterFailure.TransferredOut#</td>
+					<td>#NegativeTxAfterFailure.TotalEval#</td>
+					<td>#NegativeTxAfterFailure.Canceled#</td>
+				</tr>
+				<tr>
+					<td>#OtherNegative.Male#</td>
+					<td>#OtherNegative.Female#</td>
+					<td>#OtherNegative.Total#</td>
+					<td>2.6. Другие МБТ-</td>
+					<td>#OtherNegative.Cured#</td>
+					<td>#OtherNegative.TreatmentCompleted#</td>
+					<td>#OtherNegative.Died#</td> 
+					<td>#OtherNegative.Failed#</td>
+					<td>#OtherNegative.Defaulted#</td>
+					<td>#OtherNegative.TransferredOut#</td>
+					<td>#OtherNegative.TotalEval#</td>
+					<td>#OtherNegative.Canceled#</td>
+				</tr>
+				<tr>
+					<td>#RetreatmentTotal.Male#</td>
+					<td>#RetreatmentTotal.Female#</td>
+					<td>#RetreatmentTotal.Total#</td>
+					<td><b>2.7. Всего (2.1+2.6)</b></td>
+					<td>#RetreatmentTotal.Cured#</td>
+					<td>#RetreatmentTotal.TreatmentCompleted#</td>
+					<td>#RetreatmentTotal.Died#</td> 
+					<td>#RetreatmentTotal.Failed#</td>
+					<td>#RetreatmentTotal.Defaulted#</td>
+					<td>#RetreatmentTotal.TransferredOut#</td>
+					<td>#RetreatmentTotal.TotalEval#</td>
+					<td>#RetreatmentTotal.Canceled#</td>
+				</tr>
+			</table>
+			<br/>
+			* Из них, ______ (количество) исключено из учета результатов химиотерапии по следующим причинам: ____________________________________________________
+_________________________________________________________________________________________________________________________________________
+_________________________________________________________________________________________________________________________________________
+_________________________________________________________________________________________________________________________________________
+			
+		</div>
+	</body>
+</html>

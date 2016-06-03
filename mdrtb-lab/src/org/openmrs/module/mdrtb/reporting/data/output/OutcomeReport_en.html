@@ -1,0 +1,142 @@
+<html>
+	<head>
+		<title>TB-08y</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;}
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%"><tr>
+				<td width="100%" align="center" style="font-size:14px; font-weight:bold;">
+					Annual report on results of treatment of MDR TB patients starting CAT IV treatment<br/>
+					between #startDate|dd/MMM/yyyy# and #endDate|dd/MMM/yyyy#<br/><br/>
+				</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%">
+				<tr>
+					<td>District or Health Center:  #location#</td>
+					<td>Date Completed:  #generationDate|dd/MMM/yyyy#</td>
+				</tr>
+				<tr>
+					<td>Period of Treatment Start:  #startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#</td>
+					<td>Completed By:  #generatedBy#</td>
+				</tr>
+			</table>
+			<table border="1" cellpadding="5" width="100%">
+				<tr>
+					<th>Registration Group</th>
+					<th>Cured</th>
+					<th>Treatment<br/>Completed</th>
+					<th>Failed</th>
+					<th>Defaulted</th>
+					<th>Died</th>
+					<th>Transferred Out</th>
+					<th>Still Enrolled</th>
+					<th>Total</th>
+				</tr>
+				<tr>
+					<td>New</td>
+					<td>#New.Cured#</td>
+					<td>#New.TreatmentCompleted#</td>
+					<td>#New.Failed#</td>
+					<td>#New.Defaulted#</td>
+					<td>#New.Died#</td>
+					<td>#New.TransferredOut#</td>
+					<td>#New.StillEnrolled#</td>
+					<td>#New.Total#</td>
+				</tr>
+				<tr>
+					<td>Relapse</td>
+					<td>#Relapse.Cured#</td>
+					<td>#Relapse.TreatmentCompleted#</td>
+					<td>#Relapse.Failed#</td>
+					<td>#Relapse.Defaulted#</td>
+					<td>#Relapse.Died#</td>
+					<td>#Relapse.TransferredOut#</td>
+					<td>#Relapse.StillEnrolled#</td>
+					<td>#Relapse.Total#</td>
+				</tr>
+				<tr>
+					<td>After Default</td>
+					<td>#AfterDefault.Cured#</td>
+					<td>#AfterDefault.TreatmentCompleted#</td>
+					<td>#AfterDefault.Failed#</td>
+					<td>#AfterDefault.Defaulted#</td>
+					<td>#AfterDefault.Died#</td>
+					<td>#AfterDefault.TransferredOut#</td>
+					<td>#AfterDefault.StillEnrolled#</td>
+					<td>#AfterDefault.Total#</td>
+				</tr>
+				<tr>
+					<td>After failure of<br/>Category I treatment</td>
+					<td>#AfterFailureCategoryI.Cured#</td>
+					<td>#AfterFailureCategoryI.TreatmentCompleted#</td>
+					<td>#AfterFailureCategoryI.Failed#</td>
+					<td>#AfterFailureCategoryI.Defaulted#</td>
+					<td>#AfterFailureCategoryI.Died#</td>
+					<td>#AfterFailureCategoryI.TransferredOut#</td>
+					<td>#AfterFailureCategoryI.StillEnrolled#</td>
+					<td>#AfterFailureCategoryI.Total#</td>
+				</tr>
+				<tr>
+					<td>After failure of<br/>Category II treatment</td>
+					<td>#AfterFailureCategoryII.Cured#</td>
+					<td>#AfterFailureCategoryII.TreatmentCompleted#</td>
+					<td>#AfterFailureCategoryII.Failed#</td>
+					<td>#AfterFailureCategoryII.Defaulted#</td>
+					<td>#AfterFailureCategoryII.Died#</td>
+					<td>#AfterFailureCategoryII.TransferredOut#</td>
+					<td>#AfterFailureCategoryII.StillEnrolled#</td>
+					<td>#AfterFailureCategoryII.Total#</td>
+				</tr>
+				<!-- <tr>
+					<td>Transferred In</td>
+					<td>#TransferredIn.Cured#</td>
+					<td>#TransferredIn.TreatmentCompleted#</td>
+					<td>#TransferredIn.Failed#</td>
+					<td>#TransferredIn.Defaulted#</td>
+					<td>#TransferredIn.Died#</td>
+					<td>#TransferredIn.TransferredOut#</td>
+					<td>#TransferredIn.StillEnrolled#</td>
+					<td>#TransferredIn.Total#</td>
+				</tr> -->
+				<tr>
+					<td>Other</td>
+					<td>#Other.Cured#</td>
+					<td>#Other.TreatmentCompleted#</td>
+					<td>#Other.Failed#</td>
+					<td>#Other.Defaulted#</td>
+					<td>#Other.Died#</td>
+					<td>#Other.TransferredOut#</td>
+					<td>#Other.StillEnrolled#</td>
+					<td>#Other.Total#</td>
+				</tr>
+				<tr>
+					<td>Unknown</td>
+					<td>#Unknown.Cured#</td>
+					<td>#Unknown.TreatmentCompleted#</td>
+					<td>#Unknown.Failed#</td>
+					<td>#Unknown.Defaulted#</td>
+					<td>#Unknown.Died#</td>
+					<td>#Unknown.TransferredOut#</td>
+					<td>#Unknown.StillEnrolled#</td>
+					<td>#Unknown.Total#</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td>#Total.Cured#</td>
+					<td>#Total.TreatmentCompleted#</td>
+					<td>#Total.Failed#</td>
+					<td>#Total.Defaulted#</td>
+					<td>#Total.Died#</td>
+					<td>#Total.TransferredOut#</td>
+					<td>#Total.StillEnrolled#</td>
+					<td>#Total.Total#</td>
+				</tr>	
+			</table>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,106 @@
+<html>
+	<head>
+		<title>TB-07y</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;}
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%"><tr>
+				<td width="10%">&nbsp;</td>
+				<td width="50%" align="center" style="font-size:14px; font-weight:bold;">Quarterly report on MDR-TB detection and Category IV treatment start</td>
+				<td width="10%" align="right">TB-07y</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%">
+				<tr>
+					<td>Name of area:  #location#</td>
+					<td>Name of area coordinator:  ________________</td>
+				</tr>
+				<tr>
+					<td>Patients identified during Q#quarter# #year# (#startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#)</td>
+					<td>Date: #generationDate|dd/MMM/yyyy#</td>
+				</tr>
+			</table>
+			<br/>
+			<br/>
+			<span style="font-weight:bold;">
+				1. Number of patients detected with MDR-TB/XDR-TB in the lab (by date of result in laboratory register) during the quarter<br/><br/>
+				<center><table>
+					<tr>
+						<td>MDR-TB</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.mdr#
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>XDR-TB</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.xdr#
+						</td>
+					</tr>
+				</table></center>
+			</span>
+			<br/><br/>
+			
+			<span style="font-weight:bold;">
+				2. Number of MDR-TB patients who started Category IV treatment during the quarter
+			</span>
+			<br/><br/>
+			<table border="1" cellpadding="5" width="100%">
+				<tr align="center">
+					<td colspan="5">Pulmonary TB</td>
+					<td rowspan="3">Other*</td>
+					<td rowspan="3">Total</td>
+				</tr>
+				<tr align="center">
+					<td rowspan="2">New</td> <!-- new -->
+					<td colspan="4">Previously received treatment</td> <!-- treated -->
+				</tr>
+				<tr align="center">
+					<td>Relapse</td> <!-- relapse -->
+					<td>After Default</td> <!-- after default -->
+					<td>After Cat I Failure</td> <!-- previously treated with Cat 1 -->
+					<td>After Cat II Failure</td>  <!-- previously treated with Cat 2 -->
+				</tr>
+				<tr>
+					<td>#startedTreatment.confirmed.New#</td>
+					<td>#startedTreatment.confirmed.Relapse#</td>
+					<td>#startedTreatment.confirmed.AfterDefault#</td>
+					<td>#startedTreatment.confirmed.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.confirmed.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.confirmed.Other#</td>
+					<td>#startedTreatment.confirmed.Total#</td>
+				</tr>
+				<!-- <tr>
+					<td></td>
+					<td>New Case</td>
+					<td>Previously treated with first-line drugs</td>
+					<td>Previously treated with second-line drugs</td>
+					<td>Unknown</td>
+				</tr>
+				<tr>
+					<td>Confirmed Cases</td>
+					<td>#startedTreatment.confirmed.New#</td>
+					<td>#startedTreatment.confirmed.PreviousFirstLine#</td>
+					<td>#startedTreatment.confirmed.PreviousSecondLine#</td>
+					<td>#startedTreatment.confirmed.Unknown#</td>
+				</tr>
+				<tr>
+					<td>Suspected Cases</td>
+					<td>#startedTreatment.suspected.New#</td>
+					<td>#startedTreatment.suspected.PreviousFirstLine#</td>
+					<td>#startedTreatment.suspected.PreviousSecondLine#</td>
+					<td>#startedTreatment.suspected.Unknown#</td>
+				</tr> -->
+			</table>
+			<br/><br/>
+			1st quarter:  26 December-25 March<br/>
+			2nd quarter:  26 March-25 June<br/>
+			3rd quarter:  26 June-25 September<br/>
+			4th quarter:  26 September-25 December<br/>
+			<table width="100%"><tr><td align="right">Signature ______________________________</td></tr></table>
+		</div>
+	</body>
+</html>

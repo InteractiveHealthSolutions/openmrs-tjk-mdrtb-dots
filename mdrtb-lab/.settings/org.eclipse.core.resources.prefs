@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//metadata/messages.properties=UTF-8
+encoding//metadata/messages_fr.properties=UTF-8
+encoding//metadata/messages_ru.properties=UTF-8
+encoding//src/org/openmrs/module/mdrtb/reporting/data/output/DSTForm_ru.html=UTF-8
+encoding//src/org/openmrs/module/mdrtb/reporting/data/output/TB07_ru.html=UTF-8
+encoding//src/org/openmrs/module/mdrtb/reporting/data/output/TB08_ru.html=UTF-8
+encoding//src/org/openmrs/module/mdrtb/reporting/data/output/WHOForm06_ru.html=UTF-8
+encoding//web/module/drugforecast/patientsOnSLDResults.jsp=UTF-8
+encoding//web/module/specimen/specimenQuickEntry.jsp=UTF-8

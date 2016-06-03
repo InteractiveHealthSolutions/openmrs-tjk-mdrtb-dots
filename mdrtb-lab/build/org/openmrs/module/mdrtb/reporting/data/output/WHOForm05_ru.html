@@ -1,0 +1,104 @@
+﻿<html>
+	<head>
+		<title>WHO Form 07y</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;}
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%"><tr>
+				<td width="10%">&nbsp;</td>
+				<td width="50%" align="center" style="font-size:14px; font-weight:bold;">ТБ-07у: Квартальный отчет выявления случаев МЛУ-ТБ и начала лечения больных категории IV</td>
+				<td width="10%" align="right">&nbsp;</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%">
+				<tr>
+					<td>Область,/район:  #location#</td>
+					<td>ФИО координатора области/района:  ________________</td>
+				</tr>
+				<tr>
+					<td>Больные выявленные в #quarter# квартале #year# г.(#startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#)</td>
+					<td>дата: #generationDate|dd/MMM/yyyy#</td>
+				</tr>
+			</table>
+			<br/>
+			<br/>
+			<span style="font-weight:bold;">
+				1 – Число больных, с выявленной формой МЛУ-ТБ/ШЛУ-ТБ в лаборатории (согласно дате получения результатов  указанных в лабораторном журнале/регистре) в течение квартала:<br/><br/>
+				<center><table>
+					<tr>
+						<!-- <td>PolyDR-TB</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.polydr#
+						</td> -->
+						<td>МЛУ-ТБ</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.mdr#
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>ШЛУ-ТБ</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.xdr#
+						</td>
+					</tr>
+				</table></center>
+			</span>
+			<br/><br/>
+			
+			<span style="font-weight:bold;">
+				2 – Число больных МЛУ-ТБ, начавших лечение IV категории в течение квартала
+			</span>
+			<br/><br/>
+			<table border="1" cellpadding="5" width="100%" >
+				<tr align="center">
+					<td colspan="5">ТБ легких</td>
+					<td rowspan="3">Другие формы*</td>
+					<td rowspan="3">Всего</td>
+				</tr>
+				<tr align="center">
+					<td rowspan="2">Вновь<br>выявленные<br>больные</td> <!-- new -->
+					<td colspan="4">Лечившие ранее</td> <!-- treated -->
+				</tr>
+				<tr align="center">
+					<td>Рецидивы</td> <!-- relapse -->
+					<td>После перерыва </td> <!-- after default -->
+					<td>После<br>неэффективного<br>лечения по I<br>категории</td> <!-- previously treated with Cat 1 -->
+					<td>После<br>неэффективного<br>лечения по II<br>категории</td>  <!-- previously treated with Cat 2 -->
+				</tr>
+				<tr>
+					<td>#startedTreatment.confirmed.New#</td>
+					<td>#startedTreatment.confirmed.Relapse#</td>
+					<td>#startedTreatment.confirmed.AfterDefault#</td>
+					<td>#startedTreatment.confirmed.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.confirmed.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.confirmed.Other#</td>
+					<td>#startedTreatment.confirmed.Total#</td>
+				</tr>
+				
+				<!--  <tr>
+					<td>подтвержденных случаев заболевания</td>
+					<td>#startedTreatment.confirmed.New#</td>
+					<td>#startedTreatment.confirmed.PreviousFirstLine#</td>
+					<td>#startedTreatment.confirmed.PreviousSecondLine#</td>
+					<td>#startedTreatment.confirmed.Unknown#</td>
+				</tr>
+				<tr>
+					<td>Подозреваемые случаи</td>
+					<td>#startedTreatment.suspected.New#</td>
+					<td>#startedTreatment.suspected.PreviousFirstLine#</td>
+					<td>#startedTreatment.suspected.PreviousSecondLine#</td>
+					<td>#startedTreatment.suspected.Unknown#</td>
+				</tr> -->
+			</table>
+			<br/><br/>
+			Квартал 1:  26 декабря-25 марта<br/>
+			Квартал 2:  26 марта-25 июнья<br/>
+			Квартал 3:  26 июля-25 сентября<br/>
+			Квартал 4:  26 сентября-25 декабря<br/>
+			<table width="100%"><tr><td align="right">Подпись ______________________________</td></tr></table>
+		</div>
+	</body>
+</html>

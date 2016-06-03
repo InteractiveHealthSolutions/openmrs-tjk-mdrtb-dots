@@ -1,0 +1,280 @@
+<html>
+	<head>
+		<title>TB 07</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;border: 1px solid #000000}
+			border {border: 1px solid #000000}
+
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%" border="0"><tr>
+				
+				<td width="90%" align="center" style="font-size:14px; font-weight:bold;border:0px">
+						Quarterly Report on TB Case Registration
+				</td>
+				<td width="10%" align="right" style="font-size:14px; font-weight:bold;border:0px" valign="top">TB 07</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%" style="border: 1px #000000 solid;">
+				<tr>
+					<td>District:  #location# &nbsp;&nbsp; Name of Diagnostic Center (BMU):__________<br/><br/>
+					Name of TB Coordinator _____________ &nbsp;&nbsp; Signature ____________</td>
+				
+					<td>Patient registered during #quarter# quarter of year #year#<br/>
+					Date Completed:  #generationDate|dd/MMM/yyyy#<br/>
+					Completed By:  #generatedBy#</td>
+				</tr>
+			</table>
+			
+			<h5>Table 1 New cases</h5>
+			<table border="1" width="100%">
+				<tr align="center">
+					<td>&nbsp;</td>
+					<td colspan="6">Pulmonary TB</td>
+					<td colspan="3">Extrapulmonary TB</td>
+					<td colspan="3">Total Number</td>
+				</tr>
+				<tr align="center">
+					<td>&nbsp;</td>
+					<td colspan="3">New cases with smear positive</td>
+					<td colspan="3">New cases with smear negative</td>
+					<td colspan="3">&nbsp;</td>
+					<td colspan="3">&nbsp;</td>
+				</tr>
+				<tr align="center">
+					<td>&nbsp;</td>
+					<td>M</td>
+					<td>F</td>
+					<td>Total</td>
+					<td>M</td>
+					<td>F</td>
+					<td>Total</td>
+					<td>M</td>
+					<td>F</td>
+					<td>Total</td>
+					<td>M</td>
+					<td>F</td>
+					<td>Total</td>
+				</tr>
+				<tr>
+					<td>TB</td>
+					<td>##allNew.tb.NewPulmonarySmearPositiveMale#</td>
+					<td>#allNew.tb.NewPulmonarySmearPositiveFemale#</td>
+					<td>#allNew.tb.NewPulmonarySmearPositiveTotal#</td>
+					<td>#allNew.tb.NewPulmonarySmearNegativeMale#</td>
+					<td>#allNew.tb.NewPulmonarySmearNegativeFemale#</td>
+					<td>#allNew.tb.NewPulmonarySmearNegativeTotal#</td>
+					<td>#allNew.tb.NewExtraPulmonaryMale#</td>
+					<td>#allNew.tb.NewExtraPulmonaryFemale#</td>
+					<td>#allNew.tb.NewExtraPulmonaryTotal#</td>
+					<td>#allNew.tb.MaleTotal#</td>
+					<td>#allNew.tb.FemaleTotal#</td>
+					<td>#allNew.tb.Total#</td>
+				</tr>
+				<tr>
+					<td>TBHIV</td>
+					<td>#allNew.tbhiv.NewPulmonarySmearPositiveMale#</td>
+					<td>#allNew.tbhiv.NewPulmonarySmearPositiveFemale#</td>
+					<td>#allNew.tbhiv.NewPulmonarySmearPositiveTotal#</td>
+					<td>#allNew.tbhiv.NewPulmonarySmearNegativeMale#</td>
+					<td>#allNew.tbhiv.NewPulmonarySmearNegativeFemale#</td>
+					<td>#allNew.tbhiv.NewPulmonarySmearNegativeTotal#</td>
+					<td>#allNew.tbhiv.NewExtraPulmonaryMale#</td>
+					<td>#allNew.tbhiv.NewExtraPulmonaryFemale#</td>
+					<td>#allNew.tbhiv.NewExtraPulmonaryTotal#</td>
+					<td>#allNew.tbhiv.MaleTotal#</td>
+					<td>#allNew.tbhiv.FemaleTotal#</td>
+					<td>#allNew.tbhiv.Total#</td>
+				</tr>
+				
+			</table>
+			
+			<h5>Table 2. New Smear Positive Cases</h5>
+			<table border="1" width="75%">
+				<tr align="center">
+					<td colspan="15">Age group</td>
+					<td colspan="3" rowspan="2">Total Number</td>
+				</tr>
+				<tr align="center">
+					<td>&nbsp;</td>
+					<td colspan="2">0-14</td>
+					<td colspan="2">15-24</td>
+					<td colspan="2">25-34</td>
+					<td colspan="2">35-44</td>
+					<td colspan="2">45-54</td>
+					<td colspan="2">55-64</td>
+					<td colspan="2">&gt;65</td>
+				</tr>
+				<tr align="center">
+					<td>&nbsp;</td>
+					<td>M</td>
+					<td>F</td>
+					<td>M</td>
+					<td>F</td>
+					<td>M</td>
+					<td>F</td>
+					<td>M</td>
+					<td>F</td>
+					<td>M</td>
+					<td>F</td>
+					<td>M</td>
+					<td>F</td>
+					<td>M</td>
+					<td>F</td>
+					<td>M</td>
+					<td>F</td>
+					<td>Total</td>
+				</tr>
+				<tr align="center">
+					<td>TB</td>
+					<td>#newByAge.tb.NewPulmonarySmearPositiveMale014#</td>
+					<td>#newByAge.tb.NewPulmonarySmearPositiveFemale014#</td>
+					
+					<td>#newByAge.tb.NewPulmonarySmearPositiveMale1524#</td>
+					<td>#newByAge.tb.NewPulmonarySmearPositiveFemale1524#</td>
+					
+					<td>#newByAge.tb.NewPulmonarySmearPositiveMale2534#</td>
+					<td>#newByAge.tb.NewPulmonarySmearPositiveFemale2534#</td>
+					
+					<td>#newByAge.tb.NewPulmonarySmearPositiveMale3544#</td>
+					<td>#newByAge.tb.NewPulmonarySmearPositiveFemale3544#</td>
+					
+					<td>#newByAge.tb.NewPulmonarySmearPositiveMale4554#</td>
+					<td>#newByAge.tb.NewPulmonarySmearPositiveFemale4554#</td>
+					
+					<td>#newByAge.tb.NewPulmonarySmearPositiveMale5564#</td>
+					<td>#newByAge.tb.NewPulmonarySmearPositiveFemale5564#</td>
+					
+					<td>#newByAge.tb.NewPulmonarySmearPositiveMale65#</td>
+					<td>#newByAge.tb.NewPulmonarySmearPositiveFemale65#</td>
+					<td>#newByAge.tb.MaleTotal#</td>
+					<td>#newByAge.tb.FemaleTotal#</td>
+					<td>#newByAge.tb.Total#</td>
+				</tr>
+				<tr align="center">
+					<td>TBHIV</td>
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveMale014#</td>
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveFemale014#</td>
+					
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveMale1524#</td>
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveFemale1524#</td>
+					
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveMale2534#</td>
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveFemale2534#</td>
+					
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveMale3544#</td>
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveFemale3544#</td>
+					
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveMale4554#</td>
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveFemale4554#</td>
+				
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveMale5564#</td>
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveFemale5564#</td>
+					
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveMale65#</td>
+					<td>#newByAge.tbhiv.NewPulmonarySmearPositiveFemale65#</td>
+					
+					<td>#newByAge.tbhiv.MaleTotal#</td>
+					<td>#newByAge.tbhiv.FemaleTotal#</td>
+					<td>#newByAge.tbhiv.Total#</td>
+				</tr>
+			</table>
+			<h5>Table 3 Smear positive cases (re-treatment) </h5>
+			<table width="100%" border="1">
+				<tr align="center">
+					<td>&nbsp;</td>
+					<td colspan="3">Relapses(1)</td>
+					<td colspan="3">Failure(2)</td>
+					<td colspan="3">Default(3)</td>
+					<td colspan="3">Other(4)</td>
+				</tr>
+				<tr align="center">
+					<td>&nbsp;</td>
+					<td>M</td>
+					<td>F</td>
+					<td>Total</td>
+					<td>M</td>
+					<td>F</td>
+					<td>Total</td>
+					<td>M</td>
+					<td>F</td>
+					<td>Total</td>
+					<td>M</td>
+					<td>F</td>
+					<td>Total</td>
+				</tr>
+				<tr align="center">
+					<td>TB</td>
+					<td>#RelapseByGender.tb.RelapsePulmonarySmearPositiveMale#</td>
+					<td>#RelapseByGender.tb.RelapsePulmonarySmearPositiveFemale#</td>
+					<td>#RelapseByGender.tb.RelapsePulmonarySmearPositiveTotal#</td>
+					<td>#RelapseByGender.tb.FailurePulmonarySmearPositiveMale#</td>
+					<td>#RelapseByGender.tb.FailurePulmonarySmearPositiveFemale#</td>
+					<td>#RelapseByGender.tb.FailurePulmonarySmearPositiveTotal#</td>
+					<td>#RelapseByGender.tb.DefaultPulmonarySmearPositiveMale#</td>
+					<td>#RelapseByGender.tb.DefaultPulmonarySmearPositiveFemale#</td>
+					<td>#RelapseByGender.tb.DefaultPulmonarySmearPositiveTotal#</td>
+					<td>#RelapseByGender.tb.OtherPulmonarySmearPositiveMale#</td>
+					<td>#RelapseByGender.tb.OtherPulmonarySmearPositiveFemale#</td>
+					<td>#RelapseByGender.tb.OtherPulmonarySmearPositiveTotal#</td>
+				</tr>
+				<tr align="center">
+					<td>TBHIV</td>
+					<td>#RelapseByGender.tbhiv.RelapsePulmonarySmearPositiveMale#</td>
+					<td>#RelapseByGender.tbhiv.RelapsePulmonarySmearPositiveFemale#</td>
+					<td>#RelapseByGender.tbhiv.RelapsePulmonarySmearPositiveTotal#</td>
+					<td>#RelapseByGender.tbhiv.FailurePulmonarySmearPositiveMale#</td>
+					<td>#RelapseByGender.tbhiv.FailurePulmonarySmearPositiveFemale#</td>
+					<td>#RelapseByGender.tbhiv.FailurePulmonarySmearPositiveTotal#</td>
+					<td>#RelapseByGender.tbhiv.DefaultPulmonarySmearPositiveMale#</td>
+					<td>#RelapseByGender.tbhiv.DefaultPulmonarySmearPositiveFemale#</td>
+					<td>#RelapseByGender.tbhiv.DefaultPulmonarySmearPositiveTotal#</td>
+					<td>#RelapseByGender.tbhiv.OtherPulmonarySmearPositiveMale#</td>
+					<td>#RelapseByGender.tbhiv.OtherPulmonarySmearPositiveFemale#</td>
+					<td>#RelapseByGender.tbhiv.OtherPulmonarySmearPositiveTotal#</td>
+				</tr>
+			</table>
+			<h5>Table 4 Smear negative cases (re-treatment) </h5>
+			<table width="100%" border="1">
+				<tr align="center">
+					<td>&nbsp;</td>
+					<td colspan="3">Default(1)</td>
+					<td colspan="3">Other(2)</td>	
+				</tr>
+				<tr align="center">
+					<td>&nbsp;</td>
+					<td>M</td>
+					<td>F</td>
+					<td>Total</td>
+					<td>M</td>
+					<td>F</td>
+					<td>Total</td>
+					
+				</tr>
+				<tr align="center">
+					<td>TB</td>
+					<td>#DefaultNegByGender.tb.DefaultPulmonarySmearNegativeMale#</td>
+					<td>#DefaultNegByGender.tb.DefaultPulmonarySmearNegativeFemale#</td>
+					<td>#DefaultNegByGender.tb.DefaultPulmonarySmearNegativeTotal#</td>
+					<td>#DefaultNegByGender.tb.OtherPulmonarySmearNegativeMale#</td>
+					<td>#DefaultNegByGender.tb.OtherPulmonarySmearNegativeFemale#</td>
+					<td>#DefaultNegByGender.tb.OtherPulmonarySmearNegativeTotal#</td>
+				
+				</tr>
+				<tr align="center">
+					<td>TB/HIV</td>
+					<td>#DefaultNegByGender.tbhiv.DefaultPulmonarySmearNegativeMale#</td>
+					<td>#DefaultNegByGender.tbhiv.DefaultPulmonarySmearNegativeFemale#</td>
+					<td>#DefaultNegByGender.tbhiv.DefaultPulmonarySmearNegativeTotal#</td>
+					<td>#DefaultNegByGender.tbhiv.OtherPulmonarySmearNegativeMale#</td>
+					<td>#DefaultNegByGender.tbhiv.OtherPulmonarySmearNegativeFemale#</td>
+					<td>#DefaultNegByGender.tbhiv.OtherPulmonarySmearNegativeTotal#</td>
+					
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

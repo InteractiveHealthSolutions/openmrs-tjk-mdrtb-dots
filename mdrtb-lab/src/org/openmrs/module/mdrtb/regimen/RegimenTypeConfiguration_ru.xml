@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list>
+	<regimenType>
+		<name>tb</name>
+		<drugSet>TUBERCULOSIS DRUGS</drugSet>
+		<reasonForStartingQuestion>CURRENT MULTI-DRUG RESISTANT TUBERCULOSIS TREATMENT TYPE</reasonForStartingQuestion>
+		<reasonForStoppingQuestion>REASON TUBERCULOSIS TREATMENT CHANGED OR STOPPED</reasonForStoppingQuestion>
+		<suggestions>
+			<regimenSuggestion> 
+				<codeName>INJECTABLEINITIAL</codeName>
+				<displayName>mdrtb.injectablePhaseInitial</displayName>
+				<reasonForStarting>STANDARDIZED</reasonForStarting>
+				<drugComponents> 
+					<drugSuggestion> 
+						<generic>Канамицин</generic> 
+						<drugId>Kanamycin (Km)</drugId> 
+						<dose>1</dose> 
+						<units>g</units> 
+						<frequency>1/day x 6 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>Пиразинамид</generic> 
+						<drugId>Pyrazinamide (Z)</drugId> 
+						<dose>400</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>Офлоксацин</generic> 
+						<drugId>Ofloxacin (Ofx)</drugId> 
+						<dose>200</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>Протионамид</generic> 
+						<drugId>Prothionamide (Pto)</drugId> 
+						<dose>250</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>Циклосерин</generic> 
+						<drugId>Cycloserine (Cs)</drugId> 
+						<dose>250</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+				</drugComponents>
+			</regimenSuggestion>
+			<regimenSuggestion>
+				<codeName>INJECTABLECONTINUATION</codeName>
+				<displayName>mdrtb.injectablePhaseContinuation</displayName>
+				<reasonForStarting>STANDARDIZED</reasonForStarting>
+				<drugComponents> 
+					<drugSuggestion> 
+						<generic>KANAMYCIN</generic> 
+						<drugId>Kanamycin (Km)</drugId> 
+						<dose>1</dose> 
+						<units>g</units> 
+						<frequency>1/day x 3 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>PYRAZINAMIDE</generic> 
+						<drugId>Pyrazinamide (Z)</drugId> 
+						<dose>400</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>OFLOXACIN</generic> 
+						<drugId>Ofloxacin (Ofx)</drugId> 
+						<dose>200</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>PROTHIONAMIDE</generic> 
+						<drugId>Prothionamide (Pto)</drugId> 
+						<dose>250</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>CYCLOSERINE</generic> 
+						<drugId>Cycloserine (Cs)</drugId> 
+						<dose>250</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+				</drugComponents>
+			</regimenSuggestion>
+			<regimenSuggestion> 
+				<codeName>CONTINUATIONSIMPLE</codeName>
+				<displayName>mdrtb.continuationPhaseWithoutZ</displayName>
+				<reasonForStarting>STANDARDIZED</reasonForStarting>
+				<drugComponents> 
+					<drugSuggestion> 
+						<generic>OFLOXACIN</generic> 
+						<drugId>Ofloxacin (Ofx)</drugId> 
+						<dose>200</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>PROTHIONAMIDE</generic> 
+						<drugId>Prothionamide (Pto)</drugId> 
+						<dose>250</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>CYCLOSERINE</generic> 
+						<drugId>Cycloserine (Cs)</drugId> 
+						<dose>250</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+				</drugComponents>
+			</regimenSuggestion>
+			<regimenSuggestion>
+				<codeName>CONTINUATIONPLUS</codeName>
+				<displayName>mdrtb.continuationPhasePlusZ</displayName>
+				<reasonForStarting>STANDARDIZED</reasonForStarting>
+				<drugComponents> 
+					<drugSuggestion> 
+						<generic>OFLOXACIN</generic> 
+						<drugId>Ofloxacin (Ofx)</drugId> 
+						<dose>200</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>PROTHIONAMIDE</generic> 
+						<drugId>Prothionamide (Pto)</drugId> 
+						<dose>250</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>CYCLOSERINE</generic> 
+						<drugId>Cycloserine (Cs)</drugId> 
+						<dose>250</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>PYRAZINAMIDE</generic> 
+						<drugId>Pyrazinamide (Z)</drugId> 
+						<dose>400</dose> 
+						<units>mg</units> 
+						<frequency>1/day x 7 days/week</frequency>  
+						<instructions></instructions> 
+						<asNeeded>false</asNeeded>
+					</drugSuggestion>
+				</drugComponents>
+			</regimenSuggestion>
+			<regimenSuggestion> 
+				<codeName>KM_LFX_ETHIO_CS_PAS</codeName>
+				<displayName>KM + LFX + Ethio + CS + PAS</displayName>
+				<reasonForStarting>EMPIRIC</reasonForStarting>
+				<drugComponents> 
+					<drugSuggestion> 
+						<generic>KANAMYCIN</generic> 
+						<drugId>Kanamycin (Km)</drugId> 
+						<dose></dose> 
+						<units></units> 
+						<frequency></frequency>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>LEVOFLOXACIN</generic> 
+						<drugId>Levofloxacin (Lfx)</drugId> 
+						<dose></dose> 
+						<units></units> 
+						<frequency></frequency>  
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>ETHIONAMIDE</generic> 
+						<drugId>Ethionamide (Eto)</drugId> 
+						<dose></dose> 
+						<units></units> 
+						<frequency></frequency>  
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>CYCLOSERINE</generic> 
+						<drugId>Cycloserine (Cs)</drugId> 
+						<dose></dose> 
+						<units></units> 
+						<frequency></frequency>
+					</drugSuggestion>
+					<drugSuggestion> 
+						<generic>P-AMINOSALICYLIC ACID</generic> 
+						<drugId>P-aminosalyicylic acid (PAS)</drugId> 
+						<dose></dose> 
+						<units></units> 
+						<frequency></frequency>
+					</drugSuggestion>
+				</drugComponents>
+			</regimenSuggestion>
+		</suggestions>
+	</regimenType>
+	
+	<regimenType>
+		<name>hiv</name>
+		<drugSet>ANTIRETROVIRAL DRUGS</drugSet>
+		<reasonForStoppingQuestion>REASON ANTIRETROVIRALS CHANGED OR STOPPED</reasonForStoppingQuestion>
+		<suggestions>
+			<regimenSuggestion>
+				<codeName>standardTri30</codeName>
+				<displayName>3TC + d4T(30) + NVP (Triomune-30)</displayName>
+				<drugComponents>
+					<drugSuggestion>
+						<generic>STAVUDINE LAMIVUDINE AND NEVIRAPINE</generic> 
+						<drugId>Triomune-30</drugId>
+						<dose>1</dose>
+						<units>tab(s)</units>
+						<frequency>2/day x 7 days/week</frequency>
+						<instructions></instructions>
+			  		</drugSuggestion>
+				</drugComponents>
+			</regimenSuggestion>
+			<regimenSuggestion>
+				<codeName>standardTri40</codeName>
+				<displayName>3TC + d4T(40) + NVP (Triomune-40)</displayName>
+				<drugComponents>
+					<drugSuggestion>
+						<generic>STAVUDINE LAMIVUDINE AND NEVIRAPINE</generic> 
+						<drugId>Triomune-40</drugId>
+						<dose>1</dose>
+						<units>tab(s)</units>
+						<frequency>2/day x 7 days/week</frequency>
+						<instructions></instructions>
+					</drugSuggestion>
+				</drugComponents>
+			</regimenSuggestion>
+			<regimenSuggestion>
+				<codeName>standardD4t30Efv</codeName>
+				<displayName>d4T(30) + 3TC + EFV(600)</displayName>
+				<drugComponents>
+					<drugSuggestion>
+						<generic>STAVUDINE</generic> 
+						<drugId>d4T 30</drugId>
+						<dose>30</dose>
+						<units>mg</units>
+						<frequency>2/day x 7 days/week</frequency>
+						<instructions></instructions>
+					</drugSuggestion>
+					<drugSuggestion>
+						<generic>LAMIVUDINE</generic> 
+						<drugId>3TC 150</drugId>
+						<dose>150</dose>
+						<units>mg</units>
+						<frequency>2/day x 7 days/week</frequency>
+						<instructions></instructions>
+					</drugSuggestion>
+			  		<drugSuggestion>
+			  			<generic>EFAVIRENZ</generic> 
+						<drugId>EFV 600</drugId>
+						<dose>600</dose>
+						<units>mg</units>
+						<frequency>1/day x 7 days/week</frequency>
+						<instructions></instructions>
+			  		</drugSuggestion>
+				</drugComponents>
+			</regimenSuggestion>
+			<regimenSuggestion>
+				<codeName>standardAztNvp</codeName>
+				<displayName>AZT + 3TC + NVP</displayName>
+				<drugComponents>
+					<drugSuggestion>
+						<generic>ZIDOVUDINE AND LAMIVUDINE</generic> 
+						<drugId>AZT+3TC (Duovir)</drugId>
+						<dose>1</dose>
+						<units>tab(s)</units>
+						<frequency>2/day x 7 days/week</frequency>
+						<instructions></instructions>
+					</drugSuggestion>
+					<drugSuggestion>
+						<generic>NEVIRAPINE</generic> 
+						<drugId>NVP</drugId>
+						<dose>200</dose>
+						<units>mg</units>
+						<frequency>2/day x 7 days/week</frequency>
+						<instructions></instructions>
+					</drugSuggestion>
+				</drugComponents>
+			</regimenSuggestion>
+			<regimenSuggestion>
+				<codeName>standardAztEfv</codeName>
+				<displayName>AZT + 3TC + EFV(600)</displayName>
+				<drugComponents>
+					<drugSuggestion>
+						<generic>ZIDOVUDINE AND LAMIVUDINE</generic> 
+						<drugId>AZT+3TC (Duovir)</drugId>
+						<dose>1</dose>
+						<units>tab(s)</units>
+						<frequency>2/day x 7 days/week</frequency>
+						<instructions></instructions>
+					</drugSuggestion>
+					<drugSuggestion>
+						<generic>EFAVIRENZ</generic> 
+						<drugId>EFV 600</drugId>
+						<dose>600</dose>
+						<units>mg</units>
+						<frequency>1/day x 7 days/week</frequency>
+						<instructions></instructions>
+					</drugSuggestion>
+				</drugComponents>
+			</regimenSuggestion>
+			<regimenSuggestion>
+				<codeName>standardD4t40Efv</codeName>
+				<displayName>d4T(40) + 3TC + EFV(600)</displayName>
+				<drugComponents>
+					<drugSuggestion>
+						<generic>STAVUDINE</generic> 
+						<drugId>d4T 40</drugId>
+						<dose>40</dose>
+						<units>mg</units>
+						<frequency>2/day x 7 days/week</frequency>
+						<instructions></instructions>
+					</drugSuggestion>
+					<drugSuggestion>
+						<generic>LAMIVUDINE</generic> 
+						<drugId>3TC 150</drugId>
+						<dose>150</dose>
+						<units>mg</units>
+						<frequency>2/day x 7 days/week</frequency>
+						<instructions></instructions>
+					</drugSuggestion>
+					<drugSuggestion>
+						<generic>EFAVIRENZ</generic> 
+						<drugId>EFV 600</drugId>
+						<dose>600</dose>
+						<units>mg</units>
+						<frequency>1/day x 7 days/week</frequency>
+						<instructions></instructions>
+					</drugSuggestion>
+				</drugComponents>
+			</regimenSuggestion>
+		</suggestions>
+	</regimenType>
+	
+	<regimenType>
+		<name>other</name>
+		<reasonForStoppingQuestion>REASON TUBERCULOSIS TREATMENT CHANGED OR STOPPED</reasonForStoppingQuestion>
+	</regimenType>
+</list>

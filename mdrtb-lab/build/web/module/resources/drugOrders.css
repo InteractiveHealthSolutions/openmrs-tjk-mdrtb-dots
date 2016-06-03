@@ -1,0 +1,39 @@
+.cellStyle {
+	text-align:left; padding-right:20px; white-space:nowrap;
+}
+.indentedCellStyle {
+	text-align:left; padding-left:10px; padding-right:10px; white-space:nowrap;
+}
+.cellWrappable {
+	text-align:left; padding-right:20px;
+}
+.headerStyle {
+	text-align:left; padding-right:20px; white-space:nowrap; 
+}
+.groupStyle {
+	font-weight:bold; text-align:left; padding-right:20px; white-space:nowrap; border-bottom:1px solid black; background-color:lightgrey;
+}
+.future {
+	font-style:italic; color:grey; font-weight:normal;
+}
+.drugAlert {
+	color:red;	
+}
+.hidden {
+	display:none;	
+}
+.regimenHistory {
+	border:1px solid grey; white-space:nowrap; background-color:#EEEEDD;
+}
+.regimenHistory th {
+	padding:5px; background-color:white; vertical-align:middle;
+}
+.regimenHistory td {
+	padding:5px; text-align: center;
+}
+#ui-datepicker-div {
+	z-index: 9999; /* must be > than popup editor (950) */
+}
+.ui-datepicker {
+	z-index: 9999 !important; /* must be > than popup editor (1002) */
+}

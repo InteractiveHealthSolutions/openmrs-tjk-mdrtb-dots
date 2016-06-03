@@ -1,0 +1,635 @@
+/**
+table,div,td, thead,tbody {
+border-collapse: collapse;
+}
+*/
+
+table,div,td,thead,tbody {
+	border-color: #8FABC7
+}
+
+input {
+autocomplete:off;	
+}	
+
+p {
+	line-height: 100%;
+	margin: 1%;
+}	
+
+
+.boxHeader,.boxRed,.boxHeaderRed,.boxExited,.boxHeaderExited {
+	border: 1px solid #8FABC7;
+	width: 99%;
+	padding: 1px 1px 1px 1px;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+.boxDisplay {
+	border: 1px solid black;
+	width: 100%;
+	padding: 0px 0px 0px 0px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.divSearchClass{
+	position:absolute;
+	top:8pt;
+	right: 100px;
+	white-space: nowrap;
+}
+
+.absolute{
+	position: absolute;	
+	width: 100%;
+}
+
+
+.divHeader {
+	background-color: #F0F0F0;
+	text-align: center;
+	padding: 0px 3px 10px 3px
+	}
+	
+	.divHeaderTwo {
+	background-color: #F0F0F0;
+	text-align: left;
+	padding: 3px 3px 10px 3px;
+	border: 1px solid grey; 
+	padding-left: 5px;
+	}
+
+.patientErrorInner{
+	border: none; 
+	padding-left: 10px;	
+}
+
+#R01SearchTabs {
+	margin: 10px auto 0px auto;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 2px;
+	border-bottom: 1px solid navy;
+}
+
+#R01SearchTabs ul,#R01SearchTabs li {
+	display: inline;
+	list-style-type: none;
+	padding: 0px 0px 0px 0px;
+}
+
+#R01SearchTabs a:link,#R01SearchTabs a:visited {
+	border: 1px solid navy;
+	font-size: small;
+	font-weight: bold;
+	margin-right: 8px;
+	padding: 2px 10px 2px 10px;
+	text-decoration: none;
+	color: navy;
+	background: #E0E0F0;
+}
+
+#R01SearchTabs a:link .active,#R01SearchTabs a:visited .active {
+	border-bottom: 1px solid #FFFFFF;
+}
+
+#R01SearchTabs a.current,#R01SearchTabs  .current,#R01SearchTabs 
+	.current,#R01SearchTabs a.current:hover {
+	background: #FFFFFF;
+	border-bottom: 1px solid #FFFFFF;
+	color: navy;
+	text-decoration: none;
+}
+
+#searchTab_findcreate_content {
+	margin: 10px auto 0px auto;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-bottom: 2px;
+	border-bottom: 1px solid navy;
+}
+table.patientTable {
+	border-width: 1px;
+	border-spacing: 20px;
+	border-style: solid;
+	border-color: #8FABC7;
+	border-collapse: collapse;
+	background-color: white;
+}
+
+table.patientTable th {
+	border-width: 0px;
+	border-style: none;
+	background-color: white;
+	border-collapse: collapse;
+	padding: 0px;
+}
+
+table.patientTable tr {
+	border-width: 0px;
+	padding: 0px;
+	border-color:grey;
+	border-type:solid;
+	border-collapse: collapse;
+}
+
+.patientTableOne {
+	border-width: 0px;
+	padding:0px;
+	border-style: solid;
+	border-color: white;
+	background-color: white;
+	border-collapse: collapse;
+}
+
+.patientTableHeader {
+	border-width: 0px;
+	padding:0px;
+	border-style: solid;
+	border-color: white;
+	background-color: #8FABC7;	
+}
+
+
+.patientTableTwo {
+	border-width: 0px;
+	padding:0px;
+	border-style: solid;
+	border-color: white;
+	background-color: #8FABC7;
+	border-collapse: collapse;
+}
+
+.widgetOut {
+	border-width:1px;
+	border-spacing:1px;
+	border-style:solid;
+	border-collapse:separate;
+	border-color:grey;
+	border-spacing:3px;
+	background-color:#EEEEDD;
+}
+.widgetOut th {
+   	border-width:2px;
+	padding:5px;
+	border-style:none;
+	background-color:white;
+	vertical-align:middle;
+}
+.widgetOut td {
+   	border-width:2px;
+	padding:5px;
+	border-style:none;
+	width: 10px;
+	text-align: center;
+}
+
+.widgetHeaderRows {
+	background-color:#CCCC88;
+	text-align: center;	
+}
+
+.widgetGreen {
+background-color:#99dd00;
+text-align:center;
+}
+
+.widgetRed {
+background-color: #ff6633;
+text-align:center;
+}
+
+.dstWarning {
+color: red;
+text-align:center;
+}
+
+.widgetYellow{
+background-color: #ffddaa;
+text-align:center;
+}
+
+.widgetDefault {
+background-color:#CCCCCC;
+}
+
+
+#content {
+	border-right: 1px;
+	border-style-right: solid;
+	border-color-right:	grey;
+}		
+
+.portletTable {
+	border-width:1px;
+	border-spacing:1px;
+	border-style:solid;
+	border-collapse:collapse;
+	border-color:lightgrey;
+	border-spacing:3px;
+	
+}
+
+.portletTable th{
+	background-color:lightgrey;
+	padding:3px;
+}
+.portletTable td{
+	padding:6px 6px 6px 6px;
+}
+
+
+a.widgetLinks {
+	color: black;	
+	text-decoration: none;
+}
+a.widgetLinks:link {
+	color: black;	
+	text-decoration: none;
+}
+
+
+
+.indexTable {
+	border-width:1px;
+	border-spacing:1px;
+	border-style:none;
+	border-collapse:collapse;
+	border-color:white;
+	background-color:white;
+}
+.indexTable th {
+   	border-width:2px;
+	padding:5px;
+	border-style:none;
+	background-color:white;
+	vertical-align:middle;
+}
+.indexTable td{
+	padding:5px;
+	border:thin solid white;
+}
+
+
+
+.indexInner{
+border: 1px solid #8FABC7;
+border-collapse:collapse;
+
+}
+
+.indexInner td{
+	padding: 15px 15px 15px 15px;
+	border:none;
+	}
+	
+
+	
+.boxHeaderTwo {
+	position:absolue;
+	background-color:#8FABC7;
+	padding: 0px 3px 3px 3px;
+	text-align: center;
+	color:white;
+}
+	
+.activeRegimenRow {
+	background-color: #FFFF99;
+	height:20px;
+}
+
+.oddRow {
+	background-color: white;
+	height:20px;
+	
+}
+
+.evenRow {
+	background-color: whitesmoke;
+	height:20px;
+}
+
+.oddRowTwo {
+	background-color: white;
+	height:20px;
+
+}
+
+.evenRowTwo {
+	background-color: #FCFCFC;
+	height:20px;
+}
+
+.rowMouseOver {
+	background-color: #F0E68C;
+	height:20px;
+}
+
+.resTable{
+	border-collapse: collapse;
+	width: 100%;
+	border:none;
+}
+
+.resTable td {
+	border:none;	
+}
+
+#messageZone {
+	position:absolute;
+	top:0px;
+	right:0px;
+	background-color:red;
+	color:white;
+	padding: 2px 2px 2px 2px;	
+}
+
+.regTable {
+	border-width:1px;
+	border-spacing:1px;
+	border-style:solid;
+	border-collapse:collapse;
+	border-color:grey;
+	border-spacing:3px;
+	
+}
+.regTable th {
+	padding:5px 5px 5px 5px;
+	border:thin solid grey;
+	text-align: left;
+	/*background-color:#8FABC7;*/
+	font-size:90%;
+	background-color:lightgrey;
+	}
+	
+.regTable td {
+	padding:5px 5px 5px 5px;
+	border:thin solid grey;
+	text-align: left;
+	}
+	
+.displayOff {
+	display:none;	
+}
+
+.displayOn {
+	display:inline;	
+}
+
+.simple_popup_div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    width: 300px;
+}
+.simple_popup_inner {
+    padding: 40px;
+    border: #999 2px solid;
+    text-align: left;
+}
+.simple_popup_close {
+    text-align: right;
+}
+
+.oddRowFirstLine {
+	background-color: #eeeeee;
+
+}
+
+.evenRowFirstLine {
+	background-color: #eaeaea;
+
+}
+
+.oddRowInjectible {
+	background-color: #cafa97;
+}
+
+.evenRowInjectible {
+	background-color: #ccff99;
+}
+.oddRowQuinolone {
+	background-color: #ffff66;
+}
+
+.evenRowQuinolone {
+	background-color: #fcfc6a;
+}
+.oddRowSecondLine {
+	background-color: #ffcc66;
+}
+
+.evenRowSecondLine {
+	background-color: #fcca60;
+}
+
+.patientOverviewHeaderOdd {
+	border-width: 0px;
+	padding:3px 3px 3px 3px;
+	border-style: solid;
+	border-color: white;
+	background-color: white;	
+}
+
+.patientOverviewHeaderEven {
+	border-width: 0px;
+	padding:3px 3px 3px 3px;
+	border-style: solid;
+	border-color: white;
+	background-color: whitesmoke;	
+}
+.patientOverviewHeaderTitle {
+	border-width: 0px;
+	padding:3px 3px 3px 3px;
+	border-style: solid;
+	border-color: white;
+	background-color: #ddffbb;	
+}
+.popupTable {
+	border-spacing:3px;
+	background-color:white;
+}
+
+	
+.popupTable td {
+	padding:10px 10px 10px 10px;
+	vertical-align: top;
+	}
+	
+.smaller {
+	vertical-align:middle;
+	padding: 3px 20px 3px 3px
+	}	
+
+
+.statusTable {	
+	border-width:1px;
+	border-color:none;
+	border-spacing:1px;
+	border-style:none;
+	border-collapse:collapse;
+	border-spacing:1px;
+	width:95%;
+	/*background-color:lightgrey;*/
+}
+
+
+.statusTableOdd {
+ background-color:whitesmoke;
+padding: 5px 5px 5px 5px;	
+}
+
+.statusTableEven {
+ background-color:whitesmoke;
+padding: 5px 5px 5px 5px;	
+}
+
+.statusTableOuterTable {
+border: 1px grey solid;
+border-top: none;
+padding: 1px 1px 1px 1px;	
+}
+
+.statusContainerDiv {
+	width:100%; 
+	font-size:70%;
+	position:relative;
+	left:1%;
+	padding: 3px 3px 3px 3px;
+	}
+	
+.statusFillOutTable {
+	width:100%;
+	height: 100%;
+	border-width:1px;
+	border-color:grey;
+	border-spacing:1px;
+	border-style:none;
+	
+}	
+	
+.statusFillOutTable	td {
+	padding: 5px 5px 5px 5px;
+	vertical-align:top;
+	
+}	
+	
+
+
+
+.statusTDs {
+	height: 100%;
+}
+
+.spanFontSize{
+	font-size:100%;	
+}	
+.statusTextArea {
+	width:230px;
+	height:80px;	
+}		
+.onehundredpx{
+	width:100px;	
+}
+.findpatientpopup {
+	border-width:1px;
+	border-color:grey;
+	border-spacing:1px;
+	border-style:solid;
+	background-color:white;
+	width:100px;
+	position:relative;
+	left:-20px;
+	
+}
+.findpatientpopup td {
+	padding: 10px 10px 10px 10px;
+}
+.findpatientpopup th {
+	padding: 2px 10px 2px 10px;
+	font-size:80%;
+	font-weight: normal;
+	background-color:lightgrey;
+}
+.disabled {
+	background-color:lightgrey;
+	color:black; 
+}
+
+.disabledTwo {
+	background-color:lightgrey;	
+}	
+
+.contactsTable {
+	border-width:1px;
+	border-color:grey;
+	border-spacing:1px;
+	border-style:solid;
+	border-collapse:collapse;
+	
+}
+
+.contactsTable th {
+	background-color:lightgrey;
+	align:center;	
+}
+
+.contactsTableEven td {
+	padding: 4px 12px 4px 10px;
+}
+
+.contactsTableOdd td {
+	padding: 4px 12px 4px 10px;
+	background-color:whitesmoke;
+}
+
+#mdrtbbanner {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	text-align: left;
+	z-index: 7;
+	padding-left: 0px;
+}
+
+.patientSummaryTable {
+	border: 1px;
+	border-color: black;
+    padding: 2px;	
+}
+
+.patientSummaryTableOdd a,.patientSummaryTableEven a {
+    color: black;
+}
+
+.patientSummaryTableOdd td,.patientSummaryTableEven td {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 11px;
+    padding: 2px 3px 2px 3px;
+}
+
+.patientSummaryTableOdd {
+    background-color: #ffffff;
+}
+
+.patientSummaryTableEven {
+    background-color: #e3e3e3;
+}
+
+.patientSummaryTableHeader {
+	border-color: white;
+  	text-align: center;
+  	white-space: nowrap;
+    background-color: #729fcf;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px 3px 4px 3px;
+}
+

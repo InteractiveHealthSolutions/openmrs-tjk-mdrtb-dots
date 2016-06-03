@@ -1,0 +1,142 @@
+<html>
+	<head>
+		<title>TB 10</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;border: 1px solid #000000}
+			border {border: 1px solid #000000}
+
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%" border="0"><tr>
+				
+				<td width="90%" align="center" style="font-size:14px; font-weight:bold;border:0px">
+						Quarterly report on sputum conversion after completion of intensive phase of treatment 
+				</td>
+				<td width="10%" align="right" style="font-size:14px; font-weight:bold;border:0px" valign="top">TB 10</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%" style="border: 1px #000000 solid;">
+				<tr>
+					<td>District:  #location# &nbsp;&nbsp; Name of Diagnostic Center (BMU):__________<br><br>
+					Name of TB Coordinator _____________ &nbsp;&nbsp; Signature ____________</td>
+				
+					<td>Patient registered during #quarter# quarter of year #year#<br>
+					Date Completed:  #generationDate|dd/MMM/yyyy#<br>
+					Completed By:  #generatedBy#</td>
+				</tr>
+			</table>
+			
+			<table style="border: 1px #000000 solid;" cellpadding="5" width="100%">
+				<tr>
+					<td rowspan="3">Patient Type</td>
+					<td rowspan="3">Number of Smear +ve cases registred</td>
+					<td colspan="8">Sputum Conversion</td>
+					<td rowspan="3">Sputum still positive</td>
+					<td rowspan="3">Follow-up smear not done</td>
+					
+				</tr>
+				<tr>
+					<td colspan="2">After 2 mnth</td>
+					<td colspan="2">After 3 mnth</td> 
+					<td colspan="2">After 4 mnth</td>
+					<td colspan="2">Total</td>
+				</tr>
+				<tr>
+					<td>Amt</td>
+					<td>%</td>
+					<td>Amt</td>
+					<td>%</td>
+					<td>Amt</td>
+					<td>%</td>
+					<td>Amt</td>
+					<td>%</td>
+				</tr>
+				<tr>
+					<td>New Cases</td>
+					<td>#labDetections.New.Positive#</td>
+					<td>#labDetections.New.ConvertedAtTwo#</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.New.ConvertedAtThree#</td>
+					<td>&nbsp;</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.New.NotConverted#</td>
+					<td>#labDetections.New.NoFollowup#</td>
+					
+				</tr>
+				<tr>
+					<td>Relapse</td>
+					<td>#labDetections.Relapse.Positive#</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td>#labDetections.Relapse.ConvertedAtThree#</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.Relapse.ConvertedAtFour#</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.Relapse.NotConverted#</td>
+					<td>#labDetections.Relapse.NoFollowup#</td>
+					
+				</tr>
+				<tr>
+					<td>After Failure</td>
+					<td>#labDetections.AfterFailure.Positive#</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td>#labDetections.AfterFailure.ConvertedAtThree#</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.AfterFailure.ConvertedAtFour#</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.AfterFailure.NotConverted#</td>
+					<td>#labDetections.AfterFailure.NoFollowup#</td>
+					
+				</tr>
+				<tr>
+					<td>After Default</td>
+					<td>#labDetections.AfterDefault.Positive#</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td>#labDetections.AfterDefault.ConvertedAtThree#</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.AfterDefault.ConvertedAtFour#</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.AfterDefault.NotConverted#</td>
+					<td>#labDetections.AfterDefault.NoFollowup#</td>
+					
+				</tr>
+				<tr>
+					<td>Other</td>
+					<td>#labDetections.Other.Positive#</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td bgcolor="#C0C0C0">&nbsp;</td>
+					<td>#labDetections.Other.ConvertedAtThree#</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.Other.ConvertedAtFour#</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>#labDetections.Other.NotConverted#</td>
+					<td>#labDetections.Other.NoFollowup#</td>
+					
+				</tr>
+			</table>
+			<p>Of total number of new cases for which follow-up sputum microscopy was not done: died (from column 10, page 1) #lowerSet.NoFollowupDead# 1, transferred in (out)<br>
+			(from column 10, page 1) #lowerSet.NoFollowupTransferOut# 2, default (from column 10, page 1) #lowerSet.NoFollowupDefaulted#, non-productive (from column 10, page 1) _______4, active TB<br>diagnosis is cancelled (from column 10, page 1) #lowerSet.NoFollowupCanceled# 5.<br><br>
+			Notes: ____________________________________________________________________________________________________________________________________<br>
+			__________________________________________________________________________________________________________________________________________<br>
+			__________________________________________________________________________________________________________________________________________<br>
+			__________________________________________________________________________________________________________________________________________
+			</p>
+		</div>
+	</body>
+</html>
