@@ -332,4 +332,34 @@ public class MdrtbQueryService {
     	
     	return executeQuery(q.toString(), context);
     }
+    
+    /**
+     * @return the Cohort of patients with DST rest results
+     */
+    public static Cohort getPatientsWithDOTSTxStartDate(EvaluationContext context, Date minResultDate, Date maxResultDate) {
+    	
+    	Integer txStartDate = Context.getService(TbService.class).getConcept(TbConcepts.DOTS_TREATMENT_START_DATE).getConceptId();
+    	
+    	StringBuilder q = new StringBuilder();
+    	q.append("select 	p.patient_id ");
+    	q.append("from 		patient p, obs o ");
+    	q.append("where 	p.patient_id = o.person_id ");
+    	q.append("and	 	p.voided = 0 and o.voided = 0 ");
+    	q.append("and		o.concept_id = " + txStartDate + " ");
+    	addOptionalDateClause(q, "and o.value_datetime >= ", minResultDate);
+    	addOptionalDateClause(q, "and o.value_datetime <= ", maxResultDate);
+    	
+    	
+    	
+    	/*q.append("and o.value_coded in (");
+		for (int i=0; i<drugs.length; i++) {
+			q.append(drugs[i].getConceptId());
+			if ((i+1)<drugs.length) {
+				q.append(",");
+			}
+		}	
+    	q.append(") ");*/
+    	
+    	return executeQuery(q.toString(), context);
+    }
 }

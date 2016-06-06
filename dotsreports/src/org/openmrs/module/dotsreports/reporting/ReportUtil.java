@@ -538,6 +538,9 @@ public class ReportUtil {
 		CohortDefinition defaulted =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
 			 Context.getService(TbService.class).getConcept(TbConcepts.DEFAULTED), startDate, endDate);
 		
+		CohortDefinition ltfu =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.LOST_TO_FOLLOWUP), startDate, endDate);
+		
 		CohortDefinition died =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
 			 Context.getService(TbService.class).getConcept(TbConcepts.DIED), startDate, endDate);
 		
@@ -554,7 +557,7 @@ public class ReportUtil {
 		map.put("Died", died);
 		map.put("Failed", failed);
 		
-		map.put("Defaulted", defaulted);
+		map.put("Defaulted", ReportUtil.getCompositionCohort("OR",defaulted,ltfu));
 		map.put("TransferredOut", transferred);
 		map.put("Canceled", canceled);
 		//map.put("StillEnrolled", stillEnrolled);

@@ -11,6 +11,9 @@ import org.openmrs.Concept;
 import org.openmrs.Location;
 import org.openmrs.Patient;
 import org.openmrs.Person;
+import org.openmrs.module.dotsreports.specimen.HAIN;
+import org.openmrs.module.dotsreports.specimen.Xpert;
+import org.openmrs.module.dotsreports.specimen.Specimen;
 
 /**
  * This class is a special implementation of the Specimen interface that
@@ -76,6 +79,14 @@ public class SpecimenGroupImpl implements Specimen {
     }
 
     public Dst addDst() {
+		throw new RuntimeException("Illegal attempt to access add or set method of SpecimenGroupImpl. SpecimenGroupImpl should be used for get access only.");
+    }
+    
+    public Xpert addXpert() {
+		throw new RuntimeException("Illegal attempt to access add or set method of SpecimenGroupImpl. SpecimenGroupImpl should be used for get access only.");
+    }
+
+    public HAIN addHAIN() {
 		throw new RuntimeException("Illegal attempt to access add or set method of SpecimenGroupImpl. SpecimenGroupImpl should be used for get access only.");
     }
 
@@ -152,6 +163,30 @@ public class SpecimenGroupImpl implements Specimen {
     	Collections.sort(dsts);
     	
     	return dsts;
+    }
+    
+    public List<Xpert> getXperts() {
+    	List<Xpert> xperts = new LinkedList<Xpert>();
+    	
+    	for(Specimen specimen : specimens) {
+    		xperts.addAll(specimen.getXperts());
+    	}
+    	
+    	Collections.sort(xperts);
+    	
+    	return xperts;
+    }
+    
+    public List<HAIN> getHAINs() {
+    	List<HAIN> hains = new LinkedList<HAIN>();
+    	
+    	for(Specimen specimen : specimens) {
+    		hains.addAll(specimen.getHAINs());
+    	}
+    	
+    	Collections.sort(hains);
+    	
+    	return hains;
     }
 
     public String getId() {
@@ -263,4 +298,6 @@ public class SpecimenGroupImpl implements Specimen {
 	public int compareTo(Specimen specimenToCompare) {
 		return this.getDateCollected().compareTo(specimenToCompare.getDateCollected());
 	}
+	
+	
 }

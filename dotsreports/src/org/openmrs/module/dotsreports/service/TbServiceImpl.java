@@ -78,7 +78,7 @@ public class TbServiceImpl extends BaseOpenmrsService implements TbService {
 	}
 	
 	public Concept getConcept(String conceptMapping) {
-		System.out.println ("CONC MAP:" + conceptMapping);
+		//System.out.println ("CONC MAP:" + conceptMapping);
 		return conceptMap.lookup(conceptMapping);
 	}
 	

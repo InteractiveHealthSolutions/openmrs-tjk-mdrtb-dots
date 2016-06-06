@@ -146,24 +146,28 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				CohortDefinition pulmonary = Cohorts.getAllPulmonaryDuring(startDate,endDate);
 				CohortDefinition extrapulmonary = Cohorts.getAllExtraPulmonaryDuring(startDate,endDate);
 				//CohortDefinition culturePositive = Cohorts.getAnyCulturePositiveDuring(startDate, endDate);
-				//CohortDefinition smearPositive = Cohorts.getDotsBacBaselineTJKResult(startDate, endDate, null, null, org.openmrs.module.dotsreports.reporting.definition.DotsBacBaselineResultTJKCohortDefinition.Result.POSITIVE);
+				CohortDefinition smearPositive = Cohorts.getDotsBacBaselineTJKResult(startDate, endDate, null, null, org.openmrs.module.dotsreports.reporting.definition.DotsBacBaselineResultTJKCohortDefinition.Result.POSITIVE);
+				CohortDefinition rapidTestPositive = Cohorts.getAnyXpertOrHAINPositiveDuring(startDate, endDate);
 				//CohortDefinition bacteriology = ReportUtil.getCompositionCohort("OR", smearPositive, culturePositive);
 				
-				CohortDefinition haveDiagnosticType = Cohorts.getHaveDiagnosticTypeDuring(startDate, endDate, null);
+				/*CohortDefinition haveDiagnosticType = Cohorts.getHaveDiagnosticTypeDuring(startDate, endDate, null);
 				CohortDefinition haveClinicalDiagnosis = Cohorts.getHaveDiagnosticTypeDuring(startDate, endDate, TbConcepts.TB_CLINICAL_DIAGNOSIS[0]);
-				CohortDefinition haveLabDiagnosis = ReportUtil.minus(haveDiagnosticType, haveClinicalDiagnosis);
+				CohortDefinition haveLabDiagnosis = ReportUtil.minus(haveDiagnosticType, haveClinicalDiagnosis);*/
+				
+				CohortDefinition haveLabDiagnosis = ReportUtil.getCompositionCohort("OR", smearPositive,  rapidTestPositive);
+				CohortDefinition haveClinicalDiagnosis = ReportUtil.minus(allTB,haveLabDiagnosis);
 				
 				//New Age filters added by Omar
-				CohortDefinition age04=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 0, 4);
-				CohortDefinition age0514=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 5, 14);
-				CohortDefinition age1517=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 15, 17);
-				CohortDefinition age1819=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 18, 19);
-				CohortDefinition age2024=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 20, 24);
+				CohortDefinition age04=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 0, 5);
+				CohortDefinition age0514=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 5, 15);
+				CohortDefinition age1517=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 15, 18);
+				CohortDefinition age1819=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 18, 20);
+				CohortDefinition age2024=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 20, 25);
 				//
-				CohortDefinition age2534 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 25, 34);
-				CohortDefinition age3544 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 35, 44);
-				CohortDefinition age4554 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 45, 54);
-				CohortDefinition age5564 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 55, 64);
+				CohortDefinition age2534 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 25, 35);
+				CohortDefinition age3544 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 35, 45);
+				CohortDefinition age4554 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 45, 55);
+				CohortDefinition age5564 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 55, 65);
 				CohortDefinition age65 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 65, 999);
 				
 				Map<String, CohortDefinition> groups = ReportUtil.getDotsRegistrationGroupsFilterSet(startDate, endDate);
@@ -265,14 +269,14 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				
 				///////////////////////			ROWS		////////////////////////////
 				
-				table1.addRow(	"ptbldretreatment", 			ReportUtil.getCompositionCohort("AND",allTB,allRetreatment,pulmonary,haveLabDiagnosis),null);
-				table1.addRow(	"tbhivptbldretreatment",	 	ReportUtil.getCompositionCohort("AND",tbHIV,allRetreatment,pulmonary,haveLabDiagnosis),null);
-				table1.addRow(	"ptbbsdretreatment", 			ReportUtil.getCompositionCohort("AND",allTB,allRetreatment,pulmonary,haveClinicalDiagnosis),null);
-				table1.addRow(	"tbhivptbsdretreatment", 		ReportUtil.getCompositionCohort("AND",tbHIV,allRetreatment,pulmonary,haveLabDiagnosis),null);
-				table1.addRow(	"eptbretreatment", 				ReportUtil.getCompositionCohort("AND",allTB,allRetreatment,extrapulmonary),null);
-				table1.addRow(	"tbhiveptbretreatment", 		ReportUtil.getCompositionCohort("AND",tbHIV,allRetreatment,extrapulmonary),null);
-				table1.addRow(	"totalretreatment", 			ReportUtil.getCompositionCohort("AND",allTB,allRetreatment),null);
-				table1.addRow(	"totalhivretreatment", 			ReportUtil.getCompositionCohort("AND",tbHIV,allRetreatment),null);
+				table1.addRow(	"ptbldretreatment", 			ReportUtil.getCompositionCohort("AND",allTB,pulmonary,haveLabDiagnosis),null);
+				table1.addRow(	"tbhivptbldretreatment",	 	ReportUtil.getCompositionCohort("AND",tbHIV,pulmonary,haveLabDiagnosis),null);
+				table1.addRow(	"ptbbsdretreatment", 			ReportUtil.getCompositionCohort("AND",allTB,pulmonary,haveClinicalDiagnosis),null);
+				table1.addRow(	"tbhivptbsdretreatment", 		ReportUtil.getCompositionCohort("AND",tbHIV,pulmonary,haveLabDiagnosis),null);
+				table1.addRow(	"eptbretreatment", 				ReportUtil.getCompositionCohort("AND",allTB,extrapulmonary),null);
+				table1.addRow(	"tbhiveptbretreatment", 		ReportUtil.getCompositionCohort("AND",tbHIV,extrapulmonary),null);
+				table1.addRow(	"totalretreatment", 			ReportUtil.getCompositionCohort("AND",allTB),null);
+				table1.addRow(	"totalhivretreatment", 			ReportUtil.getCompositionCohort("AND",tbHIV),null);
 
 				///////////////////////		   COLUMNS		////////////////////////////
 				//FAILURES
@@ -282,7 +286,7 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				
 				//DEFAULT
 				table1.addColumn("defaultmale",		ReportUtil.getCompositionCohort("AND", men, allDefault), null);
-				table1.addColumn("defaultfemale" ,		ReportUtil.getCompositionCohort("AND", women, allDefault), null);
+				table1.addColumn("defaultfemale" ,		ReportUtil.getCompositionCohort("AND", women,allDefault), null);
 				table1.addColumn("defaulttotal"	 ,		allDefault, null);
 				
 				//OTHER
@@ -293,12 +297,12 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				//TOTAL
 				table1.addColumn("totalmale"	,		ReportUtil.getCompositionCohort("AND", men, allRetreatment), null);
 				table1.addColumn("totalfemale" 	,		ReportUtil.getCompositionCohort("AND", women, allRetreatment), null);
-				table1.addColumn("totaltotal"	,		allTB, null);
+				table1.addColumn("totaltotal"	,		allRetreatment, null);
 				
 				//TOTAL (COLUMN 1 + 2)
-				table1.addColumn("totalcolumnmale"	,	ReportUtil.getCompositionCohort("AND", men, allNewCases,allRelapses,allRetreatment), null);
-				table1.addColumn("totalcolumnfemale" ,	ReportUtil.getCompositionCohort("AND", women, allNewCases,allRelapses,allRetreatment), null);
-				table1.addColumn("totalcolumntotal"	,	ReportUtil.getCompositionCohort("AND", allNewCases,allRelapses,allRetreatment), null);
+				table1.addColumn("totalcolumnmale"	,	ReportUtil.getCompositionCohort("AND", men, ReportUtil.getCompositionCohort("OR",allNewCases,allRelapses,allRetreatment)), null);
+				table1.addColumn("totalcolumnfemale" ,	ReportUtil.getCompositionCohort("AND", women,ReportUtil.getCompositionCohort("OR",allNewCases,allRelapses,allRetreatment)), null);
+				table1.addColumn("totalcolumntotal"	,	ReportUtil.getCompositionCohort("OR", allNewCases,allRelapses,allRetreatment), null);
 				
 				//report.addDataSetDefinition("retreatment", table2, null);
 				report.addDataSetDefinition("all", table1, null);

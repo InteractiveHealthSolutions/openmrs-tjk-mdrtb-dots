@@ -20,6 +20,10 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.dotsreports.TbConcepts;
 import org.openmrs.module.dotsreports.TbUtil;
 import org.openmrs.module.dotsreports.service.TbService;
+import org.openmrs.module.dotsreports.specimen.HAIN;
+import org.openmrs.module.dotsreports.specimen.HAINImpl;
+import org.openmrs.module.dotsreports.specimen.Xpert;
+import org.openmrs.module.dotsreports.specimen.XpertImpl;
 
 /**
  * An implementation of the MdrtbSpecimen. This wraps an Encounter and provides access to the
@@ -285,6 +289,8 @@ public class SpecimenImpl implements Specimen {
 		tests.addAll(getSmears());
 		tests.addAll(getCultures());
 		tests.addAll(getDsts());
+		tests.addAll(getXperts());
+		tests.addAll(getHAINs());
 	
 		return tests;
 	}
@@ -475,6 +481,62 @@ public class SpecimenImpl implements Specimen {
 				encounter.addObs(obs);
 			}
 		}
+	}
+	
+	public Xpert addXpert() {
+		// cast to an Impl so we can access protected methods from within the specimen impl
+		XpertImpl xpert = new XpertImpl(this.encounter);
+		
+		// add the smear to the master encounter
+		this.encounter.addObs(xpert.getObs());
+		
+		// we need to set the location back to null, since it will be set to the encounter location
+		// when it is added to the location
+		xpert.setLab(null);
+		
+		return xpert;
+	}
+	
+	public List<Xpert> getXperts() {
+		List<Xpert> xperts = new LinkedList<Xpert>();		
+		// iterate through all the obs groups, create xperts from them, and add them to the list
+		if(encounter.getObsAtTopLevel(false) != null) {
+			for(Obs obs : encounter.getObsAtTopLevel(false)) {
+				if (obs.getConcept().equals(Context.getService(TbService.class).getConcept(TbConcepts.XPERT_CONSTRUCT))) {
+					xperts.add(new XpertImpl(obs));
+				}
+			}
+		}
+		Collections.sort(xperts);
+		return xperts;
+	}
+	
+	public HAIN addHAIN() {
+		// cast to an Impl so we can access protected methods from within the specimen impl
+		HAINImpl hain = new HAINImpl(this.encounter);
+		
+		// add the smear to the master encounter
+		this.encounter.addObs(hain.getObs());
+		
+		// we need to set the location back to null, since it will be set to the encounter location
+		// when it is added to the location
+		hain.setLab(null);
+		
+		return hain;
+	}
+	
+	public List<HAIN> getHAINs() {
+		List<HAIN> hains = new LinkedList<HAIN>();		
+		// iterate through all the obs groups, create hains from them, and add them to the list
+		if(encounter.getObsAtTopLevel(false) != null) {
+			for(Obs obs : encounter.getObsAtTopLevel(false)) {
+				if (obs.getConcept().equals(Context.getService(TbService.class).getConcept(TbConcepts.HAIN_CONSTRUCT))) {
+					hains.add(new HAINImpl(obs));
+				}
+			}
+		}
+		Collections.sort(hains);
+		return hains;
 	}
 
 	

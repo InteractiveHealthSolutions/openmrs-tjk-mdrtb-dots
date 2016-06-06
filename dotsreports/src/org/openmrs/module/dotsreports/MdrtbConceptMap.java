@@ -40,9 +40,9 @@ public class MdrtbConceptMap {
 		
 		try {
 			
-			for(int i=0;i<conceptMapping.length; i++) {
-				System.out.println(">>>> " + conceptMapping[i]);
-			}
+//			for(int i=0;i<conceptMapping.length; i++) {
+//				System.out.println(">>>> " + conceptMapping[i]);
+//			}
 			// see if we have have the concept in the cache
 			Concept concept = cache.get(conceptMapping[0]);
 		

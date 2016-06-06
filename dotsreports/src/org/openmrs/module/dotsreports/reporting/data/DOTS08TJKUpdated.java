@@ -14,14 +14,17 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.openmrs.Cohort;
 import org.openmrs.Location;
+import org.openmrs.api.PatientSetService.TimeModifier;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.dotsreports.TbConcepts;
 import org.openmrs.module.dotsreports.exception.MdrtbAPIException;
 import org.openmrs.module.dotsreports.reporting.ReportSpecification;
 import org.openmrs.module.dotsreports.reporting.ReportUtil;
 import org.openmrs.module.dotsreports.reporting.definition.DotsBacResultAfterTreatmentStartedCohortDefinition.Result;
+import org.openmrs.module.dotsreports.service.TbService;
 import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.evaluator.CompositionCohortDefinitionEvaluator;
+import org.openmrs.module.reporting.common.SetComparator;
 import org.openmrs.module.reporting.dataset.definition.CohortCrossTabDataSetDefinition;
 import org.openmrs.module.reporting.evaluation.EvaluationContext;
 import org.openmrs.module.reporting.evaluation.EvaluationException;
@@ -144,9 +147,17 @@ public ReportData evaluateReport(EvaluationContext context) {
 			CohortDefinition pulmonary = Cohorts.getAllPulmonaryDuring(startDate,endDate);
 			CohortDefinition extrapulmonary = Cohorts.getAllExtraPulmonaryDuring(startDate,endDate);
 			
-			CohortDefinition haveDiagnosticType = Cohorts.getHaveDiagnosticTypeDuring(startDate, endDate, null);
+			
+			CohortDefinition smearPositive = Cohorts.getDotsBacBaselineTJKResult(startDate, endDate, null, null, org.openmrs.module.dotsreports.reporting.definition.DotsBacBaselineResultTJKCohortDefinition.Result.POSITIVE);
+			CohortDefinition rapidTestPositive = Cohorts.getAnyXpertOrHAINPositiveDuring(startDate, endDate);
+			
+			/*CohortDefinition haveDiagnosticType = Cohorts.getHaveDiagnosticTypeDuring(startDate, endDate, null);
 			CohortDefinition haveClinicalDiagnosis = Cohorts.getHaveDiagnosticTypeDuring(startDate, endDate, TbConcepts.TB_CLINICAL_DIAGNOSIS[0]);
-			CohortDefinition haveLabDiagnosis = ReportUtil.minus(haveDiagnosticType, haveClinicalDiagnosis);
+			CohortDefinition haveLabDiagnosis = ReportUtil.minus(haveDiagnosticType, haveClinicalDiagnosis);*/
+			
+			CohortDefinition haveLabDiagnosis = ReportUtil.getCompositionCohort("OR", smearPositive,  rapidTestPositive);
+			CohortDefinition haveClinicalDiagnosis = ReportUtil.minus(allTB,haveLabDiagnosis);
+			
 			CohortDefinition haveTxOutcome = Cohorts.getHaveTreatmentOutcome(null, null, null);
 			CohortDefinition haveNoTxOutcome = ReportUtil.minus(allTB,haveTxOutcome);
 			//sCohortDefinition onSLDWaitingList
@@ -159,10 +170,15 @@ public ReportData evaluateReport(EvaluationContext context) {
 			//CohortDefinition diedDuringTreatment =  Cohorts.getDiedDuringFilter(startDate, endDate);
 			
 			//DIED:TB
-			//CohortDefinition tbDied = ReportUtil.getCompositionCohort("AND", allTB,diedDuringTreatment,bacteriology);
+			CohortDefinition tbDied = ReportUtil.getCodedObsCohort(TimeModifier.ANY, Context.getService(TbService.class).getConcept(TbConcepts.CAUSE_OF_DEATH).getId(),
+					null, null, SetComparator.IN, Context.getService(TbService.class).getConcept(TbConcepts.DEATH_BY_TB).getId());
+			
+			
 			
 			//DIED: NON-TB
 			//CohortDefinition nonTbDeath = ReportUtil.minus(diedDuringTreatment, tbDied);
+			CohortDefinition nonTbDeath = ReportUtil.getCodedObsCohort(TimeModifier.ANY, Context.getService(TbService.class).getConcept(TbConcepts.CAUSE_OF_DEATH).getId(),
+					null, null, SetComparator.IN, Context.getService(TbService.class).getConcept(TbConcepts.DEATH_BY_OTHER_DISEASES).getId());
 			
 			//FAILURE
 			//CohortDefinition failure = Cohorts.getFailedDuringFilter(startDate, endDate);
@@ -179,7 +195,9 @@ public ReportData evaluateReport(EvaluationContext context) {
 				treatmentNotStarted = ReportUtil.minus(allTB, treatmentStarted);
 			}*/
 			
-			CohortDefinition fldTreatmentStarted = Cohorts.getFLDTreatmentStartedFilter(startDate, endDate);
+			//CohortDefinition fldTreatmentStarted = Cohorts.getFLDTreatmentStartedFilter(startDate, endDate);
+			
+			CohortDefinition fldTreatmentStarted = Cohorts.getHaveDOTSTxStartDate(startDate, endDate);
 			CohortDefinition sldTreatmentStarted = Cohorts.getSLDTreatmentStartedFilter(startDate, endDate);
 			CohortDefinition treatmentNotStarted = ReportUtil.minus(allTB, ReportUtil.getCompositionCohort("OR", fldTreatmentStarted, sldTreatmentStarted));
 			//WAITING FOR SLD
@@ -195,9 +213,9 @@ public ReportData evaluateReport(EvaluationContext context) {
 			
 			
 			//New Age filters added by Omar
-			CohortDefinition age04=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 0, 4);
-			CohortDefinition age0514=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 5, 14);
-			CohortDefinition age1517=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 15, 17);
+			CohortDefinition age04=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 0, 5);
+			CohortDefinition age0514=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 5, 15);
+			CohortDefinition age1517=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 15, 18);
 				
 			Map<String, CohortDefinition> groups = ReportUtil.getDotsRegistrationGroupsFilterSet(startDate, endDate);
 			
@@ -298,19 +316,20 @@ public ReportData evaluateReport(EvaluationContext context) {
 			////      			COLUMNS           			////
 			///////////////////////////////////////////////////
 			table1.addColumn("reg", allTB,null);
-			table1.addColumn("eval", ReportUtil.minus(haveTxOutcome, cancelled), null);
+			//table1.addColumn("eval", ReportUtil.minus(haveTxOutcome, cancelled), null);
+			table1.addColumn("eval", ReportUtil.getCompositionCohort("OR",ReportUtil.minus(haveTxOutcome, cancelled),cured,txCompleted,died,failed,defaulted,ReportUtil.getCompositionCohort("AND",allTB,treatmentNotStarted),ReportUtil.getCompositionCohort("AND",ReportUtil.getCompositionCohort("AND", mdr,treatmentNotStarted))),null);
 			table1.addColumn("cured", cured, null);
 			table1.addColumn("tx", txCompleted, null);
 			
 			
-			table1.addColumn("tbdeath", died, null);
-			table1.addColumn("notbdeath", died, null);
+			table1.addColumn("tbdeath", tbDied, null);
+			table1.addColumn("notbdeath", nonTbDeath, null);
 			table1.addColumn("fail", failed, null);
 			table1.addColumn("def", defaulted, null);
-			table1.addColumn("nofld", ReportUtil.getCompositionCohort("AND",allTB,treatmentNotStarted), null);
-			table1.addColumn("nosld", ReportUtil.getCompositionCohort("AND",allTB,ReportUtil.getCompositionCohort("OR", mdr,treatmentNotStarted)), null);
+			table1.addColumn("nofld", ReportUtil.getCompositionCohort("AND",haveNoTxOutcome,treatmentNotStarted), null);
+			table1.addColumn("nosld", ReportUtil.getCompositionCohort("AND",haveNoTxOutcome,ReportUtil.getCompositionCohort("AND", mdr,treatmentNotStarted)), null);
 			
-			table1.addColumn("coltotal",ReportUtil.getCompositionCohort("OR",allTB,ReportUtil.minus(haveTxOutcome, cancelled),cured,txCompleted,died,failed,defaulted,ReportUtil.getCompositionCohort("AND",allTB,treatmentNotStarted),ReportUtil.getCompositionCohort("AND",ReportUtil.getCompositionCohort("OR", mdr,treatmentNotStarted))),null);
+			table1.addColumn("coltotal",ReportUtil.getCompositionCohort("OR",cured,txCompleted,died,failed,defaulted,ReportUtil.getCompositionCohort("AND",allTB,treatmentNotStarted),ReportUtil.getCompositionCohort("AND",ReportUtil.getCompositionCohort("AND", mdr,treatmentNotStarted))),null);
 			table1.addColumn("canceled", cancelled,null);
 			table1.addColumn("sld", ReportUtil.getCompositionCohort("AND",allTB,sldTreatmentStarted), null);
 			

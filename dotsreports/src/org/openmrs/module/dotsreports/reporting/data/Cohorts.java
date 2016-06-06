@@ -30,6 +30,7 @@ import org.openmrs.module.dotsreports.reporting.ReportUtil;
 import org.openmrs.module.dotsreports.reporting.definition.AgeAtDotsProgramEnrollmentTJKCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.AgeAtMdrtbProgramEnrollmentCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.CompletedDotsProgramEnrolledDuringTJKCohortDefinition;
+import org.openmrs.module.dotsreports.reporting.definition.DOTSTxStartDateExistsCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.DotsBacBaselineResultTJKCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.DotsDstResultCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.DotsBacResultAfterTreatmentStartedCohortDefinition;
@@ -125,6 +126,13 @@ public class Cohorts {
 		cd.setMinResultDate(startDate);
 		cd.setMaxResultDate(endDate);
 		cd.setOutcomeType(outcomeType);
+		return cd;
+	}
+	
+	public static CohortDefinition getHaveDOTSTxStartDate(Date startDate, Date endDate) {
+		DOTSTxStartDateExistsCohortDefinition cd = new DOTSTxStartDateExistsCohortDefinition();
+		cd.setMinResultDate(startDate);
+		cd.setMaxResultDate(endDate);
 		return cd;
 	}
 	
@@ -367,6 +375,11 @@ public class Cohorts {
 			startDate, endDate, SetComparator.IN, TbUtil.getPositiveResultConceptIds());
 	}
 	
+	public static CohortDefinition getAnyXpertOrHAINPositiveDuring(Date startDate, Date endDate) {
+		return ReportUtil.getCodedObsCohort(TimeModifier.ANY, Context.getService(TbService.class).getConcept(TbConcepts.MTB_RESULT).getId(), 
+			startDate, endDate, SetComparator.IN, TbUtil.getPositiveResultConceptIds());
+	}
+
 	public static CohortDefinition getAllCultureNegativeDuring(Date startDate, Date endDate) {
 		CompositionCohortDefinition cd = new CompositionCohortDefinition();	
 		cd.addSearch("anyNegative", ReportUtil.getCodedObsCohort(TimeModifier.ANY, Context.getService(TbService.class).getConcept(TbConcepts.CULTURE_RESULT).getId(),

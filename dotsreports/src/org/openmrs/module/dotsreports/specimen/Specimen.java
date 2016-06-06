@@ -8,6 +8,8 @@ import org.openmrs.Concept;
 import org.openmrs.Location;
 import org.openmrs.Patient;
 import org.openmrs.Person;
+import org.openmrs.module.dotsreports.specimen.HAIN;
+import org.openmrs.module.dotsreports.specimen.Xpert;
 
 /**
  * Interface that defines how to interaction with a specimen
@@ -80,6 +82,12 @@ public interface Specimen extends Comparable<Specimen>{
 	
 	public List<Dst> getDsts();
 	public Dst addDst();
+	
+	public List<Xpert> getXperts();
+	public Xpert addXpert();
+	
+	public List<HAIN> getHAINs();
+	public HAIN addHAIN();
 	
 	public List<Test> getTests();
 	

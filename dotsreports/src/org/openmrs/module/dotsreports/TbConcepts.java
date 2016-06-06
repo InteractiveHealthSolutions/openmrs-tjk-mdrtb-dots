@@ -62,6 +62,22 @@ public class TbConcepts {
     public final static String [] DST_CONSTRUCT = {"TUBERCULOSIS DRUG SENSITIVITY TEST CONSTRUCT"};
     public final static String [] DST_METHOD = {"TUBERCULOSIS DRUG SENSITIVITY TEST METHOD"};
     public final static String [] DST_RESULT = {"TUBERCULOSIS DRUG SENSITIVITY TEST RESULT"};
+    
+    //XPERT AND HAIN CONCEPTS
+    public final static String [] XPERT_CONSTRUCT = {"TUBERCULOSIS XPERT TEST CONSTRUCT"};
+    public final static String [] HAIN_CONSTRUCT = {"TUBERCULOSIS HAIN TEST CONSTRUCT"};
+    public final static String [] MTB_RESULT = {"MTB RESULT"};
+    public final static String [] RIFAMPICIN_RESISTANCE = {"RIFAMPICIN RESISTANCE"};
+    public final static String [] DETECTED = {"DETECTED"};
+    public final static String [] NOT_DETECTED = {"NOT DETECTED"};
+    public final static String [] ERROR = {"ERROR"};
+    public final static String [] ERROR_CODE = {"ERROR CODE"};
+    public final static String [] XPERT_MTB_BURDEN = {"XPERT MTB BURDEN"};
+    public final static String [] XPERT_HIGH = {"HIGH"};
+    public final static String [] XPERT_MEDIUM = {"MEDIUM"};
+    public final static String [] XPERT_LOW = {"LOW"};
+    public final static String [] ISONIAZID_RESISTANCE = {"ISONIAZID RESISTANCE"};
+    
     public final static String [] COLONIES_IN_CONTROL = {"COLONIES IN CONTROL"};
     public final static String [] CONCENTRATION = {"CONCENTRATION"};
     public final static String [] RESISTANT_TO_TB_DRUG = {"RESISTANT TO TUBERCULOSIS DRUG"};
@@ -129,6 +145,8 @@ public class TbConcepts {
     public final static String [] PATIENT_TRANSFERRED_OUT = {"PATIENT TRANSFERRED OUT"};
     public final static String [] STILL_ON_TREATMENT = {"STILL ON TREATMENT"};
     public final static String [] CANCELLED = {"DIAGNOSIS CANCELLED"};
+    public final static String [] LOST_TO_FOLLOWUP = {"LOST TO FOLLOWUP"};
+    
     
     // TB Type
     public final static String [] PULMONARY_TB = {"PULMONARY TUBERCULOSIS"};
@@ -185,6 +203,7 @@ public class TbConcepts {
     public final static String [] DEATH_BY_TB = {"DEATH BY TB"};
     public final static String [] DEATH_BY_TBHIV = {"DEATH BY TB/HIV"};
     public final static String [] DEATH_BY_OTHER_DISEASES = {"DEATH BY OTHER DISEASES"};
+    public final static String [] DOTS_TREATMENT_START_DATE = {"DATE OF DOTS TREATMENT START"};
     
 
 }
