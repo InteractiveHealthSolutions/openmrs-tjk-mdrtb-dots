@@ -146,6 +146,7 @@ public class TbConcepts {
     public final static String [] STILL_ON_TREATMENT = {"STILL ON TREATMENT"};
     public final static String [] CANCELLED = {"DIAGNOSIS CANCELLED"};
     public final static String [] LOST_TO_FOLLOWUP = {"LOST TO FOLLOWUP"};
+    public final static String [] STARTED_SLD_TX = {"Started SLD Treatment"};
     
     
     // TB Type

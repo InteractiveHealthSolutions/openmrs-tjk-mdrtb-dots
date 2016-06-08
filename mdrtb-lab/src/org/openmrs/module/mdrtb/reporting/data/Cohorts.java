@@ -152,7 +152,7 @@ public class Cohorts {
 	}
 	
 	public static CohortDefinition getDefaultedDuringFilter(Date startDate, Date endDate) {
-		return getEnteredStateDuringFilter(MdrtbUtil.getProgramWorkflowState(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.DEFAULTED)), startDate, endDate);	
+		return getEnteredStateDuringFilter(MdrtbUtil.getProgramWorkflowState(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.LOST_TO_FOLLOWUP)), startDate, endDate);	
 	}
 	
 	public static CohortDefinition getDiedDuringFilter(Date startDate, Date endDate) {

@@ -561,8 +561,11 @@ public class ReportUtil {
 		CohortDefinition failed =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
 			 Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.FAILED), startDate, endDate);
 	
-		CohortDefinition defaulted =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
-			 Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.DEFAULTED), startDate, endDate);
+		/*CohortDefinition defaulted =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.DEFAULTED), startDate, endDate);*/
+		
+		CohortDefinition ltfu =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.LOST_TO_FOLLOWUP), startDate, endDate);
 		
 		CohortDefinition died =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
 			 Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.DIED), startDate, endDate);
@@ -575,7 +578,7 @@ public class ReportUtil {
 		map.put("Cured", cured);
 		map.put("TreatmentCompleted", complete);
 		map.put("Failed", failed);
-		map.put("Defaulted", defaulted);
+		map.put("Defaulted", ltfu);
 		map.put("Died", died);
 		map.put("TransferredOut", transferred);
 		map.put("StillEnrolled", stillEnrolled);
