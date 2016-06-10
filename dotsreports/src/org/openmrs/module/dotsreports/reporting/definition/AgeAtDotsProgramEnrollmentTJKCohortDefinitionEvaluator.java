@@ -67,7 +67,7 @@ public class AgeAtDotsProgramEnrollmentTJKCohortDefinitionEvaluator extends Prog
     			
     			if(programStarted!=null) {
     			Integer age = patient.getAge(programStarted);
-    			System.out.println(id + " " + age + " " + cd.getMinAge() + " " + cd.getMaxAge());
+    			//System.out.println(id + " " + age + " " + cd.getMinAge() + " " + cd.getMaxAge());
     			if(age !=null && (age >=cd.getMinAge() && age < cd.getMaxAge()))
     				resultCohort.addMember(id);
     			}

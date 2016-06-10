@@ -134,7 +134,7 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				}
 				/*CohortDefinition baseCohort = ReportUtil.getCompositionCohort(baseCohortDefs, "AND");
 				report.setBaseCohortDefinition(baseCohort, null);*/
-		
+				
 				CohortDefinition allTB = Cohorts.getEnrolledInDOTSProgramDuring(startDate, endDate);
 				
 				CohortDefinition tbHIV = Cohorts.getHivPositiveDuring(startDate, endDate);
@@ -260,7 +260,7 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				table1.addColumn("65Male", ReportUtil.getCompositionCohort("AND", age65,men), null);
 				table1.addColumn("TotalFemale", women, null);
 				table1.addColumn("TotalMale", men, null);
-				
+				table1.addColumn("GenTotal", ReportUtil.getCompositionCohort("OR", men, women), null);
 				//report.addDataSetDefinition("all", table1, null);
 				
 				//////////////////////TABLE2:ALL RETREATMENT CASES /////////////////////
