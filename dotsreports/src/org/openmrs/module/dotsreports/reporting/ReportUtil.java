@@ -568,7 +568,46 @@ public class ReportUtil {
 		
 		return map;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+    public static Map<String,CohortDefinition> getMdrtbOutcomesFilterSet(Date startDate, Date endDate) {
+		Map<String,CohortDefinition> map = new HashMap<String,CohortDefinition>();
+		
+		Concept workflowConcept = Context.getService(TbService.class).getConcept(TbConcepts.MDR_TB_TX_OUTCOME);
+		
+		CohortDefinition cured =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.CURED), startDate, endDate);
+		
+		CohortDefinition complete =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_COMPLETE), startDate, endDate);
+		
+		CohortDefinition failed =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.FAILED), startDate, endDate);
+	
+		/*CohortDefinition defaulted =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.DEFAULTED), startDate, endDate);*/
+		
+		CohortDefinition ltfu =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.LOST_TO_FOLLOWUP), startDate, endDate);
+		
+		CohortDefinition died =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.DIED), startDate, endDate);
+		
+		CohortDefinition transferred =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.PATIENT_TRANSFERRED_OUT), startDate, endDate);
+		
+		CohortDefinition stillEnrolled =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, new ArrayList(), startDate, endDate);
+	
+		map.put("Cured", cured);
+		map.put("TreatmentCompleted", complete);
+		map.put("Failed", failed);
+		map.put("Defaulted", ltfu);
+		map.put("Died", died);
+		map.put("TransferredOut", transferred);
+		map.put("StillEnrolled", stillEnrolled);
+		
+		return map;
+	}
 	/*@SuppressWarnings("unchecked")
     public static Map<String,CohortDefinition> getMdrtbPreviousDrugUseFilterSet(Date startDate, Date endDate) {
 		Map<String,CohortDefinition> map = new HashMap<String,CohortDefinition>();
@@ -648,6 +687,63 @@ public class ReportUtil {
 		return map;
 	}
 	
+	@SuppressWarnings("unchecked")
+    public static Map<String,CohortDefinition> getMdrtbPreviousTreatmentFilterSet(Date startDate, Date endDate) {
+		Map<String,CohortDefinition> map = new HashMap<String,CohortDefinition>();
+		
+		Concept workflowConcept = Context.getService(TbService.class).getConcept(TbConcepts.CAT_4_CLASSIFICATION_PREVIOUS_TX);
+		
+		CohortDefinition newPatient =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.NEW), startDate, endDate);
+		
+		CohortDefinition relapse =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.RELAPSE), startDate, endDate);
+		
+		CohortDefinition afterDefault =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.DEFAULTED), startDate, endDate);
+	
+		CohortDefinition failureCatI =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_AFTER_FAILURE_OF_FIRST_TREATMENT), startDate, endDate);
+		
+		CohortDefinition failureCatII =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_AFTER_FAILURE_OF_FIRST_RETREATMENT), startDate, endDate);
+		
+		CohortDefinition transferred =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.TRANSFER), startDate, endDate);
+		
+		CohortDefinition other =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.OTHER), startDate, endDate);
+		
+		/*CohortDefinition other =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.OTHER), startDate, endDate);*/
+		
+		/*List<Concept> others = new ArrayList<Concept>();
+		others.add(Context.getService(TbService.class).getConcept(TbConcepts.TRANSFER));
+		others.add(Context.getService(TbService.class).getConcept(TbConcepts.OTHER));
+		others.add(Context.getService(TbService.class).getConcept(TbConcepts.UNKNOWN));*/
+		//others.add();
+		
+		
+		//CohortDefinition otherStar =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, others, startDate, endDate);
+		//CohortDefinition unknown =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, new ArrayList(), startDate, endDate);
+	
+		
+		
+		map.put("New", newPatient);
+		map.put("Relapse", relapse);
+		map.put("AfterDefault", afterDefault);
+		map.put("AfterFailureCategoryI", failureCatI);
+		map.put("AfterFailureCategoryII", failureCatII);
+		map.put("TransferredIn", transferred);
+		map.put("Other", other);
+		//map.put("Unknown", unknown);
+		map.put("AfterFailure", ReportUtil.getCompositionCohort("OR",failureCatI,failureCatII) );
+		//map.put("Other", otherStar);
+		
+		
+		return map;
+	}
+	
 	/**
 	 * Returns a map of patients ids to the list of active mdrtb patient programs for that patient during the given date range
 	 */
@@ -692,6 +788,49 @@ public class ReportUtil {
 	}
 	
 	public static Map<Integer,List<TbPatientProgram>> getMdrTbPatientProgramsEnrolledInDateRangeMap(Date startDate, Date endDate) {
+		
+		Map<Integer,List<TbPatientProgram>> tbPatientProgramsMap = new HashMap<Integer,List<TbPatientProgram>>();
+		
+		// get all the mdrtb patient programs
+		for (TbPatientProgram program : Context.getService(TbService.class).getAllMdrtbPatientProgramsEnrolledInDateRange(startDate, endDate)) {
+			Integer patientId = program.getPatient().getId();
+			
+			// create a new entry for this patient if we don't already have it
+			if (!tbPatientProgramsMap.containsKey(patientId)) {
+				tbPatientProgramsMap.put(patientId, new ArrayList<TbPatientProgram>());
+			}
+			
+			// add the program
+			tbPatientProgramsMap.get(patientId).add(program);
+		}
+		
+		return tbPatientProgramsMap;
+	}
+	
+	/**
+	 * Returns a map of patients ids to the list of active mdrtb patient programs for that patient during the given date range
+	 */
+	public static Map<Integer,List<TbPatientProgram>> getMdrtbPatientProgramsInDateRangeMap(Date startDate, Date endDate) {
+		
+		Map<Integer,List<TbPatientProgram>> mdrtbPatientProgramsMap = new HashMap<Integer,List<TbPatientProgram>>();
+		
+		// get all the mdrtb patient programs
+		for (TbPatientProgram program : Context.getService(TbService.class).getAllMdrtbPatientProgramsInDateRange(startDate, endDate)) {
+			Integer patientId = program.getPatient().getId();
+			
+			// create a new entry for this patient if we don't already have it
+			if (!mdrtbPatientProgramsMap.containsKey(patientId)) {
+				mdrtbPatientProgramsMap.put(patientId, new ArrayList<TbPatientProgram>());
+			}
+			
+			// add the program
+			mdrtbPatientProgramsMap.get(patientId).add(program);
+		}
+		
+		return mdrtbPatientProgramsMap;
+	}
+	
+	public static Map<Integer,List<TbPatientProgram>> getMdrtbPatientProgramsEnrolledInDateRangeMap(Date startDate, Date endDate) {
 		
 		Map<Integer,List<TbPatientProgram>> tbPatientProgramsMap = new HashMap<Integer,List<TbPatientProgram>>();
 		

@@ -25,6 +25,8 @@ import org.openmrs.module.dotsreports.regimen.Regimen;
 import org.openmrs.module.dotsreports.regimen.RegimenUtils;
 import org.openmrs.module.dotsreports.service.TbService;
 import org.openmrs.module.dotsreports.specimen.Specimen;
+import org.openmrs.module.dotsreports.TbConcepts;
+import org.openmrs.module.dotsreports.service.TbService;
 
 
 public class TbPatientProgram implements Comparable<TbPatientProgram> {
@@ -136,6 +138,12 @@ public class TbPatientProgram implements Comparable<TbPatientProgram> {
 	public ProgramWorkflowState getClassificationAccordingToPatientGroup() {		
 		Concept patientGroup = Context.getService(TbService.class).getConcept(TbConcepts.PATIENT_GROUP);
 		return getPatientWorkflowState(patientGroup);
+		
+	}
+	
+	public ProgramWorkflowState getClassificationAccordingToPreviousDrugUse() {		
+		Concept previousDrug = Context.getService(TbService.class).getConcept(TbConcepts.CAT_4_CLASSIFICATION_PREVIOUS_DRUG_USE);
+		return getPatientWorkflowState(previousDrug);
 	}
 	
 	public void setClassificationAccordingToPreviousDrugUse (ProgramWorkflowState classification) {
@@ -166,7 +174,7 @@ public class TbPatientProgram implements Comparable<TbPatientProgram> {
 		}
 	}
 	
-	/*public ProgramWorkflowState getClassificationAccordingToPreviousTreatment() {		
+	public ProgramWorkflowState getClassificationAccordingToPreviousTreatment() {		
 		Concept previousTreatment = Context.getService(TbService.class).getConcept(TbConcepts.CAT_4_CLASSIFICATION_PREVIOUS_TX);
 		return getPatientWorkflowState(previousTreatment);
 	}
@@ -197,7 +205,7 @@ public class TbPatientProgram implements Comparable<TbPatientProgram> {
 			previousTreatmentState.setStartDate(program.getDateEnrolled()); 
 			this.program.getStates().add(previousTreatmentState);	
 		}
-	}*/
+	}
 	
 	public ProgramWorkflowState getCurrentHospitalizationState() {
 		Concept hospitalizationWorkflow = Context.getService(TbService.class).getConcept(TbConcepts.HOSPITALIZATION_WORKFLOW);

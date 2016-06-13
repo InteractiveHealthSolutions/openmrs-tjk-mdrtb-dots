@@ -67,6 +67,12 @@ public interface TbService extends OpenmrsService {
     @Transactional(readOnly=true)
     public List<TbPatientProgram> getAllTbPatientPrograms();
     
+    /**
+     * Returns all the dots programs in the system that were active during a specific date range
+     */
+    @Transactional(readOnly=true)
+    public List<TbPatientProgram> getAllMdrtbPatientProgramsInDateRange(Date startDate, Date endDate);
+    
    
     
     /**
@@ -305,7 +311,7 @@ public interface TbService extends OpenmrsService {
     /**
      * Returns all possible MDR-TB previous treatment classifications
      */
-    //public Set<ProgramWorkflowState> getPossibleClassificationsAccordingToPreviousTreatment();
+    public Set<ProgramWorkflowState> getPossibleClassificationsAccordingToPreviousTreatment();
     
 	/**
      * Check to see what color to associate with a given result concept

@@ -126,6 +126,23 @@ public class TbServiceImpl extends BaseOpenmrsService implements TbService {
 		return getAllTbPatientProgramsInDateRange(null, null);
 	}
 	
+	public List<TbPatientProgram> getAllMdrtbPatientProgramsInDateRange(Date startDate, Date endDate) {
+		// (program must have started before the end date of the period, and must not have ended before the start of the period)
+		List<PatientProgram> programs = Context.getProgramWorkflowService().getPatientPrograms(null, getMdrtbProgram(), null, endDate, startDate, null, false);
+    	
+	 	// sort the programs so oldest is first and most recent is last
+    	Collections.sort(programs, new PatientProgramComparator());
+    	
+    	List<TbPatientProgram> tbPrograms = new LinkedList<TbPatientProgram>();
+    	
+    	// convert to mdrtb patient programs
+    	for (PatientProgram program : programs) {
+    		tbPrograms.add(new TbPatientProgram(program));
+    	}
+    	
+    	return tbPrograms;
+	}
+	
 	
 	
 	public List<TbPatientProgram> getAllTbPatientProgramsEnrolledInDateRange(Date startDate, Date endDate) {
@@ -431,9 +448,9 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	return getPossibleWorkflowStates(Context.getService(TbService.class).getConcept(TbConcepts.PATIENT_GROUP));
     }
   
-    /*public Set<ProgramWorkflowState> getPossibleClassificationsAccordingToPreviousTreatment() {
+    public Set<ProgramWorkflowState> getPossibleClassificationsAccordingToPreviousTreatment() {
     	return getPossibleWorkflowStates(Context.getService(TbService.class).getConcept(TbConcepts.CAT_4_CLASSIFICATION_PREVIOUS_TX));
-    }  */  
+    }  
     
     public String getColorForConcept(Concept concept) {
     	if(concept == null) {

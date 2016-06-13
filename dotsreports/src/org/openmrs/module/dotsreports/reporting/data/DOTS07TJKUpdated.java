@@ -135,7 +135,10 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				/*CohortDefinition baseCohort = ReportUtil.getCompositionCohort(baseCohortDefs, "AND");
 				report.setBaseCohortDefinition(baseCohort, null);*/
 				
-				CohortDefinition allTB = Cohorts.getEnrolledInDOTSProgramDuring(startDate, endDate);
+				CohortDefinition dstb = Cohorts.getEnrolledInDOTSProgramDuring(startDate, endDate);
+				CohortDefinition drtb = Cohorts.getEnrolledInMDRProgramDuring(startDate, endDate);
+				
+				CohortDefinition allTB = ReportUtil.getCompositionCohort("OR", dstb,drtb);//Cohorts.getEnrolledInDOTSProgramDuring(startDate, endDate);
 				
 				CohortDefinition tbHIV = Cohorts.getHivPositiveDuring(startDate, endDate);
 				//CohortDefinition onlyTB = ReportUtil.minus(allTB,tbHIV);
@@ -156,9 +159,47 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				
 				CohortDefinition haveLabDiagnosis = ReportUtil.getCompositionCohort("OR", smearPositive,  rapidTestPositive);
 				CohortDefinition haveClinicalDiagnosis = ReportUtil.minus(allTB,haveLabDiagnosis);
+
+				CohortDefinition dotsage04=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 0, 5);
+				CohortDefinition dotsage0514=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 5, 15);
+				CohortDefinition dotsage1517=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 15, 18);
+				CohortDefinition dotsage1819=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 18, 20);
+				CohortDefinition dotsage2024=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 20, 25);
+				//
+				CohortDefinition dotsage2534 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 25, 35);
+				CohortDefinition dotsage3544 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 35, 45);
+				CohortDefinition dotsage4554 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 45, 55);
+				CohortDefinition dotsage5564 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 55, 65);
+				CohortDefinition dotsage65 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 65, 999);
+
+				CohortDefinition mdrage04=Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 0, 5);
+				CohortDefinition mdrage0514=Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 5, 15);
+				CohortDefinition mdrage1517=Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 15, 18);
+				CohortDefinition mdrage1819=Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 18, 20);
+				CohortDefinition mdrage2024=Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 20, 25);
+				//
+				CohortDefinition mdrage2534 = Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 25, 35);
+				CohortDefinition mdrage3544 = Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 35, 45);
+				CohortDefinition mdrage4554 = Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 45, 55);
+				CohortDefinition mdrage5564 = Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 55, 65);
+				CohortDefinition mdrage65 = Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 65, 999);
+
+				//
+				
+				CohortDefinition age04=ReportUtil.getCompositionCohort("OR", dotsage04, mdrage04);
+				CohortDefinition age0514=ReportUtil.getCompositionCohort("OR", dotsage0514, mdrage0514);
+				CohortDefinition age1517=ReportUtil.getCompositionCohort("OR", dotsage1517, mdrage1517);
+				CohortDefinition age1819=ReportUtil.getCompositionCohort("OR", dotsage1819, mdrage1819);
+				CohortDefinition age2024=ReportUtil.getCompositionCohort("OR", dotsage2024, mdrage2024);
+				//
+				CohortDefinition age2534 = ReportUtil.getCompositionCohort("OR", dotsage2534, mdrage2534);
+				CohortDefinition age3544 = ReportUtil.getCompositionCohort("OR", dotsage3544, mdrage3544);
+				CohortDefinition age4554 = ReportUtil.getCompositionCohort("OR", dotsage4554, mdrage4554);
+				CohortDefinition age5564 = ReportUtil.getCompositionCohort("OR", dotsage5564, mdrage5564);
+				CohortDefinition age65 = ReportUtil.getCompositionCohort("OR", dotsage65, mdrage65);
 				
 				//New Age filters added by Omar
-				CohortDefinition age04=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 0, 5);
+				/*CohortDefinition age04=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 0, 5);
 				CohortDefinition age0514=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 5, 15);
 				CohortDefinition age1517=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 15, 18);
 				CohortDefinition age1819=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 18, 20);
@@ -169,17 +210,32 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				CohortDefinition age4554 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 45, 55);
 				CohortDefinition age5564 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 55, 65);
 				CohortDefinition age65 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 65, 999);
+*/				
+				Map<String, CohortDefinition> dotsgroups = ReportUtil.getDotsRegistrationGroupsFilterSet(startDate, endDate);
+				Map<String, CohortDefinition> mdrgroups = ReportUtil.getMdrtbPreviousTreatmentFilterSet(startDate, endDate);
 				
-				Map<String, CohortDefinition> groups = ReportUtil.getDotsRegistrationGroupsFilterSet(startDate, endDate);
+				CohortDefinition dotsallNewCases = dotsgroups.get("New");
+				CohortDefinition dotsallFailures = dotsgroups.get("AfterFailure");
+				CohortDefinition dotsallDefault = dotsgroups.get("AfterDefault");
+				CohortDefinition dotsallOthers = dotsgroups.get("Other");
+				CohortDefinition dotsallTransferred = dotsgroups.get("TransferredIn");
+				CohortDefinition dotsallRelapses = dotsgroups.get("Relapse");
 				
-				CohortDefinition allNewCases = groups.get("New");
-				CohortDefinition allFailures = groups.get("AfterFailure");
-				CohortDefinition allDefault = groups.get("AfterDefault");
-				CohortDefinition allOthers = groups.get("Other");
-				CohortDefinition allTransferred = groups.get("TransferredIn");
-				CohortDefinition allRelapses = groups.get("Relapse");
+				CohortDefinition mdrallNewCases = mdrgroups.get("New");
+				CohortDefinition mdrallFailures = mdrgroups.get("AfterFailure");
+				CohortDefinition mdrallDefault = mdrgroups.get("AfterDefault");
+				CohortDefinition mdrallOthers = mdrgroups.get("Other");
+				CohortDefinition mdrallTransferred = mdrgroups.get("TransferredIn");
+				CohortDefinition mdrallRelapses = mdrgroups.get("Relapse");
 				
-				CohortDefinition allRetreatment= ReportUtil.getCompositionCohort("OR",groups.get("AfterDefault"),groups.get("AfterFailure"),groups.get("Other"),groups.get("TransferredIn") ); 
+				CohortDefinition allNewCases = ReportUtil.getCompositionCohort("OR", dotsallNewCases,mdrallNewCases);
+				CohortDefinition allFailures = ReportUtil.getCompositionCohort("OR", dotsallFailures,mdrallFailures);
+				CohortDefinition allDefault = ReportUtil.getCompositionCohort("OR", dotsallDefault,mdrallDefault);
+				CohortDefinition allOthers = ReportUtil.getCompositionCohort("OR", dotsallOthers,mdrallOthers);
+				CohortDefinition allTransferred = ReportUtil.getCompositionCohort("OR", dotsallTransferred,mdrallTransferred);
+				CohortDefinition allRelapses = ReportUtil.getCompositionCohort("OR", dotsallRelapses,mdrallRelapses);
+				
+				CohortDefinition allRetreatment= ReportUtil.getCompositionCohort("OR",allDefault,allFailures,allOthers,allTransferred ); 
 				//CohortDefinition allExceptNew = ReportUtil.getCompositionCohort("OR",allRelapses,allTransferred,allOthers );
 			
 				

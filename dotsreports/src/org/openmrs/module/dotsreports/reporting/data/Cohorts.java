@@ -42,6 +42,8 @@ import org.openmrs.module.dotsreports.reporting.definition.DotsProgramLocationCo
 import org.openmrs.module.dotsreports.reporting.definition.DotsTJKConvertedInMonthForEnrollmentDuringCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.DotsTJKPatientDistrictCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.FLDTreatmentStartedCohortDefinition;
+import org.openmrs.module.dotsreports.reporting.definition.DotsMdrtbPatientProgramStateCohortDefinition;
+import org.openmrs.module.dotsreports.reporting.definition.DotsMdrtbProgramLocationCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.SLDTreatmentStartedCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.TxOutcomeExistsCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.TypeOfDiagnosisCohortDefinition;
@@ -94,8 +96,12 @@ public class Cohorts {
 			cd.setStartDate(startDate);
 			cd.setEndDate(endDate);
 			
+			DotsMdrtbProgramLocationCohortDefinition md = new DotsMdrtbProgramLocationCohortDefinition();
+			md.setLocation(location);
+			md.setStartDate(startDate);
+			md.setEndDate(endDate);
 			
-			return cd;
+			return ReportUtil.getCompositionCohort("OR", cd, md);
 			
 			
 			
@@ -201,6 +207,23 @@ public class Cohorts {
 			stateConcepts.add(stateConcept);
 		
 		return getDotsPatientProgramStateFilter(workflowConcept, stateConcepts, startDate, endDate);
+	}
+	
+	public static CohortDefinition getMdrtbPatientProgramStateFilter(Concept workflowConcept, List<Concept> stateConcepts, Date startDate, Date endDate) {
+		DotsMdrtbPatientProgramStateCohortDefinition cd = new DotsMdrtbPatientProgramStateCohortDefinition();
+		cd.setWorkflowConcept(workflowConcept);
+		cd.setStateConcepts(stateConcepts);
+		cd.setStartDate(startDate);
+		cd.setEndDate(endDate);
+		return cd;
+	}
+		
+	public static CohortDefinition getMdrtbPatientProgramStateFilter(Concept workflowConcept, Concept stateConcept, Date startDate, Date endDate) {
+		List<Concept> stateConcepts = new ArrayList<Concept>();
+		if(stateConcept!=null)
+			stateConcepts.add(stateConcept);
+		
+		return getMdrtbPatientProgramStateFilter(workflowConcept, stateConcepts, startDate, endDate);
 	}
 	
 	public static CohortDefinition getCuredDuringFilter(Date startDate, Date endDate) {

@@ -50,7 +50,7 @@ public class AgeAtMdrtbProgramEnrollmentCohortDefinitionEvaluator extends Progra
     	Cohort resultCohort = new Cohort();
     	
     	// get all the program during the specified period
-    	Map<Integer,List<TbPatientProgram>> tbPatientProgramsMap = ReportUtil.getTbPatientProgramsEnrolledInDateRangeMap(cd.getEnrolledOnOrAfter(), cd.getEnrolledOnOrBefore());
+    	Map<Integer,List<TbPatientProgram>> tbPatientProgramsMap = ReportUtil.getMdrtbPatientProgramsEnrolledInDateRangeMap(cd.getEnrolledOnOrAfter(), cd.getEnrolledOnOrBefore());
     	
     	for (int id : baseCohort.getMemberIds()) {
     		// first we need to find out what program(s) the patient was on during a given time period
