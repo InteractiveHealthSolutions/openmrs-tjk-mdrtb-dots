@@ -7,8 +7,8 @@
 <h2><table width="90%"><tr>
 <td align="left" width="20%" valign="center"><img src="${pageContext.request.contextPath}/moduleResources/mdrtb/TJK_logo.jpg" alt="logo Tajikistan" style="height:78px; width:87px;" border="0"/>&nbsp;<spring:message code="mdrtb.title" /></td>
 <td align="right" width="50%">&nbsp;</td>
-<td align="right" width="20%"><img src="${pageContext.request.contextPath}/moduleResources/mdrtb/WHO_Euro_logo.jpg" alt="logo WHO Euro" style="height:78px; width:60px;" border="0"/>&nbsp;<img src="${pageContext.request.contextPath}/moduleResources/mdrtb/gfatm_square.jpg" alt="logo GFATM" style="height:78px; width:83px;" border="0"/></td>
-</td>
+<td align="right" width="20%"><img src="${pageContext.request.contextPath}/moduleResources/mdrtb/WHO_Euro_logo.jpg" alt="logo WHO Euro" style="height:78px; width:60px;" border="0"/>&nbsp;<img src="${pageContext.request.contextPath}/moduleResources/mdrtb/gfatm_square.jpg" alt="logo GFATM" style="height:78px; width:83px;" border="0"/>&nbsp;
+<img src="${pageContext.request.contextPath}/moduleResources/mdrtb/USAID_logo_en.jpg" alt="logo USAID" style="height:45px; width:150px;" border="0"/></td>
 
 </tr></table></h2>
 

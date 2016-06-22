@@ -142,6 +142,7 @@ public ReportData evaluateReport(EvaluationContext context) {
 			CohortDefinition dotsdied = dotsoutcomes.get("Died");
 			CohortDefinition dotsfailed = dotsoutcomes.get("Failed");
 			CohortDefinition dotsdefaulted = dotsoutcomes.get("Defaulted");
+			CohortDefinition dotstout = dotsoutcomes.get("TransferredOut");
 			CohortDefinition dotscancelled = dotsoutcomes.get("Canceled");
 			CohortDefinition dotsstartedSLD =dotsoutcomes.get("StartedSLD");
 			//TREATMENT COMPLETED
@@ -152,6 +153,7 @@ public ReportData evaluateReport(EvaluationContext context) {
 			CohortDefinition mdrdied = mdroutcomes.get("Died");
 			CohortDefinition mdrfailed = mdroutcomes.get("Failed");
 			CohortDefinition mdrdefaulted = mdroutcomes.get("Defaulted");
+			CohortDefinition mdrtout = mdroutcomes.get("TransferredOut");
 			//CohortDefinition mdrcancelled = mdroutcomes.get("Canceled");
 			//CohortDefinition mdrstartedSLD = mdroutcomes.get("StartedSLD");
 			
@@ -160,6 +162,7 @@ public ReportData evaluateReport(EvaluationContext context) {
 			CohortDefinition died = ReportUtil.getCompositionCohort("OR", dotsdied,mdrdied);
 			CohortDefinition failed = ReportUtil.getCompositionCohort("OR", dotsfailed,mdrfailed);
 			CohortDefinition defaulted = ReportUtil.getCompositionCohort("OR", dotsdefaulted,mdrdefaulted);
+			CohortDefinition tout = ReportUtil.getCompositionCohort("OR", dotstout,mdrtout);
 			CohortDefinition cancelled = dotscancelled;
 			CohortDefinition startedSLD =dotsstartedSLD;
 			
@@ -216,9 +219,9 @@ public ReportData evaluateReport(EvaluationContext context) {
 			
 			//CohortDefinition fldTreatmentStarted = Cohorts.getFLDTreatmentStartedFilter(startDate, endDate);
 			
-			CohortDefinition fldTreatmentStarted = Cohorts.getHaveDOTSTxStartDate(startDate, endDate);
+			//CohortDefinition fldTreatmentStarted = Cohorts.getHaveDOTSTxStartDate(startDate, endDate);
 			CohortDefinition sldTreatmentStarted = ReportUtil.getCompositionCohort("OR", startedSLD, Cohorts.getSLDTreatmentStartedFilter(startDate, endDate));
-			CohortDefinition treatmentNotStarted = ReportUtil.minus(allTB, ReportUtil.getCompositionCohort("OR", fldTreatmentStarted, sldTreatmentStarted));
+			//CohortDefinition treatmentNotStarted = ReportUtil.minus(allTB, ReportUtil.getCompositionCohort("OR", fldTreatmentStarted, sldTreatmentStarted));
 			//WAITING FOR SLD
 			//TODO: NO INFORMATION YET
 			
@@ -362,7 +365,7 @@ public ReportData evaluateReport(EvaluationContext context) {
 			///////////////////////////////////////////////////
 			table1.addColumn("reg", allTB,null);
 			////table1.addColumn("eval", ReportUtil.minus(haveTxOutcome, cancelled), null);
-			table1.addColumn("eval",  ReportUtil.minus(allTB,sldTreatmentStarted),null);
+			table1.addColumn("eval",  ReportUtil.getCompositionCohort("OR",cured,txCompleted,died,failed,defaulted,tout),null);
 			//table1.addColumn("eval", ReportUtil.getCompositionCohort("OR",ReportUtil.minus(haveTxOutcome, cancelled),cured,txCompleted,died,failed,defaulted,ReportUtil.getCompositionCohort("AND",allTB,treatmentNotStarted),ReportUtil.getCompositionCohort("AND",ReportUtil.getCompositionCohort("AND", mdr,treatmentNotStarted))),null);
 			table1.addColumn("cured", cured, null);
 			table1.addColumn("tx", txCompleted, null);
@@ -372,10 +375,11 @@ public ReportData evaluateReport(EvaluationContext context) {
 			table1.addColumn("notbdeath", nonTbDeath, null);
 			table1.addColumn("fail", failed, null);
 			table1.addColumn("def", defaulted, null);
-			table1.addColumn("nofld", ReportUtil.getCompositionCohort("AND",haveNoTxOutcome,treatmentNotStarted), null);
-			table1.addColumn("nosld", ReportUtil.getCompositionCohort("AND",haveNoTxOutcome,ReportUtil.getCompositionCohort("AND", mdr,treatmentNotStarted)), null);
+			table1.addColumn("tout", tout, null);
+		//	table1.addColumn("nofld", ReportUtil.getCompositionCohort("AND",haveNoTxOutcome,treatmentNotStarted), null);
+		//	table1.addColumn("nosld", ReportUtil.getCompositionCohort("AND",haveNoTxOutcome,ReportUtil.getCompositionCohort("AND", mdr,treatmentNotStarted)), null);
 			
-			table1.addColumn("coltotal",ReportUtil.getCompositionCohort("OR",ReportUtil.minus(haveTxOutcome, cancelled),cured,txCompleted,died,failed,defaulted,ReportUtil.getCompositionCohort("AND",allTB,treatmentNotStarted),ReportUtil.getCompositionCohort("AND",ReportUtil.getCompositionCohort("AND", mdr,treatmentNotStarted))),null);
+			table1.addColumn("coltotal",ReportUtil.getCompositionCohort("OR",cured,txCompleted,died,failed,defaulted,tout),null);
 			table1.addColumn("canceled", cancelled,null);
 			table1.addColumn("sld", ReportUtil.getCompositionCohort("AND",allTB,sldTreatmentStarted), null);
 			
