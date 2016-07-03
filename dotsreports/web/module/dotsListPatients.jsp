@@ -138,8 +138,8 @@
 						<spring:message code="dotsreports.chooseColumnsToDisplay" text="Choose columns to display"/>: 
 						<select name="displayMode">
 							<option value="basic"<c:if test="${'basic' == param.displayMode}"> selected</c:if>><spring:message code="dotsreports.basicDetails"/></option>
-							<option value="mdrtbShortSummary"<c:if test="${'mdrtbShortSummary' == param.displayMode}"> selected</c:if>><spring:message code="dotsreports.mdrtbShortSummary"/></option>
-							<option value="mdrtbCustomList"<c:if test="${'mdrtbCustomList' == param.displayMode}"> selected</c:if>><spring:message code="dotsreports.mdrtbCustomList"/></option>
+							<option value="dotsShortSummary"<c:if test="${'dotsShortSummary' == param.displayMode}"> selected</c:if>><spring:message code="dotsreports.dotsShortSummary"/></option>
+							<option value="dotsCustomList"<c:if test="${'dotsCustomList' == param.displayMode}"> selected</c:if>><spring:message code="dotsreports.dotsCustomList"/></option>
 							
 							<openmrs:extensionPoint pointId="org.openmrs.dotsreports.listPatientDisplayModes" type="html">
 								<option value="${extension.key}"<c:if test="${extension.key == param.displayMode}"> selected</c:if>>
