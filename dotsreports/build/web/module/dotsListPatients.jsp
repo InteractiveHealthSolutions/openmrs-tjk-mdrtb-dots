@@ -101,6 +101,14 @@
 					</tr>
 					<tr><th colspan="2"><br/><spring:message code="dotsreports.enrollment"/></th></tr>
 					<tr>
+						<td><spring:message code="dotsreports.year"/></td>
+						<td><input type="text" name="year" value="${year}"/>
+					</tr>
+					<tr>
+						<td><spring:message code="dotsreports.quarter"/></td>
+						<td><input type="quarter" name="quarter" value="${quarter}"/>
+					</tr>
+					<!-- <tr>
 						<td><input type="radio" name="enrollment" value="ever"<c:if test="${empty enrollment || enrollment == 'ever'}"> checked</c:if>/>&nbsp;</td>
 						<td><spring:message code="dotsreports.enrollment.ever"/></td>
 					</tr>
@@ -115,7 +123,7 @@
 					<tr>
 						<td><input type="radio" name="enrollment" value="never"<c:if test="${enrollment == 'never'}"> checked</c:if>/>&nbsp;</td>
 						<td><spring:message code="dotsreports.enrollment.never"/></td>
-					</tr>
+					</tr>-->
 					
 					<c:forEach items="${openmrs:sort(tbProgram.workflows, 'concept.name.name', false)}" var="wf">
 						<c:if test="${!wf.retired}">
@@ -138,8 +146,8 @@
 						<spring:message code="dotsreports.chooseColumnsToDisplay" text="Choose columns to display"/>: 
 						<select name="displayMode">
 							<option value="basic"<c:if test="${'basic' == param.displayMode}"> selected</c:if>><spring:message code="dotsreports.basicDetails"/></option>
-							<option value="mdrtbShortSummary"<c:if test="${'mdrtbShortSummary' == param.displayMode}"> selected</c:if>><spring:message code="dotsreports.mdrtbShortSummary"/></option>
-							<option value="mdrtbCustomList"<c:if test="${'mdrtbCustomList' == param.displayMode}"> selected</c:if>><spring:message code="dotsreports.mdrtbCustomList"/></option>
+							<option value="dotsreportsShortSummary"<c:if test="${'dotsreportsShortSummary' == param.displayMode}"> selected</c:if>><spring:message code="dotsreports.dotsShortSummary"/></option>
+							<option value="dotsreportsCustomList"<c:if test="${'dotsreportsCustomList' == param.displayMode}"> selected</c:if>><spring:message code="dotsreports.dotsCustomList"/></option>
 							
 							<openmrs:extensionPoint pointId="org.openmrs.dotsreports.listPatientDisplayModes" type="html">
 								<option value="${extension.key}"<c:if test="${extension.key == param.displayMode}"> selected</c:if>>
@@ -160,14 +168,14 @@
 				</openmrs:extensionPoint>
 				<c:if test="${extensionFound != 'true'}">
 					<c:choose>
-						<c:when test="${param.displayMode == 'mdrtbSummary'}">
-							<openmrs:portlet moduleId="dotsreports" url="dotsPatientSummary" patientIds="${patientIds}" />
+						<c:when test="${param.displayMode == 'dotsreportsSummary'}">
+							<openmrs:portlet moduleId="dotsreports" url="dotsreportsPatientSummary" patientIds="${patientIds}" />
 						</c:when>
-						<c:when test="${param.displayMode == 'mdrtbShortSummary'}">
-							<openmrs:portlet moduleId="dotsreports" url="dotsShortSummary" patientIds="${patientIds}" />
+						<c:when test="${param.displayMode == 'dotsreportsShortSummary'}">
+							<openmrs:portlet moduleId="dotsreports" url="dotsreportsShortSummary" patientIds="${patientIds}" />
 						</c:when>
-						<c:when test="${param.displayMode == 'mdrtbCustomList'}">
-							<openmrs:portlet moduleId="dotsreports" url="dotsCustomList" patientIds="${patientIds}" />
+						<c:when test="${param.displayMode == 'dotsreportsCustomList'}">
+							<openmrs:portlet moduleId="dotsreports" url="dotsreportsCustomList" patientIds="${patientIds}" />
 						</c:when>
 						<c:otherwise>
 							<table id="patientTable">
@@ -184,7 +192,7 @@
 									<c:forEach items="${patients}" var="p">
 										<tr class="patientRow patientRow${p.patientId}">
 											<td class="patientTable" style="white-space:nowrap; width:20px;">
-												<a href="${pageContext.request.contextPath}/module/dotsreports/dashboard/dashboard.form?patientId=${p.patientId}">
+												<a href="${pageContext.request.contextPath}/patientDashboard.form?patientId=${p.patientId}">
 													<img src="${pageContext.request.contextPath}/images/lookup.gif" title="<spring:message code="general.view"/>" border="0" align="top" />
 												</a>						
 												<openmrs:extensionPoint pointId="org.openmrs.dotsreports.listPatientDetailPortlets" type="html">

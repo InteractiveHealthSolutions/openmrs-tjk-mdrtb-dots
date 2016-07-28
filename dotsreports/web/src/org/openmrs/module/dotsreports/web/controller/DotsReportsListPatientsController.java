@@ -38,7 +38,9 @@ public class DotsReportsListPatientsController {
     				@RequestParam(required=false, value="displayMode") 		String displayMode,
 	    			@RequestParam(required=false, value="identifier") 		String identifier,
 	    			@RequestParam(required=false, value="name") 			String name,
-	    			@RequestParam(required=false, value="enrollment")		String enrollment,
+	    			//@RequestParam(required=false, value="enrollment")		String enrollment,
+	    			@RequestParam(required=false, value="year")				Integer year,
+	    			@RequestParam(required=false, value="quarter")			String quarter,
 	    			@RequestParam(required=false, value="location") 		Location location,
 	    			@RequestParam(required=false, value="states") 			List<ProgramWorkflowState> states,
 	    			@RequestParam(required=false, value="minage")			Integer minage,
@@ -50,7 +52,9 @@ public class DotsReportsListPatientsController {
     	model.addAttribute("displayMode", displayMode);
     	model.addAttribute("identifier", identifier);
     	model.addAttribute("name", name);
-    	model.addAttribute("enrollment", enrollment);
+    	//model.addAttribute("enrollment", enrollment);
+    	model.addAttribute("year", year);
+    	model.addAttribute("quarter", quarter);
     	model.addAttribute("location", location);;
     	model.addAttribute("states", states);
     	model.addAttribute("minage", minage);
@@ -59,7 +63,7 @@ public class DotsReportsListPatientsController {
     	
     	
     	if (StringUtils.hasText(displayMode)) {
-    		Cohort cohort = TbUtil.getDOTSPatientsTJK(identifier, name, enrollment, location, states, minage, maxage, gender);
+    		Cohort cohort = TbUtil.getDOTSPatientsTJK(identifier, name, location, states, minage, maxage, gender,year,quarter);
         	model.addAttribute("patientIds", cohort.getCommaSeparatedPatientIds());
         	model.addAttribute("patients", Context.getPatientSetService().getPatients(cohort.getMemberIds()));
     	}

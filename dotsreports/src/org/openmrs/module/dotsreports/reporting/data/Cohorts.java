@@ -27,6 +27,7 @@ import org.openmrs.module.dotsreports.TbConcepts;
 import org.openmrs.module.dotsreports.TbUtil;
 import org.openmrs.module.dotsreports.MdrtbConstants.TbClassification;
 import org.openmrs.module.dotsreports.reporting.ReportUtil;
+import org.openmrs.module.dotsreports.reporting.definition.AgeAtDOTSRegistrationCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.AgeAtDotsProgramEnrollmentTJKCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.AgeAtMdrtbProgramEnrollmentCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.CompletedDotsProgramEnrolledDuringTJKCohortDefinition;
@@ -44,6 +45,7 @@ import org.openmrs.module.dotsreports.reporting.definition.DotsTJKPatientDistric
 import org.openmrs.module.dotsreports.reporting.definition.FLDTreatmentStartedCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.DotsMdrtbPatientProgramStateCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.DotsMdrtbProgramLocationCohortDefinition;
+import org.openmrs.module.dotsreports.reporting.definition.FirstMTBResultCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.SLDTreatmentStartedCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.TxOutcomeExistsCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.TypeOfDiagnosisCohortDefinition;
@@ -89,20 +91,25 @@ public class Cohorts {
 	 * @return the CohortDefinition for the Location
 	 */
 
-	public static CohortDefinition getLocationFilter(Location location, Date startDate, Date endDate) {
+	public static CohortDefinition getLocationFilter(Location location, Date startDate, Date endDate, boolean mdrtb) {
 		if (location != null) {
 			DotsProgramLocationCohortDefinition cd = new DotsProgramLocationCohortDefinition();
 			cd.setLocation(location);
 			cd.setStartDate(startDate);
 			cd.setEndDate(endDate);
 			
-			DotsMdrtbProgramLocationCohortDefinition md = new DotsMdrtbProgramLocationCohortDefinition();
-			md.setLocation(location);
-			md.setStartDate(startDate);
-			md.setEndDate(endDate);
 			
-			return ReportUtil.getCompositionCohort("OR", cd, md);
+			if(mdrtb) {
+				DotsMdrtbProgramLocationCohortDefinition md = new DotsMdrtbProgramLocationCohortDefinition();
+				md.setLocation(location);
+				md.setStartDate(startDate);
+				md.setEndDate(endDate);
 			
+				return ReportUtil.getCompositionCohort("OR", cd, md);
+			}
+			
+			else
+				return cd;
 			
 			
 		}
@@ -402,6 +409,15 @@ public class Cohorts {
 		return ReportUtil.getCodedObsCohort(TimeModifier.ANY, Context.getService(TbService.class).getConcept(TbConcepts.MTB_RESULT).getId(), 
 			startDate, endDate, SetComparator.IN, TbUtil.getPositiveResultConceptIds());
 	}
+	
+	public static CohortDefinition getFirstEverMTBResult(Date startDate, Date endDate, Boolean isPositive) {
+		FirstMTBResultCohortDefinition fmrcd = new FirstMTBResultCohortDefinition();
+		fmrcd.setStartDate(startDate);
+		fmrcd.setEndDate(endDate);
+		fmrcd.setIsPositive(isPositive);
+		
+		return fmrcd;
+	}
 
 	public static CohortDefinition getAllCultureNegativeDuring(Date startDate, Date endDate) {
 		CompositionCohortDefinition cd = new CompositionCohortDefinition();	
@@ -481,6 +497,8 @@ public class Cohorts {
 		}
 		return new SqlCohortDefinition(q.toString());
 	}
+	
+	
 	
 	public static CohortDefinition getInDOTSProgramEverDuring(Date startDate, Date endDate) {
 		InProgramCohortDefinition cd = new InProgramCohortDefinition();
@@ -573,6 +591,16 @@ public class Cohorts {
 		cd.setEnrolledOnOrBefore(endDate);		
 		cd.setTreatmentMonth(treatmentMonth);
 		cd.setPrograms(Arrays.asList(Context.getProgramWorkflowService().getProgramByName(Context.getAdministrationService().getGlobalProperty("dotsreports.program_name"))));
+		return cd;
+	}
+	
+	public static CohortDefinition getAgeAtDOTSRegistration(Date startDate, Date endDate, Integer minAge, Integer maxAge) {
+		AgeAtDOTSRegistrationCohortDefinition cd = new AgeAtDOTSRegistrationCohortDefinition();
+		cd.setStartDate(startDate);
+		cd.setEndDate(endDate);		
+		cd.setMinAge(minAge);
+		cd.setMaxAge(maxAge);
+		//cd.setPrograms(Arrays.asList(Context.getProgramWorkflowService().getProgramByName(Context.getAdministrationService().getGlobalProperty("dotsreports.program_name"))));
 		return cd;
 	}
 	

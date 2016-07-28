@@ -660,6 +660,8 @@ public class ReportUtil {
 		CohortDefinition other =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
 			 Context.getService(TbService.class).getConcept(TbConcepts.OTHER), startDate, endDate);
 		
+		
+		
 		//List<Concept> others = new ArrayList<Concept>();
 		//others.add(Context.getService(TbService.class).getConcept(TbConcepts.TRANSFER));
 		//others.add(Context.getService(TbService.class).getConcept(TbConcepts.OTHER));
@@ -679,6 +681,7 @@ public class ReportUtil {
 		//map.put("AfterFailureCategoryII", failureCatII);
 		map.put("TransferredIn", transferred);
 		map.put("Other", other);
+		
 		//map.put("Unknown", unknown);
 		
 		//map.put("Other", otherStar);

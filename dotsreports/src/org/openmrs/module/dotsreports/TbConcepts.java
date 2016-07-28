@@ -206,6 +206,7 @@ public class TbConcepts {
     public final static String [] DEATH_BY_TBHIV = {"DEATH BY TB/HIV"};
     public final static String [] DEATH_BY_OTHER_DISEASES = {"DEATH BY OTHER DISEASES"};
     public final static String [] DOTS_TREATMENT_START_DATE = {"DATE OF DOTS TREATMENT START"};
+    public final static String [] AGE_AT_REGISTRATION = {"AGE AT REGISTRATION"};
     
 
 }

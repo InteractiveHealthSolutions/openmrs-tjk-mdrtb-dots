@@ -119,13 +119,13 @@ public class PatientSummaryUtil {
     	Map<String, String> keys = new LinkedHashMap<String, String>();
     	
     	for (String s : DEMOGRAPHICS_KEYS) {
-    		keys.put(s, MessageUtil.translate("mdrtb."+s));
+    		keys.put(s, MessageUtil.translate("dotsreports."+s));
     	}
-    	String primaryIdType = Context.getAdministrationService().getGlobalProperty("mdrtb.primaryPatientIdentifierType");
+    	String primaryIdType = Context.getAdministrationService().getGlobalProperty("dotsreports.primaryPatientIdentifierType");
     	for (PatientIdentifierType pit : Context.getPatientService().getAllPatientIdentifierTypes()) {
     		keys.put("identifier."+pit.getName(), pit.getName());
     		if (pit.getName().equals(primaryIdType) || pit.getId().toString().equals(primaryIdType)) {
-    			keys.put(PRIMARY_IDENTIFIER, MessageUtil.translate("mdrtb.identifier"));
+    			keys.put(PRIMARY_IDENTIFIER, MessageUtil.translate("dotsreports.identifier"));
     		}
     	}
     	for (PersonAttributeType pat : Context.getPersonService().getAllPersonAttributeTypes()) {
@@ -136,18 +136,18 @@ public class PatientSummaryUtil {
     		keys.put("state."+wf.getId(), cn);
     	}
     	for (String s : TB_REGIMEN_KEYS) {
-    		keys.put(s, MessageUtil.translate("mdrtb."+s));
+    		keys.put(s, MessageUtil.translate("dotsreports."+s));
     	}
     	for (String s : HIV_REGIMEN_KEYS) {
-    		keys.put(s, MessageUtil.translate("mdrtb."+s));
+    		keys.put(s, MessageUtil.translate("dotsreports."+s));
     	}
     	for (String s : OBS_KEYS) {
     		Concept c = Context.getService(TbService.class).getConcept(s); 
-    		keys.put("obs."+s+".latest", MessageUtil.translate("mdrtb.latest") + " " + formatConcept(c));
-    		keys.put("obs."+s+".latestDate", MessageUtil.translate("mdrtb.latest") + " " + formatConcept(c) + " " + MessageUtil.translate("mdrtb.date"));
+    		keys.put("obs."+s+".latest", MessageUtil.translate("dotsreports.latest") + " " + formatConcept(c));
+    		keys.put("obs."+s+".latestDate", MessageUtil.translate("dotsreports.latest") + " " + formatConcept(c) + " " + MessageUtil.translate("dotsreports.date"));
     	}
     	for (String s : TEST_KEYS) {
-    		keys.put(s, MessageUtil.translate("mdrtb."+s));
+    		keys.put(s, MessageUtil.translate("dotsreports."+s));
     	}
     	return keys;
     }
@@ -167,7 +167,7 @@ public class PatientSummaryUtil {
     	Cohort cohort = Context.getPatientSetService().getPatientsInProgram(mdrProgram, now, now);
         
         if (location != null) {
-        	CohortDefinition cd = Cohorts.getLocationFilter(location, now, now);
+        	CohortDefinition cd = Cohorts.getLocationFilter(location, now, now, false);
 	        Cohort atLocation;
             try {
 	            atLocation = Context.getService(CohortDefinitionService.class).evaluate(cd, new EvaluationContext());

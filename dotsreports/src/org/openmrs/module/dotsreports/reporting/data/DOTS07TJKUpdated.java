@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.openmrs.Cohort;
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.dotsreports.TbConcepts;
@@ -31,6 +32,7 @@ import org.openmrs.module.dotsreports.reporting.ReportSpecification;
 import org.openmrs.module.dotsreports.reporting.ReportUtil;
 import org.openmrs.module.reporting.cohort.definition.AgeCohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
+import org.openmrs.module.reporting.cohort.definition.service.CohortDefinitionService;
 import org.openmrs.module.reporting.dataset.definition.CohortCrossTabDataSetDefinition;
 import org.openmrs.module.reporting.evaluation.EvaluationContext;
 import org.openmrs.module.reporting.evaluation.EvaluationException;
@@ -126,7 +128,7 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				
 				if (location != null) {
 					//
-					CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate);
+					CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate, true);
 					if (locationFilter != null) {
 						//baseCohortDefs.put("location", new Mapped(locationFilter, null));
 						report.setBaseCohortDefinition(locationFilter, null);
@@ -150,7 +152,10 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				CohortDefinition extrapulmonary = Cohorts.getAllExtraPulmonaryDuring(startDate,endDate);
 				//CohortDefinition culturePositive = Cohorts.getAnyCulturePositiveDuring(startDate, endDate);
 				CohortDefinition smearPositive = Cohorts.getDotsBacBaselineTJKResult(startDate, endDate, null, null, org.openmrs.module.dotsreports.reporting.definition.DotsBacBaselineResultTJKCohortDefinition.Result.POSITIVE);
-				CohortDefinition rapidTestPositive = Cohorts.getAnyXpertOrHAINPositiveDuring(startDate, endDate);
+				//CohortDefinition rapidTestPositive = Cohorts.getAnyXpertOrHAINPositiveDuring(startDate, endDate);
+				CohortDefinition rapidTestPositive = Cohorts.getFirstEverMTBResult(null, null, Boolean.TRUE);
+				//Context.getObsService().getO
+				
 				//CohortDefinition bacteriology = ReportUtil.getCompositionCohort("OR", smearPositive, culturePositive);
 				
 				/*CohortDefinition haveDiagnosticType = Cohorts.getHaveDiagnosticTypeDuring(startDate, endDate, null);
@@ -159,20 +164,42 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				
 				CohortDefinition haveLabDiagnosis = ReportUtil.getCompositionCohort("OR", smearPositive,  rapidTestPositive);
 				CohortDefinition haveClinicalDiagnosis = ReportUtil.minus(allTB,haveLabDiagnosis);
+				
+				CohortDefinition dotsage04=Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 0, 4);
+				CohortDefinition dotsage0514=Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 5, 14);
+				CohortDefinition dotsage1517=Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 15, 17);
+				CohortDefinition dotsage1819=Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 18, 19);
+				CohortDefinition dotsage2024=Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 20, 24);
+				CohortDefinition dotsage2534 = Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 25, 34);
+				CohortDefinition dotsage3544 = Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 35, 44);
+				CohortDefinition dotsage4554 = Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 45, 54);
+				CohortDefinition dotsage5564 = Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 55, 64);
+				CohortDefinition dotsage65 = Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 65, null);
+				
+				CohortDefinition mdrage04=Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 0, 4);
+				CohortDefinition mdrage0514=Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 5, 14);
+				CohortDefinition mdrage1517=Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 15, 17);
+				CohortDefinition mdrage1819=Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 18, 19);
+				CohortDefinition mdrage2024=Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 20, 24);
+				//
+				CohortDefinition mdrage2534 = Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 25, 34);
+				CohortDefinition mdrage3544 = Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 35, 44);
+				CohortDefinition mdrage4554 = Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 45, 54);
+				CohortDefinition mdrage5564 = Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 55, 64);
+				CohortDefinition mdrage65 = Cohorts.getAgeAtDOTSRegistration(startDate, endDate, 65, null);
 
-				CohortDefinition dotsage04=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 0, 5);
+				/*CohortDefinition dotsage04=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 0, 5);
 				CohortDefinition dotsage0514=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 5, 15);
 				CohortDefinition dotsage1517=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 15, 18);
 				CohortDefinition dotsage1819=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 18, 20);
 				CohortDefinition dotsage2024=Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 20, 25);
-				//
 				CohortDefinition dotsage2534 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 25, 35);
 				CohortDefinition dotsage3544 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 35, 45);
 				CohortDefinition dotsage4554 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 45, 55);
 				CohortDefinition dotsage5564 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 55, 65);
-				CohortDefinition dotsage65 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 65, 999);
+				CohortDefinition dotsage65 = Cohorts.getAgeAtEnrollmentInDotsProgram(startDate, endDate, 65, 999);*/
 
-				CohortDefinition mdrage04=Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 0, 5);
+				/*CohortDefinition mdrage04=Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 0, 5);
 				CohortDefinition mdrage0514=Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 5, 15);
 				CohortDefinition mdrage1517=Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 15, 18);
 				CohortDefinition mdrage1819=Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 18, 20);
@@ -183,7 +210,7 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				CohortDefinition mdrage4554 = Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 45, 55);
 				CohortDefinition mdrage5564 = Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 55, 65);
 				CohortDefinition mdrage65 = Cohorts.getAgeAtEnrollmentInMdrtbProgram(startDate, endDate, 65, 999);
-
+*/
 				//
 				
 				CohortDefinition age04=ReportUtil.getCompositionCohort("OR", dotsage04, mdrage04);
@@ -364,6 +391,7 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				report.addDataSetDefinition("all", table1, null);
 				
 		ReportData data;
+		
 		try {
 			data = Context.getService(ReportDefinitionService.class).evaluate(
 					report, context);
@@ -371,6 +399,44 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 			throw new MdrtbAPIException("Unable to evaluate WHO Form 7 report",
 					e);
 		}
+		
+		CohortDefinition newMen = ReportUtil.getCompositionCohort("AND", men, allNewCases, report.getBaseCohortDefinition().getParameterizable());
+		Cohort test = null;
+		
+		try {
+			test = Context.getService(CohortDefinitionService.class).evaluate(newMen, new EvaluationContext());
+		} catch (EvaluationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		System.out.println("********NEW**************");
+		Set<Integer> ids = test.getMemberIds();
+		for(Integer testid:ids) {
+			System.out.println(testid);
+		}
+		
+		
+		CohortDefinition relapseMen = ReportUtil.getCompositionCohort("AND", men, allRelapses, allTB,report.getBaseCohortDefinition().getParameterizable());
+	    test = null;
+		
+		try {
+			test = Context.getService(CohortDefinitionService.class).evaluate(relapseMen, new EvaluationContext());
+		} catch (EvaluationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		System.out.println("**********RELAPSES**************");
+		ids = test.getMemberIds();
+		for(Integer testid:ids) {
+			System.out.println(testid);
+		}
+		
+		
+		
+		
 		return data;
 	}
 }

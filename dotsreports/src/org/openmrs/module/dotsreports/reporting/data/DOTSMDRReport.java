@@ -111,7 +111,7 @@ public ReportData evaluateReport(EvaluationContext context) {
 			
 			
 			if (location != null) {
-				CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate);//Cohorts.getLocationFilterTJK(location.getCountyDistrict(), startDate, endDate);
+				CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate, false);//Cohorts.getLocationFilterTJK(location.getCountyDistrict(), startDate, endDate);
 				if (locationFilter != null) {
 					//baseCohortDefs.put("location", new Mapped(locationFilter, null));
 					report.setBaseCohortDefinition(locationFilter, null);

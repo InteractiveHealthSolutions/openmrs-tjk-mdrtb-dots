@@ -18,17 +18,17 @@
     	<property name="mappings">
             <props>
             	<prop key="cohortBuilder.list">mdrtbCohortBuilderController</prop>
-            	<prop key="**/mdrtbPatientSummary.portlet">patientSummaryPortletController</prop>
-            	<prop key="**/mdrtbShortSummary.portlet">shortSummaryPortletController</prop>
-            	<prop key="**/mdrtbCustomList.portlet">customSummaryPortletController</prop>
-            	<prop key="**/specimenReport.portlet">specimenReportPortletController</prop>
+            	<prop key="**/dotsreportsPatientSummary.portlet">dotspatientSummaryPortletController</prop>
+            	<prop key="**/dotsreportsShortSummary.portlet">dotsshortSummaryPortletController</prop>
+            	<prop key="**/dotsreportsCustomList.portlet">dotscustomSummaryPortletController</prop>
+            	<prop key="**/specimenReport.portlet">dotsspecimenReportPortletController</prop>
 	    	</props>
 		</property>
     </bean>
     
     <!-- Controllers -->
     
-	<bean id="mdrtbCohortBuilderController" class="org.openmrs.module.dotsreports.web.controller.reporting.CohortBuilderController">
+	<bean id="dotsreportsCohortBuilderController" class="org.openmrs.module.dotsreports.web.controller.reporting.CohortBuilderController">
 		<property name="formView"><value>/module/@MODULE_ID@/reporting/cohortBuilder</value></property>
 		<property name="successView"><value>cohortBuilder.list</value></property>
 	</bean>
@@ -36,10 +36,10 @@
     <!-- Portlet controllers -->    
    
    
-    <bean id="patientSummaryPortletController" class="org.openmrs.module.dotsreports.web.controller.reporting.PatientSummaryPortletController" />
-	<bean id="shortSummaryPortletController" class="org.openmrs.module.dotsreports.web.controller.reporting.ShortSummaryPortletController" />
-	<bean id="customSummaryPortletController" class="org.openmrs.module.dotsreports.web.controller.reporting.CustomSummaryPortletController" />
-	<bean id="specimenReportPortletController" class="org.openmrs.module.dotsreports.web.controller.portlet.SpecimenReportPortletController" />
+    <bean id="dotspatientSummaryPortletController" class="org.openmrs.module.dotsreports.web.controller.reporting.DotsPatientSummaryPortletController" />
+	<bean id="dotsshortSummaryPortletController" class="org.openmrs.module.dotsreports.web.controller.reporting.DotsShortSummaryPortletController" />
+	<bean id="dotscustomSummaryPortletController" class="org.openmrs.module.dotsreports.web.controller.reporting.DotsCustomSummaryPortletController" />
+	<bean id="dotsspecimenReportPortletController" class="org.openmrs.module.dotsreports.web.controller.portlet.SpecimenReportPortletController" />
     
     <bean parent="serviceContext">
 		<property name="moduleService">
@@ -83,7 +83,7 @@
 	</bean>
 
 	<!-- Add an event listener -->
-	<bean id="mdrtbEventListeners" parent="openmrsEventListeners">
+	<bean id="dotsreportsEventListeners" parent="openmrsEventListeners">
 		<property name="globalPropertyListeners">
 			<list value-type="org.openmrs.api.GlobalPropertyListener" merge="true">
 				<bean class="org.openmrs.module.dotsreports.CacheResetListener" />

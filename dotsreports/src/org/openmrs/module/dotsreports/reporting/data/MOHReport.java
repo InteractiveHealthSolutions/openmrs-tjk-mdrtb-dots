@@ -105,7 +105,7 @@ public class MOHReport implements org.openmrs.module.dotsreports.reporting.Repor
 		Date endDate = (Date)context.getParameterValue("endDate");
 
 		CohortDefinition inProgram = Cohorts.getInDOTSProgramEverDuring(startDate, endDate);
-		CohortDefinition atLocation = (location == null ? null : Cohorts.getLocationFilter(location, startDate, endDate));
+		CohortDefinition atLocation = (location == null ? null : Cohorts.getLocationFilter(location, startDate, endDate, false));
 		CohortDefinition newlyHospitalized = Cohorts.getNewlyHospitalizedDuringPeriod(startDate, endDate);
 		CohortDefinition allHospitalized = Cohorts.getEverHospitalizedDuringPeriod(startDate, endDate);
 		CohortDefinition startedTxDuring = Cohorts.getStartedTreatmentFilter(startDate, endDate);

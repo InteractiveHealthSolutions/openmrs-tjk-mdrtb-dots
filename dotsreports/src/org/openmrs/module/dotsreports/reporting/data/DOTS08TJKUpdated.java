@@ -117,7 +117,7 @@ public ReportData evaluateReport(EvaluationContext context) {
 			
 			
 			if (location != null) {
-				CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate);//Cohorts.getLocationFilterTJK(location.getCountyDistrict(), startDate, endDate);
+				CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate, true);//Cohorts.getLocationFilterTJK(location.getCountyDistrict(), startDate, endDate);
 				if (locationFilter != null) {
 					//baseCohortDefs.put("location", new Mapped(locationFilter, null));
 					report.setBaseCohortDefinition(locationFilter, null);
@@ -381,7 +381,8 @@ public ReportData evaluateReport(EvaluationContext context) {
 			
 			table1.addColumn("coltotal",ReportUtil.getCompositionCohort("OR",cured,txCompleted,died,failed,defaulted,tout),null);
 			table1.addColumn("canceled", cancelled,null);
-			table1.addColumn("sld", ReportUtil.getCompositionCohort("AND",allTB,sldTreatmentStarted), null);
+			//table1.addColumn("sld", ReportUtil.getCompositionCohort("AND",allTB,sldTreatmentStarted), null);
+			table1.addColumn("sld", ReportUtil.getCompositionCohort("AND",allTB,startedSLD), null);
 			
 			report.addDataSetDefinition("tbl", table1, null);
 		

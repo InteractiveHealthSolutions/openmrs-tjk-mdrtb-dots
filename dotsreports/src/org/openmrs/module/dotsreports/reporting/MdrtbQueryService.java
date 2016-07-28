@@ -256,6 +256,11 @@ public class MdrtbQueryService {
 		}
 	}
 	
+	private static void addOptionalNumericClause(StringBuilder sb, String baseClause, Integer i) {
+		if(i!=null)
+			sb.append(baseClause  + i + " ");
+	}
+	
 	/**
 	 * Utility method to evaluate a query into a Cohort
 	 */
@@ -348,6 +353,38 @@ public class MdrtbQueryService {
     	q.append("and		o.concept_id = " + txStartDate + " ");
     	addOptionalDateClause(q, "and o.value_datetime >= ", minResultDate);
     	addOptionalDateClause(q, "and o.value_datetime <= ", maxResultDate);
+    	
+    	
+    	
+    	/*q.append("and o.value_coded in (");
+		for (int i=0; i<drugs.length; i++) {
+			q.append(drugs[i].getConceptId());
+			if ((i+1)<drugs.length) {
+				q.append(",");
+			}
+		}	
+    	q.append(") ");*/
+    	
+    	return executeQuery(q.toString(), context);
+    }
+    
+    /**
+     * @return the Cohort of patients with DST rest results
+     */
+    public static Cohort getPatientsWithAgeAtDOTSRegistration(EvaluationContext context, Integer minAge, Integer maxAge, Date startDate, Date endDate) {
+    	
+    	Integer ageAtDotsRegistration = Context.getService(TbService.class).getConcept(TbConcepts.AGE_AT_REGISTRATION).getConceptId();
+    	
+    	StringBuilder q = new StringBuilder();
+    	q.append("select 	p.patient_id ");
+    	q.append("from 		patient p, obs o ");
+    	q.append("where 	p.patient_id = o.person_id ");
+    	q.append("and	 	p.voided = 0 and o.voided = 0 ");
+    	q.append("and		o.concept_id = " + ageAtDotsRegistration + " ");
+    	addOptionalDateClause(q, "and o.obs_datetime >= ", startDate);
+    	addOptionalDateClause(q, "and o.obs_datetime <= ", endDate);
+    	addOptionalNumericClause(q, "and o.value_numeric >= ", minAge);
+    	addOptionalNumericClause(q, "and o.value_numeric <= ", maxAge);
     	
     	
     	

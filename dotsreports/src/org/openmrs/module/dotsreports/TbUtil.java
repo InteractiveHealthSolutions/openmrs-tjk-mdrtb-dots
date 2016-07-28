@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
@@ -32,7 +33,10 @@ import org.openmrs.module.dotsreports.exception.MdrtbAPIException;
 import org.openmrs.module.dotsreports.program.TbPatientProgram;
 import org.openmrs.module.dotsreports.regimen.Regimen;
 import org.openmrs.module.dotsreports.regimen.RegimenUtils;
+import org.openmrs.module.dotsreports.reporting.ReportUtil;
 import org.openmrs.module.dotsreports.reporting.data.Cohorts;
+import org.openmrs.module.dotsreports.reporting.definition.AgeAtDOTSRegistrationCohortDefinition;
+import org.openmrs.module.dotsreports.reporting.definition.AgeAtDotsProgramEnrollmentTJKCohortDefinitionEvaluator;
 import org.openmrs.module.dotsreports.service.TbService;
 import org.openmrs.module.dotsreports.specimen.Specimen;
 import org.openmrs.module.dotsreports.specimen.Test;
@@ -409,7 +413,7 @@ public class TbUtil {
 		
 		// If Location is specified, limit to patients at this Location
 		if (location != null) {
-			CohortDefinition lcd = Cohorts.getLocationFilter(location, now, now);
+			CohortDefinition lcd = Cohorts.getLocationFilter(location, now, now, false);
 			Cohort locationCohort;
             try {
 	            locationCohort = Context.getService(CohortDefinitionService.class).evaluate(lcd, new EvaluationContext());
@@ -457,7 +461,7 @@ public class TbUtil {
 	 * Utility method to return patients matching passed criteria. Difference between this and main method is that locations are matched by patient rayon
 	 * @return Cohort
 	 */
-	public static Cohort getDOTSPatientsTJK(String identifier, String name, String enrollment, Location location, List<ProgramWorkflowState> states, Integer minage, Integer maxage, String gender) {
+	public static Cohort getDOTSPatientsTJK(String identifier, String name, /*String enrollment,*/ Location location, List<ProgramWorkflowState> states, Integer minage, Integer maxage, String gender, Integer year, String quarter) {
 		
 		
 		Cohort cohort = Context.getPatientSetService().getAllPatients();
@@ -467,9 +471,25 @@ public class TbUtil {
 		Date now = new Date();
 		Program tbProgram = ms.getTbProgram();
 		
-		if ("current".equals(enrollment)) {
+		Map<String, Date> dateMap = ReportUtil.getPeriodDates(year, quarter, null);
+		
+		Date startDate = (Date)(dateMap.get("startDate"));
+		Date endDate = (Date)(dateMap.get("endDate"));
+		
+		CohortDefinition dstb = Cohorts.getEnrolledInDOTSProgramDuring(startDate, endDate);
+		
+		try {
+			Cohort enrollmentCohort = Context.getService(CohortDefinitionService.class).evaluate(dstb, new EvaluationContext());
+			cohort = Cohort.intersect(cohort, enrollmentCohort);
+		}
+		
+		 catch (EvaluationException e) {
+       	  throw new MdrtbAPIException("Unable to evalute location cohort",e);
+       }
+		/*if ("current".equals(enrollment)) {
 			Cohort current = Context.getPatientSetService().getPatientsInProgram(tbProgram, now, now);
 			cohort = Cohort.intersect(cohort, current);
+			
 		}
 		else {
 			Cohort ever = Context.getPatientSetService().getPatientsInProgram(tbProgram, null, null);
@@ -484,7 +504,7 @@ public class TbUtil {
 			else {
 				cohort = Cohort.intersect(cohort, ever);
 			}	
-		}
+		}*/
 		
 		if (StringUtils.isNotBlank(name) || StringUtils.isNotBlank(identifier)) {
 			name = "".equals(name) ? null : name;
@@ -500,16 +520,49 @@ public class TbUtil {
 			cohort = Cohort.intersect(cohort, inStates);
 		}
 		
-		// If Location is specified, limit to patients at this Location
 		if (location != null) {
-			//System.out.println("ENTERED!!!!!!!!!");
-			//System.out.println("L:" + location.getCountyDistrict());
+			CohortDefinition lcd = Cohorts.getLocationFilter(location, null, null, false);
+			Cohort locationCohort;
+            try {
+	            locationCohort = Context.getService(CohortDefinitionService.class).evaluate(lcd, new EvaluationContext());
+            }
+            catch (EvaluationException e) {
+            	  throw new MdrtbAPIException("Unable to evalute location cohort",e);
+            }
+			cohort = Cohort.intersect(cohort, locationCohort);
+		}
+		
+		/*// If Location is specified, limit to patients at this Location
+		if (location != null) {
+			System.out.println("ENTERED!!!!!!!!!");
+			System.out.println("L:" + location.getId());
 			Cohort fc = new Cohort();
+			Patient patient = null;
 			Set<Integer> idSet = cohort.getMemberIds();
 	    	//System.out.println("SET SIZE:" + idSet.size());
 	    	Iterator<Integer> itr = idSet.iterator();
 	    	Integer idCheck = null;
-	    	Patient patient = null;
+	    	
+	    	PatientService ps = Context.getService(PatientService.class);
+	    	boolean use = false;
+	    	while(itr.hasNext()) {
+	    		use = false;
+	    		idCheck = (Integer)itr.next();
+	    		patient = ps.getPatient(idCheck);
+	    		TbService svc = Context.getService(TbService.class);
+	    		
+	    		TbPatientProgram mpp = svc.getMostRecentTbPatientProgram(patient);
+	    		Location enrLoc = mpp.getLocation();
+	    		
+	    		while(itr.hasNext()) {
+		    		idCheck = (Integer)itr.next();
+		    		
+		    		if(location.getLocationId()==enrLoc.getId())
+		    			fc.addMember(idCheck);
+		    	}
+	    	}*/
+	    		
+	    	/*Patient patient = null;
 	    	PersonAddress addr = null;
 	    	PatientService ps = Context.getService(PatientService.class);
 	    	while(itr.hasNext()) {
@@ -521,54 +574,77 @@ public class TbUtil {
 	    		if(areRussianStringsEqual(addr.getCountyDistrict(),location.getCountyDistrict())==true)
 	    			fc.addMember(idCheck);
 	    		
-	    	}
+	    	}*/
 	    	
-	    	cohort  = fc;
+	    /*	cohort  = fc;
 		}
-		
+		*/
 		if(minage != null || maxage != null) {
+		
 			Cohort ageCohort = new Cohort();
-			Patient patient = null;
+			AgeAtDOTSRegistrationCohortDefinition ageatEnrollmentCohort = new AgeAtDOTSRegistrationCohortDefinition();
+			ageatEnrollmentCohort.setMaxAge(maxage);
+			ageatEnrollmentCohort.setMinAge(minage);
+			ageatEnrollmentCohort.setStartDate(startDate);
+			ageatEnrollmentCohort.setEndDate(endDate);
+			
+			AgeAtDotsProgramEnrollmentTJKCohortDefinitionEvaluator eval = new AgeAtDotsProgramEnrollmentTJKCohortDefinitionEvaluator();
+			
+			//eval.evaluate(ageatEnrollmentCohort, context)
+			 try {
+				 ageCohort = Context.getService(CohortDefinitionService.class).evaluate(ageatEnrollmentCohort, new EvaluationContext());
+			 }
+			 
+			 catch (EvaluationException e) {
+           	  throw new MdrtbAPIException("Unable to evalute age cohort",e);
+           }
+			/*Patient patient = null;
 			Set<Integer> idSet = cohort.getMemberIds();
 			Iterator<Integer> itr = idSet.iterator();
 	    	Integer idCheck = null;
 	   
 	    	PatientService ps = Context.getService(PatientService.class);
 	    	boolean use = false;
-	    	while(itr.hasNext()) {
-	    		use = false;
+	    	while(itr.hasNext()) {*/
+	    		/*use = false;
 	    		idCheck = (Integer)itr.next();
 	    		patient = ps.getPatient(idCheck);
 	    		TbService svc = Context.getService(TbService.class);
 	    		
 	    		TbPatientProgram mpp = svc.getMostRecentTbPatientProgram(patient);
 	    		
-	    		Date tsd = mpp.getTreatmentStartDateDuringProgram();
 	    		
-	    		if(minage!=null) {
+	    		//Date tsd = mpp.getTreatmentStartDateDuringProgram();
+	    		Date tsd = mpp.getDateEnrolled();
+	    		
+	    		if(minage != null && maxage !=null ) {
+	    			if(patient.getAge(tsd)>= minage.intValue() && patient.getAge(tsd)<= maxage.intValue() ) {
+	    				use = true;
+	    			}
+	    		}
+	    		
+	    		else if(minage!=null) {
 	    			if(patient.getAge(tsd)>= minage.intValue()) {
 	    				use = true;
 	    			}
-	    			else
-	    				use = false;
+	    			
 	    				
 	    		}
 	    		
-	    		if(maxage!=null) {
+	    		else if(maxage!=null) {
 	    			if(patient.getAge(tsd)<= maxage.intValue()) {
 	    				use = true;
 	    			}
-	    			else
-	    				use = false;
+	    				
 	    		} 
 	    		
 	    		if(use) {
 	    			ageCohort.addMember(patient.getPatientId());
 	    		}
 	    		
-	    	}
+	    	}*/
 	    	
-	    	cohort = ageCohort;
+	    	cohort = cohort = Cohort.intersect(cohort, ageCohort);
 			
 			
 		}
@@ -594,7 +670,7 @@ public class TbUtil {
 	    		
 	    	}
 	    	
-	    	cohort = genderCohort;
+	    	cohort = Cohort.intersect(cohort, genderCohort);
 		}
 		
 		

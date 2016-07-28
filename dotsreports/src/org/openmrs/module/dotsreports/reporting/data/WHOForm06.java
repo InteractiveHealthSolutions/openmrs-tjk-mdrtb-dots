@@ -96,7 +96,7 @@ public class WHOForm06 implements org.openmrs.module.dotsreports.reporting.Repor
 		baseCohortDefs.put("confirmedMdr", new Mapped(Cohorts.getInDOTSProgramAndStartedTreatmentFilter(startDate, endDate), null));
 		baseCohortDefs.put("startedTreatment", new Mapped(Cohorts.getStartedTreatmentFilter(startDate, endDate), null));
 		if (location != null) {
-			CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate);
+			CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate,false);
 			if (locationFilter != null) {
 				baseCohortDefs.put("location", new Mapped(locationFilter, null));
 			}	

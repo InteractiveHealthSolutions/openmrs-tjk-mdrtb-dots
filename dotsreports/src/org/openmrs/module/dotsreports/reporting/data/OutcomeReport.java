@@ -111,7 +111,7 @@ public class OutcomeReport implements org.openmrs.module.dotsreports.reporting.R
 		Map<String, Mapped<? extends CohortDefinition>> baseCohortDefs = new LinkedHashMap<String, Mapped<? extends CohortDefinition>>();
 		baseCohortDefs.put("startedTreatment", new Mapped(Cohorts.getStartedTreatmentFilter(startDate, endDate), null));
 		if (location != null) {
-			CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate);
+			CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate,false);
 			if (locationFilter != null) {
 				baseCohortDefs.put("location", new Mapped(locationFilter, null));
 			}

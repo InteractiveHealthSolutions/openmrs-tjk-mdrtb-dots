@@ -104,7 +104,7 @@ public class DOTS10TJK implements ReportSpecification {
 		Date endDate = (Date)context.getParameterValue("endDate");
 		
 		// Set base cohort to patients assigned to passed location, if applicable
-		CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate);
+		CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate, false);
 		if (locationFilter != null) {
 			report.setBaseCohortDefinition(locationFilter, null);
 		}
