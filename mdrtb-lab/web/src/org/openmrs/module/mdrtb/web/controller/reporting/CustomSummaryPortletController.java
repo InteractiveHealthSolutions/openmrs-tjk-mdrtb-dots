@@ -17,6 +17,7 @@ public class CustomSummaryPortletController extends PatientSummaryPortletControl
 	 */
 	@Override
 	protected String[] getSummaryColumns(HttpServletRequest request) {
+		System.out.println("HERE");
 		String[] columns = request.getParameterValues("columns");
 		if (columns == null || columns.length == 0) {
 			columns = new String[] {};

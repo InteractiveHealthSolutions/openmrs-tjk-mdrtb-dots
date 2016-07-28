@@ -496,6 +496,19 @@ public class MdrtbUtil {
 		}
 		
 		// If Location is specified, limit to patients at this Location
+				if (location != null) {
+					CohortDefinition lcd = Cohorts.getLocationFilter(location, now, now);
+					Cohort locationCohort;
+		            try {
+			            locationCohort = Context.getService(CohortDefinitionService.class).evaluate(lcd, new EvaluationContext());
+		            }
+		            catch (EvaluationException e) {
+		            	  throw new MdrtbAPIException("Unable to evalute location cohort",e);
+		            }
+					cohort = Cohort.intersect(cohort, locationCohort);
+				}
+		
+		/*// If Location is specified, limit to patients at this Location
 		if (location != null) {
 			//System.out.println("ENTERED!!!!!!!!!");
 			//System.out.println("L:" + location.getCountyDistrict());
@@ -521,7 +534,7 @@ public class MdrtbUtil {
 	    	}
 	    	
 	    	cohort  = fc;
-		}
+		}*/
 		
 		if(minage != null || maxage != null) {
 			Cohort ageCohort = new Cohort();
@@ -540,23 +553,31 @@ public class MdrtbUtil {
 	    		
 	    		MdrtbPatientProgram mpp = svc.getMostRecentMdrtbPatientProgram(patient);
 	    		
-	    		Date tsd = mpp.getTreatmentStartDateDuringProgram();
+	    		Date tsd = mpp.getDateEnrolled();
+	    		//mpp.getTreatmentStartDateDuringProgram();
 	    		
-	    		if(minage!=null) {
+	    		
+	    		if(minage != null && maxage !=null ) {
+	    			if(patient.getAge(tsd)>= minage.intValue() && patient.getAge(tsd)<= maxage.intValue() ) {
+	    				use = true;
+	    			}
+	    		}
+	    		
+	    		else if(minage!=null) {
 	    			if(patient.getAge(tsd)>= minage.intValue()) {
 	    				use = true;
 	    			}
-	    			else
-	    				use = false;
+	    			/*else
+	    				use = false;*/
 	    				
 	    		}
 	    		
-	    		if(maxage!=null) {
+	    		else if(maxage!=null) {
 	    			if(patient.getAge(tsd)<= maxage.intValue()) {
 	    				use = true;
 	    			}
-	    			else
-	    				use = false;
+	    			/*else
+	    				use = false;*/
 	    		} 
 	    		
 	    		if(use) {
