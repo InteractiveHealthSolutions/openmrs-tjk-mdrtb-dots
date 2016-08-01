@@ -35,7 +35,7 @@ import org.openmrs.module.dotsreports.regimen.Regimen;
 import org.openmrs.module.dotsreports.regimen.RegimenUtils;
 import org.openmrs.module.dotsreports.reporting.ReportUtil;
 import org.openmrs.module.dotsreports.reporting.data.Cohorts;
-import org.openmrs.module.dotsreports.reporting.definition.AgeAtDOTSRegistrationCohortDefinition;
+import org.openmrs.module.dotsreports.reporting.definition.AgeAtProgramRegistrationCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.AgeAtDotsProgramEnrollmentTJKCohortDefinitionEvaluator;
 import org.openmrs.module.dotsreports.service.TbService;
 import org.openmrs.module.dotsreports.specimen.Specimen;
@@ -582,13 +582,13 @@ public class TbUtil {
 		if(minage != null || maxage != null) {
 		
 			Cohort ageCohort = new Cohort();
-			AgeAtDOTSRegistrationCohortDefinition ageatEnrollmentCohort = new AgeAtDOTSRegistrationCohortDefinition();
+			AgeAtProgramRegistrationCohortDefinition ageatEnrollmentCohort = new AgeAtProgramRegistrationCohortDefinition();
 			ageatEnrollmentCohort.setMaxAge(maxage);
 			ageatEnrollmentCohort.setMinAge(minage);
 			ageatEnrollmentCohort.setStartDate(startDate);
 			ageatEnrollmentCohort.setEndDate(endDate);
 			
-			AgeAtDotsProgramEnrollmentTJKCohortDefinitionEvaluator eval = new AgeAtDotsProgramEnrollmentTJKCohortDefinitionEvaluator();
+			//AgeAtDotsProgramEnrollmentTJKCohortDefinitionEvaluator eval = new AgeAtDotsProgramEnrollmentTJKCohortDefinitionEvaluator();
 			
 			//eval.evaluate(ageatEnrollmentCohort, context)
 			 try {

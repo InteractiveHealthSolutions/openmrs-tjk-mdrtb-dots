@@ -371,16 +371,21 @@ public class MdrtbQueryService {
     /**
      * @return the Cohort of patients with DST rest results
      */
-    public static Cohort getPatientsWithAgeAtDOTSRegistration(EvaluationContext context, Integer minAge, Integer maxAge, Date startDate, Date endDate) {
+    public static Cohort getPatientsWithAgeAtRegistration(EvaluationContext context, Integer minAge, Integer maxAge, Date startDate, Date endDate, Boolean mdr) {
     	
-    	Integer ageAtDotsRegistration = Context.getService(TbService.class).getConcept(TbConcepts.AGE_AT_REGISTRATION).getConceptId();
+    	Integer ageAtRegistration = null;
+    	
+    	if(mdr.booleanValue())
+    		ageAtRegistration = Context.getService(TbService.class).getConcept(TbConcepts.AGE_AT_MDR_REGISTRATION).getConceptId();
+    	else
+    		ageAtRegistration = Context.getService(TbService.class).getConcept(TbConcepts.AGE_AT_DOTS_REGISTRATION).getConceptId();
     	
     	StringBuilder q = new StringBuilder();
     	q.append("select 	p.patient_id ");
     	q.append("from 		patient p, obs o ");
     	q.append("where 	p.patient_id = o.person_id ");
     	q.append("and	 	p.voided = 0 and o.voided = 0 ");
-    	q.append("and		o.concept_id = " + ageAtDotsRegistration + " ");
+    	q.append("and		o.concept_id = " + ageAtRegistration + " ");
     	addOptionalDateClause(q, "and o.obs_datetime >= ", startDate);
     	addOptionalDateClause(q, "and o.obs_datetime <= ", endDate);
     	addOptionalNumericClause(q, "and o.value_numeric >= ", minAge);
@@ -399,4 +404,6 @@ public class MdrtbQueryService {
     	
     	return executeQuery(q.toString(), context);
     }
+    
+    
 }

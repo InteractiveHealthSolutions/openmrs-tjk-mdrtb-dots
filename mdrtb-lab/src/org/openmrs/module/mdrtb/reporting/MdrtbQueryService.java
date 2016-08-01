@@ -20,6 +20,7 @@ import org.openmrs.ProgramWorkflow;
 import org.openmrs.api.context.Context;
 import org.openmrs.logic.result.Result;
 import org.openmrs.module.mdrtb.MdrtbConcepts;
+import org.openmrs.module.mdrtb.MdrtbConstants.TbClassification;
 import org.openmrs.module.mdrtb.service.MdrtbService;
 import org.openmrs.module.reporting.cohort.query.service.CohortQueryService;
 import org.openmrs.module.reporting.common.DateUtil;
@@ -307,6 +308,11 @@ public class MdrtbQueryService {
 		}
 	}
 	
+	private static void addOptionalNumericClause(StringBuilder sb, String baseClause, Integer i) {
+		if(i!=null)
+			sb.append(baseClause  + i + " ");
+	}
+	
 	/**
 	 * Utility method to evaluate a query into a Cohort
 	 */
@@ -317,4 +323,89 @@ public class MdrtbQueryService {
 		}
 		return c;
 	}
+	
+	 public static Cohort getPatientsWithAgeAtMDRRegistration(EvaluationContext context, Integer minAge, Integer maxAge, Date startDate, Date endDate) {
+	    	
+	    	Integer ageAtMdrRegistration = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.AGE_AT_MDR_REGISTRATION).getConceptId();
+	    	
+	    	StringBuilder q = new StringBuilder();
+	    	q.append("select 	p.patient_id ");
+	    	q.append("from 		patient p, obs o ");
+	    	q.append("where 	p.patient_id = o.person_id ");
+	    	q.append("and	 	p.voided = 0 and o.voided = 0 ");
+	    	q.append("and		o.concept_id = " + ageAtMdrRegistration + " ");
+	    	addOptionalDateClause(q, "and o.obs_datetime >= ", startDate);
+	    	addOptionalDateClause(q, "and o.obs_datetime <= ", endDate);
+	    	addOptionalNumericClause(q, "and o.value_numeric >= ", minAge);
+	    	addOptionalNumericClause(q, "and o.value_numeric <= ", maxAge);
+	    	
+	    	
+	    	
+	    	/*q.append("and o.value_coded in (");
+			for (int i=0; i<drugs.length; i++) {
+				q.append(drugs[i].getConceptId());
+				if ((i+1)<drugs.length) {
+					q.append(",");
+				}
+			}	
+	    	q.append(") ");*/
+	    	
+	    	return executeQuery(q.toString(), context);
+	    }
+	 
+	 public static Cohort getPatientsByResitantType(EvaluationContext context, Date minResultDate, Date maxResultDate, TbClassification rType) { 
+		    
+	    	Integer resistanceType = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.RESISTANCE_TYPE).getConceptId();
+	    	
+	    	Integer type = null;
+	    	
+	    	if(rType==TbClassification.RIF_RESISTANT_TB)
+	    			type = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.RR_TB).getConceptId();
+	    	
+	    	else if(rType==TbClassification.MDR_TB)
+    			type = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.MDR_TB).getConceptId();
+	    	
+	    	else if(rType==TbClassification.POLY_RESISTANT_TB)
+    			type = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.PDR_TB).getConceptId();
+	    	
+	    	else if(rType==TbClassification.XDR_TB)
+    			type = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.XDR_TB).getConceptId();
+	    	
+	    	StringBuilder q = new StringBuilder();
+	    	q.append("select 	p.patient_id ");
+	    	q.append("from 		patient p, obs o ");
+	    	q.append("where 	p.patient_id = o.person_id ");
+	    	q.append("and	 	p.voided = 0 and o.voided = 0 ");
+	    	q.append("and		o.concept_id = " + resistanceType + " ");
+	    	
+	    	if(type!=null)
+	    		q.append("and		o.value_coded = " + type + " ");
+	    	
+	    	addOptionalDateClause(q, "and o.obs_datetime >= ", minResultDate);
+	    	addOptionalDateClause(q, "and o.obs_datetime <= ", maxResultDate);
+
+	    	
+	    	
+	    	return executeQuery(q.toString(), context);
+	    }
+	 
+	 public static Cohort getTreatmentStarted(EvaluationContext context, Date minResultDate, Date maxResultDate) { 
+		    
+	    	Integer mdrTreatmentStartDate = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.MDR_TREATMENT_START_DATE).getConceptId();
+	    	
+	    	StringBuilder q = new StringBuilder();
+	    	q.append("select 	p.patient_id ");
+	    	q.append("from 		patient p, obs o ");
+	    	q.append("where 	p.patient_id = o.person_id ");
+	    	q.append("and	 	p.voided = 0 and o.voided = 0 ");
+	    	q.append("and		o.concept_id = " + mdrTreatmentStartDate + " ");
+	    	
+	    	
+	    	addOptionalDateClause(q, "and o.value_coded >= ", minResultDate);
+	    	addOptionalDateClause(q, "and o.value_coded <= ", maxResultDate);
+
+	    	
+	    	
+	    	return executeQuery(q.toString(), context);
+	    }
 }

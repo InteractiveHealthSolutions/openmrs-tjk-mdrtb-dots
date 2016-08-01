@@ -27,7 +27,7 @@ import org.openmrs.module.dotsreports.TbConcepts;
 import org.openmrs.module.dotsreports.TbUtil;
 import org.openmrs.module.dotsreports.MdrtbConstants.TbClassification;
 import org.openmrs.module.dotsreports.reporting.ReportUtil;
-import org.openmrs.module.dotsreports.reporting.definition.AgeAtDOTSRegistrationCohortDefinition;
+import org.openmrs.module.dotsreports.reporting.definition.AgeAtProgramRegistrationCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.AgeAtDotsProgramEnrollmentTJKCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.AgeAtMdrtbProgramEnrollmentCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.CompletedDotsProgramEnrolledDuringTJKCohortDefinition;
@@ -258,7 +258,7 @@ public class Cohorts {
 	}
 
 	public static CohortDefinition getRelapsedDuringFilter(Date startDate, Date endDate) {
-		return getEnteredStateDuringFilter(TbUtil.getProgramWorkflowState(Context.getService(TbService.class).getConcept(TbConcepts.RELAPSE)), startDate, endDate);
+		return getEnteredStateDuringFilter(TbUtil.getProgramWorkflowState(Context.getService(TbService.class).getConcept(TbConcepts.RELAPSE_AFTER_REGIMEN_1)), startDate, endDate);
 
 	}
 	
@@ -594,15 +594,18 @@ public class Cohorts {
 		return cd;
 	}
 	
-	public static CohortDefinition getAgeAtDOTSRegistration(Date startDate, Date endDate, Integer minAge, Integer maxAge) {
-		AgeAtDOTSRegistrationCohortDefinition cd = new AgeAtDOTSRegistrationCohortDefinition();
+	public static CohortDefinition getAgeAtRegistration(Date startDate, Date endDate, Integer minAge, Integer maxAge, Boolean mdr) {
+		AgeAtProgramRegistrationCohortDefinition cd = new AgeAtProgramRegistrationCohortDefinition();
 		cd.setStartDate(startDate);
 		cd.setEndDate(endDate);		
 		cd.setMinAge(minAge);
 		cd.setMaxAge(maxAge);
+		cd.setMdr(mdr);
 		//cd.setPrograms(Arrays.asList(Context.getProgramWorkflowService().getProgramByName(Context.getAdministrationService().getGlobalProperty("dotsreports.program_name"))));
 		return cd;
 	}
+	
+	
 	
 	public static CohortDefinition getAgeAtEnrollmentInDotsProgram(Date startDate, Date endDate, Integer minAge, Integer maxAge) {
 		AgeAtDotsProgramEnrollmentTJKCohortDefinition cd = new AgeAtDotsProgramEnrollmentTJKCohortDefinition();

@@ -101,6 +101,15 @@
 					</tr>
 					<tr><th colspan="2"><br/><spring:message code="mdrtb.enrollment"/></th></tr>
 					<tr>
+						<td><spring:message code="dotsreports.year"/></td>
+						<td><input type="text" name="year" value="${year}"/>
+					</tr>
+					<tr>
+						<td><spring:message code="dotsreports.quarter"/></td>
+						<td><input type="quarter" name="quarter" value="${quarter}"/>
+					</tr>
+					
+					<!-- <tr>
 						<td><input type="radio" name="enrollment" value="ever"<c:if test="${empty enrollment || enrollment == 'ever'}"> checked</c:if>/>&nbsp;</td>
 						<td><spring:message code="mdrtb.enrollment.ever"/></td>
 					</tr>
@@ -115,7 +124,7 @@
 					<tr>
 						<td><input type="radio" name="enrollment" value="never"<c:if test="${enrollment == 'never'}"> checked</c:if>/>&nbsp;</td>
 						<td><spring:message code="mdrtb.enrollment.never"/></td>
-					</tr>
+					</tr> -->
 					
 					<c:forEach items="${openmrs:sort(mdrProgram.workflows, 'concept.name.name', false)}" var="wf">
 						<c:if test="${!wf.retired}">

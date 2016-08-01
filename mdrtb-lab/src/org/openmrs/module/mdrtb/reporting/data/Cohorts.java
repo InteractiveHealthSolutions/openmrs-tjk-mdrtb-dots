@@ -24,10 +24,12 @@ import org.openmrs.ProgramWorkflowState;
 import org.openmrs.api.PatientSetService.TimeModifier;
 import org.openmrs.api.context.Context;
 
+
 import org.openmrs.module.mdrtb.MdrtbConcepts;
 import org.openmrs.module.mdrtb.MdrtbUtil;
 import org.openmrs.module.mdrtb.MdrtbConstants.TbClassification;
 import org.openmrs.module.mdrtb.reporting.ReportUtil;
+import org.openmrs.module.mdrtb.reporting.definition.AgeAtMDRRegistrationCohortDefinition;
 import org.openmrs.module.mdrtb.reporting.definition.AgetAtMdrtbProgramEnrollmentTJKCohortDefinition;
 import org.openmrs.module.mdrtb.reporting.definition.DstResultCohortDefinition;
 import org.openmrs.module.mdrtb.reporting.definition.MdrtbAfterTreatmentStartedCohortDefinition;
@@ -37,6 +39,7 @@ import org.openmrs.module.mdrtb.reporting.definition.MdrtbPreviousProgramOutcome
 import org.openmrs.module.mdrtb.reporting.definition.MdrtbProgramClosedAfterTreatmentStartedCohortDefintion;
 import org.openmrs.module.mdrtb.reporting.definition.MdrtbProgramLocationCohortDefinition;
 import org.openmrs.module.mdrtb.reporting.definition.MdrtbTJKPatientDistrictCohortDefinition;
+import org.openmrs.module.mdrtb.reporting.definition.ResistanceTypeCohortDefinition;
 import org.openmrs.module.mdrtb.reporting.definition.TestReferralCohortDefinition;
 
 import org.openmrs.module.mdrtb.reporting.definition.MdrtbTreatmentStartedCohortDefinition;
@@ -44,10 +47,12 @@ import org.openmrs.module.mdrtb.reporting.definition.MdrtbBacResultAfterTreatmen
 import org.openmrs.module.mdrtb.service.MdrtbService;
 import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.CompositionCohortDefinition;
+import org.openmrs.module.reporting.cohort.definition.GenderCohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.InProgramCohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.InStateCohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.InverseCohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.PatientStateCohortDefinition;
+import org.openmrs.module.reporting.cohort.definition.ProgramEnrollmentCohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.SqlCohortDefinition;
 import org.openmrs.module.reporting.common.DateUtil;
 import org.openmrs.module.reporting.common.SetComparator;
@@ -164,7 +169,7 @@ public class Cohorts {
 	}
 
 	public static CohortDefinition getRelapsedDuringFilter(Date startDate, Date endDate) {
-		return getEnteredStateDuringFilter(MdrtbUtil.getProgramWorkflowState(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.RELAPSE)), startDate, endDate);
+		return getEnteredStateDuringFilter(MdrtbUtil.getProgramWorkflowState(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.RELAPSE_AFTER_REGIMEN_1)), startDate, endDate);
 
 	}
 	
@@ -191,6 +196,14 @@ public class Cohorts {
 		xdrPats.setMinResultDate(startDate);
 		xdrPats.setMaxResultDate(endDate);
 		return xdrPats;
+	}
+	
+	public static CohortDefinition getResistanceTypeFilter(Date startDate, Date endDate, TbClassification rType) {
+		ResistanceTypeCohortDefinition rtcd = new ResistanceTypeCohortDefinition();
+		rtcd.setResistanceType(rType);
+		rtcd.setStartDate(startDate);
+		rtcd.setEndDate(endDate);
+		return rtcd;
 	}
 	
 	public static CohortDefinition getStartedTreatmentFilter(Date startDate, Date endDate) {
@@ -279,7 +292,7 @@ public class Cohorts {
 	
 	// TODO: figure out what obs to look for here--see ticket HATB-358
 	public static CohortDefinition getHivPositiveDuring(Date startDate, Date endDate) {
-		return ReportUtil.getCodedObsCohort(TimeModifier.ANY, 3753, startDate, endDate, SetComparator.IN, Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.POSITIVE).getId());
+		return ReportUtil.getCodedObsCohort(TimeModifier.ANY, 186, startDate, endDate, SetComparator.IN, Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.POSITIVE).getId());
 	}
 	
 	// TODO: figure out what obs to look for here--see ticket HATB-358
@@ -375,6 +388,14 @@ public class Cohorts {
 		return cd;
 	}
 	
+	public static CohortDefinition getEnrolledInMDRProgramDuring(Date startDate, Date endDate) {
+		ProgramEnrollmentCohortDefinition pd = new ProgramEnrollmentCohortDefinition();
+		pd.setPrograms(Arrays.asList(Context.getProgramWorkflowService().getProgramByName(Context.getAdministrationService().getGlobalProperty("mdrtb.program_name"))));
+		pd.setEnrolledOnOrAfter(startDate);
+		pd.setEnrolledOnOrBefore(endDate);
+		return pd;
+	}
+	
 	public static CohortDefinition getPendingCulturesOnDate(Date effectiveDate) {
 		StringBuilder q = new StringBuilder();
 		q.append("select 	o.person_id ");
@@ -450,6 +471,68 @@ public class Cohorts {
 		cd.setMaxAge(maxAge);
 		cd.setPrograms(Arrays.asList(Context.getProgramWorkflowService().getProgramByName(Context.getAdministrationService().getGlobalProperty("mdrtb.program_name"))));
 		return cd;
+	}
+	
+	public static CohortDefinition getMalePatients() {
+		GenderCohortDefinition cd = new GenderCohortDefinition();
+		cd.setMaleIncluded(true);
+		cd.setFemaleIncluded(false);
+		cd.setUnknownGenderIncluded(false);
+		
+		return cd;
+	}
+	
+	public static CohortDefinition getFemalePatients() {
+		GenderCohortDefinition cd = new GenderCohortDefinition();
+		cd.setMaleIncluded(false);
+		cd.setFemaleIncluded(true);
+		cd.setUnknownGenderIncluded(false);
+		
+		return cd;
+	}
+	
+	public static CohortDefinition getAgeAtRegistration(Date startDate, Date endDate, Integer minAge, Integer maxAge) {
+		AgeAtMDRRegistrationCohortDefinition cd = new AgeAtMDRRegistrationCohortDefinition();
+		cd.setStartDate(startDate);
+		cd.setEndDate(endDate);		
+		cd.setMinAge(minAge);
+		cd.setMaxAge(maxAge);
+		//cd.setPrograms(Arrays.asList(Context.getProgramWorkflowService().getProgramByName(Context.getAdministrationService().getGlobalProperty("dotsreports.program_name"))));
+		return cd;
+	}
+	
+	public static CohortDefinition getAllPulmonaryDuring(Date startDate, Date endDate) {
+		StringBuilder q = new StringBuilder();
+		q.append("select 	o.person_id ");
+		q.append("from		obs o ");
+		q.append("where		o.concept_id = " + Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.ANATOMICAL_SITE_OF_TB).getId() + " ");
+		
+		q.append("and		o.value_coded = " + Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.PULMONARY_TB).getId() + " ");
+		
+		if (startDate != null) {
+			q.append("and	o.obs_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
+		}
+		if (endDate != null) {
+			q.append("and	o.obs_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
+		}
+		return new SqlCohortDefinition(q.toString());
+	}
+	
+	public static CohortDefinition getAllExtraPulmonaryDuring(Date startDate, Date endDate) {
+		StringBuilder q = new StringBuilder();
+		q.append("select 	o.person_id ");
+		q.append("from		obs o ");
+		q.append("where		o.concept_id = " + Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.ANATOMICAL_SITE_OF_TB).getId() + " ");
+		
+		q.append("and		o.value_coded = " + Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.EXTRA_PULMONARY_TB).getId() + " ");
+		
+		if (startDate != null) {
+			q.append("and	o.obs_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
+		}
+		if (endDate != null) {
+			q.append("and	o.obs_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
+		}
+		return new SqlCohortDefinition(q.toString());
 	}
 	
 	/**

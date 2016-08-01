@@ -1,0 +1,244 @@
+﻿<html>
+	<head>
+		<title>ТБ-08у</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;}
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%"><tr>
+				<td width="100%" align="center" style="font-size:14px; font-weight:bold;">
+					Ҳисоботи семоҳа оид ба натиҷаи табобати беморони ШМС, ки бо реҷаи табобат бо ДЗҚД фаро гирифта шудаанд <br/>
+                          		(баъди 24-36 моҳи табобат аз анҷоми санаи семоҳа ва ё соли табобат пур карда мешавад) <br/>
+				</td>
+			</tr></table>
+			<br/><br/>
+			
+			
+			<table border="1" width="100%">
+				<tr>
+					<td>
+					Номгӯи муассиса: <u> #location# </u><br/>
+					Ному насаби ҳамоҳангсоз: _________________________<br/>
+					Имзо __________________ <br/>
+					</td>
+					<td>
+					Бемороне, ки дар муддати семоҳаи <u> #quarter# </u> соли <u> #year# </u> ба қайд гирифта<br/>шудаанд<br/>
+					Санаи пур намудани ҳисобот _________________________________
+					</td>
+				</tr>
+			</table>
+		
+			
+			<table width="100%">
+				
+				<tr>
+					<td>Санаи семоҳа ва ё соли оғози табобат:  #startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#</td>
+				</tr>
+				<tr><td> Ҳамагӣ дарёфт шуд:</td></tr>
+				<tr><td> Ҳамагӣ натиҷагирӣ карда шуд:</td></tr>
+			</table>
+			<table border="1" cellpadding="5" width="100%">
+				<tr>
+					<th rowspan="2" colspan="2">Гурӯҳи беморон</th>
+					<th rowspan="2">Ҳамагӣ бақайдгирифта шудааст</th>
+					<th rowspan="2">Шифо ёфт</th>
+					<th rowspan="2">Табобат ба<br/>анҷом расонид</th>
+					<th rowspan="2">Табобати бобарор</th>
+					<th rowspan="2">Табобати бебарор</th>
+					<th rowspan="2">Аз зери назорати минбаъдаи табибон дур шуд</th>
+					<th colspan="2">Фавт</th>
+					<th rowspan="2">Натиҷагирӣ карда нашуд (табобат давом дорад)</th>
+					<th rowspan="2">Ҳамагӣ</th>
+				</tr>
+				<tr>
+					<th>Аз сил</th>
+					<th>Аз дигар сабабҳо</th>
+				</tr>
+				<tr>
+					<td rowspan="7">Беморони МР/ШМС, ки бори аввал  ДЗКД гирифтаанд</td>
+					<td>Беморони бори аввал дарёфтгардида</td>
+					<td>#results.New.Registered#</td>
+					<td>#results.New.Cured#</td>
+					<td>#results.New.TreatmentCompleted#</td>
+					<td>#results.New.SuccessfulTreatment#</td>
+					<td>#results.New.Failed#</td>
+					<td>#results.New.Defaulted#</td>
+					<td>#results.New.DiedTB#</td>
+					<td>#results.New.DiedNonTB#</td>
+					
+					<td>#results.New.StillEnrolled#</td>
+					<td>#results.New.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Хурӯҷи такрорӣ</td>
+					<td>#results.Relapse.Registered#</td>
+					<td>#results.Relapse.Cured#</td>
+					<td>#results.Relapse.TreatmentCompleted#</td>
+					<td>#results.Relapse.SuccessfulTreatment#</td>
+					<td>#results.Relapse.Failed#</td>
+					<td>#results.Relapse.Defaulted#</td>
+					<td>#results.Relapse.DiedTB#</td>
+					<td>#results.Relapse.DiedNonTB#</td>
+					
+					<td>#results.Relapse.StillEnrolled#</td>
+					<td>#results.Relapse.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Баъди кандашавӣ</td>
+					<td>#results.AfterDefault.Registered#</td>
+					<td>#results.AfterDefault.Cured#</td>
+					<td>#results.AfterDefault.TreatmentCompleted#</td>
+					<td>#results.AfterDefault.SuccessfulTreatment#</td>					
+					<td>#results.AfterDefault.Failed#</td>
+					<td>#results.AfterDefault.Defaulted#</td>
+					<td>#results.AfterDefault.DiedTB#</td>
+					<td>#results.AfterDefault.DiedNonTB#</td>
+					
+					<td>#results.AfterDefault.StillEnrolled#</td>
+					<td>#results.AfterDefault.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Баъди табобати<br/>бебарор бо реҷаи I</td>
+					<td>#results.AfterFailureCategoryI.Registered#</td>
+					<td>#results.AfterFailureCategoryI.Cured#</td>
+					<td>#results.AfterFailureCategoryI.TreatmentCompleted#</td>
+					<td>#results.AfterFailureCategoryI.SuccessfulTreatment#</td>					
+					<td>#results.AfterFailureCategoryI.Failed#</td>
+					<td>#results.AfterFailureCategoryI.Defaulted#</td>
+					<td>#results.AfterFailureCategoryI.DiedTB#</td>
+					<td>#results.AfterFailureCategoryI.DiedNonTB#</td>
+					
+					<td>#results.AfterFailureCategoryI.StillEnrolled#</td>
+					<td>#results.AfterFailureCategoryI.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Баъди табобати<br/>бебарор бо реҷаи II</td>
+					<td>#results.AfterFailureCategoryII.Registered#</td>
+					<td>#results.AfterFailureCategoryII.Cured#</td>
+					<td>#results.AfterFailureCategoryII.TreatmentCompleted#</td>
+					<td>#results.AfterFailureCategoryII.SuccessfulTreatment#</td>										
+					<td>#results.AfterFailureCategoryII.Failed#</td>
+					<td>#results.AfterFailureCategoryII.Defaulted#</td>
+					<td>#results.AfterFailureCategoryII.DiedTB#</td>
+					<td>#results.AfterFailureCategoryII.DiedNonTB#</td>					
+					<td>#results.AfterFailureCategoryII.StillEnrolled#</td>
+					<td>#results.AfterFailureCategoryII.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Дигар намудҳо* (бо таърихи номаълум)</td>
+					<td>#results.Unknown.Registered#</td>
+					<td>#results.Unknown.Cured#</td>
+					<td>#results.Unknown.TreatmentCompleted#</td>
+					<td>#results.Unknown.SuccessfulTreatment#</td>					
+					<td>#results.Unknown.Failed#</td>
+					<td>#results.Unknown.Defaulted#</td>
+					<td>#results.Unknown.DiedTB#</td>
+					<td>#results.Unknown.DiedNonTB#</td>
+					
+					<td>#results.Unknown.StillEnrolled#</td>
+					<td>#results.Unknown.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Ҳамагӣ</td>
+					<td>#results.SubTotal.Registered#</td>
+					<td>#results.SubTotal.Cured#</td>
+					<td>#results.SubTotal.TreatmentCompleted#</td>
+					<td>#results.SubTotal.SuccessfulTreatment#</td>						
+					<td>#results.SubTotal.Failed#</td>
+					<td>#results.SubTotal.Defaulted#</td>
+					<td>#results.SubTotal.DiedTB#</td>
+					<td>#results.SubTotal.DiedNonTB#</td>
+					
+					<td>#results.SubTotal.StillEnrolled#</td>
+					<td>#results.SubTotal.ColTotal#</td>
+				</tr>	
+				<tr>
+					<td rowspan=5">ШМС  пештар ДЗҚД гирифтаанд</td>
+					<td>Хурӯҷи ШМС</td>
+					<td>#results.RelapseMDR.Registered#</td>
+					<td>#results.RelapseMDR.Cured#</td>
+					<td>#results.RelapseMDR.TreatmentCompleted#</td>
+					<td>#results.RelapseMDR.SuccessfulTreatment#</td>					
+					<td>#results.RelapseMDR.Failed#</td>
+					<td>#results.RelapseMDR.Defaulted#</td>
+					<td>#results.RelapseMDR.DiedTB#</td>
+					<td>#results.RelapseMDR.DiedNonTB#</td>
+					
+					<td>#results.RelapseMDR.StillEnrolled#</td>
+					<td>#results.RelapseMDR.ColTotal#</td>
+					
+				</tr>
+				<tr>
+					<td>Баъди кандашавии  табобати ШМС</td>
+					<td>#results.DefaultMDR.Registered#</td>
+					<td>#results.DefaultMDR.Cured#</td>
+					<td>#results.DefaultMDR.TreatmentCompleted#</td>
+					<td>#results.DefaultMDR.SuccessfulTreatment#</td>					
+					<td>#results.DefaultMDR.Failed#</td>
+					<td>#results.DefaultMDR.Defaulted#</td>
+					<td>#results.DefaultMDR.DiedTB#</td>
+					<td>#results.DefaultMDR.DiedNonTB#</td>
+					
+					<td>#results.DefaultMDR.StillEnrolled#</td>
+					<td>#results.DefaultMDR.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Табобати бебарори ШМС</td>
+					<td>#results.FailureMDR.Registered#</td>
+					<td>#results.FailureMDR.Cured#</td>
+					<td>#results.FailureMDR.TreatmentCompleted#</td>
+					<td>#results.FailureMDR.SuccessfulTreatment#</td>					
+					<td>#results.FailureMDR.Failed#</td>
+					<td>#results.FailureMDR.Defaulted#</td>
+					<td>#results.FailureMDR.DiedTB#</td>
+					<td>#results.FailureMDR.DiedNonTB#</td>
+					
+					<td>#results.FailureMDR.StillEnrolled#</td>
+					<td>#results.FailureMDR.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Ҳамагӣ</td>
+					<td>#results.PrevTotal.Registered#</td>
+					<td>#results.PrevTotal.Cured#</td>
+					<td>#results.PrevTotal.TreatmentCompleted#</td>
+					<td>#results.PrevTotal.SuccessfulTreatment#</td>					
+					<td>#results.PrevTotal.Failed#</td>
+					<td>#results.PrevTotal.Defaulted#</td>
+					<td>#results.PrevTotal.DiedTB#</td>
+					<td>#results.PrevTotal.DiedNonTB#</td>
+					
+					<td>#results.PrevTotal.StillEnrolled#</td>
+					<td>#results.PrevTotal.ColTotal#</td>
+				</tr>
+				<tr>
+					<td><b>Total</b></td>
+					<td>#results.Total.Registered#</td>
+					<td>#results.Total.Cured#</td>
+					<td>#results.Total.TreatmentCompleted#</td>
+					<td>#results.Total.SuccessfulTreatment#</td>					
+					<td>#results.Total.Failed#</td>
+					<td>#results.Total.Defaulted#</td>
+					<td>#results.Total.DiedTB#</td>
+					<td>#results.Total.DiedNonTB#</td>
+					
+					<td>#results.Total.StillEnrolled#</td>
+					<td>#results.Total.ColTotal#</td>
+				</tr>
+				
+			</table>
+			<table>
+			<tr>
+			<td>
+			Эзоҳ* _______________________________________________________________________________________________________________________________________________<br/>
+			_____________________________________________________________________________________________________________________________________________________<br/>
+		    ____________________________________________________________________________________________________________________________________ натиҷаи беморони<br/>
+		    дарёфтшудае, ки ба табобат фаро гирифта нашудаанд, қайд карда шавад: мисол, фавтид, розӣ нашуд, ҳавасманд нест ва ғ.
+			</td>
+			</tr>
+			</table>
+		</div>
+	</body>
+</html>

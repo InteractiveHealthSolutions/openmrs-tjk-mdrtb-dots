@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
@@ -28,6 +29,8 @@ import org.openmrs.Program;
 import org.openmrs.ProgramWorkflowState;
 import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.mdrtb.reporting.definition.AgeAtMDRRegistrationCohortDefinition;
+import org.openmrs.module.mdrtb.reporting.ReportUtil;
 import org.openmrs.module.mdrtb.exception.MdrtbAPIException;
 import org.openmrs.module.mdrtb.program.MdrtbPatientProgram;
 import org.openmrs.module.mdrtb.regimen.Regimen;
@@ -453,7 +456,7 @@ public class MdrtbUtil {
 	 * Utility method to return patients matching passed criteria. Difference between this and main method is that locations are matched by patient rayon
 	 * @return Cohort
 	 */
-	public static Cohort getMdrPatientsTJK(String identifier, String name, String enrollment, Location location, List<ProgramWorkflowState> states, Integer minage, Integer maxage, String gender) {
+	public static Cohort getMdrPatientsTJK(String identifier, String name, /*String enrollment,*/ Location location, List<ProgramWorkflowState> states, Integer minage, Integer maxage, String gender, Integer year, String quarter) {
 		
 		Cohort cohort = Context.getPatientSetService().getAllPatients();
 		
@@ -462,7 +465,23 @@ public class MdrtbUtil {
 		Date now = new Date();
 		Program mdrtbProgram = ms.getMdrtbProgram();
 		
-		if ("current".equals(enrollment)) {
+		Map<String, Date> dateMap = ReportUtil.getPeriodDates(year, quarter, null);
+		
+		Date startDate = (Date)(dateMap.get("startDate"));
+		Date endDate = (Date)(dateMap.get("endDate"));
+		
+		CohortDefinition drtb = Cohorts.getEnrolledInMDRProgramDuring(startDate, endDate);
+		
+		try {
+			Cohort enrollmentCohort = Context.getService(CohortDefinitionService.class).evaluate(drtb, new EvaluationContext());
+			cohort = Cohort.intersect(cohort, enrollmentCohort);
+		}
+		
+		 catch (EvaluationException e) {
+       	  throw new MdrtbAPIException("Unable to evalute location cohort",e);
+       }
+		
+		/*if ("current".equals(enrollment)) {
 			Cohort current = Context.getPatientSetService().getPatientsInProgram(mdrtbProgram, now, now);
 			cohort = Cohort.intersect(cohort, current);
 		}
@@ -479,7 +498,7 @@ public class MdrtbUtil {
 			else {
 				cohort = Cohort.intersect(cohort, ever);
 			}	
-		}
+		}*/
 		
 		if (StringUtils.isNotBlank(name) || StringUtils.isNotBlank(identifier)) {
 			name = "".equals(name) ? null : name;
@@ -538,7 +557,23 @@ public class MdrtbUtil {
 		
 		if(minage != null || maxage != null) {
 			Cohort ageCohort = new Cohort();
-			Patient patient = null;
+			AgeAtMDRRegistrationCohortDefinition ageatEnrollmentCohort = new AgeAtMDRRegistrationCohortDefinition();
+			ageatEnrollmentCohort.setMaxAge(maxage);
+			ageatEnrollmentCohort.setMinAge(minage);
+			ageatEnrollmentCohort.setStartDate(startDate);
+			ageatEnrollmentCohort.setEndDate(endDate);
+			
+			;
+			
+			//eval.evaluate(ageatEnrollmentCohort, context)
+			 try {
+				 ageCohort = Context.getService(CohortDefinitionService.class).evaluate(ageatEnrollmentCohort, new EvaluationContext());
+			 }
+			 
+			 catch (EvaluationException e) {
+           	  throw new MdrtbAPIException("Unable to evalute age cohort",e);
+           }
+			/*Patient patient = null;
 			Set<Integer> idSet = cohort.getMemberIds();
 			Iterator<Integer> itr = idSet.iterator();
 	    	Integer idCheck = null;
@@ -567,8 +602,8 @@ public class MdrtbUtil {
 	    			if(patient.getAge(tsd)>= minage.intValue()) {
 	    				use = true;
 	    			}
-	    			/*else
-	    				use = false;*/
+	    			else
+	    				use = false;
 	    				
 	    		}
 	    		
@@ -576,17 +611,17 @@ public class MdrtbUtil {
 	    			if(patient.getAge(tsd)<= maxage.intValue()) {
 	    				use = true;
 	    			}
-	    			/*else
-	    				use = false;*/
+	    			else
+	    				use = false;
 	    		} 
 	    		
 	    		if(use) {
 	    			ageCohort.addMember(patient.getPatientId());
 	    		}
 	    		
-	    	}
+	    	}*/
 	    	
-	    	cohort = ageCohort;
+			 cohort = Cohort.intersect(cohort, ageCohort);
 			
 			
 		}
@@ -612,7 +647,7 @@ public class MdrtbUtil {
 	    		
 	    	}
 	    	
-	    	cohort = genderCohort;
+	    	cohort = Cohort.intersect(cohort, genderCohort);
 		}
 		
 		

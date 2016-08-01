@@ -1,0 +1,177 @@
+<html>
+	<head>
+		<title>TB-07y</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;}
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%"><tr>
+				<td width="10%">&nbsp;</td>
+				<td width="50%" align="center" style="font-size:14px; font-weight:bold;">Quarterly report on MDR-TB detection and Category IV treatment start</td>
+				<td width="10%" align="right">TB-07y</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%">
+				<tr>
+					<td>Name of area:  #location#</td>
+					<td>Name of area coordinator:  ________________</td>
+				</tr>
+				<tr>
+					<td>Patients identified during Q#quarter# #year# (#startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#)</td>
+					<td>Date: #generationDate|dd/MMM/yyyy#</td>
+				</tr>
+			</table>
+			<br/>
+			<br/>
+			<span style="font-weight:bold;">
+				1. Number of patients detected with MDR-TB/XDR-TB in the lab (by date of result in laboratory register) during the quarter<br/><br/>
+				<center><table>
+					<tr>
+						<td>MDR-TB</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.mdr#
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>XDR-TB</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.xdr#
+						</td>
+					</tr>
+				</table></center>
+			</span>
+			<br/><br/>
+			
+			<span style="font-weight:bold;">
+				2. Number of DR TB cases started SLD treatment during the quarter 
+			</span>
+			<br/><br/>
+			<table border="1" cellpadding="5" width="100%">
+				<tr align="center">
+				    <td>&nbsp;</td>
+					<td colspan="5">Pulmonary TB</td>
+					<td rowspan="3">Other*</td>
+					<td rowspan="3">Total</td>
+				</tr>
+				<tr align="center">
+					<td rowspan="2">&nbsp;</td>
+					<td rowspan="2">New</td> <!-- new -->
+					<td colspan="4">Re-treatment</td> <!-- treated -->
+				</tr>
+				<tr align="center">
+					<td>Relapse</td> <!-- relapse -->
+					<td>After Default</td> <!-- after default -->
+					<td>After Cat I Failure</td> <!-- previously treated with Cat 1 -->
+					<td>After Cat II Failure</td>  <!-- previously treated with Cat 2 -->
+				</tr>
+				<tr>
+				    <td>MDR-TB</td>
+					<td>#startedTreatment.mdr.New#</td>
+					<td>#startedTreatment.mdr.Relapse#</td>
+					<td>#startedTreatment.mdr.AfterDefault#</td>
+					<td>#startedTreatment.mdr.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.mdr.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.mdr.Other#</td>
+					<td>#startedTreatment.mdr.newTotal#</td>
+				</tr>
+				<tr>
+				    <td>XDR-TB</td>
+					<td>#startedTreatment.xdr.New#</td>
+					<td>#startedTreatment.xdr.Relapse#</td>
+					<td>#startedTreatment.xdr.AfterDefault#</td>
+					<td>#startedTreatment.xdr.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.xdr.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.xdr.Other#</td>
+					<td>#startedTreatment.xdr.newTotal#</td>
+				</tr>
+				<tr>
+				    <td>TB/HIV</td>
+					<td>#startedTreatment.tbhiv.New#</td>
+					<td>#startedTreatment.tbhiv.Relapse#</td>
+					<td>#startedTreatment.tbhiv.AfterDefault#</td>
+					<td>#startedTreatment.tbhiv.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.tbhiv.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.tbhiv.Other#</td>
+					<td>#startedTreatment.tbhiv.newTotal#</td>
+				</tr>
+				<tr>
+				    <td>Children</td>
+					<td>#startedTreatment.children.New#</td>
+					<td>#startedTreatment.children.Relapse#</td>
+					<td>#startedTreatment.children.AfterDefault#</td>
+					<td>#startedTreatment.children.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.children.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.children.Other#</td>
+					<td>#startedTreatment.children.newTotal#</td>
+				</tr>
+				
+			</table>
+			<br/><br/>
+			<span style="font-weight:bold;">
+				3. Number of MDR TB patients previously received SLDs
+			</span>
+			<br/><br/>
+			<table border="1" cellpadding="5" width="100%">
+				<tr align="center">
+				    <td rowspan="2">&nbsp;</td>
+					<td colspan="4">Retreatment</td>
+					<td>Total</td>
+					<td>Total (2+3)</td>
+				</tr>
+				<tr align="center">
+					<td>Relapses MDR</td>
+					<td>Default of MDR TB treatment</td>
+					<td>Failure of MDR TB treatment</td>
+					<td>XDR</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					
+				</tr>
+				
+				<tr>
+				    <td>MDR-TB</td>
+					<td>#startedTreatment.mdr.relapseMDR#</td>
+					<td>#startedTreatment.mdr.defaultMDR#</td>
+					<td>#startedTreatment.mdr.failureMDR#</td>
+					<td>#startedTreatment.mdr.prevXDR#</td>
+					<td>#startedTreatment.mdr.prevTotal#</td>
+					<td>#startedTreatment.mdr.finalTotal#</td>
+					
+				</tr>
+				<tr>
+				    <td>XDR-TB</td>
+					<td>#startedTreatment.xdr.relapseMDR#</td>
+					<td>#startedTreatment.xdr.defaultMDR#</td>
+					<td>#startedTreatment.xdr.failureMDR#</td>
+					<td>#startedTreatment.xdr.prevXDR#</td>
+					<td>#startedTreatment.xdr.prevTotal#</td>
+					<td>#startedTreatment.xdr.finalTotal#</td>
+				</tr>
+				<tr>
+				    <td>TB/HIV</td>
+					<td>#startedTreatment.tbhiv.relapseMDR#</td>
+					<td>#startedTreatment.tbhiv.defaultMDR#</td>
+					<td>#startedTreatment.tbhiv.failureMDR#</td>
+					<td>#startedTreatment.tbhiv.prevXDR#</td>
+					<td>#startedTreatment.tbhiv.prevTotal#</td>
+					<td>#startedTreatment.tbhiv.finalTotal#</td>
+				</tr>
+				<tr>
+				    <td>Children</td>
+					<td>#startedTreatment.children.relapseMDR#</td>
+					<td>#startedTreatment.children.defaultMDR#</td>
+					<td>#startedTreatment.children.failureMDR#</td>
+					<td>#startedTreatment.children.prevXDR#</td>
+					<td>#startedTreatment.children.prevTotal#</td>
+					<td>#startedTreatment.children.finalTotal#</td>
+				</tr>
+				
+			</table>
+			<br/><br/>
+			
+			<table width="100%"><tr><td align="right">Signature ______________________________</td></tr></table>
+		</div>
+	</body>
+</html>

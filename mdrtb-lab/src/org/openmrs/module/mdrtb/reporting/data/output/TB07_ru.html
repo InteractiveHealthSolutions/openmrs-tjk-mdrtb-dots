@@ -31,15 +31,20 @@
 			<br/>
 			<br/>
 			<span style="font-weight:bold;">
-				1. Шумораи беморони сили бо МД дарёфтшуда дар муддати семоҳа<br/><br/>
+				1 - Число выявленных ЛУ ТБ случаев в течение квартала<br/><br/>
 				<center><table>
 					<tr>
-						<td>МР/ШМС</td>
+						<td>РУ/МЛУ ТБ</td>
 						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
 							#labDetections.mdr#
 						</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td>ШВМС</td>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td>ПЛУ ТБ</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.pdr#
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td>ШЛУ ТБ</td>
 						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
 							#labDetections.xdr#
 						</td>
@@ -49,137 +54,237 @@
 			<br/><br/>
 			
 			<span style="font-weight:bold;">
-				2. Шумораи беморони МР/ШМС, ки табобатро бо  ДЗКД дар семоҳа оғоз намуданд 
+				2 - Число случаев ЛУ ТБ, начавших лечение в течение квартала: 
 			</span>
 			<br/><br/>
 			<table border="1" cellpadding="5" width="100%">
 				<tr align="center">
 				    <td>&nbsp;</td>
-					<td colspan="5">Сили шушҳо</td>
-					<td rowspan="3">Дигар намудҳо* (бо таърихи номаълум)*</td>
-					<td rowspan="3">Ҳамагӣ</td>
+				    <td>&nbsp;</td>
+					<td colspan="7">Регистрационная группа</td>
+					<td rowspan="3">Другие</td>
+					<td rowspan="3">Итого</td>
 				</tr>
 				<tr align="center">
 					<td rowspan="2">&nbsp;</td>
-					<td rowspan="2">Беморони бори авал дарёфтгардида</td> <!-- new -->
-					<td colspan="4">Пештар табобат гирифта</td> <!-- treated -->
+					<td rowspan="2">&nbsp;</td>
+					<td rowspan="2">Новые случаи</td> <!-- new -->
+					<td colspan="6">Повторные случаи</td> <!-- treated -->
 				</tr>
 				<tr align="center">
-					<td>Хурӯҷ</td> <!-- relapse -->
-					<td>Баъди кандашавӣ аз табобат</td> <!-- after default -->
-					<td>Баъди табобати бесамар бо реҷаи I</td> <!-- previously treated with Cat 1 -->
-					<td>Баъди табобати бесамар бо реҷаи II</td>  <!-- previously treated with Cat 2 -->
+					<td>Рецидив после<br/>режима I</td> <!-- relapse -->
+					<td>Рецидив после<br/>режима II</td> <!-- relapse -->
+					<td>После отрыва<br/>от режима I</td> <!-- after default -->
+					<td>После отрыва<br/>от режима II</td> <!-- after default -->
+					<td>После безуспешного<br/>лечения по режиму I</td> <!-- previously treated with Cat 1 -->
+					<td>После безуспешного<br/>лечения по режиму II</td>  <!-- previously treated with Cat 2 -->
 				</tr>
 				<tr>
-				    <td>МР/ШМС</td>
+				    <td rowspan="3">РУ/МЛУ ТБ</td>
+				    <td>M</td>
+					<td>#startedTreatment.mdrmale.New#</td>
+					<td>#startedTreatment.mdrmale.Relapse1#</td>
+					<td>#startedTreatment.mdrmale.Relapse2#</td>
+					<td>#startedTreatment.mdrmale.AfterDefault1#</td>
+					<td>#startedTreatment.mdrmale.AfterDefault2#</td>
+					<td>#startedTreatment.mdrmale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.mdrmale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.mdrmale.Other#</td>
+					<td>#startedTreatment.mdrmale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Ж</td>
+					<td>#startedTreatment.mdrfemale.New#</td>
+					<td>#startedTreatment.mdrfemale.Relapse1#</td>
+					<td>#startedTreatment.mdrfemale.Relapse2#</td>
+					<td>#startedTreatment.mdrfemale.AfterDefault1#</td>
+					<td>#startedTreatment.mdrfemale.AfterDefault2#</td>
+					<td>#startedTreatment.mdrfemale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.mdrfemale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.mdrfemale.Other#</td>
+					<td>#startedTreatment.mdrfemale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Итого</td>
 					<td>#startedTreatment.mdr.New#</td>
-					<td>#startedTreatment.mdr.Relapse#</td>
-					<td>#startedTreatment.mdr.AfterDefault#</td>
+					<td>#startedTreatment.mdr.Relapse1#</td>
+					<td>#startedTreatment.mdr.Relapse2#</td>
+					<td>#startedTreatment.mdr.AfterDefault1#</td>
+					<td>#startedTreatment.mdr.AfterDefault2#</td>
 					<td>#startedTreatment.mdr.AfterFailureCategoryI#</td>
 					<td>#startedTreatment.mdr.AfterFailureCategoryII#</td>
 					<td>#startedTreatment.mdr.Other#</td>
 					<td>#startedTreatment.mdr.newTotal#</td>
 				</tr>
 				<tr>
-				    <td>ШПР</td>
-					<td>#startedTreatment.xdr.New#</td>
-					<td>#startedTreatment.xdr.Relapse#</td>
-					<td>#startedTreatment.xdr.AfterDefault#</td>
+				    <td rowspan="3">ПЛУ ТБ</td>
+				    <td>M</td>
+				    <td>#startedTreatment.pdrmale.New#</td>
+					<td>#startedTreatment.pdrmale.Relapse1#</td>
+					<td>#startedTreatment.pdrmale.Relapse2#</td>
+					<td>#startedTreatment.pdrmale.AfterDefault1#</td>
+					<td>#startedTreatment.pdrmale.AfterDefault2#</td>
+					<td>#startedTreatment.pdrmale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.pdrmale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.pdrmale.Other#</td>
+					<td>#startedTreatment.pdrmale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Ж</td>
+				    <td>#startedTreatment.pdrfemale.New#</td>
+					<td>#startedTreatment.pdrfemale.Relapse1#</td>
+					<td>#startedTreatment.pdrfemale.Relapse2#</td>
+					<td>#startedTreatment.pdrfemale.AfterDefault1#</td>
+					<td>#startedTreatment.pdrfemale.AfterDefault2#</td>
+					<td>#startedTreatment.pdrfemale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.pdrfemale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.pdrfemale.Other#</td>
+					<td>#startedTreatment.pdrfemale.newTotal#</td>
+				</tr>
+				    
+				 <tr>
+				    <td>Итого</td>
+					<td>#startedTreatment.pdr.New#</td>
+					<td>#startedTreatment.pdr.Relapse1#</td>
+					<td>#startedTreatment.pdr.Relapse2#</td>
+					<td>#startedTreatment.pdr.AfterDefault1#</td>
+					<td>#startedTreatment.pdr.AfterDefault2#</td>
+					<td>#startedTreatment.pdr.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.pdr.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.pdr.Other#</td>
+					<td>#startedTreatment.pdr.newTotal#</td>
+				</tr>
+				<tr>
+					<td rowspan="3">ШЛУ ТБ</td>
+					<td>M</td>
+				    <td>#startedTreatment.xdrmale.New#</td>
+					<td>#startedTreatment.xdrmale.Relapse1#</td>
+					<td>#startedTreatment.xdrmale.Relapse2#</td>
+					<td>#startedTreatment.xdrmale.AfterDefault1#</td>
+					<td>#startedTreatment.xdrmale.AfterDefault2#</td>
+					<td>#startedTreatment.xdrmale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.xdrmale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.xdrmale.Other#</td>
+					<td>#startedTreatment.xdrmale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Ж</td>
+				    <td>#startedTreatment.xdrfemale.New#</td>
+					<td>#startedTreatment.xdrfemale.Relapse1#</td>
+					<td>#startedTreatment.xdrfemale.Relapse2#</td>
+					<td>#startedTreatment.xdrfemale.AfterDefault1#</td>
+					<td>#startedTreatment.xdrfemale.AfterDefault2#</td>
+					<td>#startedTreatment.xdrfemale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.xdrfemale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.xdrfemale.Other#</td>
+					<td>#startedTreatment.xdrfemale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Итого</td>
+				    <td>#startedTreatment.xdr.New#</td>
+					<td>#startedTreatment.xdr.Relapse1#</td>
+					<td>#startedTreatment.xdr.Relapse2#</td>
+					<td>#startedTreatment.xdr.AfterDefault1#</td>
+					<td>#startedTreatment.xdr.AfterDefault2#</td>
 					<td>#startedTreatment.xdr.AfterFailureCategoryI#</td>
 					<td>#startedTreatment.xdr.AfterFailureCategoryII#</td>
 					<td>#startedTreatment.xdr.Other#</td>
 					<td>#startedTreatment.xdr.newTotal#</td>
+				
 				</tr>
 				<tr>
-				    <td>Аз онҳо ВНМО</td>
+					<td colspan="2">ИТОГО</td>
+				    <td>#startedTreatment.total.New#</td>
+					<td>#startedTreatment.total.Relapse1#</td>
+					<td>#startedTreatment.total.Relapse2#</td>
+					<td>#startedTreatment.total.AfterDefault1#</td>
+					<td>#startedTreatment.total.AfterDefault2#</td>
+					<td>#startedTreatment.total.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.total.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.total.Other#</td>
+					<td>#startedTreatment.total.newTotal#</td>
+				</tr>
+				<tr>
+				    <td rowspan="3">из них ВИЧ</td>
+				    <td>M</td>
+					<td>#startedTreatment.tbhivmale.New#</td>
+					<td>#startedTreatment.tbhivmale.Relapse1#</td>
+					<td>#startedTreatment.tbhivmale.Relapse2#</td>
+					<td>#startedTreatment.tbhivmale.AfterDefault1#</td>
+					<td>#startedTreatment.tbhivmale.AfterDefault2#</td>
+					<td>#startedTreatment.tbhivmale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.tbhivmale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.tbhivmale.Other#</td>
+					<td>#startedTreatment.tbhivmale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Ж</td>
+					<td>#startedTreatment.tbhivfemale.New#</td>
+					<td>#startedTreatment.tbhivfemale.Relapse1#</td>
+					<td>#startedTreatment.tbhivfemale.Relapse2#</td>
+					<td>#startedTreatment.tbhivfemale.AfterDefault1#</td>
+					<td>#startedTreatment.tbhivfemale.AfterDefault2#</td>
+					<td>#startedTreatment.tbhivfemale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.tbhivfemale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.tbhivfemale.Other#</td>
+					<td>#startedTreatment.tbhivfemale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Итого</td>
 					<td>#startedTreatment.tbhiv.New#</td>
-					<td>#startedTreatment.tbhiv.Relapse#</td>
-					<td>#startedTreatment.tbhiv.AfterDefault#</td>
+					<td>#startedTreatment.tbhiv.Relapse1#</td>
+					<td>#startedTreatment.tbhiv.Relapse2#</td>
+					<td>#startedTreatment.tbhiv.AfterDefault1#</td>
+					<td>#startedTreatment.tbhiv.AfterDefault2#</td>
 					<td>#startedTreatment.tbhiv.AfterFailureCategoryI#</td>
 					<td>#startedTreatment.tbhiv.AfterFailureCategoryII#</td>
 					<td>#startedTreatment.tbhiv.Other#</td>
 					<td>#startedTreatment.tbhiv.newTotal#</td>
 				</tr>
+				
+				
 				<tr>
-				    <td>Аз онҳо кӯдакон</td>
+				    <td rowspan="3">из них дети</td>
+				    <td>M</td>
+					<td>#startedTreatment.childrenmale.New#</td>
+					<td>#startedTreatment.childrenmale.Relapse1#</td>
+					<td>#startedTreatment.childrenmale.Relapse2#</td>
+					<td>#startedTreatment.childrenmale.AfterDefault1#</td>
+					<td>#startedTreatment.childrenmale.AfterDefault2#</td>
+					<td>#startedTreatment.childrenmale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.childrenmale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.childrenmale.Other#</td>
+					<td>#startedTreatment.childrenmale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Ж</td>
+					<td>#startedTreatment.childrenfemale.New#</td>
+					<td>#startedTreatment.childrenfemale.Relapse1#</td>
+					<td>#startedTreatment.childrenfemale.Relapse2#</td>
+					<td>#startedTreatment.childrenfemale.AfterDefault1#</td>
+					<td>#startedTreatment.childrenfemale.AfterDefault2#</td>
+					<td>#startedTreatment.childrenfemale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.childrenfemale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.childrenfemale.Other#</td>
+					<td>#startedTreatment.childrenfemale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Итого</td>
 					<td>#startedTreatment.children.New#</td>
-					<td>#startedTreatment.children.Relapse#</td>
-					<td>#startedTreatment.children.AfterDefault#</td>
+					<td>#startedTreatment.children.Relapse1#</td>
+					<td>#startedTreatment.children.Relapse2#</td>
+					<td>#startedTreatment.children.AfterDefault1#</td>
+					<td>#startedTreatment.children.AfterDefault2#</td>
 					<td>#startedTreatment.children.AfterFailureCategoryI#</td>
 					<td>#startedTreatment.children.AfterFailureCategoryII#</td>
 					<td>#startedTreatment.children.Other#</td>
 					<td>#startedTreatment.children.newTotal#</td>
 				</tr>
-				
 			</table>
+			
 			<br/><br/>
 			
-			<span style="font-weight:bold;" align="left">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Шумораи беморони ШМС, ки пештар ДЗҚД қабул намудаанд
-			</span>
-			<br/><br/>
-			
-			
-			<center>
-			<table border="1" cellpadding="5" width="80%">
-				<tr align="center">
-				    <td rowspan="2">&nbsp;</td>
-					<td colspan="4">Пештар табобат гирифта</td>
-					<td>Ҳамагӣ</td>
-					
-				</tr>
-				<tr align="center">
-					<td>Хуруҷи ШМС</td>
-					<td>Баъди кандашавӣ аз табобати ШМС</td>
-					<td>Табобати бесамари ШМС</td>
-					<td>ШВМС</td>
-					<td>&nbsp;</td>
-					
-					
-				</tr>
-				
-				<tr>
-				    <td>ШМС</td>
-					<td>#startedTreatment.mdr.relapseMDR#</td>
-					<td>#startedTreatment.mdr.defaultMDR#</td>
-					<td>#startedTreatment.mdr.failureMDR#</td>
-					<td>#startedTreatment.mdr.prevXDR#</td>
-					<td>#startedTreatment.mdr.prevTotal#</td>
-					
-					
-				</tr>
-				<tr>
-				    <td>ШВМС</td>
-					<td>#startedTreatment.xdr.relapseMDR#</td>
-					<td>#startedTreatment.xdr.defaultMDR#</td>
-					<td>#startedTreatment.xdr.failureMDR#</td>
-					<td>#startedTreatment.xdr.prevXDR#</td>
-					<td>#startedTreatment.xdr.prevTotal#</td>
-					
-				</tr>
-				<tr>
-				    <td>Аз он ВНМО</td>
-					<td>#startedTreatment.tbhiv.relapseMDR#</td>
-					<td>#startedTreatment.tbhiv.defaultMDR#</td>
-					<td>#startedTreatment.tbhiv.failureMDR#</td>
-					<td>#startedTreatment.tbhiv.prevXDR#</td>
-					<td>#startedTreatment.tbhiv.prevTotal#</td>
-					
-				</tr>
-				<tr>
-				    <td>Аз он кӯдакон</td>
-					<td>#startedTreatment.children.relapseMDR#</td>
-					<td>#startedTreatment.children.defaultMDR#</td>
-					<td>#startedTreatment.children.failureMDR#</td>
-					<td>#startedTreatment.children.prevXDR#</td>
-					<td>#startedTreatment.children.prevTotal#</td>
-					
-				</tr>
-				
-			</table>
-			</center>
-			
-			<br/><br/>			<table width="100%"><tr><td align="right">Имзо ______________________________</td></tr></table>
+			<table width="100%"><tr><td align="right">Подпись ______________________________</td></tr></table>
 		</div>
 	</body>
 </html>

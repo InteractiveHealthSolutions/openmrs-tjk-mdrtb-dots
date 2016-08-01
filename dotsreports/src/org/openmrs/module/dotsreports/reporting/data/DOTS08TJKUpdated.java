@@ -253,7 +253,7 @@ public ReportData evaluateReport(EvaluationContext context) {
 			CohortDefinition allRetreatment= ReportUtil.getCompositionCohort("OR",groups.get("AfterDefault"),groups.get("AfterFailure"),groups.get("Other"),groups.get("TransferredIn") );
 			CohortDefinition allRelapses = groups.get("Relapse");*/
 			
-			Map<String, CohortDefinition> dotsgroups = ReportUtil.getDotsRegistrationGroupsFilterSet(startDate, endDate);
+			/*Map<String, CohortDefinition> dotsgroups = ReportUtil.getDotsRegistrationGroupsFilterSet(startDate, endDate);
 			Map<String, CohortDefinition> mdrgroups = ReportUtil.getMdrtbPreviousTreatmentFilterSet(startDate, endDate);
 			
 			CohortDefinition dotsallNewCases = dotsgroups.get("New");
@@ -277,7 +277,33 @@ public ReportData evaluateReport(EvaluationContext context) {
 			CohortDefinition allTransferred = ReportUtil.getCompositionCohort("OR", dotsallTransferred,mdrallTransferred);
 			CohortDefinition allRelapses = ReportUtil.getCompositionCohort("OR", dotsallRelapses,mdrallRelapses);
 			
-			CohortDefinition allRetreatment= ReportUtil.getCompositionCohort("OR",allDefault,allFailures,allOthers,allTransferred );
+			CohortDefinition allRetreatment= ReportUtil.getCompositionCohort("OR",allDefault,allFailures,allOthers,allTransferred );*/
+			
+			Map<String, CohortDefinition> dotsgroups = ReportUtil.getDotsRegistrationGroupsFilterSet(startDate, endDate);
+			Map<String, CohortDefinition> mdrgroups = ReportUtil.getMdrtbPreviousTreatmentFilterSet(startDate, endDate);
+			
+			CohortDefinition dotsallNewCases = dotsgroups.get("New");
+			CohortDefinition dotsallFailures = ReportUtil.getCompositionCohort("OR", dotsgroups.get("AfterFailure1"),dotsgroups.get("AfterFailure2"));
+			CohortDefinition dotsallDefault = ReportUtil.getCompositionCohort("OR", dotsgroups.get("AfterDefault1"),dotsgroups.get("AfterDefault2"));
+			CohortDefinition dotsallOthers = dotsgroups.get("Other");
+			CohortDefinition dotsallTransferred = dotsgroups.get("TransferredIn");
+			CohortDefinition dotsallRelapses = ReportUtil.getCompositionCohort("OR", dotsgroups.get("Relapse1"),dotsgroups.get("Relapse2"));
+			
+			CohortDefinition mdrallNewCases = mdrgroups.get("New");
+			CohortDefinition mdrallFailures = ReportUtil.getCompositionCohort("OR", mdrgroups.get("AfterFailure1"),mdrgroups.get("AfterFailure2"));
+			CohortDefinition mdrallDefault =ReportUtil.getCompositionCohort("OR", mdrgroups.get("AfterDefault1"),mdrgroups.get("AfterDefault2"));
+			CohortDefinition mdrallOthers = mdrgroups.get("Other");
+			CohortDefinition mdrallTransferred = mdrgroups.get("TransferredIn");
+			CohortDefinition mdrallRelapses = ReportUtil.getCompositionCohort("OR", mdrgroups.get("Relapse1"),mdrgroups.get("Relapse2"));
+			
+			CohortDefinition allNewCases = ReportUtil.getCompositionCohort("OR", dotsallNewCases,mdrallNewCases);
+			CohortDefinition allFailures = ReportUtil.getCompositionCohort("OR", dotsallFailures,mdrallFailures);
+			CohortDefinition allDefault = ReportUtil.getCompositionCohort("OR", dotsallDefault,mdrallDefault);
+			CohortDefinition allOthers = ReportUtil.getCompositionCohort("OR", dotsallOthers,mdrallOthers);
+			CohortDefinition allTransferred = ReportUtil.getCompositionCohort("OR", dotsallTransferred,mdrallTransferred);
+			CohortDefinition allRelapses = ReportUtil.getCompositionCohort("OR", dotsallRelapses,mdrallRelapses);
+			
+			CohortDefinition allRetreatment= ReportUtil.getCompositionCohort("OR",allDefault,allFailures,allOthers,allTransferred ); 
 			
 			CohortDefinition pulmonaryLabDiagnosis = ReportUtil.getCompositionCohort("AND", pulmonary, haveLabDiagnosis);
 			CohortDefinition pulmonaryClinicalDiagnosis = ReportUtil.getCompositionCohort("AND", pulmonary, haveClinicalDiagnosis);

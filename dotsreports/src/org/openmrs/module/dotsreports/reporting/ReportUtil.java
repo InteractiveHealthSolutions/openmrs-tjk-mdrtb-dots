@@ -642,14 +642,23 @@ public class ReportUtil {
 		CohortDefinition newPatient =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
 			 Context.getService(TbService.class).getConcept(TbConcepts.NEW), startDate, endDate);
 		
-		CohortDefinition relapse =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
-			 Context.getService(TbService.class).getConcept(TbConcepts.RELAPSE), startDate, endDate);
+		CohortDefinition relapse1 =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.RELAPSE_AFTER_REGIMEN_1), startDate, endDate);
 		
-		CohortDefinition afterDefault =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
-			 Context.getService(TbService.class).getConcept(TbConcepts.DEFAULTED), startDate, endDate);
+		CohortDefinition relapse2 =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.RELAPSE_AFTER_REGIMEN_2), startDate, endDate);
+		
+		CohortDefinition afterDefault1 =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.DEFAULT_AFTER_REGIMEN_1), startDate, endDate);
+		
+		CohortDefinition afterDefault2 =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.DEFAULT_AFTER_REGIMEN_2), startDate, endDate);
 	
-		CohortDefinition treatmentAfterFailure =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
-			 Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_AFTER_FAILURE), startDate, endDate);
+		CohortDefinition treatmentAfterFailure1 =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
+			 Context.getService(TbService.class).getConcept(TbConcepts.AFTER_FAILURE_REGIMEN_1), startDate, endDate);
+		
+		CohortDefinition treatmentAfterFailure2 =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.AFTER_FAILURE_REGIMEN_2), startDate, endDate);
 		
 		/*CohortDefinition failureCatII =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
 			 Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_AFTER_FAILURE_OF_FIRST_RETREATMENT), startDate, endDate);*/
@@ -675,9 +684,13 @@ public class ReportUtil {
 		
 		
 		map.put("New", newPatient);
-		map.put("Relapse", relapse);
-		map.put("AfterDefault", afterDefault);
-		map.put("AfterFailure", treatmentAfterFailure);
+		map.put("Relapse1", relapse1);
+		map.put("Relapse2", relapse2);
+		map.put("AfterDefault1", afterDefault1);
+		map.put("AfterDefault2", afterDefault2);
+		//map.put("AfterFailure", treatmentAfterFailure);
+		map.put("AfterFailure1", treatmentAfterFailure1);
+		map.put("AfterFailure2", treatmentAfterFailure2);
 		//map.put("AfterFailureCategoryII", failureCatII);
 		map.put("TransferredIn", transferred);
 		map.put("Other", other);
@@ -696,17 +709,17 @@ public class ReportUtil {
 		
 		Concept workflowConcept = Context.getService(TbService.class).getConcept(TbConcepts.CAT_4_CLASSIFICATION_PREVIOUS_TX);
 		
-		CohortDefinition newPatient =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+		/*CohortDefinition newPatient =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
 			 Context.getService(TbService.class).getConcept(TbConcepts.NEW), startDate, endDate);
 		
 		CohortDefinition relapse =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
-			 Context.getService(TbService.class).getConcept(TbConcepts.RELAPSE), startDate, endDate);
+			 Context.getService(TbService.class).getConcept(TbConcepts.RELAPSE_AFTER_REGIMEN_1), startDate, endDate);
 		
 		CohortDefinition afterDefault =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
 			 Context.getService(TbService.class).getConcept(TbConcepts.DEFAULTED), startDate, endDate);
 	
 		CohortDefinition failureCatI =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
-			 Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_AFTER_FAILURE_OF_FIRST_TREATMENT), startDate, endDate);
+			 Context.getService(TbService.class).getConcept(TbConcepts.AFTER_FAILURE_REGIMEN_1), startDate, endDate);
 		
 		CohortDefinition failureCatII =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
 			 Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_AFTER_FAILURE_OF_FIRST_RETREATMENT), startDate, endDate);
@@ -717,13 +730,13 @@ public class ReportUtil {
 		CohortDefinition other =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
 				 Context.getService(TbService.class).getConcept(TbConcepts.OTHER), startDate, endDate);
 		
-		/*CohortDefinition other =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
-				 Context.getService(TbService.class).getConcept(TbConcepts.OTHER), startDate, endDate);*/
+		CohortDefinition other =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.OTHER), startDate, endDate);
 		
-		/*List<Concept> others = new ArrayList<Concept>();
+		List<Concept> others = new ArrayList<Concept>();
 		others.add(Context.getService(TbService.class).getConcept(TbConcepts.TRANSFER));
 		others.add(Context.getService(TbService.class).getConcept(TbConcepts.OTHER));
-		others.add(Context.getService(TbService.class).getConcept(TbConcepts.UNKNOWN));*/
+		others.add(Context.getService(TbService.class).getConcept(TbConcepts.UNKNOWN));
 		//others.add();
 		
 		
@@ -742,8 +755,62 @@ public class ReportUtil {
 		//map.put("Unknown", unknown);
 		map.put("AfterFailure", ReportUtil.getCompositionCohort("OR",failureCatI,failureCatII) );
 		//map.put("Other", otherStar);
+*/		
+		CohortDefinition newPatient =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.NEW), startDate, endDate);
+			
+			CohortDefinition relapse1 =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.RELAPSE_AFTER_REGIMEN_1), startDate, endDate);
+			
+			CohortDefinition relapse2 =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+					 Context.getService(TbService.class).getConcept(TbConcepts.RELAPSE_AFTER_REGIMEN_2), startDate, endDate);
+			
+			CohortDefinition afterDefault1 =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.DEFAULT_AFTER_REGIMEN_1), startDate, endDate);
+			
+			CohortDefinition afterDefault2 =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+					 Context.getService(TbService.class).getConcept(TbConcepts.DEFAULT_AFTER_REGIMEN_2), startDate, endDate);
 		
+			CohortDefinition treatmentAfterFailure1 =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.AFTER_FAILURE_REGIMEN_1), startDate, endDate);
+			
+			CohortDefinition treatmentAfterFailure2 =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+					 Context.getService(TbService.class).getConcept(TbConcepts.AFTER_FAILURE_REGIMEN_2), startDate, endDate);
+			
+			/*CohortDefinition failureCatII =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_AFTER_FAILURE_OF_FIRST_RETREATMENT), startDate, endDate);*/
+			
+			CohortDefinition transferred =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.TRANSFER), startDate, endDate);
+			
+			CohortDefinition other =  Cohorts.getMdrtbPatientProgramStateFilter(workflowConcept, 
+				 Context.getService(TbService.class).getConcept(TbConcepts.OTHER), startDate, endDate);
+			
+			
+			
+			//List<Concept> others = new ArrayList<Concept>();
+			//others.add(Context.getService(TbService.class).getConcept(TbConcepts.TRANSFER));
+			//others.add(Context.getService(TbService.class).getConcept(TbConcepts.OTHER));
+			//others.add(Context.getService(TbService.class).getConcept(TbConcepts.UNKNOWN));
+			//others.add();
+			
+			
+			//CohortDefinition otherStar =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, others, startDate, endDate);
+			//CohortDefinition unknown =  Cohorts.getDotsPatientProgramStateFilter(workflowConcept, new ArrayList(), startDate, endDate);
 		
+			
+			
+			map.put("New", newPatient);
+			map.put("Relapse1", relapse1);
+			map.put("Relapse2", relapse2);
+			map.put("AfterDefault1", afterDefault1);
+			map.put("AfterDefault2", afterDefault2);
+			//map.put("AfterFailure", treatmentAfterFailure);
+			map.put("AfterFailure1", treatmentAfterFailure1);
+			map.put("AfterFailure2", treatmentAfterFailure2);
+			//map.put("AfterFailureCategoryII", failureCatII);
+			map.put("TransferredIn", transferred);
+			map.put("Other", other);
 		return map;
 	}
 	

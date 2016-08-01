@@ -633,7 +633,7 @@ public class SpecimenMigrationController {
     	previousTreatment.addState(newPatientTreatment);
     	
     	ProgramWorkflowState relapse = new ProgramWorkflowState();
-    	relapse.setConcept(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.RELAPSE));
+    	relapse.setConcept(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.RELAPSE_AFTER_REGIMEN_1));
     	relapse.setInitial(true);
     	relapse.setTerminal(false);
     	previousTreatment.addState(relapse);
@@ -645,13 +645,13 @@ public class SpecimenMigrationController {
     	previousTreatment.addState(afterDefault);
     	
      	ProgramWorkflowState afterFailiureCat1 = new ProgramWorkflowState();
-     	afterFailiureCat1.setConcept(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.TREATMENT_AFTER_FAILURE_OF_FIRST_TREATMENT));
+     	afterFailiureCat1.setConcept(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.AFTER_FAILURE_REGIMEN_1));
      	afterFailiureCat1.setInitial(true);
      	afterFailiureCat1.setTerminal(false);
     	previousTreatment.addState(afterFailiureCat1);
     	
     	ProgramWorkflowState afterFailiureCat2 = new ProgramWorkflowState();
-     	afterFailiureCat2.setConcept(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.TREATMENT_AFTER_FAILURE_OF_FIRST_RETREATMENT));
+     	afterFailiureCat2.setConcept(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.AFTER_FAILURE_REGIMEN_2));
      	afterFailiureCat2.setInitial(true);
      	afterFailiureCat2.setTerminal(false);
     	previousTreatment.addState(afterFailiureCat2);
@@ -1293,7 +1293,7 @@ public class SpecimenMigrationController {
     	transfer.setConcept(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.TRANSFER));
     
     	ProgramWorkflowState relapse = prevTreatmentWorkflow.getState(Context.getConceptService().getConcept(1524));
-    	relapse.setConcept(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.RELAPSE));
+    	relapse.setConcept(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.RELAPSE_AFTER_REGIMEN_1));
     	
     	ProgramWorkflowState other = prevTreatmentWorkflow.getState(Context.getConceptService().getConcept(1530));
     	other.setConcept(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.OTHER));

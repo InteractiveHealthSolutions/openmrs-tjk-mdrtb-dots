@@ -13,11 +13,17 @@
  */
 package org.openmrs.module.mdrtb.reporting.definition;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.openmrs.Cohort;
 import org.openmrs.Concept;
+import org.openmrs.ConceptSet;
 import org.openmrs.annotation.Handler;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.mdrtb.MdrtbConcepts;
+import org.openmrs.module.mdrtb.MdrtbConstants.TbClassification;
 import org.openmrs.module.mdrtb.reporting.MdrtbQueryService;
 import org.openmrs.module.mdrtb.service.MdrtbService;
 import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
@@ -25,27 +31,29 @@ import org.openmrs.module.reporting.cohort.definition.evaluator.CohortDefinition
 import org.openmrs.module.reporting.evaluation.EvaluationContext;
 
 /**
- * Evaluates an MdrtbTreatmentStartedCohortDefinition and produces a Cohort
+ * Evaluates an DstResultCohortDefinition and produces a Cohort
  */
-@Handler(supports={MdrtbTreatmentStartedCohortDefinition.class})
-public class MdrtbTreatmentStartedCohortDefinitionEvaluator implements CohortDefinitionEvaluator {
+@Handler(supports={AgeAtMDRRegistrationCohortDefinition.class})
+public class AgeAtMDRRegistrationCohortDefinitionEvaluator implements CohortDefinitionEvaluator {
 
 	/**
 	 * Default Constructor
 	 */
-	public MdrtbTreatmentStartedCohortDefinitionEvaluator() {}
+	public AgeAtMDRRegistrationCohortDefinitionEvaluator() {}
 	
 	/**
-     * @see CohortDefinitionEvaluator#evaluateCohort(CohortDefinition, EvaluationContext)
-     * @should return patients whose first TB regimen was during the passed period
+     * @see CohortDefinitionExistsEvaluator#evaluateCohort(CohortDefinition, EvaluationContext)
+     *
      */
-    public Cohort evaluate(CohortDefinition cohortDefinition, EvaluationContext context) {	
-    	MdrtbTreatmentStartedCohortDefinition cd = (MdrtbTreatmentStartedCohortDefinition) cohortDefinition;
-    	/*Concept tbDrugSet = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.TUBERCULOSIS_DRUGS);
-    	return MdrtbQueryService.getPatientsFirstStartingDrugs(context, cd.getFromDate(), cd.getToDate(), tbDrugSet);*/
+    public Cohort evaluate(CohortDefinition cohortDefinition, EvaluationContext context) {
     	
-    	return MdrtbQueryService.getTreatmentStarted(context,cd.getFromDate(),cd.getToDate());
+    	AgeAtMDRRegistrationCohortDefinition cd = (AgeAtMDRRegistrationCohortDefinition) cohortDefinition;
+    	//Cohort c = null;
+
+    	Cohort c = MdrtbQueryService.getPatientsWithAgeAtMDRRegistration(context, cd.getMinAge(),cd.getMaxAge(), cd.getStartDate(), cd.getEndDate());
+    		
     	
     	
-	}
+    	return c;
+    }
 }

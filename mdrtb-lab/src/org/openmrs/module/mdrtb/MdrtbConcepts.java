@@ -125,14 +125,22 @@ public class MdrtbConcepts {
     public final static String [] PREVIOUSLY_TREATED_SECOND_LINE_DRUGS = {"PREVIOUSLY TREATED WITH SECOND LINE DRUGS"};
     
     public final static String [] CAT_4_CLASSIFICATION_PREVIOUS_TX = {"CATEGORY 4 TUBERCULOSIS CLASSIFICATION ACCORDING TO RESULT OF PREVIOUS TREATMENT"};
-    public final static String [] TREATMENT_AFTER_FAILURE_OF_FIRST_TREATMENT = {"TREATMENT AFTER FAILURE OF FIRST TREATMENT MDR-TB PATIENT"};
-    public final static String [] TREATMENT_AFTER_FAILURE_OF_FIRST_RETREATMENT = {"TREATMENT AFTER FAILURE OF RE-TREATMENT MDR-TB PATIENT"};
+   // public final static String [] TREATMENT_AFTER_FAILURE_OF_FIRST_TREATMENT = {"TREATMENT AFTER FAILURE OF FIRST TREATMENT MDR-TB PATIENT"};
+   // public final static String [] TREATMENT_AFTER_FAILURE_OF_FIRST_RETREATMENT = {"TREATMENT AFTER FAILURE OF RE-TREATMENT MDR-TB PATIENT"};
     public final static String [] OTHER = {"OTHER"};
-    public final static String [] RELAPSE = {"RELAPSE"};
+   // public final static String [] RELAPSE = {"RELAPSE"};
     public final static String [] TRANSFER = {"TRANSFER"};
+    public final static String [] RELAPSE_AFTER_REGIMEN_1 = {"RELAPSE AFTER REGIMEN 1"};
+    public final static String [] RELAPSE_AFTER_REGIMEN_2 = {"RELAPSE AFTER REGIMEN 2"};
+    public final static String [] DEFAULT_AFTER_REGIMEN_1 = {"DEFAULT AFTER REGIMEN 1"};
+    public final static String [] DEFAULT_AFTER_REGIMEN_2 = {"DEFAULT AFTER REGIMEN 2"};
+    public final static String [] AFTER_FAILURE_REGIMEN_1 = {"AFTER FAILURE REGIMEN 1"};
+    public final static String [] AFTER_FAILURE_REGIMEN_2 = {"AFTER FAILURE REGIMEN 2"};
     
     public final static String [] MDR_TB = {"MULTI-DRUG RESISTANT TUBERCULOSIS"};
     public final static String [] XDR_TB = {"EXTENSIVE DRUG RESISTANT TUBERCULOSIS"};
+    public final static String [] RR_TB = {"RR-TB"};
+    public final static String [] PDR_TB = {"PDR-TB"};
     public final static String [] SUSPECTED_MDR_TB = {"SUSPECTED MULTI-DRUG TUBERCULOSIS"};
     public final static String [] TB = {"TUBERCULOSIS"};
     
@@ -200,5 +208,9 @@ public class MdrtbConcepts {
     public final static String [] DEATH_BY_TB = {"DEATH BY TB"};
     public final static String [] DEATH_BY_TBHIV = {"DEATH BY TB/HIV"};
     public final static String [] DEATH_BY_OTHER_DISEASES = {"DEATH BY OTHER DISEASES"};
+    
+    public final static String [] AGE_AT_MDR_REGISTRATION = {"AGE AT MDR REGISTRATION"};
+    public final static String [] MDR_TREATMENT_START_DATE = {"DATE OF MDR TREATMENT START"};
+    public final static String [] RESISTANCE_TYPE = {"RESISTANCE TYPE"};
 
 }
