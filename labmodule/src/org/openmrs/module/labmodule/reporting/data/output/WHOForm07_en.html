@@ -1,0 +1,101 @@
+<html>
+	<head>
+		<title>WHO Form 07</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;}
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%"><tr>
+				<td width="10%">&nbsp;</td>
+				<td width="50%" align="center" style="font-size:14px; font-weight:bold;">
+						Annual report of treatment result of confirmed MDR-TB patients<br/>
+						starting Category IV treatment<br/>
+						(to be filled in 24 and 36 months past the closing date of treatment)
+				</td>
+				<td width="10%" align="right" valign="top">FORM 07</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%">
+				<tr>
+					<td>District or Health Center:  #location#</td>
+					<td>Date Completed:  #generationDate|dd/MMM/yyyy#</td>
+				</tr>
+				<tr>
+					<td>Year of treatment start: #year#</td>
+					<td>Completed By:  #generatedBy#</td>
+				</tr>
+			</table>
+			<table border="1" cellpadding="5" width="100%">
+				<tr>
+					<th>Patient Group</th>
+					<th>Cured</th>
+					<th>Treatment<br/>Completed</th>
+					<th>Failed</th>
+					<th>Defaulted</th>
+					<th>Died</th>
+					<th>Transferred Out</th>
+					<th>Still Enrolled</th>
+					<th>Total</th>
+				</tr>
+				<tr>
+					<td>New</td>
+					<td>#New.Cured#</td>
+					<td>#New.TreatmentCompleted#</td>
+					<td>#New.Failed#</td>
+					<td>#New.Defaulted#</td>
+					<td>#New.Died#</td>
+					<td>#New.TransferredOut#</td>
+					<td>#New.StillEnrolled#</td>
+					<td>#New.Total#</td>
+				</tr>
+				<tr>
+					<td>Previously<br/>treated with<br/>first-line drugs<br/>only</td>
+					<td>#PreviousFirstLine.Cured#</td>
+					<td>#PreviousFirstLine.TreatmentCompleted#</td>
+					<td>#PreviousFirstLine.Failed#</td>
+					<td>#PreviousFirstLine.Defaulted#</td>
+					<td>#PreviousFirstLine.Died#</td>
+					<td>#PreviousFirstLine.TransferredOut#</td>
+					<td>#PreviousFirstLine.StillEnrolled#</td>
+					<td>#PreviousFirstLine.Total#</td>
+				</tr>
+				<tr>
+					<td>Previously<br/>treated with both<br/>first- and second-<br/>line drugs</td>
+					<td>#PreviousSecondLine.Cured#</td>
+					<td>#PreviousSecondLine.TreatmentCompleted#</td>
+					<td>#PreviousSecondLine.Failed#</td>
+					<td>#PreviousSecondLine.Defaulted#</td>
+					<td>#PreviousSecondLine.Died#</td>
+					<td>#PreviousSecondLine.TransferredOut#</td>
+					<td>#PreviousSecondLine.StillEnrolled#</td>
+					<td>#PreviousSecondLine.Total#</td>
+				</tr>
+				<tr>
+					<td>Unknown</td>
+					<td>#Unknown.Cured#</td>
+					<td>#Unknown.TreatmentCompleted#</td>
+					<td>#Unknown.Failed#</td>
+					<td>#Unknown.Defaulted#</td>
+					<td>#Unknown.Died#</td>
+					<td>#Unknown.TransferredOut#</td>
+					<td>#Unknown.StillEnrolled#</td>
+					<td>#Unknown.Total#</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td>#Total.Cured#</td>
+					<td>#Total.TreatmentCompleted#</td>
+					<td>#Total.Failed#</td>
+					<td>#Total.Defaulted#</td>
+					<td>#Total.Died#</td>
+					<td>#Total.TransferredOut#</td>
+					<td>#Total.StillEnrolled#</td>
+					<td>#Total.Total#</td>
+				</tr>	
+			</table>
+		</div>
+	</body>
+</html>

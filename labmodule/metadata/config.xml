@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//OpenMRS//DTD OpenMRS Config 1.0//EN" "../lib-common/config-1.0.dtd">
+<module configVersion="1.0">
+	
+	<!-- Base Module Properties -->
+	<id>labmodule</id>
+	<name>LAB MODULE</name>
+	<version>0.1</version>
+	<package>org.openmrs.module.@MODULE_ID@</package>
+	<author>Interactive Research and Development</author>
+	<description>LAB Module</description>
+	<activator>org.openmrs.module.labmodule.LabModuleActivator</activator>
+		
+	<updateURL>https://modules.openmrs.org/modules/download/@MODULE_ID@/update.rdf</updateURL>
+		
+	<require_version>1.6</require_version>
+	
+	<require_modules>
+		<require_module>org.openmrs.module.programlocation</require_module>
+		<require_module version="0.6">org.openmrs.module.reporting</require_module>
+	</require_modules>
+		
+	<extension>
+		<point>org.openmrs.admin.list</point>
+		<class>org.openmrs.module.labmodule.extension.html.AdminList</class>
+	</extension>
+	<extension>
+		<point>org.openmrs.gutter.tools</point>
+		<class>org.openmrs.module.labmodule.extension.html.MdrtbGutterItem</class>
+	</extension>
+	
+	
+
+	<!--  AOP advice points -->
+	<advice>
+		<point>org.openmrs.api.ConceptService</point>
+		<class>org.openmrs.module.labmodule.service.ConceptServiceAdvice</class>
+	</advice>
+
+	<!-- Global properties -->
+
+	<globalProperty>
+		<property>@MODULE_ID@.program_name</property>
+		<defaultValue>Lab Module</defaultValue>
+		<description>
+			MDRTB LAB Module
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>@MODULE_ID@.roles_to_redirect_from_openmrs_homepage</property>
+		<defaultValue/>
+		<description>
+			Comma-separated list of role names. Any user in a role listed here will not be able to see the regular OpenMRS homepage.
+			That will redirect them to the MDR-TB homepage instead.
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>@MODULE_ID@.patient_identifier_type_list</property>
+		<defaultValue/>
+		<description>
+			Pipe delimited list of all patient identifier types associated with the MDRTB program.
+		</description>
+	</globalProperty>
+	
+	<globalProperty>
+		<property>@MODULE_ID@.database_version</property>
+		<defaultValue>1.0.0</defaultValue>
+		<description>The version trigger for the contents of sqldiff.xml
+		</description>
+	</globalProperty>
+	<globalProperty>
+		<property>@MODULE_ID@.test_result_encounter_type</property>
+		<defaultValue>Lab Result</defaultValue>
+		<description>Name of the lab result encounter type.</description>
+	</globalProperty>
+	
+    <dwr>
+		<allow>
+			<create creator="new" javascript="LabFindPatient">
+				<param name="class" value="org.openmrs.module.labmodule.web.dwr.LabFindPatient"/>
+				<include method="findPatients"/>
+				<include method="findPeople"/>
+				<include method="findAllPeople"/>
+				<include method="findTestsThroughSuspect"/>
+				<include method="findTestsThroughId"/>
+				<include method="findTestThroughDates"/>
+				<include method="findLatestEncounterByUserId"/>
+			</create>							
+			<convert converter="bean" match="org.openmrs.module.labmodule.web.dwr.LabPersonListItem"/>
+			<convert converter="bean" match="org.openmrs.PersonAddress"/>
+			<convert converter="bean" match="org.openmrs.Person"/>
+		</allow>
+		
+		<signatures>
+			<![CDATA[  ]]>
+		</signatures>	
+	</dwr>
+	
+	<!-- Internationalization -->
+	<!-- All message codes should start with @MODULE_ID@.* -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<messages>
+		<lang>es</lang>
+		<file>messages_es.properties</file>
+	</messages>
+	<messages>
+		<lang>ru</lang>
+		<file>messages_ru.properties</file>
+	</messages>
+	<!-- /Internationalization -->
+
+</module>

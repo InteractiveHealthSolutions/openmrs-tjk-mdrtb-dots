@@ -1,0 +1,15 @@
+eclipse.preferences.version=1
+encoding//metadata/messages.properties=UTF-8
+encoding//metadata/messages_fr.properties=UTF-8
+encoding//metadata/messages_ru.properties=UTF-8
+encoding//src/org/openmrs/module/labmodule/reporting/data/output/DOTS-TB07-OMAR_ru.html=UTF-8
+encoding//src/org/openmrs/module/labmodule/reporting/data/output/DOTS-TB07_ru.html=UTF-8
+encoding//src/org/openmrs/module/labmodule/reporting/data/output/DOTS-TB08-OMAR_ru.html=UTF-8
+encoding//src/org/openmrs/module/labmodule/reporting/data/output/DOTS-TB08_ru.html=UTF-8
+encoding//src/org/openmrs/module/labmodule/reporting/data/output/DOTS-TB10_ru.html=UTF-8
+encoding//src/org/openmrs/module/labmodule/reporting/data/output/DOTSMDR_en.html=UTF-8
+encoding//src/org/openmrs/module/labmodule/reporting/data/output/DOTSMDR_ru.html=UTF-8
+encoding//src/org/openmrs/module/labmodule/reporting/data/output/Form8_en.html=UTF-8
+encoding//src/org/openmrs/module/labmodule/reporting/data/output/Form8_ru.html=UTF-8
+encoding//web/module/lab/labEntry.jsp=UTF-8
+encoding//web/module/portlets/labHeader.jsp=UTF-8
