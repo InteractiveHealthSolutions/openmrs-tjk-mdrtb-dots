@@ -58,12 +58,14 @@ public class LabFindPatient {
                 }
                 
                 String pi= Context.getAdministrationService().getGlobalProperty("mdrtb.primaryPatientIdentifierType");
-        		if(p.getPatientIdentifier(pi) == null)
+        		if(p.getPatientIdentifier(pi) == null){
         			patientListItem.setPatientStatus("Suspect");
-        		else
+        			patientList.add(patientListItem);
+        		}
+        		else{
         			patientListItem.setPatientStatus("Confirmed");
-                	
-            	patientList.add(patientListItem);
+        		}
+            	
             }
                             
         return patientList;
@@ -132,6 +134,7 @@ public class LabFindPatient {
          patientList = new Vector<Object>(patients.size());
          String primaryIdentifier = Context.getAdministrationService().getGlobalProperty("mdrtb.primaryPatientIdentifierType");
          for (Patient p : patients) {
+        	 
              // Get all Encounters for encounter name and patient...
           	 List<Encounter> encounters = Context.getEncounterService ().getEncounters (p, null, null, null, null, encounterType, false);
           	
@@ -145,6 +148,15 @@ public class LabFindPatient {
 	             }
 	       		 
 	       		 LabResultImpl labResult = new LabResultImpl(e);
+	       		 
+	       		String pi= Context.getAdministrationService().getGlobalProperty("mdrtb.primaryPatientIdentifierType");
+				 if(p.getPatientIdentifier(pi) == null){
+					patientListItem.setPatientStatus("Suspect");
+				 }
+				 else{
+					patientListItem.setPatientStatus("Confirmed");
+					continue;
+				 }
 	             
 	       		 patientListItem.setRecievedDate(e.getEncounterDatetime());
 	             patientListItem.setLabNumber(labResult.getLabNumber());
@@ -198,6 +210,15 @@ public class LabFindPatient {
 			 Patient p = obs.getPatient ();
 			 LabPatientListItem patientListItem = new LabPatientListItem(p);
 			 
+			 String pi= Context.getAdministrationService().getGlobalProperty("mdrtb.primaryPatientIdentifierType");
+			 if(p.getPatientIdentifier(pi) == null){
+				patientListItem.setPatientStatus("Suspect");
+			 }
+			 else{
+				patientListItem.setPatientStatus("Confirmed");
+				continue;
+			 }
+			 
 			// make sure the correct patient identifier is set on the patient list item
             if (StringUtils.isNotBlank(primaryIdentifier) && p.getPatientIdentifier(primaryIdentifier) != null) {
             	patientListItem.setIdentifier(p.getPatientIdentifier(primaryIdentifier).getIdentifier());
@@ -245,7 +266,16 @@ public Collection findTestThroughDates(String dateFrom, String dateTo, boolean i
 		
 		Patient p = e.getPatient();
 		LabPatientListItem patientListItem = new LabPatientListItem(p);
-        
+		
+		String pi= Context.getAdministrationService().getGlobalProperty("mdrtb.primaryPatientIdentifierType");
+		if(p.getPatientIdentifier(pi) == null){
+			patientListItem.setPatientStatus("Suspect");
+		}
+		else{
+			patientListItem.setPatientStatus("Confirmed");
+			continue;
+		}
+		
         // make sure the correct patient identifier is set on the patient list item
         if (StringUtils.isNotBlank(primaryIdentifier) && p.getPatientIdentifier(primaryIdentifier) != null) {
         	patientListItem.setIdentifier(p.getPatientIdentifier(primaryIdentifier).getIdentifier());
@@ -286,6 +316,15 @@ public Collection findLatestEncounterByUserId(int userId, int numberOfEnc, boole
 			 
 			 Patient p = e.getPatient();
 			 LabPatientListItem patientListItem = new LabPatientListItem(p);
+			 
+			 String pi= Context.getAdministrationService().getGlobalProperty("mdrtb.primaryPatientIdentifierType");
+				if(p.getPatientIdentifier(pi) == null){
+					patientListItem.setPatientStatus("Suspect");
+				}
+				else{
+					patientListItem.setPatientStatus("Confirmed");
+					continue;
+				}
 			 
 			 LabResultImpl labResult = new LabResultImpl(e);
 		        

@@ -26,6 +26,7 @@ import org.openmrs.module.labmodule.specimen.Specimen;
 import org.openmrs.module.labmodule.specimen.HAIN;
 import org.openmrs.module.labmodule.specimen.Xpert;
 import org.openmrs.module.labmodule.specimen.ScannedLabReport;
+import org.openmrs.module.labmodule.specimen.reporting.Oblast;
 /*import org.openmrs.module.mdrtb.specimen.ScannedLabReport;*/
 import org.springframework.transaction.annotation.Transactional;
 
@@ -194,8 +195,11 @@ public interface TbService extends OpenmrsService {
      */
     public List<LabResult> getLabResults(Patient patient, Date startDateCollected, Date endDateCollected, Location locationCollected);
     
+    public List<Oblast> getOblasts();
+
+    public Oblast getOblast(Integer oblastId);
     
-    
+    public List<Location> getLocationsFromOblastName(Oblast oblast);
     
     /**
      * Fetches a smear given the obs of a Tuberculosis Smear Test Construct

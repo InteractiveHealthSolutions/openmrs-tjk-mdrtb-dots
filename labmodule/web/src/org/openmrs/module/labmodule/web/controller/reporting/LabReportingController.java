@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.openmrs.Location;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlwidgets.web.WidgetUtil;
 import org.openmrs.module.labmodule.reporting.LabPreviewReportRenderer;
 import org.openmrs.module.labmodule.reporting.ReportSpecification;
@@ -18,6 +20,9 @@ import org.openmrs.module.labmodule.reporting.data.DOTS08TJKUpdated;
 import org.openmrs.module.labmodule.reporting.data.DOTS10TJK;
 import org.openmrs.module.labmodule.reporting.data.DOTSMDRReport;
 import org.openmrs.module.labmodule.reporting.data.Form8;
+import org.openmrs.module.labmodule.reporting.data.LabReport;
+import org.openmrs.module.labmodule.service.TbService;
+import org.openmrs.module.labmodule.specimen.reporting.Oblast;
 import org.openmrs.module.reporting.evaluation.EvaluationContext;
 import org.openmrs.module.reporting.evaluation.parameter.Parameter;
 import org.openmrs.module.reporting.report.ReportData;
@@ -40,17 +45,16 @@ public class LabReportingController {
 
     	List<ReportSpecification> availableReports = new ArrayList<ReportSpecification>();
     	
-    	availableReports.add(new DOTS07TJKUpdated());
-    	availableReports.add(new DOTS08TJKUpdated());
-    	availableReports.add(new Form8());
-    	availableReports.add(new DOTSMDRReport());
-    	//availableReports.add(new MOHReportTJK());
+    	availableReports.add(new LabReport());
     	model.addAttribute("availableReports", availableReports);
     	
 		model.addAttribute("type", type);
 		if (type != null) {
 			model.addAttribute("report", type.newInstance());
 		}
+		
+		List<Oblast> oblasts = Context.getService(TbService.class).getOblasts();
+		model.addAttribute("oblasts", oblasts);
     }
     
 	/**
@@ -60,9 +64,11 @@ public class LabReportingController {
 	public void render(
         @RequestParam(required=true, value="type") Class<? extends ReportSpecification> type,
         @RequestParam(required=false, value="format") String format,
+        @RequestParam(required=false, value="oblast") String oblast,
         HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 
     	response.setContentType("text/html");
+    	
 		try {
 			ReportSpecification report = type.newInstance();
 			
@@ -71,6 +77,7 @@ public class LabReportingController {
 				Object val = WidgetUtil.getFromRequest(request, "p."+p.getName(), p.getType(), p.getCollectionType());
 				parameters.put(p.getName(), val);
 			}
+			parameters.put("oblast",oblast);
 			
 			EvaluationContext context = report.validateAndCreateContext(parameters);
 			ReportData data = report.evaluateReport(context);
@@ -94,4 +101,5 @@ public class LabReportingController {
 			response.getOutputStream().print("<span></body></html>");
 		}
     }
+    
 }

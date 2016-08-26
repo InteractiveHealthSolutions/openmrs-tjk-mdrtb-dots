@@ -56,5 +56,6 @@ public interface ReportSpecification {
 	/**
 	 * @return the ReportData that is produced when evaluating this report
 	 */
+	
 	public ReportData evaluateReport(EvaluationContext context);
 }

@@ -1,5 +1,6 @@
 package org.openmrs.module.labmodule.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -20,6 +21,7 @@ import org.openmrs.ConceptSet;
 import org.openmrs.Encounter;
 import org.openmrs.EncounterType;
 import org.openmrs.Location;
+import org.openmrs.LocationTag;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
 import org.openmrs.PatientProgram;
@@ -58,6 +60,7 @@ import org.openmrs.module.labmodule.specimen.SpecimenImpl;
 import org.openmrs.module.labmodule.specimen.Xpert;
 import org.openmrs.module.labmodule.specimen.HAINImpl;
 import org.openmrs.module.labmodule.specimen.XpertImpl;
+import org.openmrs.module.labmodule.specimen.reporting.Oblast;
 import org.openmrs.module.reporting.common.ObjectUtil;
 
 public class TbServiceImpl extends BaseOpenmrsService implements TbService {
@@ -1061,5 +1064,70 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 		Context.getObsService().saveObs((Obs) microscopy.getTest(),"Updated...");
 		
 	}
+	
+	@Override
+	public List<Oblast> getOblasts(){
+		
+		List<Oblast> oblastList = new ArrayList<Oblast>();
+		
+		List<List<Object>> result = Context.getAdministrationService().executeSQL("Select address_hierarchy_entry_id, name from address_hierarchy_entry where level_id = 2", true);
+		for (List<Object> temp : result) {
+			Integer id = 0;
+			String name = "";
+	        for (int i = 0; i < temp.size(); i++) {
+	        	Object value = temp.get(i);
+	            if (value != null) {
+	            	
+	            	if(i == 0)
+	            		id = (Integer) value;
+	            	else if (i == 1)
+	            		name = (String) value;
+	            }
+	        }
+	        oblastList.add(new Oblast(name, id));
+	    }
+		
+		return oblastList;
+	}
+	
+	public Oblast getOblast(Integer oblastId){
+		Oblast oblast = null;
+				
+		List<List<Object>> result = Context.getAdministrationService().executeSQL("Select address_hierarchy_entry_id, name from address_hierarchy_entry where level_id = 2 and address_hierarchy_entry_id = " +  oblastId, true);
+		for (List<Object> temp : result) {
+			Integer id = 0;
+			String name = "";
+	        for (int i = 0; i < temp.size(); i++) {
+	        	Object value = temp.get(i);
+	            if (value != null) {
+	            	
+	            	if(i == 0)
+	            		id = (Integer) value;
+	            	else if (i == 1)
+	            		name = (String) value;
+	            }
+	        }
+	        oblast = new Oblast(name, id);
+	        break;
+	    }
+
+		return oblast;
+	}
+	
+    public List<Location> getLocationsFromOblastName(Oblast oblast){
+    	List<Location> locationList = new ArrayList<Location>();
+    	
+    	List<Location> locations = Context.getLocationService().getAllLocations(false);
+    	
+    	for(Location loc : locations){
+    		    		
+    		if(loc.getStateProvince() != null){
+	    		if(loc.getStateProvince().equals(oblast.getName()))
+	    			locationList.add(loc);
+    		}
+    	}
+    	return locationList;
+    }
+
 
 }

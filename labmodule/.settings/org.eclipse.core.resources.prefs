@@ -11,5 +11,6 @@ encoding//src/org/openmrs/module/labmodule/reporting/data/output/DOTSMDR_en.html
 encoding//src/org/openmrs/module/labmodule/reporting/data/output/DOTSMDR_ru.html=UTF-8
 encoding//src/org/openmrs/module/labmodule/reporting/data/output/Form8_en.html=UTF-8
 encoding//src/org/openmrs/module/labmodule/reporting/data/output/Form8_ru.html=UTF-8
+encoding//src/org/openmrs/module/labmodule/reporting/data/output/Lab-Report_ru.html=UTF-8
 encoding//web/module/lab/labEntry.jsp=UTF-8
 encoding//web/module/portlets/labHeader.jsp=UTF-8

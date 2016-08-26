@@ -1,8 +1,8 @@
-<%@ include file="/WEB-INF/view/module/dotsreports/include.jsp"%> 
-<%@ include file="/WEB-INF/view/module/dotsreports/dotsHeader.jsp"%>
+<%@ include file="/WEB-INF/view/module/labmodule/include.jsp"%> 
+<%@ include file="/WEB-INF/view/module/labmodule/dotsHeader.jsp"%>
 <%@ taglib prefix="wgt" uri="/WEB-INF/view/module/htmlwidgets/resources/htmlwidgets.tld" %>
 <openmrs:htmlInclude file="/scripts/jquery/jquery-1.3.2.min.js" />
-<openmrs:require privilege="Run Reports" otherwise="/login.htm" redirect="/module/dotsreports/dotsIndex.form" />			
+<openmrs:require privilege="Run Reports" otherwise="/login.htm" redirect="/module/labmodule/labIndex.form" />			
 
 <style>
 	.reportTable th,td {
@@ -16,10 +16,10 @@
 <script type="text/javascript" charset="utf-8">
 	$j(document).ready(function() {
 		$j('#reportData').load(function(event){
-			var ht = $j("#reportData").height($j(window).height()-80);
+			var ht = $j("#reportData").height($j(window).height()-110);
 		});
 		$j('#cancelButton').click(function(event){
-			document.location.href = '${pageContext.request.contextPath}/module/dotsreports/dotsIndex.form';
+			document.location.href = '${pageContext.request.contextPath}/module/labmodule/labIndex.form';
 		});
 	});
 </script>
@@ -45,11 +45,23 @@
 							<input type="hidden" name="type" value="${type.name}"/>
 							<b>${report.name}</b><br/>
 							<span style="font-size:smaller;">${report.description}</span><br/><br/>
+							
+							<b><spring:message code="labmodule.oblast"/></b><br/>
+							<select name="oblast">
+								 <option value=""></option>
+								<c:forEach items="${oblasts}" var="o">
+									<option value="${o.id}">${o.name}</option>
+								</c:forEach>
+							</select>
+							
+							<br/> or <br/>
+							
 							<c:forEach items="${report.parameters}" var="p">
 								<b>${p.label}:</b><br/>
 								<wgt:widget id="param-${p.name}" name="p.${p.name}" type="${p.type.name}" defaultValue="${parameters[p.name]}"/>
 								<br/><br/>
 							</c:forEach>
+							
 							<b><spring:message code="dotsreports.outputFormat"/></b><br/>
 							<select name="format">
 								<c:forEach items="${report.renderingModes}" var="mode">

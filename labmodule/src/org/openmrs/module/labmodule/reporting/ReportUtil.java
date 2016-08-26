@@ -113,6 +113,26 @@ public class ReportUtil {
 		return d;
 	}
 	
+	public static CohortDefinition getCompositionCohort(String operator, List<CohortDefinition> definitions) {
+		if (definitions.size() == 1) {
+			return definitions.get(0);
+		}
+		CompositionCohortDefinition d = new CompositionCohortDefinition();
+		StringBuilder s = new StringBuilder();
+		int i = 1;
+		for (CohortDefinition cd : definitions) {
+			if (cd != null) {
+				d.addSearch(""+i, cd, null);
+				if (s.length() > 0) {
+					s.append(" " + operator + " ");
+				}
+				s.append(i++);
+			}
+		}
+		d.setCompositionString(s.toString());
+		return d;
+	}
+	
 	public static CohortDefinition minus(CohortDefinition base, CohortDefinition... toSubtract) {
 		CompositionCohortDefinition d = new CompositionCohortDefinition();
 		d.addSearch("base", base, null);
