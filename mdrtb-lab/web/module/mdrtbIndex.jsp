@@ -4,16 +4,14 @@
 <openmrs:require privilege="View Patients" otherwise="/login.htm" redirect="/findPatient.htm" />
 
 <!-- <h2><table><tr><td><img src="${pageContext.request.contextPath}/moduleResources/mdrtb/who_logo.bmp" alt="logo WHO" style="height:50px; width:50px;" border="0"/></td><td>&nbsp;<spring:message code="mdrtb.title" /></td></tr></table></h2> -->
-<h2><table width="90%">
+<h2><table>
 <tr>
-<td rowspan="3" align="left" rowspan="3" align="right" width="50%"><spring:message code="mdrtb.title" /></td>
-<td rowspan="3" align="right" width="40%" valign="center"><img src="${pageContext.request.contextPath}/moduleResources/mdrtb/TJK_logo.jpg" alt="logo Tajikistan" style="height:78px; width:87px;" border="0"/>
-<td>&nbsp;</td>
-<td align="right" rowspan="3" valign="center"><img src="${pageContext.request.contextPath}/moduleResources/mdrtb/WHO_Euro_logo.jpg" alt="logo WHO Euro" style="height:78px; width:60px;" border="0"/></td>
-<td align="right" rowspan="3" valign="center"><img src="${pageContext.request.contextPath}/moduleResources/mdrtb/gfatm_square.jpg" alt="logo GFATM" style="height:78px; width:83px;" border="0"/></td>
-</tr>
-<tr>
-<td align="right" valign="center"><img src="${pageContext.request.contextPath}/moduleResources/mdrtb/USAID_logo_en.jpg" alt="logo USAID" style="height:45px; width:150px;" border="0"/>
+<td align="left">
+<img src="${pageContext.request.contextPath}/moduleResources/mdrtb/TJK_logo.jpg" alt="logo Tajikistan" style="height:78px; width:87px;" border="0"/>
+<img src="${pageContext.request.contextPath}/moduleResources/mdrtb/WHO_Euro_logo.jpg" alt="logo WHO Euro" style="height:78px; width:60px;" border="0"/>
+<img src="${pageContext.request.contextPath}/moduleResources/mdrtb/gfatm_square.jpg" alt="logo GFATM" style="height:78px; width:83px;" border="0"/>
+<img src="${pageContext.request.contextPath}/moduleResources/mdrtb/USAID_logo_en.jpg" alt="logo USAID" style="height:78px; width:259px;" border="0"/>
+</td>
 </tr>
 <tr>
 <td>&nbsp;</td>
@@ -117,6 +115,21 @@
 					</openmrs:extensionPoint>
 				</td></tr>
 				
+				<tr><td style="background-color:#8FABC7;padding:2px 2px 2px 2px;">
+					 <b class="boxHeaderTwo" nowrap style="padding:0px 0px 0px 0px;">
+						&nbsp;&nbsp;<spring:message code="mdrtb.dotsreports" />&nbsp;&nbsp;
+					</b>
+				</td></tr>
+				
+				<tr><td>
+					<!-- <a href="drugforecast/simpleUsage.list"><spring:message code="mdrtb.simpleDrugUsage"/></a><br/>
+					<a href="drugforecast/patientsTakingDrugs.list"><spring:message code="mdrtb.numberofpatientstakingeachdrug" /></a><br/> -->
+					<a href="../dotsreports/reporting/reports.form?type=org.openmrs.module.dotsreports.reporting.data.DOTS07TJKUpdated"><spring:message code="mdrtb.dotsreport07" /></a><br/>
+					<a href="../dotsreports/reporting/reports.form?type=org.openmrs.module.dotsreports.reporting.data.DOTS08TJKUpdated"><spring:message code="mdrtb.dotsreport08" /></a><br/>
+				
+								
+				</td></tr>
+				
 				<c:set var="reportsFound" value="f"/>
 				<tr><td style = "background-color:#8FABC7;padding:2px 2px 2px 2px;">
 					<b class="boxHeaderTwo" nowrap style="padding:0px 0px 0px 0px;">&nbsp;&nbsp;
@@ -145,19 +158,8 @@
 					</c:if>
 				</td></tr>
 				
-				<tr><td style="background-color:#8FABC7;padding:2px 2px 2px 2px;">
-					 <b class="boxHeaderTwo" nowrap style="padding:0px 0px 0px 0px;">
-						&nbsp;&nbsp;<spring:message code="mdrtb.dotsreports" />&nbsp;&nbsp;
-					</b>
-				</td></tr>
-				<tr><td>
-					<!-- <a href="drugforecast/simpleUsage.list"><spring:message code="mdrtb.simpleDrugUsage"/></a><br/>
-					<a href="drugforecast/patientsTakingDrugs.list"><spring:message code="mdrtb.numberofpatientstakingeachdrug" /></a><br/> -->
-					<a href="../dotsreports/reporting/reports.form?type=org.openmrs.module.dotsreports.reporting.data.DOTS07TJKUpdated"><spring:message code="mdrtb.dotsreport07" /></a><br/>
-					<a href="../dotsreports/reporting/reports.form?type=org.openmrs.module.dotsreports.reporting.data.DOTS08TJKUpdated"><spring:message code="mdrtb.dotsreport08" /></a><br/>
 				
-								
-				</td></tr>
+				
 				<tr><td style="background-color:#8FABC7;padding:2px 2px 2px 2px;">
 					 <b class="boxHeaderTwo" nowrap style="padding:0px 0px 0px 0px;">
 						&nbsp;&nbsp;<spring:message code="mdrtb.otherreports" />&nbsp;&nbsp;

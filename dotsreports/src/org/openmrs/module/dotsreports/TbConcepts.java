@@ -136,6 +136,8 @@ public class TbConcepts {
     
     public final static String [] MDR_TB = {"MULTI-DRUG RESISTANT TUBERCULOSIS"};
     public final static String [] XDR_TB = {"EXTENSIVE DRUG RESISTANT TUBERCULOSIS"};
+    public final static String [] RR_TB = {"RR-TB"};
+    public final static String [] PDR_TB = {"PDR-TB"};
     public final static String [] SUSPECTED_MDR_TB = {"SUSPECTED MULTI-DRUG TUBERCULOSIS"};
     public final static String [] TB = {"TUBERCULOSIS"};
     
@@ -167,6 +169,9 @@ public class TbConcepts {
     public final static String [] COINFECTED_ARVS = {"COINFECTED AND ON ANTIRETROVIRALS"};
     public final static String [] CD4_COUNT = {"CD4 COUNT"};
     public final static String [] RESULT_OF_HIV_TEST = {"RESULT OF HIV TEST"};
+    public final static String [] DATE_OF_HIV_TEST = {"DATE OF HIV TEST"};
+    public final static String [] DATE_OF_ART_TREATMENT_START  = {"DATE OF ART TREATMENT START "};
+    public final static String [] DATE_OF_PCT_TREATMENT_START  = {"DATE OF PCT TREATMENT START "};
     
     // Hospitalization states
     public final static String [] HOSPITALIZATION_WORKFLOW = {"HOSPITALIZATION WORKFLOW"};
@@ -213,6 +218,10 @@ public class TbConcepts {
     public final static String [] MDR_TREATMENT_START_DATE = {"DATE OF MDR TREATMENT START"};
     public final static String [] AGE_AT_DOTS_REGISTRATION = {"AGE AT DOTS REGISTRATION"};
     public final static String [] AGE_AT_MDR_REGISTRATION = {"AGE AT MDR REGISTRATION"};
+    public final static String [] RESISTANCE_TYPE = {"RESISTANCE TYPE"};
+    public final static String [] TREATMENT_CENTER_FOR_IP = {"TREATMENT CENTER FOR IP"};
+    public final static String [] TREATMENT_CENTER_FOR_CP = {"TREATMENT CENTER FOR CP"};
+ 	public final static String [] TUBERCULOSIS_PATIENT_CATEGORY = {"TUBERCULOSIS PATIENT CATEGORY"};
     
 
 }

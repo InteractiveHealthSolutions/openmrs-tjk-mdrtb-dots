@@ -169,6 +169,7 @@ public class MdrtbConcepts {
     public final static String [] COINFECTED_ARVS = {"COINFECTED AND ON ANTIRETROVIRALS"};
     public final static String [] CD4_COUNT = {"CD4 COUNT"};
     public final static String [] RESULT_OF_HIV_TEST = {"RESULT OF HIV TEST"};
+    public final static String [] DATE_OF_HIV_TEST = {"DATE OF HIV TEST"};
     
     // Hospitalization states
     public final static String [] HOSPITALIZATION_WORKFLOW = {"HOSPITALIZATION WORKFLOW"};

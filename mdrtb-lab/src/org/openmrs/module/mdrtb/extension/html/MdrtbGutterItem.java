@@ -29,7 +29,7 @@ public class MdrtbGutterItem extends Extension {
      * @return Privilege string
      */
     public String getRequiredPrivilege() {
-        return "";
+        return  "Manage MDR";
     }
 
 }
