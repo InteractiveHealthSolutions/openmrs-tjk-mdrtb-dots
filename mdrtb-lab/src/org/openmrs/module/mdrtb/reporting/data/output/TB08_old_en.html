@@ -1,0 +1,373 @@
+<html>
+	<head>
+		<title>TB-08u</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;}
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%"><tr>
+				<td width="100%" align="center" style="font-size:14px; font-weight:bold;">
+					Quarterly report on results of treatment of MDR TB patients started treatment on Category IV <br/>
+					
+				</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%">
+				
+				<tr>
+					<td>Period of Treatment Start:  #startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#</td>
+					
+				</tr>
+				<tr><td>Total Detected:</td></tr>
+				<tr><td>Total Evaluated:</td></tr>
+			</table>
+			<table border="1" cellpadding="5" width="100%">
+				<tr>
+					<th rowspan="2">Registration group</th>
+					<th rowspan="2">Registered</th>
+					<th rowspan="2" colspan="3">Cured</th>
+					<th rowspan="2" colspan="3">Treatment<br/>Completed</th>
+					<th rowspan="2" colspan="3">Successful<br/>Treatment</th>
+					<th rowspan="2" colspan="3">Treatment<br/>Failure</th>
+					<th rowspan="2" colspan="3">Lost to Follow-<br/>up</th>
+					<th colspan="6">Died</th>
+					
+					<th rowspan="2" colspan="3">Result Not<br/>Assessed<br/>(still on treatment<br/>or transferred out)</th>
+					<th rowspan="2">Total</th>
+				</tr>
+				<tr>
+					<th colspan="3">TB</th>
+					<th colspan="3">Non-TB</th>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>P TB</td>
+					<td>EP TB</td>
+					<td>Total</td>
+					<td>P TB</td>
+					<td>EP TB</td>
+					<td>Total</td>
+					<td>P TB</td>
+					<td>EP TB</td>
+					<td>Total</td>
+					<td>P TB</td>
+					<td>EP TB</td>
+					<td>Total</td>
+					<td>P TB</td>
+					<td>EP TB</td>
+					<td>Total</td>
+					<td>P TB</td>
+					<td>EP TB</td>
+					<td>Total</td>
+					<td>P TB</td>
+					<td>EP TB</td>
+					<td>Total</td>
+					<td>P TB</td>
+					<td>EP TB</td>
+					<td>Total</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>New</td>
+					<td>#results.New.Registered#</td>
+					<td>#results.New.pCured#</td>
+					<td>#results.New.epCured#</td>
+					<td>#results.New.Cured#</td>
+					<td>#results.New.pTreatmentCompleted#</td>
+					<td>#results.New.epTreatmentCompleted#</td>
+					<td>#results.New.TreatmentCompleted#</td>
+					<td>#results.New.pSuccessfulTreatment#</td>
+					<td>#results.New.epSuccessfulTreatment#</td>
+					<td>#results.New.SuccessfulTreatment#</td>
+					<td>#results.New.pFailed#</td>
+					<td>#results.New.epFailed#</td>
+					<td>#results.New.Failed#</td>
+					<td>#results.New.pDefaulted#</td>
+					<td>#results.New.epDefaulted#</td>
+					<td>#results.New.Defaulted#</td>
+					<td>#results.New.pDiedTB#</td>
+					<td>#results.New.epDiedTB#</td>
+					<td>#results.New.DiedTB#</td>
+					<td>#results.New.pDiedNonTB#</td>
+					<td>#results.New.epDiedNonTB#</td>
+					<td>#results.New.DiedNonTB#</td>
+					<td>#results.New.pStillEnrolled#</td>
+					<td>#results.New.epStillEnrolled#</td>
+					<td>#results.New.StillEnrolled#</td>
+					<td>#results.New.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Relapse after regimen I<br/>treatment</td>
+					<td>#results.Relapse1.Registered#</td>
+					<td>#results.Relapse1.pCured#</td>
+					<td>#results.Relapse1.epCured#</td>
+					<td>#results.Relapse1.Cured#</td>
+					<td>#results.Relapse1.pTreatmentCompleted#</td>
+					<td>#results.Relapse1.epTreatmentCompleted#</td>
+					<td>#results.Relapse1.TreatmentCompleted#</td>
+					<td>#results.Relapse1.pSuccessfulTreatment#</td>
+					<td>#results.Relapse1.epSuccessfulTreatment#</td>
+					<td>#results.Relapse1.SuccessfulTreatment#</td>
+					<td>#results.Relapse1.pFailed#</td>
+					<td>#results.Relapse1.epFailed#</td>
+					<td>#results.Relapse1.Failed#</td>
+					<td>#results.Relapse1.pDefaulted#</td>
+					<td>#results.Relapse1.epDefaulted#</td>
+					<td>#results.Relapse1.Defaulted#</td>
+					<td>#results.Relapse1.pDiedTB#</td>
+					<td>#results.Relapse1.epDiedTB#</td>
+					<td>#results.Relapse1.DiedTB#</td>
+					<td>#results.Relapse1.pDiedNonTB#</td>
+					<td>#results.Relapse1.epDiedNonTB#</td>
+					<td>#results.Relapse1.DiedNonTB#</td>
+					<td>#results.Relapse1.pStillEnrolled#</td>
+					<td>#results.Relapse1.epStillEnrolled#</td>
+					<td>#results.Relapse1.StillEnrolled#</td>
+					<td>#results.Relapse1.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Relapse after regimen II<br/>treatment</td>
+					<td>#results.Relapse2.Registered#</td>
+					<td>#results.Relapse2.pCured#</td>
+					<td>#results.Relapse2.epCured#</td>
+					<td>#results.Relapse2.Cured#</td>
+					<td>#results.Relapse2.pTreatmentCompleted#</td>
+					<td>#results.Relapse2.epTreatmentCompleted#</td>
+					<td>#results.Relapse2.TreatmentCompleted#</td>
+					<td>#results.Relapse2.pSuccessfulTreatment#</td>
+					<td>#results.Relapse2.epSuccessfulTreatment#</td>
+					<td>#results.Relapse2.SuccessfulTreatment#</td>
+					<td>#results.Relapse2.pFailed#</td>
+					<td>#results.Relapse2.epFailed#</td>
+					<td>#results.Relapse2.Failed#</td>
+					<td>#results.Relapse2.pDefaulted#</td>
+					<td>#results.Relapse2.epDefaulted#</td>
+					<td>#results.Relapse2.Defaulted#</td>
+					<td>#results.Relapse2.pDiedTB#</td>
+					<td>#results.Relapse2.epDiedTB#</td>
+					<td>#results.Relapse2.DiedTB#</td>
+					<td>#results.Relapse2.pDiedNonTB#</td>
+					<td>#results.Relapse2.epDiedNonTB#</td>
+					<td>#results.Relapse2.DiedNonTB#</td>
+					<td>#results.Relapse2.pStillEnrolled#</td>
+					<td>#results.Relapse2.epStillEnrolled#</td>
+					<td>#results.Relapse2.StillEnrolled#</td>
+					<td>#results.Relapse2.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Default after regimen I<br/>treatment</td>
+					<td>#results.AfterDefault1.Registered#</td>
+					<td>#results.AfterDefault1.pCured#</td>
+					<td>#results.AfterDefault1.epCured#</td>
+					<td>#results.AfterDefault1.Cured#</td>
+					<td>#results.AfterDefault1.pTreatmentCompleted#</td>
+					<td>#results.AfterDefault1.epTreatmentCompleted#</td>
+					<td>#results.AfterDefault1.TreatmentCompleted#</td>
+					<td>#results.AfterDefault1.pSuccessfulTreatment#</td>
+					<td>#results.AfterDefault1.epSuccessfulTreatment#</td>
+					<td>#results.AfterDefault1.SuccessfulTreatment#</td>
+					<td>#results.AfterDefault1.pFailed#</td>
+					<td>#results.AfterDefault1.epFailed#</td>
+					<td>#results.AfterDefault1.Failed#</td>
+					<td>#results.AfterDefault1.pDefaulted#</td>
+					<td>#results.AfterDefault1.epDefaulted#</td>
+					<td>#results.AfterDefault1.Defaulted#</td>
+					<td>#results.AfterDefault1.pDiedTB#</td>
+					<td>#results.AfterDefault1.epDiedTB#</td>
+					<td>#results.AfterDefault1.DiedTB#</td>
+					<td>#results.AfterDefault1.pDiedNonTB#</td>
+					<td>#results.AfterDefault1.epDiedNonTB#</td>
+					<td>#results.AfterDefault1.DiedNonTB#</td>
+					<td>#results.AfterDefault1.pStillEnrolled#</td>
+					<td>#results.AfterDefault1.epStillEnrolled#</td>
+					<td>#results.AfterDefault1.StillEnrolled#</td>
+					<td>#results.AfterDefault1.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Default after regimen II<br/>treatment</td>
+					<td>#results.AfterDefault2.Registered#</td>
+					<td>#results.AfterDefault2.pCured#</td>
+					<td>#results.AfterDefault2.epCured#</td>
+					<td>#results.AfterDefault2.Cured#</td>
+					<td>#results.AfterDefault2.pTreatmentCompleted#</td>
+					<td>#results.AfterDefault2.epTreatmentCompleted#</td>
+					<td>#results.AfterDefault2.TreatmentCompleted#</td>
+					<td>#results.AfterDefault2.pSuccessfulTreatment#</td>
+					<td>#results.AfterDefault2.epSuccessfulTreatment#</td>
+					<td>#results.AfterDefault2.SuccessfulTreatment#</td>
+					<td>#results.AfterDefault2.pFailed#</td>
+					<td>#results.AfterDefault2.epFailed#</td>
+					<td>#results.AfterDefault2.Failed#</td>
+					<td>#results.AfterDefault2.pDefaulted#</td>
+					<td>#results.AfterDefault2.epDefaulted#</td>
+					<td>#results.AfterDefault2.Defaulted#</td>
+					<td>#results.AfterDefault2.pDiedTB#</td>
+					<td>#results.AfterDefault2.epDiedTB#</td>
+					<td>#results.AfterDefault2.DiedTB#</td>
+					<td>#results.AfterDefault2.pDiedNonTB#</td>
+					<td>#results.AfterDefault2.epDiedNonTB#</td>
+					<td>#results.AfterDefault2.DiedNonTB#</td>
+					<td>#results.AfterDefault2.pStillEnrolled#</td>
+					<td>#results.AfterDefault2.epStillEnrolled#</td>
+					<td>#results.AfterDefault2.StillEnrolled#</td>
+					<td>#results.AfterDefault2.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Failure after regimen I<br/>treatment</td>
+					<td>#results.AfterFailure1.Registered#</td>
+					<td>#results.AfterFailure1.pCured#</td>
+					<td>#results.AfterFailure1.epCured#</td>
+					<td>#results.AfterFailure1.Cured#</td>
+					<td>#results.AfterFailure1.pTreatmentCompleted#</td>
+					<td>#results.AfterFailure1.epTreatmentCompleted#</td>
+					<td>#results.AfterFailure1.TreatmentCompleted#</td>
+					<td>#results.AfterFailure1.pSuccessfulTreatment#</td>
+					<td>#results.AfterFailure1.epSuccessfulTreatment#</td>
+					<td>#results.AfterFailure1.SuccessfulTreatment#</td>
+					<td>#results.AfterFailure1.pFailed#</td>
+					<td>#results.AfterFailure1.epFailed#</td>
+					<td>#results.AfterFailure1.Failed#</td>
+					<td>#results.AfterFailure1.pDefaulted#</td>
+					<td>#results.AfterFailure1.epDefaulted#</td>
+					<td>#results.AfterFailure1.Defaulted#</td>
+					<td>#results.AfterFailure1.pDiedTB#</td>
+					<td>#results.AfterFailure1.epDiedTB#</td>
+					<td>#results.AfterFailure1.DiedTB#</td>
+					<td>#results.AfterFailure1.pDiedNonTB#</td>
+					<td>#results.AfterFailure1.epDiedNonTB#</td>
+					<td>#results.AfterFailure1.DiedNonTB#</td>
+					<td>#results.AfterFailure1.pStillEnrolled#</td>
+					<td>#results.AfterFailure1.epStillEnrolled#</td>
+					<td>#results.AfterFailure1.StillEnrolled#</td>
+					<td>#results.AfterFailure1.ColTotal#</td>
+				</tr>
+				<tr>
+					<td>Failure after regimen II<br/>treatment</td>
+					<td>#results.AfterFailure2.Registered#</td>
+					<td>#results.AfterFailure2.pCured#</td>
+					<td>#results.AfterFailure2.epCured#</td>
+					<td>#results.AfterFailure2.Cured#</td>
+					<td>#results.AfterFailure2.pTreatmentCompleted#</td>
+					<td>#results.AfterFailure2.epTreatmentCompleted#</td>
+					<td>#results.AfterFailure2.TreatmentCompleted#</td>
+					<td>#results.AfterFailure2.pSuccessfulTreatment#</td>
+					<td>#results.AfterFailure2.epSuccessfulTreatment#</td>
+					<td>#results.AfterFailure2.SuccessfulTreatment#</td>
+					<td>#results.AfterFailure2.pFailed#</td>
+					<td>#results.AfterFailure2.epFailed#</td>
+					<td>#results.AfterFailure2.Failed#</td>
+					<td>#results.AfterFailure2.pDefaulted#</td>
+					<td>#results.AfterFailure2.epDefaulted#</td>
+					<td>#results.AfterFailure2.Defaulted#</td>
+					<td>#results.AfterFailure2.pDiedTB#</td>
+					<td>#results.AfterFailure2.epDiedTB#</td>
+					<td>#results.AfterFailure2.DiedTB#</td>
+					<td>#results.AfterFailure2.pDiedNonTB#</td>
+					<td>#results.AfterFailure2.epDiedNonTB#</td>
+					<td>#results.AfterFailure2.DiedNonTB#</td>
+					<td>#results.AfterFailure2.pStillEnrolled#</td>
+					<td>#results.AfterFailure2.epStillEnrolled#</td>
+					<td>#results.AfterFailure2.StillEnrolled#</td>
+					<td>#results.AfterFailure2.ColTotal#</td>
+				</tr>
+				
+				<tr>
+					<td>Other</td>
+					<td>#results.Other.Registered#</td>
+					<td>#results.Other.pCured#</td>
+					<td>#results.Other.epCured#</td>
+					<td>#results.Other.Cured#</td>
+					<td>#results.Other.pTreatmentCompleted#</td>
+					<td>#results.Other.epTreatmentCompleted#</td>
+					<td>#results.Other.TreatmentCompleted#</td>
+					<td>#results.Other.pSuccessfulTreatment#</td>
+					<td>#results.Other.epSuccessfulTreatment#</td>
+					<td>#results.Other.SuccessfulTreatment#</td>
+					<td>#results.Other.pFailed#</td>
+					<td>#results.Other.epFailed#</td>
+					<td>#results.Other.Failed#</td>
+					<td>#results.Other.pDefaulted#</td>
+					<td>#results.Other.epDefaulted#</td>
+					<td>#results.Other.Defaulted#</td>
+					<td>#results.Other.pDiedTB#</td>
+					<td>#results.Other.epDiedTB#</td>
+					<td>#results.Other.DiedTB#</td>
+					<td>#results.Other.pDiedNonTB#</td>
+					<td>#results.Other.epDiedNonTB#</td>
+					<td>#results.Other.DiedNonTB#</td>
+					<td>#results.Other.pStillEnrolled#</td>
+					<td>#results.Other.epStillEnrolled#</td>
+					<td>#results.Other.StillEnrolled#</td>
+					<td>#results.Other.ColTotal#</td>
+				</tr>
+				
+				<tr>
+					<td>Total</td>
+					<td>#results.Total.Registered#</td>
+					<td>#results.Total.pCured#</td>
+					<td>#results.Total.epCured#</td>
+					<td>#results.Total.Cured#</td>
+					<td>#results.Total.pTreatmentCompleted#</td>
+					<td>#results.Total.epTreatmentCompleted#</td>
+					<td>#results.Total.TreatmentCompleted#</td>
+					<td>#results.Total.pSuccessfulTreatment#</td>
+					<td>#results.Total.epSuccessfulTreatment#</td>
+					<td>#results.Total.SuccessfulTreatment#</td>
+					<td>#results.Total.pFailed#</td>
+					<td>#results.Total.epFailed#</td>
+					<td>#results.Total.Failed#</td>
+					<td>#results.Total.pDefaulted#</td>
+					<td>#results.Total.epDefaulted#</td>
+					<td>#results.Total.Defaulted#</td>
+					<td>#results.Total.pDiedTB#</td>
+					<td>#results.Total.epDiedTB#</td>
+					<td>#results.Total.DiedTB#</td>
+					<td>#results.Total.pDiedNonTB#</td>
+					<td>#results.Total.epDiedNonTB#</td>
+					<td>#results.Total.DiedNonTB#</td>
+					<td>#results.Total.pStillEnrolled#</td>
+					<td>#results.Total.epStillEnrolled#</td>
+					<td>#results.Total.StillEnrolled#</td>
+					<td>#results.Total.ColTotal#</td>
+				</tr>
+				
+				<tr>
+					<td>Of them, XDR</td>
+					<td>#results.Xdr.Registered#</td>
+					<td>#results.Xdr.pCured#</td>
+					<td>#results.Xdr.epCured#</td>
+					<td>#results.Xdr.Cured#</td>
+					<td>#results.Xdr.pTreatmentCompleted#</td>
+					<td>#results.Xdr.epTreatmentCompleted#</td>
+					<td>#results.Xdr.TreatmentCompleted#</td>
+					<td>#results.Xdr.pSuccessfulTreatment#</td>
+					<td>#results.Xdr.epSuccessfulTreatment#</td>
+					<td>#results.Xdr.SuccessfulTreatment#</td>
+					<td>#results.Xdr.pFailed#</td>
+					<td>#results.Xdr.epFailed#</td>
+					<td>#results.Xdr.Failed#</td>
+					<td>#results.Xdr.pDefaulted#</td>
+					<td>#results.Xdr.epDefaulted#</td>
+					<td>#results.Xdr.Defaulted#</td>
+					<td>#results.Xdr.pDiedTB#</td>
+					<td>#results.Xdr.epDiedTB#</td>
+					<td>#results.Xdr.DiedTB#</td>
+					<td>#results.Xdr.pDiedNonTB#</td>
+					<td>#results.Xdr.epDiedNonTB#</td>
+					<td>#results.Xdr.DiedNonTB#</td>
+					<td>#results.Xdr.pStillEnrolled#</td>
+					<td>#results.Xdr.epStillEnrolled#</td>
+					<td>#results.Xdr.StillEnrolled#</td>
+					<td>#results.Xdr.ColTotal#</td>
+				</tr>
+					
+				
+				
+			</table>
+		</div>
+	</body>
+</html>

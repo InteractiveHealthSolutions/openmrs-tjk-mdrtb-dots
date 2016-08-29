@@ -15,37 +15,56 @@
 		<div style="font-size:smaller; width:980px;">
 			<table width="100%"><tr>
 				<td width="10%">&nbsp;</td>
-				<td width="50%" align="center" style="font-size:14px; font-weight:bold;">Quarterly report on MDR-TB detection and Category IV treatment start</td>
+				<td width="50%" align="center" style="font-size:14px; font-weight:bold;">Quarterly report on DR TB cases detection and initiation of treatment</td>
 				<td width="10%" align="right">TB-07y</td>
 			</tr></table>
 			<br/><br/>
-			<table width="100%">
+			
+			<center>
+			<table width="100%" border="1">
 				<tr>
-					<td>Name of area:  #location#</td>
-					<td>Name of area coordinator:  ________________</td>
-				</tr>
-				<tr>
-					<td>Patients identified during Q#quarter# #year# (#startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#)</td>
-					<td>Date: #generationDate|dd/MMM/yyyy#</td>
+				    <td>Name of facility: ________________<br/>
+					Name of area:  #location#<br/>
+					Name of coordinator:  ________________<br/>
+					Signature: ___________________________
+				</td>
+				
+				<td valign="top">Cases detected in quarter #quarter# of #year# (#startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#)<br/>
+					Date: #generationDate|dd/MMM/yyyy#</td>
 				</tr>
 			</table>
+			</center>
 			<br/>
 			<br/>
 			<span style="font-weight:bold;">
-				1 - Number of DR TB cases detected during the quarter: <br/><br/>
-				<center><table>
+				Table 1. Number of DR TB cases detected during the quarter: 
+			</span>
+			<span style="font-weight:bold;">
+				<br/><br/>
+				<center><table width="100%" border="1">
 					<tr>
-						<td>RR/MDR-TB</td>
+					    <td rowspan="2" align="center">Number of DR TB cases detected<br/> during the quarter: </td>
+					    <td colspan="4" align="center">from them</td>
+					</tr>
+					<tr>
+						<td align="center">RR/MDR-TB</td>
+						<td align="center">PDR</td>
+						<td align="center">Pre-XDR</td>
+						<td align="center">XDR</td>
+					</tr>
+					<tr>
+					    <td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.total#
+						</td>
 						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
 							#labDetections.mdr#
 						</td>
-						<td>&nbsp;&nbsp;&nbsp;</td>
-						<td>PDR</td>
 						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
 							#labDetections.pdr#
 						</td>
-						<td>&nbsp;&nbsp;&nbsp;</td>
-						<td>XDR</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.prexdr#
+						</td>
 						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
 							#labDetections.xdr#
 						</td>
@@ -55,31 +74,762 @@
 			<br/><br/>
 			
 			<span style="font-weight:bold;">
-				2 - Number of DR TB cases, started treatment during the quarter
+				Table 2. Number of DR TB cases, started treatment during the quarter 
 			</span>
 			<br/><br/>
 			<table border="1" cellpadding="5" width="100%">
 				<tr align="center">
-				 	<td>&nbsp;</td>
-				    <td>&nbsp;</td>
+				 	<td colspan="2" rowspan="3">&nbsp;</td>
 					<td colspan="7">Registration Group</td>
 					<td rowspan="3">Other</td>
 					<td rowspan="3">Total</td>
 				</tr>
 				<tr align="center">
-					<td rowspan="2">&nbsp;</td>
-					<td rowspan="2">&nbsp;</td>
-					<td rowspan="2">New</td> <!-- new -->
-					<td colspan="6">Re-treatment</td> <!-- treated -->
+					<td rowspan="2">New</td>
+					<td colspan="2">Relapse after<br/>treatment on<br/>regimen</td>
+					<td colspan="2">Default after<br/>treatment on<br/>regimen</td>
+					<td colspan="2">failure after<br/>treatment on<br/>regimen</td>
 				</tr>
 				<tr align="center">
-					<td>Relapse After<br/>Regimen 1</td> <!-- relapse -->
-					<td>Relapse After<br/>Regimen 2</td> <!-- relapse -->
-					<td>Default After<br/>Regimen 1</td> <!-- after default -->
-					<td>Default After<br/>Regimen 2</td> <!-- after default -->
-					<td>Failure After<br/>Regimen 1</td> <!-- previously treated with Cat 1 -->
-					<td>Failure After<br/>Regimen 2</td>  <!-- previously treated with Cat 2 -->
+					<td>I</td> <!-- relapse -->
+					<td>II</td> <!-- relapse -->
+					<td>I</td> <!-- after default -->
+					<td>II</td> <!-- after default -->
+					<td>I</td> <!-- previously treated with Cat 1 -->
+					<td>II</td>  <!-- previously treated with Cat 2 -->
 				</tr>
+				<tr>
+				    <td colspan="2">RR/MDR-TB</td>
+				   <td>#startedTreatment.mdr.New#</td>
+					 <td>#startedTreatment.mdr.Relapse1#</td>
+					 <td>#startedTreatment.mdr.Relapse2#</td>
+					 <td>#startedTreatment.mdr.AfterDefault1#</td>
+					 <td>#startedTreatment.mdr.AfterDefault2#</td>
+					 <td>#startedTreatment.mdr.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdr.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdr.Other#</td>
+					 <td>#startedTreatment.mdr.newTotal#</td> 
+				</tr>
+				<tr>
+				     <td rowspan=3">of them<br/>children</td>
+				     <td>0-4</td>
+				     <td>#startedTreatment.mdr04.New#</td>
+					 <td>#startedTreatment.mdr04.Relapse1#</td>
+					 <td>#startedTreatment.mdr04.Relapse2#</td>
+					 <td>#startedTreatment.mdr04.AfterDefault1#</td>
+					 <td>#startedTreatment.mdr04.AfterDefault2#</td>
+					 <td>#startedTreatment.mdr04.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdr04.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdr04.Other#</td>
+					 <td>#startedTreatment.mdr04.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>5-14</td>
+				     <td>#startedTreatment.mdr0514.New#</td>
+					 <td>#startedTreatment.mdr0514.Relapse1#</td>
+					 <td>#startedTreatment.mdr0514.Relapse2#</td>
+					 <td>#startedTreatment.mdr0514.AfterDefault1#</td>
+					 <td>#startedTreatment.mdr0514.AfterDefault2#</td>
+					 <td>#startedTreatment.mdr0514.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdr0514.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdr0514.Other#</td>
+					 <td>#startedTreatment.mdr0514.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>15-17</td>
+				     <td>#startedTreatment.mdr1517.New#</td>
+					 <td>#startedTreatment.mdr1517.Relapse1#</td>
+					 <td>#startedTreatment.mdr1517.Relapse2#</td>
+					 <td>#startedTreatment.mdr1517.AfterDefault1#</td>
+					 <td>#startedTreatment.mdr1517.AfterDefault2#</td>
+					 <td>#startedTreatment.mdr1517.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdr1517.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdr1517.Other#</td>
+					 <td>#startedTreatment.mdr1517.newTotal#</td>
+				</tr>
+				<tr>
+				     <td colspan=2">of them HIV</td>
+				     <td>#startedTreatment.mdrhiv.New#</td>
+					 <td>#startedTreatment.mdrhiv.Relapse1#</td>
+					 <td>#startedTreatment.mdrhiv.Relapse2#</td>
+					 <td>#startedTreatment.mdrhiv.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrhiv.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrhiv.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrhiv.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrhiv.Other#</td>
+					 <td>#startedTreatment.mdrhiv.newTotal#</td>
+				</tr>
+				<tr>
+				    <td colspan="2">PDR</td>
+				    <td>#startedTreatment.pdr.New#</td>
+					 <td>#startedTreatment.pdr.Relapse1#</td>
+					 <td>#startedTreatment.pdr.Relapse2#</td>
+					 <td>#startedTreatment.pdr.AfterDefault1#</td>
+					 <td>#startedTreatment.pdr.AfterDefault2#</td>
+					 <td>#startedTreatment.pdr.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.pdr.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.pdr.Other#</td>
+					 <td>#startedTreatment.pdr.newTotal#</td> 
+				</tr>
+				<tr>
+				     <td rowspan=3">of them<br/>children</td>
+				     <td>0-4</td>
+				     <td>#startedTreatment.pdr04.New#</td>
+					 <td>#startedTreatment.pdr04.Relapse1#</td>
+					 <td>#startedTreatment.pdr04.Relapse2#</td>
+					 <td>#startedTreatment.pdr04.AfterDefault1#</td>
+					 <td>#startedTreatment.pdr04.AfterDefault2#</td>
+					 <td>#startedTreatment.pdr04.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.pdr04.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.pdr04.Other#</td>
+					 <td>#startedTreatment.pdr04.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>5-14</td>
+				     <td>#startedTreatment.pdr0514.New#</td>
+					 <td>#startedTreatment.pdr0514.Relapse1#</td>
+					 <td>#startedTreatment.pdr0514.Relapse2#</td>
+					 <td>#startedTreatment.pdr0514.AfterDefault1#</td>
+					 <td>#startedTreatment.pdr0514.AfterDefault2#</td>
+					 <td>#startedTreatment.pdr0514.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.pdr0514.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.pdr0514.Other#</td>
+					 <td>#startedTreatment.pdr0514.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>15-17</td>
+				     <td>#startedTreatment.pdr1517.New#</td>
+					 <td>#startedTreatment.pdr1517.Relapse1#</td>
+					 <td>#startedTreatment.pdr1517.Relapse2#</td>
+					 <td>#startedTreatment.pdr1517.AfterDefault1#</td>
+					 <td>#startedTreatment.pdr1517.AfterDefault2#</td>
+					 <td>#startedTreatment.pdr1517.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.pdr1517.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.pdr1517.Other#</td>
+					 <td>#startedTreatment.pdr1517.newTotal#</td>
+				</tr>
+				<tr>
+				     <td colspan=2">of them HIV</td>
+				     <td>#startedTreatment.pdrhiv.New#</td>
+					 <td>#startedTreatment.pdrhiv.Relapse1#</td>
+					 <td>#startedTreatment.pdrhiv.Relapse2#</td>
+					 <td>#startedTreatment.pdrhiv.AfterDefault1#</td>
+					 <td>#startedTreatment.pdrhiv.AfterDefault2#</td>
+					 <td>#startedTreatment.pdrhiv.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.pdrhiv.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.pdrhiv.Other#</td>
+					 <td>#startedTreatment.pdrhiv.newTotal#</td>
+				</tr>
+				<tr>
+				    <td colspan="2">Pre-XDR TB</td>
+				    <td>#startedTreatment.prexdr.New#</td>
+					 <td>#startedTreatment.prexdr.Relapse1#</td>
+					 <td>#startedTreatment.prexdr.Relapse2#</td>
+					 <td>#startedTreatment.prexdr.AfterDefault1#</td>
+					 <td>#startedTreatment.prexdr.AfterDefault2#</td>
+					 <td>#startedTreatment.prexdr.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.prexdr.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.prexdr.Other#</td>
+					 <td>#startedTreatment.prexdr.newTotal#</td>  
+				</tr>
+				<tr>
+				     <td rowspan=3">of them<br/>children</td>
+				     <td>0-4</td>
+				     <td>#startedTreatment.prexdr04.New#</td>
+					 <td>#startedTreatment.prexdr04.Relapse1#</td>
+					 <td>#startedTreatment.prexdr04.Relapse2#</td>
+					 <td>#startedTreatment.prexdr04.AfterDefault1#</td>
+					 <td>#startedTreatment.prexdr04.AfterDefault2#</td>
+					 <td>#startedTreatment.prexdr04.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.prexdr04.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.prexdr04.Other#</td>
+					 <td>#startedTreatment.prexdr04.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>5-14</td>
+				     <td>#startedTreatment.prexdr0514.New#</td>
+					 <td>#startedTreatment.prexdr0514.Relapse1#</td>
+					 <td>#startedTreatment.prexdr0514.Relapse2#</td>
+					 <td>#startedTreatment.prexdr0514.AfterDefault1#</td>
+					 <td>#startedTreatment.prexdr0514.AfterDefault2#</td>
+					 <td>#startedTreatment.prexdr0514.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.prexdr0514.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.prexdr0514.Other#</td>
+					 <td>#startedTreatment.prexdr0514.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>15-17</td>
+				     <td>#startedTreatment.prexdr1517.New#</td>
+					 <td>#startedTreatment.prexdr1517.Relapse1#</td>
+					 <td>#startedTreatment.prexdr1517.Relapse2#</td>
+					 <td>#startedTreatment.prexdr1517.AfterDefault1#</td>
+					 <td>#startedTreatment.prexdr1517.AfterDefault2#</td>
+					 <td>#startedTreatment.prexdr1517.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.prexdr1517.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.prexdr1517.Other#</td>
+					 <td>#startedTreatment.prexdr1517.newTotal#</td>
+				</tr>
+				<tr>
+				     <td colspan=2">of them HIV</td>
+				     <td>#startedTreatment.prexdrhiv.New#</td>
+					 <td>#startedTreatment.prexdrhiv.Relapse1#</td>
+					 <td>#startedTreatment.prexdrhiv.Relapse2#</td>
+					 <td>#startedTreatment.prexdrhiv.AfterDefault1#</td>
+					 <td>#startedTreatment.prexdrhiv.AfterDefault2#</td>
+					 <td>#startedTreatment.prexdrhiv.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.prexdrhiv.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.prexdrhiv.Other#</td>
+					 <td>#startedTreatment.prexdrhiv.newTotal#</td>
+				</tr>
+				<tr>
+				    <td colspan="2">XDR TB</td>
+				    <td>#startedTreatment.xdr.New#</td>
+					 <td>#startedTreatment.xdr.Relapse1#</td>
+					 <td>#startedTreatment.xdr.Relapse2#</td>
+					 <td>#startedTreatment.xdr.AfterDefault1#</td>
+					 <td>#startedTreatment.xdr.AfterDefault2#</td>
+					 <td>#startedTreatment.xdr.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdr.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdr.Other#</td>
+					 <td>#startedTreatment.xdr.newTotal#</td>  
+				</tr>
+				<tr>
+				     <td rowspan=3">of them<br/>children</td>
+				     <td>0-4</td>
+				     <td>#startedTreatment.xdr04.New#</td>
+					 <td>#startedTreatment.xdr04.Relapse1#</td>
+					 <td>#startedTreatment.xdr04.Relapse2#</td>
+					 <td>#startedTreatment.xdr04.AfterDefault1#</td>
+					 <td>#startedTreatment.xdr04.AfterDefault2#</td>
+					 <td>#startedTreatment.xdr04.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdr04.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdr04.Other#</td>
+					 <td>#startedTreatment.xdr04.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>5-14</td>
+				     <td>#startedTreatment.xdr0514.New#</td>
+					 <td>#startedTreatment.xdr0514.Relapse1#</td>
+					 <td>#startedTreatment.xdr0514.Relapse2#</td>
+					 <td>#startedTreatment.xdr0514.AfterDefault1#</td>
+					 <td>#startedTreatment.xdr0514.AfterDefault2#</td>
+					 <td>#startedTreatment.xdr0514.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdr0514.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdr0514.Other#</td>
+					 <td>#startedTreatment.xdr0514.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>15-17</td>
+				     <td>#startedTreatment.xdr1517.New#</td>
+					 <td>#startedTreatment.xdr1517.Relapse1#</td>
+					 <td>#startedTreatment.xdr1517.Relapse2#</td>
+					 <td>#startedTreatment.xdr1517.AfterDefault1#</td>
+					 <td>#startedTreatment.xdr1517.AfterDefault2#</td>
+					 <td>#startedTreatment.xdr1517.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdr1517.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdr1517.Other#</td>
+					 <td>#startedTreatment.xdr1517.newTotal#</td>
+				</tr>
+				<tr>
+				     <td colspan=2">of them HIV</td>
+				     <td>#startedTreatment.xdrhiv.New#</td>
+					 <td>#startedTreatment.xdrhiv.Relapse1#</td>
+					 <td>#startedTreatment.xdrhiv.Relapse2#</td>
+					 <td>#startedTreatment.xdrhiv.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrhiv.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrhiv.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrhiv.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrhiv.Other#</td>
+					 <td>#startedTreatment.xdrhiv.newTotal#</td>
+				</tr>
+				<tr>
+				    <td colspan="2">Total</td>
+				    <td>#startedTreatment.total.New#</td>
+					 <td>#startedTreatment.total.Relapse1#</td>
+					 <td>#startedTreatment.total.Relapse2#</td>
+					 <td>#startedTreatment.total.AfterDefault1#</td>
+					 <td>#startedTreatment.total.AfterDefault2#</td>
+					 <td>#startedTreatment.total.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.total.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.total.Other#</td>
+					 <td>#startedTreatment.total.newTotal#</td> 
+				</tr>
+				<tr>
+				     <td rowspan=3">of them<br/>children</td>
+				     <td>0-4</td>
+				     <td>#startedTreatment.total04.New#</td>
+					 <td>#startedTreatment.total04.Relapse1#</td>
+					 <td>#startedTreatment.total04.Relapse2#</td>
+					 <td>#startedTreatment.total04.AfterDefault1#</td>
+					 <td>#startedTreatment.total04.AfterDefault2#</td>
+					 <td>#startedTreatment.total04.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.total04.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.total04.Other#</td>
+					 <td>#startedTreatment.total04.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>5-14</td>
+				     <td>#startedTreatment.total0514.New#</td>
+					 <td>#startedTreatment.total0514.Relapse1#</td>
+					 <td>#startedTreatment.total0514.Relapse2#</td>
+					 <td>#startedTreatment.total0514.AfterDefault1#</td>
+					 <td>#startedTreatment.total0514.AfterDefault2#</td>
+					 <td>#startedTreatment.total0514.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.total0514.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.total0514.Other#</td>
+					 <td>#startedTreatment.total0514.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>15-17</td>
+				     <td>#startedTreatment.total1517.New#</td>
+					 <td>#startedTreatment.total1517.Relapse1#</td>
+					 <td>#startedTreatment.total1517.Relapse2#</td>
+					 <td>#startedTreatment.total1517.AfterDefault1#</td>
+					 <td>#startedTreatment.total1517.AfterDefault2#</td>
+					 <td>#startedTreatment.total1517.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.total1517.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.total1517.Other#</td>
+					 <td>#startedTreatment.total1517.newTotal#</td>
+				</tr>
+				<tr>
+				     <td colspan=2">of them HIV</td>
+				     <td>#startedTreatment.totalhiv.New#</td>
+					 <td>#startedTreatment.totalhiv.Relapse1#</td>
+					 <td>#startedTreatment.totalhiv.Relapse2#</td>
+					 <td>#startedTreatment.totalhiv.AfterDefault1#</td>
+					 <td>#startedTreatment.totalhiv.AfterDefault2#</td>
+					 <td>#startedTreatment.totalhiv.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.totalhiv.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.totalhiv.Other#</td>
+					 <td>#startedTreatment.totalhiv.newTotal#</td>
+				</tr>
+				
+				</table>
+			<br/><br/>	
+			<span style="font-weight:bold;">
+				Table 3. Number of DR TB cases, started treatment during the quarter 
+			</span>
+			<br/><br/>
+			<table border="1" cellpadding="5" width="100%">
+				<tr align="center">
+				 	<td colspan="2" rowspan="3">&nbsp;</td>
+					<td colspan="7">Registration Group</td>
+					<td rowspan="3">Other</td>
+					<td rowspan="3">Total</td>
+				</tr>
+				<tr align="center">
+					<td rowspan="2">New</td>
+					<td colspan="2">Relapse after<br/>treatment on<br/>regimen</td>
+					<td colspan="2">Default after<br/>treatment on<br/>regimen</td>
+					<td colspan="2">failure after<br/>treatment on<br/>regimen</td>
+				</tr>
+				<tr align="center">
+					<td>I</td> <!-- relapse -->
+					<td>II</td> <!-- relapse -->
+					<td>I</td> <!-- after default -->
+					<td>II</td> <!-- after default -->
+					<td>I</td> <!-- previously treated with Cat 1 -->
+					<td>II</td>  <!-- previously treated with Cat 2 -->
+				</tr>
+				<tr>
+				    <td colspan="11" align="center">RR/MDR-TB</td> 
+				</tr>
+				<tr>
+				   <td colspan="2">Short Regimen</td>
+				     <td>#startedTreatment.mdrshr.New#</td>
+					 <td>#startedTreatment.mdrshr.Relapse1#</td>
+					 <td>#startedTreatment.mdrshr.Relapse2#</td>
+					 <td>#startedTreatment.mdrshr.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrshr.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrshr.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrshr.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrshr.Other#</td>
+					 <td>#startedTreatment.mdrshr.newTotal#</td>
+				</tr>
+				
+				<tr>
+				     <td rowspan=3">of them<br/>children</td>
+				     <td>0-4</td>
+				     <td>#startedTreatment.mdrshr04.New#</td>
+					 <td>#startedTreatment.mdrshr04.Relapse1#</td>
+					 <td>#startedTreatment.mdrshr04.Relapse2#</td>
+					 <td>#startedTreatment.mdrshr04.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrshr04.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrshr04.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrshr04.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrshr04.Other#</td>
+					 <td>#startedTreatment.mdrshr04.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>5-14</td>
+				     <td>#startedTreatment.mdrshr0514.New#</td>
+					 <td>#startedTreatment.mdrshr0514.Relapse1#</td>
+					 <td>#startedTreatment.mdrshr0514.Relapse2#</td>
+					 <td>#startedTreatment.mdrshr0514.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrshr0514.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrshr0514.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrshr0514.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrshr0514.Other#</td>
+					 <td>#startedTreatment.mdrshr0514.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>15-17</td>
+				     <td>#startedTreatment.mdrshr1517.New#</td>
+					 <td>#startedTreatment.mdrshr1517.Relapse1#</td>
+					 <td>#startedTreatment.mdrshr1517.Relapse2#</td>
+					 <td>#startedTreatment.mdrshr1517.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrshr1517.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrshr1517.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrshr1517.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrshr1517.Other#</td>
+					 <td>#startedTreatment.mdrshr1517.newTotal#</td>
+				</tr>
+				<tr>
+				     <td colspan=2">of them HIV</td>
+				     <td>#startedTreatment.mdrshrhiv.New#</td>
+					 <td>#startedTreatment.mdrshrhiv.Relapse1#</td>
+					 <td>#startedTreatment.mdrshrhiv.Relapse2#</td>
+					 <td>#startedTreatment.mdrshrhiv.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrshrhiv.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrshrhiv.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrshrhiv.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrshrhiv.Other#</td>
+					 <td>#startedTreatment.mdrshrhiv.newTotal#</td>
+					 
+				</tr>
+				
+				<tr>
+				    <td colspan="2">Standard Regimen</td>
+				    <td>#startedTreatment.mdrstr.New#</td>
+					 <td>#startedTreatment.mdrstr.Relapse1#</td>
+					 <td>#startedTreatment.mdrstr.Relapse2#</td>
+					 <td>#startedTreatment.mdrstr.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrstr.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrstr.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrstr.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrstr.Other#</td>
+					 <td>#startedTreatment.mdrstr.newTotal#</td> 
+				</tr>
+				<tr>
+				     <td rowspan=3">of them<br/>children</td>
+				     <td>0-4</td>
+				     <td>#startedTreatment.mdrstr04.New#</td>
+					 <td>#startedTreatment.mdrstr04.Relapse1#</td>
+					 <td>#startedTreatment.mdrstr04.Relapse2#</td>
+					 <td>#startedTreatment.mdrstr04.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrstr04.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrstr04.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrstr04.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrstr04.Other#</td>
+					 <td>#startedTreatment.mdrstr04.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>5-14</td>
+				     <td>#startedTreatment.mdrstr0514.New#</td>
+					 <td>#startedTreatment.mdrstr0514.Relapse1#</td>
+					 <td>#startedTreatment.mdrstr0514.Relapse2#</td>
+					 <td>#startedTreatment.mdrstr0514.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrstr0514.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrstr0514.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrstr0514.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrstr0514.Other#</td>
+					 <td>#startedTreatment.mdrstr0514.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>15-17</td>
+				     <td>#startedTreatment.mdrstr1517.New#</td>
+					 <td>#startedTreatment.mdrstr1517.Relapse1#</td>
+					 <td>#startedTreatment.mdrstr1517.Relapse2#</td>
+					 <td>#startedTreatment.mdrstr1517.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrstr1517.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrstr1517.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrstr1517.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrstr1517.Other#</td>
+					 <td>#startedTreatment.mdrstr1517.newTotal#</td>
+				</tr>
+				<tr>
+				     <td colspan=2">of them HIV</td>
+				     <td>#startedTreatment.mdrstrhiv.New#</td>
+					 <td>#startedTreatment.mdrstrhiv.Relapse1#</td>
+					 <td>#startedTreatment.mdrstrhiv.Relapse2#</td>
+					 <td>#startedTreatment.mdrstrhiv.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrstrhiv.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrstrhiv.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrstrhiv.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrstrhiv.Other#</td>
+					 <td>#startedTreatment.mdrstrhiv.newTotal#</td>
+				</tr>
+				<tr>
+				    <td colspan="2">Total RR/MDR TB</td>
+				     <td>#startedTreatment.mdrtotal.New#</td>
+					 <td>#startedTreatment.mdrtotal.Relapse1#</td>
+					 <td>#startedTreatment.mdrtotal.Relapse2#</td>
+					 <td>#startedTreatment.mdrtotal.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrtotal.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrtotal.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrtotal.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrtotal.Other#</td>
+					 <td>#startedTreatment.mdrtotal.newTotal#</td> 
+				</tr>
+				<tr>
+				     <td rowspan=3">of them<br/>children</td>
+				     <td>0-4</td>
+				     <td>#startedTreatment.mdrtotal04.New#</td>
+					 <td>#startedTreatment.mdrtotal04.Relapse1#</td>
+					 <td>#startedTreatment.mdrtotal04.Relapse2#</td>
+					 <td>#startedTreatment.mdrtotal04.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrtotal04.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrtotal04.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrtotal04.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrtotal04.Other#</td>
+					 <td>#startedTreatment.mdrtotal04.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>5-14</td>
+				     <td>#startedTreatment.mdrtotal0514.New#</td>
+					 <td>#startedTreatment.mdrtotal0514.Relapse1#</td>
+					 <td>#startedTreatment.mdrtotal0514.Relapse2#</td>
+					 <td>#startedTreatment.mdrtotal0514.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrtotal0514.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrtotal0514.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrtotal0514.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrtotal0514.Other#</td>
+					 <td>#startedTreatment.mdrtotal0514.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>15-17</td>
+				     <td>#startedTreatment.mdrtotal1517.New#</td>
+					 <td>#startedTreatment.mdrtotal1517.Relapse1#</td>
+					 <td>#startedTreatment.mdrtotal1517.Relapse2#</td>
+					 <td>#startedTreatment.mdrtotal1517.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrtotal1517.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrtotal1517.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrtotal1517.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrtotal1517.Other#</td>
+					 <td>#startedTreatment.mdrtotal1517.newTotal#</td>
+				</tr>
+				<tr>
+				     <td colspan=2">of them HIV</td>
+				     <td>#startedTreatment.mdrtotalhiv.New#</td>
+					 <td>#startedTreatment.mdrtotalhiv.Relapse1#</td>
+					 <td>#startedTreatment.mdrtotalhiv.Relapse2#</td>
+					 <td>#startedTreatment.mdrtotalhiv.AfterDefault1#</td>
+					 <td>#startedTreatment.mdrtotalhiv.AfterDefault2#</td>
+					 <td>#startedTreatment.mdrtotalhiv.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.mdrtotalhiv.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.mdrtotalhiv.Other#</td>
+					 <td>#startedTreatment.mdrtotalhiv.newTotal#</td>
+				</tr>
+				
+				
+				<tr>
+				    <td colspan="11" align="center">Pre-XDR/XDR TB</td> 
+				</tr>
+				<tr>
+				   <td colspan="2">Individual Regimen*</td>
+				   <td>#startedTreatment.xdrind.New#</td>
+					 <td>#startedTreatment.xdrind.Relapse1#</td>
+					 <td>#startedTreatment.xdrind.Relapse2#</td>
+					 <td>#startedTreatment.xdrind.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrind.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrind.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrind.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrind.Other#</td>
+					 <td>#startedTreatment.xdrind.newTotal#</td>
+				</tr>
+				
+				<tr>
+				     <td rowspan=3">of them<br/>children</td>
+				     <td>0-4</td>
+				     <td>#startedTreatment.xdrind04.New#</td>
+					 <td>#startedTreatment.xdrind04.Relapse1#</td>
+					 <td>#startedTreatment.xdrind04.Relapse2#</td>
+					 <td>#startedTreatment.xdrind04.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrind04.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrind04.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrind04.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrind04.Other#</td>
+					 <td>#startedTreatment.xdrind04.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>5-14</td>
+				     <td>#startedTreatment.xdrind0514.New#</td>
+					 <td>#startedTreatment.xdrind0514.Relapse1#</td>
+					 <td>#startedTreatment.xdrind0514.Relapse2#</td>
+					 <td>#startedTreatment.xdrind0514.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrind0514.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrind0514.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrind0514.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrind0514.Other#</td>
+					 <td>#startedTreatment.xdrind0514.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>15-17</td>
+				     <td>#startedTreatment.xdrind1517.New#</td>
+					 <td>#startedTreatment.xdrind1517.Relapse1#</td>
+					 <td>#startedTreatment.xdrind1517.Relapse2#</td>
+					 <td>#startedTreatment.xdrind1517.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrind1517.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrind1517.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrind1517.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrind1517.Other#</td>
+					 <td>#startedTreatment.xdrind1517.newTotal#</td>
+				</tr>
+				<tr>
+				     <td colspan=2">of them HIV</td>
+				     <td>#startedTreatment.xdrindhiv.New#</td>
+					 <td>#startedTreatment.xdrindhiv.Relapse1#</td>
+					 <td>#startedTreatment.xdrindhiv.Relapse2#</td>
+					 <td>#startedTreatment.xdrindhiv.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrindhiv.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrindhiv.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrindhiv.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrindhiv.Other#</td>
+					 <td>#startedTreatment.xdrindhiv.newTotal#</td>
+					 
+				</tr>
+				
+				<tr>
+				    <td colspan="2">Standard Regimen</td>
+				    <td>#startedTreatment.xdrstr.New#</td>
+					 <td>#startedTreatment.xdrstr.Relapse1#</td>
+					 <td>#startedTreatment.xdrstr.Relapse2#</td>
+					 <td>#startedTreatment.xdrstr.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrstr.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrstr.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrstr.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrstr.Other#</td>
+					 <td>#startedTreatment.xdrstr.newTotal#</td> 
+				</tr>
+				<tr>
+				     <td rowspan=3">of them<br/>children</td>
+				     <td>0-4</td>
+				     <td>#startedTreatment.xdrstr04.New#</td>
+					 <td>#startedTreatment.xdrstr04.Relapse1#</td>
+					 <td>#startedTreatment.xdrstr04.Relapse2#</td>
+					 <td>#startedTreatment.xdrstr04.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrstr04.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrstr04.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrstr04.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrstr04.Other#</td>
+					 <td>#startedTreatment.xdrstr04.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>5-14</td>
+				     <td>#startedTreatment.xdrstr0514.New#</td>
+					 <td>#startedTreatment.xdrstr0514.Relapse1#</td>
+					 <td>#startedTreatment.xdrstr0514.Relapse2#</td>
+					 <td>#startedTreatment.xdrstr0514.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrstr0514.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrstr0514.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrstr0514.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrstr0514.Other#</td>
+					 <td>#startedTreatment.xdrstr0514.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>15-17</td>
+				     <td>#startedTreatment.xdrstr1517.New#</td>
+					 <td>#startedTreatment.xdrstr1517.Relapse1#</td>
+					 <td>#startedTreatment.xdrstr1517.Relapse2#</td>
+					 <td>#startedTreatment.xdrstr1517.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrstr1517.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrstr1517.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrstr1517.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrstr1517.Other#</td>
+					 <td>#startedTreatment.xdrstr1517.newTotal#</td>
+				</tr>
+				<tr>
+				     <td colspan=2">of them HIV</td>
+				     <td>#startedTreatment.xdrstrhiv.New#</td>
+					 <td>#startedTreatment.xdrstrhiv.Relapse1#</td>
+					 <td>#startedTreatment.xdrstrhiv.Relapse2#</td>
+					 <td>#startedTreatment.xdrstrhiv.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrstrhiv.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrstrhiv.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrstrhiv.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrstrhiv.Other#</td>
+					 <td>#startedTreatment.xdrstrhiv.newTotal#</td>
+				</tr>
+				<tr>
+				    <td colspan="2">Total Pre-XDR/XDR TB</td>
+				    <td>#startedTreatment.xdrtotal.New#</td>
+					 <td>#startedTreatment.xdrtotal.Relapse1#</td>
+					 <td>#startedTreatment.xdrtotal.Relapse2#</td>
+					 <td>#startedTreatment.xdrtotal.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrtotal.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrtotal.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrtotal.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrtotal.Other#</td>
+					 <td>#startedTreatment.xdrtotal.newTotal#</td>
+				</tr>
+				<tr>
+				     <td rowspan=3">of them<br/>children</td>
+				     <td>0-4</td>
+				     <td>#startedTreatment.xdrtotal04.New#</td>
+					 <td>#startedTreatment.xdrtotal04.Relapse1#</td>
+					 <td>#startedTreatment.xdrtotal04.Relapse2#</td>
+					 <td>#startedTreatment.xdrtotal04.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrtotal04.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrtotal04.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrtotal04.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrtotal04.Other#</td>
+					 <td>#startedTreatment.xdrtotal04.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>5-14</td>
+				     <td>#startedTreatment.xdrtotal0514.New#</td>
+					 <td>#startedTreatment.xdrtotal0514.Relapse1#</td>
+					 <td>#startedTreatment.xdrtotal0514.Relapse2#</td>
+					 <td>#startedTreatment.xdrtotal0514.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrtotal0514.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrtotal0514.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrtotal0514.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrtotal0514.Other#</td>
+					 <td>#startedTreatment.xdrtotal0514.newTotal#</td>
+				</tr>
+				<tr>
+				     <td>15-17</td>
+				     <td>#startedTreatment.xdrtotal1517.New#</td>
+					 <td>#startedTreatment.xdrtotal1517.Relapse1#</td>
+					 <td>#startedTreatment.xdrtotal1517.Relapse2#</td>
+					 <td>#startedTreatment.xdrtotal1517.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrtotal1517.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrtotal1517.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrtotal1517.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrtotal1517.Other#</td>
+					 <td>#startedTreatment.xdrtotal1517.newTotal#</td>
+				</tr>
+				<tr>
+				     <td colspan=2">of them HIV</td>
+				     <td>#startedTreatment.xdrtotalhiv.New#</td>
+					 <td>#startedTreatment.xdrtotalhiv.Relapse1#</td>
+					 <td>#startedTreatment.xdrtotalhiv.Relapse2#</td>
+					 <td>#startedTreatment.xdrtotalhiv.AfterDefault1#</td>
+					 <td>#startedTreatment.xdrtotalhiv.AfterDefault2#</td>
+					 <td>#startedTreatment.xdrtotalhiv.AfterFailureCategoryI#</td>
+					 <td>#startedTreatment.xdrtotalhiv.AfterFailureCategoryII#</td>
+					 <td>#startedTreatment.xdrtotalhiv.Other#</td>
+					 <td>#startedTreatment.xdrtotalhiv.newTotal#</td>
+				</tr>
+				
+				</table>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<!-- <table>
 				<tr>
 				    <td rowspan="3">RR/MDR-TB</td>
 				    <td>M</td>
@@ -281,11 +1031,11 @@
 					<td>#startedTreatment.children.Other#</td>
 					<td>#startedTreatment.children.newTotal#</td>
 				</tr>
-			</table>
+			</table> -->
 			
-			<br/><br/>
 			
-			<table width="100%"><tr><td align="right">Signature ______________________________</td></tr></table>
+			
+			
 		</div>
 	</body>
 </html>

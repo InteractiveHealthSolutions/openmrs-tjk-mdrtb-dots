@@ -20,7 +20,7 @@
 			<tr>
 				
 				<td width="90%" align="center" style="font-size:14px; font-weight:bold;border:0px">
-						QUARTERLY REPORT ON TREATMENT OUTCOMES OF TB CASES REGISTERED 12-15 MONTHS AGO 	
+						Quarterly report on results of treatment of TB cases registered 12-15 months ago
 				</td>
 				<td width="10%" align="right" style="font-size:14px; font-weight:bold;border:0px;" valign="top" border="0">&nbsp;</td>
 			</tr></table>
@@ -29,13 +29,13 @@
 		<tr>
 		<td>
 		Name of health facility:______________________ <br/>
-		District/ city: <u> #location# </u><br/>
+		Region/city/district  <u> #location# </u><br/>
 		Name of TB coordinator ____________________Signature ____________<br/>
 		</td>
 		
 		<td>
-		Patients registered during <u> #quarter# </u> quarter <u> #year# </u> year <br/>
-		Date of filling:  _____________
+		TB cases detected during quarter  <u> #quarter# </u> of <u> #year# </u> year <br/>
+		Date of report:  _____________
 		</td>
 		</tr>
 		</table>	
@@ -50,12 +50,11 @@
 					<td rowspan="2">
 						&nbsp;</td>
 					<td rowspan="2" style="text-align: center;">
-						Total Registered</td>
+						TB cases detected, total</td>
 					<td rowspan="2">
 						<div style="text-align: center;">
-							Evaluable&nbsp;</div>
-						<div style="text-align: center;">
-							cohort &nbsp;</div>
+							Cohort eligible for evaluation &nbsp;</div>
+						
 					</td>
 					<td rowspan="2" style="text-align: center;">
 						Cured</td>
@@ -72,15 +71,15 @@
 							&nbsp;</p>
 					</td>
 					<td rowspan="2" style="text-align: center;">
-						Failure</td>
+						Treatment failure</td>
 					<td rowspan="2" style="text-align: center;">
-						Default</td>
+						Lost to follow-up</td>
 					
 					<td rowspan="2">
 						<div style="text-align: center;">
-							Total&nbsp;</div>
+							Total &nbsp;</div>
 						<div style="text-align: center;">
-							(C+D+E)&nbsp;</div>
+							(3+4+5+6+7+8)&nbsp;</div>
 						<div style="text-align: center;">
 							+F+G+H)&nbsp;</div>
 					</td>
@@ -100,11 +99,9 @@
 					</td>
 					<td rowspan="2">
 						<div style="text-align: center;">
-							Started&nbsp;</div>
+							Started treatment on </div>
 						<div style="text-align: center;">
-							SLD&nbsp;</div>
-						<div style="text-align: center;">
-							treatment&nbsp;</div>
+							Regimen II&nbsp;</div>
 					</td>
 				</tr>
 				<tr align="center">
@@ -118,29 +115,29 @@
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>
-						A</td>
+						1</td>
 					<td>
-						B</td>
+						2</td>
 					<td>
-						C</td>
+						3</td>
 					<td>
-						D</td>
+						4</td>
 					<td>
-						E</td>
+						5</td>
 					<td>
-						F</td>
+						6</td>
 					<td>
-						G</td>
+						7</td>
 					<td>
-						H</td>
+						8</td>
 					<td>
-						I</td>
+						9</td>
 					<td>
-						J</td>
+						10</td>
 					<td>
-						K</td>
+						11</td>
 					<td>
-						L</td>
+						12</td>
 					
 				</tr>
 				<tr>
@@ -168,7 +165,7 @@
 					<td>
 						1.1</td>
 					<td>
-						Pulmonary TB LD&nbsp;</td>
+						PTB with BC&nbsp;</td>
 					<td>
 						#tbl.newptbld.reg#</td>
 					<td>
@@ -288,7 +285,7 @@
 					<td>
 						1.2</td>
 					<td>
-						Pulmonary TB SD </td>
+						PTB with CD </td>
 					<td>
 						#tbl.newptbsd.reg#</td>
 					<td>
@@ -408,7 +405,7 @@
 					<td>
 						&nbsp;1.3</td>
 					<td>
-						Extrapulmonary L/SD</td>
+						EP TB</td>
 					<td>
 						#tbl.neweptb.reg#</td>
 					<td>
@@ -528,7 +525,7 @@
 					<td>
 						&nbsp;</td>
 					<td style="font: bold;">
-						Total(1.1+2.1+3.1)</td>
+						Total(1.1+1.2+1.3)</td>
 					<td>
 						#tbl.newTotal.reg#</td>
 					<td>
@@ -676,7 +673,7 @@
 					<td>
 						2.1</td>
 					<td>
-						Pulmonary TB LD</td>
+						PTB with BC</td>
 					<td>
 						#tbl.relapseptbld.reg#</td>
 					<td>
@@ -795,7 +792,7 @@
 					<td>
 						2.2</td>
 					<td>
-						Pulmonary TB SD </td>
+						PTB with CD </td>
 					<td>
 						#tbl.relapseptbsd.reg#</td>
 					<td>
@@ -915,7 +912,7 @@
 					<td>
 						2.3</td>
 					<td>
-						Extrapulmonary L/SD </td>
+						EP TB </td>
 					<td>
 						#tbl.relapseeptb.reg#</td>
 					<td>
@@ -1035,7 +1032,7 @@
 					<td>
 						&nbsp;</td>
 					<td style="font:bold;">
-					Total(2.1+2.3)</td>
+					Total(2.1+2.2+2.3)</td>
 					<td>
 						#tbl.relapseTotal.reg#</td>
 					<td>
@@ -1155,7 +1152,7 @@
 					<td style="font: bold;">
 						3</td>
 					<td style="font: bold;">
-						Failure</td>
+						After treatment failure</td>
 					<td>
 						&nbsp;</td>
 					<td>
@@ -1186,7 +1183,7 @@
 					<td>
 						3.1</td>
 					<td>
-						Pulmonary TB LD </td>
+						PTB with BC </td>
 					<td>
 						#tbl.failureptbld.reg#</td>
 					<td>
@@ -1217,7 +1214,7 @@
 					<td>
 						3.2</td>
 					<td>
-						Pulmonary TB SD</td>
+						PTB with CD</td>
 					<td>
 						#tbl.failureptbsd.reg#</td>
 					<td>
@@ -1248,7 +1245,7 @@
 					<td>
 						3.3</td>
 					<td>
-						Extrapulmonary L/SD</td>
+						EP TB</td>
 					<td>
 						#tbl.failureeptb.reg#</td>
 					<td>
@@ -1276,10 +1273,42 @@
 						#tbl.failureeptb.sld#</td>
 				</tr>
 				<tr>
+					<td>
+						&nbsp;</td>
+					<td style="font: bold;">
+						<b>Total</b></td>
+					<td>
+						#tbl.failureTotal.reg#</td>
+					<td>
+						#tbl.failureTotal.eval#</td>
+					<td>
+						#tbl.failureTotal.cured#</td>
+					<td>
+						#tbl.failureTotal.tx#</td>
+					
+					<td>
+						#tbl.failureTotal.tbdeath#</td>
+					<td>
+						#tbl.failureTotal.notbdeath#</td>
+					<td>
+						#tbl.failureTotal.fail#</td>
+					<td>
+						#tbl.failureTotal.def#</td>
+					<td>
+						#tbl.failureTotal.coltotal#</td>
+					<td>
+						#tbl.failureTotal.tout#</td>
+					<td>
+						#tbl.failureTotal.canceled#</td>
+					<td>
+						#tbl.failureTotal.sld#</td>
+					
+				</tr>
+				<tr>
 					<td style="font: bold;">
 						4</td>
 					<td style="font: bold;">
-						Default</td>
+						After treatment default</td>
 					<td>
 						&nbsp;</td>
 					<td>
@@ -1307,7 +1336,7 @@
 					<td>
 						4.1</td>
 					<td>
-						Pulmonary TB LD </td>
+						PTB with BC </td>
 					<td>
 						#tbl.defaultptbld.reg#</td>
 					<td>
@@ -1339,7 +1368,7 @@
 					<td>
 						4.2</td>
 					<td>
-						Pulmonary TB SD</td>
+						PTB with CD</td>
 					<td>
 						#tbl.defaultptbsd.reg#</td>
 					<td>
@@ -1371,7 +1400,7 @@
 					<td>
 						4.3</td>
 					<td>
-						Extrapulmonary L/SD</td>
+						EP TB</td>
 					
 					<td>
 						#tbl.defaulteptb.reg#</td>
@@ -1401,13 +1430,45 @@
 						#tbl.defaulteptb.sld#</td>
 					
 				</tr>
-				
+				<tr>
+					<td>
+						&nbsp;</td>
+					<td style="font: bold;">
+						<b>Total</b></td>
+					<td>
+						#tbl.defaultTotal.reg#</td>
+					<td>
+						#tbl.defaultTotal.eval#</td>
+					<td>
+						#tbl.defaultTotal.cured#</td>
+					<td>
+						#tbl.defaultTotal.tx#</td>
+					
+					<td>
+						#tbl.defaultTotal.tbdeath#</td>
+					<td>
+						#tbl.defaultTotal.notbdeath#</td>
+					<td>
+						#tbl.defaultTotal.fail#</td>
+					<td>
+						#tbl.defaultTotal.def#</td>
+					<td>
+						#tbl.defaultTotal.coltotal#</td>
+					<td>
+						#tbl.defaultTotal.tout#</td>
+					
+					<td>
+						#tbl.defaultTotal.canceled#</td>
+					<td>
+						#tbl.defaultTotal.sld#</td>
+					
+					
+				</tr>
 				<tr>
 					<td style="font: bold;">
 						5</td>
 					<td style="font: bold;">
-						Other  (unknown  TB  history, 
-						others)</td>
+						Other</td>
 					<td>
 						&nbsp;</td>
 					<td>
@@ -1436,7 +1497,7 @@
 					<td>
 						5.1</td>
 					<td>
-						Pulmonary TB LD</td>
+						PTB with BC</td>
 					<td>
 						#tbl.otherptbld.reg#</td>
 					<td>
@@ -1468,7 +1529,7 @@
 					<td>
 						5.2</td>
 					<td>
-						Pulmonary TB SD</td>
+						PTB with CD</td>
 					
 					<td>
 						#tbl.otherptbsd.reg#</td>
@@ -1500,7 +1561,7 @@
 					<td>
 						5.3</td>
 					<td>
-						Extrapulmonary L/SD </td>
+						EP TB </td>
 					
 					<td>
 						#tbl.othereptb.reg#</td>
@@ -1530,12 +1591,45 @@
 						#tbl.othereptb.sld#</td>
 				</tr>
 				
+			 <tr>
+					<td>
+						&nbsp;</td>
+					<td style="font: bold;">
+						<b>Total</b> </td>
+					<td>
+						#tbl.otherTotal.reg#</td>
+					<td>
+						#tbl.otherTotal.eval#</td>
+					<td>
+						#tbl.otherTotal.cured#</td>
+					<td>
+						#tbl.otherTotal.tx#</td>
+					<td>
+						#tbl.otherTotal.tbdeath#</td>
+					<td>
+					#tbl.otherTotal.notbdeath#
+						</td>
+					<td>
+						#tbl.otherTotal.fail#</td>
+					<td>
+						#tbl.otherTotal.def#</td>
+					<td>
+						#tbl.otherTotal.coltotal#</td>
+					<td>
+						#tbl.otherTotal.tout#</td>
+					<td>
+						#tbl.otherTotal.canceled#</td>
+					<td>
+						#tbl.otherTotal.sld#</td>
+			     </tr>
+				
 				<tr>
-					<td style="font: bold;" colspan="2">
+				     <td>&nbsp;
+						</td>
+					<td style="font: bold;">
 						Total (3(3.1+3.3) + 4 (4.1.+4.3.) +5 
 						(5.1.+5.3) </td>
-					<td>
-						</td>
+					
 					<td>
 						&nbsp;</td>
 					<td>
@@ -1563,7 +1657,7 @@
 					<td>
 						&nbsp;</td>
 					<td>
-						Pulmonary TB LD </td>
+						PTB with BC </td>
 					<td>
 						#tbl.totalptbld.reg#</td>
 					<td>
@@ -1594,7 +1688,7 @@
 					<td>
 						&nbsp;</td>
 					<td>
-						Pulmonary TB SD </td>
+						PTB with CD </td>
 					<td>
 						#tbl.totalptbsd.reg#</td>
 					<td>
@@ -1625,7 +1719,7 @@
 					<td>
 						&nbsp;</td>
 					<td>
-						Extrapulmonary L/SD</td>
+						EP TB</td>
 					<td>
 						#tbl.totaleptb.reg#</td>
 					<td>
@@ -1652,6 +1746,40 @@
 					<td>
 						#tbl.totaleptb.sld#</td>
 				</tr>
+				<tr>
+					<td>&nbsp;
+						</td>
+					<td style="font: bold;">
+						Total (1+2+3+4+5) </td>
+					
+					<td>
+						#tbl.total.reg#</td>
+					<td>
+						#tbl.total.eval#</td>
+					<td>
+						#tbl.total.cured#</td>
+					<td>
+						#tbl.total.tx#</td>
+					<td>
+						#tbl.total.tbdeath#</td>
+					<td>
+						#tbl.total.notbdeath#</td>
+					<td>
+						#tbl.total.fail#</td>
+					<td>
+						#tbl.total.def#</td>
+					
+					<td>
+						#tbl.total.coltotal#</td>
+					<td>
+						#tbl.total.tout#</td>
+					<td>
+						#tbl.total.canceled#</td>
+					<td>
+						#tbl.total.sld#</td>
+					
+				</tr>
+				
 			</tbody>
 		</table>
 		</div>

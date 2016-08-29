@@ -34,8 +34,10 @@ import org.openmrs.module.dotsreports.reporting.data.Cohorts;
 import org.openmrs.module.dotsreports.reporting.definition.DotsDstResultCohortDefinition;
 import org.openmrs.module.dotsreports.service.TbService;
 import org.openmrs.module.reporting.cohort.definition.CodedObsCohortDefinition;
+import org.openmrs.module.reporting.cohort.definition.DateObsCohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.CompositionCohortDefinition;
+import org.openmrs.module.reporting.common.RangeComparator;
 import org.openmrs.module.reporting.common.SetComparator;
 import org.openmrs.module.reporting.evaluation.EvaluationContext;
 import org.openmrs.module.reporting.evaluation.parameter.Mapped;
@@ -919,4 +921,35 @@ public class ReportUtil {
 		
 		return tbPatientProgramsMap;
 	}
+	
+	public static DateObsCohortDefinition getDateObsCohort(TimeModifier tm, Concept question, 
+			  Date fromDate, Date toDate) {
+		
+		
+		DateObsCohortDefinition def = new DateObsCohortDefinition();
+		def.setQuestion(question);
+		def.setTimeModifier(tm);
+		/*def.setOnOrAfter(fromDate);
+		def.setOnOrBefore(toDate);*/
+		
+		
+		
+		if(fromDate !=null) {
+			def.setOperator1(RangeComparator.GREATER_EQUAL);
+			def.setValue1(fromDate);
+		}
+			
+		
+		
+		
+		if(toDate != null) {
+			def.setOperator2(RangeComparator.LESS_EQUAL);
+			def.setValue2(toDate);
+		}
+			
+		
+		return def;
+		
+	}
+	
 }

@@ -363,7 +363,7 @@ public ReportData evaluateReport(EvaluationContext context) {
 			table1.addRow("failureptbld", ReportUtil.getCompositionCohort("AND", pulmonary,allTB,allFailures,haveLabDiagnosis), null);
 			table1.addRow("failureptbsd", ReportUtil.getCompositionCohort("AND", pulmonary,allTB,allFailures,haveClinicalDiagnosis), null);
 			table1.addRow("failureeptb", ReportUtil.getCompositionCohort("AND", extrapulmonary,allTB,allFailures,haveClinicalDiagnosis), null);
-			//table1.addRow("failureTotal", ReportUtil.getCompositionCohort("AND", allTB, allFailures,ReportUtil.getCompositionCohort("OR",pulmonaryLabDiagnosis,pulmonaryClinicalDiagnosis,extrapulmonary) ) ,null);
+			table1.addRow("failureTotal", ReportUtil.getCompositionCohort("AND", allTB, allFailures,ReportUtil.getCompositionCohort("OR",pulmonaryLabDiagnosis,pulmonaryClinicalDiagnosis,extrapulmonary) ) ,null);
 			
 			//DEFAULT
 			table1.addRow("defaultptbld", ReportUtil.getCompositionCohort("AND", pulmonary,allTB,allDefault,haveLabDiagnosis), null);
@@ -379,12 +379,15 @@ public ReportData evaluateReport(EvaluationContext context) {
 			table1.addRow("otherTotal", ReportUtil.getCompositionCohort("AND", allTB, allOthers,ReportUtil.getCompositionCohort("OR",pulmonaryLabDiagnosis,pulmonaryClinicalDiagnosis,extrapulmonary) ) ,null);
 			
 			//TOTAL
-			table1.addRow("totalptbld", ReportUtil.getCompositionCohort("AND", pulmonary,allTB,haveLabDiagnosis),null);
-			table1.addRow("totalptbsd", ReportUtil.getCompositionCohort("AND", pulmonary,allTB,haveClinicalDiagnosis),null);
-			table1.addRow("totaleptb", ReportUtil.getCompositionCohort("AND", extrapulmonary,allTB),null);
+			table1.addRow("totalptbld", ReportUtil.getCompositionCohort("AND", pulmonary,ReportUtil.getCompositionCohort("OR", allFailures,allDefault,allOthers),haveLabDiagnosis),null);
+			table1.addRow("totalptbsd", ReportUtil.getCompositionCohort("AND", pulmonary,pulmonary,ReportUtil.getCompositionCohort("OR", allFailures,allDefault,allOthers),haveClinicalDiagnosis),null);
+			table1.addRow("totaleptb", ReportUtil.getCompositionCohort("AND", extrapulmonary,pulmonary,ReportUtil.getCompositionCohort("OR", allFailures,allDefault,allOthers)),null);
 //			table1.addRow("totalptbld", ReportUtil.getCompositionCohort("AND", pulmonary,allTB,haveLabDiagnosis),null);
 //			table1.addRow("totalptbsd", ReportUtil.getCompositionCohort("AND", pulmonary,allTB,haveClinicalDiagnosis),null);
-			table1.addRow("totaltotal", ReportUtil.getCompositionCohort("AND", allTB, ReportUtil.getCompositionCohort("OR",pulmonaryLabDiagnosis,pulmonaryClinicalDiagnosis,extrapulmonary)) ,null);
+			table1.addRow("totaltotal", ReportUtil.getCompositionCohort("AND", pulmonary,ReportUtil.getCompositionCohort("OR", allFailures,allDefault,allOthers), ReportUtil.getCompositionCohort("OR",pulmonaryLabDiagnosis,pulmonaryClinicalDiagnosis,extrapulmonary)) ,null);
+			
+			//TOTAL
+			table1.addRow("total", allTB,null);
 			
 			/////////////////////////////////////////////////////
 			////      			COLUMNS           			////

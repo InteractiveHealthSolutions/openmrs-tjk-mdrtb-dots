@@ -40,6 +40,7 @@ import org.openmrs.module.mdrtb.reporting.definition.MdrtbProgramClosedAfterTrea
 import org.openmrs.module.mdrtb.reporting.definition.MdrtbProgramLocationCohortDefinition;
 import org.openmrs.module.mdrtb.reporting.definition.MdrtbTJKPatientDistrictCohortDefinition;
 import org.openmrs.module.mdrtb.reporting.definition.ResistanceTypeCohortDefinition;
+import org.openmrs.module.mdrtb.reporting.definition.SLDRegimenTypeCohortDefinition;
 import org.openmrs.module.mdrtb.reporting.definition.TestReferralCohortDefinition;
 
 import org.openmrs.module.mdrtb.reporting.definition.MdrtbTreatmentStartedCohortDefinition;
@@ -533,6 +534,15 @@ public class Cohorts {
 			q.append("and	o.obs_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
 		}
 		return new SqlCohortDefinition(q.toString());
+	}
+	
+	public static CohortDefinition getSLDRegimenFilter(Date startDate, Date endDate, Concept regType) {
+		SLDRegimenTypeCohortDefinition cd = new SLDRegimenTypeCohortDefinition();
+		cd.setStartDate(startDate);
+		cd.setEndDate(endDate);		
+		cd.setRegType(regType);
+		
+		return cd;
 	}
 	
 	/**

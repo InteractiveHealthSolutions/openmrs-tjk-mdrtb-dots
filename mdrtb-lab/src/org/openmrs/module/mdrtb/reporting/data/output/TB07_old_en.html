@@ -1,0 +1,291 @@
+<html>
+	<head>
+		<title>TB-07y</title>
+	</head>
+	<body>
+		<style>
+			th {vertical-align:top; text-align:left;}
+			th, td {font-size:smaller;}
+			.vertical-text {
+			transform: rotate(270deg);
+			transform-origin: left top 0;
+			float: left;
+		}
+		</style>
+		<div style="font-size:smaller; width:980px;">
+			<table width="100%"><tr>
+				<td width="10%">&nbsp;</td>
+				<td width="50%" align="center" style="font-size:14px; font-weight:bold;">Quarterly report on MDR-TB detection and Category IV treatment start</td>
+				<td width="10%" align="right">TB-07y</td>
+			</tr></table>
+			<br/><br/>
+			<table width="100%">
+				<tr>
+					<td>Name of area:  #location#</td>
+					<td>Name of area coordinator:  ________________</td>
+				</tr>
+				<tr>
+					<td>Patients identified during Q#quarter# #year# (#startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#)</td>
+					<td>Date: #generationDate|dd/MMM/yyyy#</td>
+				</tr>
+			</table>
+			<br/>
+			<br/>
+			<span style="font-weight:bold;">
+				1 - Number of DR TB cases detected during the quarter: <br/><br/>
+				<center><table>
+					<tr>
+						<td>RR/MDR-TB</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.mdr#
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td>PDR</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.pdr#
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;</td>
+						<td>XDR</td>
+						<td style="border: 1px solid black; width: 50px; height: 20px; text-align:center;">
+							#labDetections.xdr#
+						</td>
+					</tr>
+				</table></center>
+			</span>
+			<br/><br/>
+			
+			<span style="font-weight:bold;">
+				2 - Number of DR TB cases, started treatment during the quarter
+			</span>
+			<br/><br/>
+			<table border="1" cellpadding="5" width="100%">
+				<tr align="center">
+				 	<td>&nbsp;</td>
+				    <td>&nbsp;</td>
+					<td colspan="7">Registration Group</td>
+					<td rowspan="3">Other</td>
+					<td rowspan="3">Total</td>
+				</tr>
+				<tr align="center">
+					<td rowspan="2">&nbsp;</td>
+					<td rowspan="2">&nbsp;</td>
+					<td rowspan="2">New</td> <!-- new -->
+					<td colspan="6">Re-treatment</td> <!-- treated -->
+				</tr>
+				<tr align="center">
+					<td>Relapse After<br/>Regimen 1</td> <!-- relapse -->
+					<td>Relapse After<br/>Regimen 2</td> <!-- relapse -->
+					<td>Default After<br/>Regimen 1</td> <!-- after default -->
+					<td>Default After<br/>Regimen 2</td> <!-- after default -->
+					<td>Failure After<br/>Regimen 1</td> <!-- previously treated with Cat 1 -->
+					<td>Failure After<br/>Regimen 2</td>  <!-- previously treated with Cat 2 -->
+				</tr>
+				<tr>
+				    <td rowspan="3">RR/MDR-TB</td>
+				    <td>M</td>
+					<td>#startedTreatment.mdrmale.New#</td>
+					<td>#startedTreatment.mdrmale.Relapse1#</td>
+					<td>#startedTreatment.mdrmale.Relapse2#</td>
+					<td>#startedTreatment.mdrmale.AfterDefault1#</td>
+					<td>#startedTreatment.mdrmale.AfterDefault2#</td>
+					<td>#startedTreatment.mdrmale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.mdrmale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.mdrmale.Other#</td>
+					<td>#startedTreatment.mdrmale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>F</td>
+					<td>#startedTreatment.mdrfemale.New#</td>
+					<td>#startedTreatment.mdrfemale.Relapse1#</td>
+					<td>#startedTreatment.mdrfemale.Relapse2#</td>
+					<td>#startedTreatment.mdrfemale.AfterDefault1#</td>
+					<td>#startedTreatment.mdrfemale.AfterDefault2#</td>
+					<td>#startedTreatment.mdrfemale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.mdrfemale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.mdrfemale.Other#</td>
+					<td>#startedTreatment.mdrfemale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td>#startedTreatment.mdr.New#</td>
+					<td>#startedTreatment.mdr.Relapse1#</td>
+					<td>#startedTreatment.mdr.Relapse2#</td>
+					<td>#startedTreatment.mdr.AfterDefault1#</td>
+					<td>#startedTreatment.mdr.AfterDefault2#</td>
+					<td>#startedTreatment.mdr.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.mdr.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.mdr.Other#</td>
+					<td>#startedTreatment.mdr.newTotal#</td>
+				</tr>
+				<tr>
+				    <td rowspan="3">PDR-TB</td>
+				    <td>M</td>
+				    <td>#startedTreatment.pdrmale.New#</td>
+					<td>#startedTreatment.pdrmale.Relapse1#</td>
+					<td>#startedTreatment.pdrmale.Relapse2#</td>
+					<td>#startedTreatment.pdrmale.AfterDefault1#</td>
+					<td>#startedTreatment.pdrmale.AfterDefault2#</td>
+					<td>#startedTreatment.pdrmale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.pdrmale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.pdrmale.Other#</td>
+					<td>#startedTreatment.pdrmale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>F</td>
+				    <td>#startedTreatment.pdrfemale.New#</td>
+					<td>#startedTreatment.pdrfemale.Relapse1#</td>
+					<td>#startedTreatment.pdrfemale.Relapse2#</td>
+					<td>#startedTreatment.pdrfemale.AfterDefault1#</td>
+					<td>#startedTreatment.pdrfemale.AfterDefault2#</td>
+					<td>#startedTreatment.pdrfemale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.pdrfemale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.pdrfemale.Other#</td>
+					<td>#startedTreatment.pdrfemale.newTotal#</td>
+				</tr>
+				    
+				 <tr>
+				    <td>Total</td>
+					<td>#startedTreatment.pdr.New#</td>
+					<td>#startedTreatment.pdr.Relapse1#</td>
+					<td>#startedTreatment.pdr.Relapse2#</td>
+					<td>#startedTreatment.pdr.AfterDefault1#</td>
+					<td>#startedTreatment.pdr.AfterDefault2#</td>
+					<td>#startedTreatment.pdr.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.pdr.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.pdr.Other#</td>
+					<td>#startedTreatment.pdr.newTotal#</td>
+				</tr>
+				<tr>
+					<td rowspan="3">XDR-TB</td>
+					<td>M</td>
+				    <td>#startedTreatment.xdrmale.New#</td>
+					<td>#startedTreatment.xdrmale.Relapse1#</td>
+					<td>#startedTreatment.xdrmale.Relapse2#</td>
+					<td>#startedTreatment.xdrmale.AfterDefault1#</td>
+					<td>#startedTreatment.xdrmale.AfterDefault2#</td>
+					<td>#startedTreatment.xdrmale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.xdrmale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.xdrmale.Other#</td>
+					<td>#startedTreatment.xdrmale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>F</td>
+				    <td>#startedTreatment.xdrfemale.New#</td>
+					<td>#startedTreatment.xdrfemale.Relapse1#</td>
+					<td>#startedTreatment.xdrfemale.Relapse2#</td>
+					<td>#startedTreatment.xdrfemale.AfterDefault1#</td>
+					<td>#startedTreatment.xdrfemale.AfterDefault2#</td>
+					<td>#startedTreatment.xdrfemale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.xdrfemale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.xdrfemale.Other#</td>
+					<td>#startedTreatment.xdrfemale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+				    <td>#startedTreatment.xdr.New#</td>
+					<td>#startedTreatment.xdr.Relapse1#</td>
+					<td>#startedTreatment.xdr.Relapse2#</td>
+					<td>#startedTreatment.xdr.AfterDefault1#</td>
+					<td>#startedTreatment.xdr.AfterDefault2#</td>
+					<td>#startedTreatment.xdr.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.xdr.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.xdr.Other#</td>
+					<td>#startedTreatment.xdr.newTotal#</td>
+				
+				</tr>
+				<tr>
+					<td colspan="2">Total</td>
+				    <td>#startedTreatment.total.New#</td>
+					<td>#startedTreatment.total.Relapse1#</td>
+					<td>#startedTreatment.total.Relapse2#</td>
+					<td>#startedTreatment.total.AfterDefault1#</td>
+					<td>#startedTreatment.total.AfterDefault2#</td>
+					<td>#startedTreatment.total.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.total.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.total.Other#</td>
+					<td>#startedTreatment.total.newTotal#</td>
+				</tr>
+				<tr>
+				    <td rowspan="3">TB/HIV</td>
+				    <td>M</td>
+					<td>#startedTreatment.tbhivmale.New#</td>
+					<td>#startedTreatment.tbhivmale.Relapse1#</td>
+					<td>#startedTreatment.tbhivmale.Relapse2#</td>
+					<td>#startedTreatment.tbhivmale.AfterDefault1#</td>
+					<td>#startedTreatment.tbhivmale.AfterDefault2#</td>
+					<td>#startedTreatment.tbhivmale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.tbhivmale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.tbhivmale.Other#</td>
+					<td>#startedTreatment.tbhivmale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>F</td>
+					<td>#startedTreatment.tbhivfemale.New#</td>
+					<td>#startedTreatment.tbhivfemale.Relapse1#</td>
+					<td>#startedTreatment.tbhivfemale.Relapse2#</td>
+					<td>#startedTreatment.tbhivfemale.AfterDefault1#</td>
+					<td>#startedTreatment.tbhivfemale.AfterDefault2#</td>
+					<td>#startedTreatment.tbhivfemale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.tbhivfemale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.tbhivfemale.Other#</td>
+					<td>#startedTreatment.tbhivfemale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td>#startedTreatment.tbhiv.New#</td>
+					<td>#startedTreatment.tbhiv.Relapse1#</td>
+					<td>#startedTreatment.tbhiv.Relapse2#</td>
+					<td>#startedTreatment.tbhiv.AfterDefault1#</td>
+					<td>#startedTreatment.tbhiv.AfterDefault2#</td>
+					<td>#startedTreatment.tbhiv.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.tbhiv.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.tbhiv.Other#</td>
+					<td>#startedTreatment.tbhiv.newTotal#</td>
+				</tr>
+				
+				
+				<tr>
+				    <td rowspan="3">Children</td>
+				    <td>M</td>
+					<td>#startedTreatment.childrenmale.New#</td>
+					<td>#startedTreatment.childrenmale.Relapse1#</td>
+					<td>#startedTreatment.childrenmale.Relapse2#</td>
+					<td>#startedTreatment.childrenmale.AfterDefault1#</td>
+					<td>#startedTreatment.childrenmale.AfterDefault2#</td>
+					<td>#startedTreatment.childrenmale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.childrenmale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.childrenmale.Other#</td>
+					<td>#startedTreatment.childrenmale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>F</td>
+					<td>#startedTreatment.childrenfemale.New#</td>
+					<td>#startedTreatment.childrenfemale.Relapse1#</td>
+					<td>#startedTreatment.childrenfemale.Relapse2#</td>
+					<td>#startedTreatment.childrenfemale.AfterDefault1#</td>
+					<td>#startedTreatment.childrenfemale.AfterDefault2#</td>
+					<td>#startedTreatment.childrenfemale.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.childrenfemale.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.childrenfemale.Other#</td>
+					<td>#startedTreatment.childrenfemale.newTotal#</td>
+				</tr>
+				<tr>
+					<td>Total</td>
+					<td>#startedTreatment.children.New#</td>
+					<td>#startedTreatment.children.Relapse1#</td>
+					<td>#startedTreatment.children.Relapse2#</td>
+					<td>#startedTreatment.children.AfterDefault1#</td>
+					<td>#startedTreatment.children.AfterDefault2#</td>
+					<td>#startedTreatment.children.AfterFailureCategoryI#</td>
+					<td>#startedTreatment.children.AfterFailureCategoryII#</td>
+					<td>#startedTreatment.children.Other#</td>
+					<td>#startedTreatment.children.newTotal#</td>
+				</tr>
+			</table>
+			
+			<br/><br/>
+			
+			<table width="100%"><tr><td align="right">Signature ______________________________</td></tr></table>
+		</div>
+	</body>
+</html>

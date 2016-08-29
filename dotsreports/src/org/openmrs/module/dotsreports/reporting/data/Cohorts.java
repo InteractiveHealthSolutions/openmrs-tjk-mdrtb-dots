@@ -746,4 +746,17 @@ public class Cohorts {
 		
 		return result.toString();
 	}
+	
+	public static CohortDefinition getHivTestedDuring(Date startDate, Date endDate) {
+		return ReportUtil.getDateObsCohort(TimeModifier.ANY, Context.getService(TbService.class).getConcept(TbConcepts.DATE_OF_HIV_TEST), startDate, endDate);
+	} 
+	
+	public static CohortDefinition startedARTDuring(Date startDate, Date endDate) {
+		return ReportUtil.getDateObsCohort(TimeModifier.ANY, Context.getService(TbService.class).getConcept(TbConcepts.DATE_OF_ART_TREATMENT_START), startDate, endDate);
+	} 
+	
+	public static CohortDefinition startedPCTDuring(Date startDate, Date endDate) {
+		return ReportUtil.getDateObsCohort(TimeModifier.ANY, Context.getService(TbService.class).getConcept(TbConcepts.DATE_OF_PCT_TREATMENT_START), startDate, endDate);
+	}
+	
 }

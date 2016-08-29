@@ -56,7 +56,7 @@ import org.openmrs.module.reporting.report.renderer.RenderingMode;
 /**
  * Outcome Report which reports on patient outcome by registration group
  */
-public class TB08TJK implements ReportSpecification {
+public class TB08TJKoldv2 implements ReportSpecification {
 	
 	/**
 	 * @see ReportSpecification#getName()
@@ -151,11 +151,13 @@ public class TB08TJK implements ReportSpecification {
 		CohortDefinition pdrOnly = ReportUtil.minus(pdr, mdr);*/
 		CohortDefinition baseCohort = ReportUtil.getCompositionCohort(baseCohortDefs, "AND");
 		report.setBaseCohortDefinition(baseCohort, null);
-		
+		CohortDefinition xdr = Cohorts.getResistanceTypeFilter(startDate, endDate, TbClassification.XDR_TB);
 		CohortDefinition drtb = Cohorts.getEnrolledInMDRProgramDuring(startDate, endDate);
+		CohortDefinition pulmonary = Cohorts.getAllPulmonaryDuring(startDate,endDate);
+		CohortDefinition extrapulmonary = Cohorts.getAllExtraPulmonaryDuring(startDate,endDate);
 		
-		
-		
+		pulmonary = ReportUtil.getCompositionCohort("AND", drtb,pulmonary);
+		extrapulmonary = ReportUtil.getCompositionCohort("AND", drtb,extrapulmonary);
 		CohortCrossTabDataSetDefinition dsd = new CohortCrossTabDataSetDefinition();
 		
 		// create the rows in the chart
@@ -216,7 +218,7 @@ public class TB08TJK implements ReportSpecification {
 		dsd.addRow("AfterFailure2", groups.get("AfterFailure2"), null);
 		dsd.addRow("Other", ReportUtil.getCompositionCohort("OR",groups.get("Other"),groups.get("TransferredIn")), null);
 		dsd.addRow("Total", drtb,null);
-		
+		dsd.addRow("Xdr", xdr,null);
 		/*dsd.addRow("RelapseMDR", ReportUtil.getCompositionCohort("AND", previousSecondLine, relapseMDR), null);
 		dsd.addRow("DefaultMDR", ReportUtil.getCompositionCohort("AND", previousSecondLine, defaultMDR), null);
 		dsd.addRow("FailureMDR", ReportUtil.getCompositionCohort("AND", previousSecondLine, failureMDR), null);
@@ -224,25 +226,33 @@ public class TB08TJK implements ReportSpecification {
 		dsd.addRow("Total",ReportUtil.getCompositionCohort("OR",newOnly,relapseOnly,defaultOnly,failureCatIOnly,failureCatIIOnly,unknownOnly,relapseMDR,defaultMDR,failureMDR),null);
 */		
 		
-		
+		dsd.addColumn("pRegistered", pulmonary, null);
+		dsd.addColumn("epRegistered", extrapulmonary, null);
 		dsd.addColumn("Registered", drtb, null);
-		
+		dsd.addColumn("pCured", ReportUtil.getCompositionCohort("AND",pulmonary,cured), null);
+		dsd.addColumn("epCured", ReportUtil.getCompositionCohort("AND",extrapulmonary,cured), null);
 		dsd.addColumn("Cured", cured, null);
-		
+		dsd.addColumn("pTreatmentCompleted", ReportUtil.getCompositionCohort("AND",pulmonary,treatmentCompleted), null);
+		dsd.addColumn("epTreatmentCompleted",ReportUtil.getCompositionCohort("AND",extrapulmonary,treatmentCompleted), null);
 		dsd.addColumn("TreatmentCompleted", treatmentCompleted, null);
-		
+		dsd.addColumn("pSuccessfulTreatment", ReportUtil.getCompositionCohort("AND",pulmonary,successfulTreatment), null);
+		dsd.addColumn("epSuccessfulTreatment",ReportUtil.getCompositionCohort("AND",extrapulmonary,successfulTreatment), null);
 		dsd.addColumn("SuccessfulTreatment", successfulTreatment, null);
-		
+		dsd.addColumn("pFailed", ReportUtil.getCompositionCohort("AND",pulmonary,failed), null);
+		dsd.addColumn("epFailed", ReportUtil.getCompositionCohort("AND",extrapulmonary,failed), null);
 		dsd.addColumn("Failed", failed, null);
-		
+		dsd.addColumn("pDefaulted", ReportUtil.getCompositionCohort("AND",pulmonary,ltfu), null);
+		dsd.addColumn("epDefaulted",ReportUtil.getCompositionCohort("AND",extrapulmonary,ltfu), null);
 		dsd.addColumn("Defaulted", ltfu, null);
-		
+		dsd.addColumn("pDiedTB",ReportUtil.getCompositionCohort("AND",pulmonary,tbDied), null);
+		dsd.addColumn("epDiedTB", ReportUtil.getCompositionCohort("AND",extrapulmonary,tbDied), null);
 		dsd.addColumn("DiedTB", tbDied, null);
-		
+		dsd.addColumn("pDiedNonTB", ReportUtil.getCompositionCohort("AND",pulmonary,nonTbDeath), null);
+		dsd.addColumn("epDiedNonTB", ReportUtil.getCompositionCohort("AND",extrapulmonary,nonTbDeath), null);
 		dsd.addColumn("DiedNonTB", nonTbDeath, null);
-		
+		dsd.addColumn("pStillEnrolled", ReportUtil.getCompositionCohort("AND",pulmonary,stillEnrolled), null);
+		dsd.addColumn("epStillEnrolled", ReportUtil.getCompositionCohort("AND",extrapulmonary,stillEnrolled), null);
 		dsd.addColumn("StillEnrolled", stillEnrolled, null);
-		
 		dsd.addColumn("ColTotal",drtb, null);
 		
 		/*for (String key : rows.keySet()) {

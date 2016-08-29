@@ -265,6 +265,13 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				CohortDefinition allRetreatment= ReportUtil.getCompositionCohort("OR",allDefault,allFailures,allOthers,allTransferred ); 
 				//CohortDefinition allExceptNew = ReportUtil.getCompositionCohort("OR",allRelapses,allTransferred,allOthers );
 			
+				CohortDefinition hivTested = Cohorts.getHivTestedDuring(startDate, endDate);
+				hivTested = ReportUtil.getCompositionCohort("OR", hivTested, tbHIV);
+				
+				CohortDefinition artStarted = Cohorts.startedARTDuring(startDate, endDate);
+				CohortDefinition pctStarted = Cohorts.startedPCTDuring(startDate, endDate);
+				
+				
 				
 				//////////////////////TABLE1:ALL NEW AND RETREATMENT CASES /////////////////////
 				CohortCrossTabDataSetDefinition table1 = new CohortCrossTabDataSetDefinition();
@@ -389,6 +396,17 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 				
 				//report.addDataSetDefinition("retreatment", table2, null);
 				report.addDataSetDefinition("all", table1, null);
+				//////////////////////TABLE3:HIV /////////////////////
+				CohortCrossTabDataSetDefinition table3 = new CohortCrossTabDataSetDefinition();
+				table3.addColumn(	"hivtested",hivTested ,null);
+				table3.addColumn(  "hivpositive", tbHIV, null);
+				table3.addColumn(  "artstart", artStarted, null);
+				table3.addColumn(  "pctstart", pctStarted, null);
+				
+				
+				
+				report.addDataSetDefinition("hiv", table3, null);
+				
 				
 		ReportData data;
 		

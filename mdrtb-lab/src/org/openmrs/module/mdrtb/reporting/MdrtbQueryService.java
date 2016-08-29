@@ -368,6 +368,9 @@ public class MdrtbQueryService {
 	    	else if(rType==TbClassification.POLY_RESISTANT_TB)
     			type = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.PDR_TB).getConceptId();
 	    	
+	    	else if(rType==TbClassification.PRE_XDR_TB)
+    			type = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.PRE_XDR_TB).getConceptId();
+	    	
 	    	else if(rType==TbClassification.XDR_TB)
     			type = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.XDR_TB).getConceptId();
 	    	
@@ -404,6 +407,25 @@ public class MdrtbQueryService {
 	    	addOptionalDateClause(q, "and o.value_coded >= ", minResultDate);
 	    	addOptionalDateClause(q, "and o.value_coded <= ", maxResultDate);
 
+	    	
+	    	
+	    	return executeQuery(q.toString(), context);
+	    }
+	 
+	 public static Cohort getPatientsWithSLDRegimenType(EvaluationContext context, Date startDate, Date endDate, Concept regType) {
+	    	
+	    	Integer regimenType = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.TUBERCULOSIS_PATIENT_CATEGORY).getConceptId();
+	    	
+	    	StringBuilder q = new StringBuilder();
+	    	q.append("select 	p.patient_id ");
+	    	q.append("from 		patient p, obs o ");
+	    	q.append("where 	p.patient_id = o.person_id ");
+	    	q.append("and	 	p.voided = 0 and o.voided = 0 ");
+	    	q.append("and		o.concept_id = " + regimenType + " ");
+	    	q.append("and		o.value_coded = " + regType.getConceptId() + " ");
+	    	addOptionalDateClause(q, "and o.obs_datetime >= ", startDate);
+	    	addOptionalDateClause(q, "and o.obs_datetime <= ", endDate);
+	    	
 	    	
 	    	
 	    	return executeQuery(q.toString(), context);

@@ -141,6 +141,7 @@ public class MdrtbConcepts {
     public final static String [] XDR_TB = {"EXTENSIVE DRUG RESISTANT TUBERCULOSIS"};
     public final static String [] RR_TB = {"RR-TB"};
     public final static String [] PDR_TB = {"PDR-TB"};
+    public final static String [] PRE_XDR_TB = {"PRE-XDR"};
     public final static String [] SUSPECTED_MDR_TB = {"SUSPECTED MULTI-DRUG TUBERCULOSIS"};
     public final static String [] TB = {"TUBERCULOSIS"};
     
@@ -213,5 +214,10 @@ public class MdrtbConcepts {
     public final static String [] AGE_AT_MDR_REGISTRATION = {"AGE AT MDR REGISTRATION"};
     public final static String [] MDR_TREATMENT_START_DATE = {"DATE OF MDR TREATMENT START"};
     public final static String [] RESISTANCE_TYPE = {"RESISTANCE TYPE"};
-
+    
+    public final static String [] TUBERCULOSIS_PATIENT_CATEGORY = {"TUBERCULOSIS PATIENT CATEGORY"};
+    public final static String [] REGIMEN_2_STANDARD = {"REGIMEN 2 STANDARD"};
+    public final static String [] REGIMEN_2_SHORT = {"REGIMEN 2 SHORT"};
+    public final static String [] REGIMEN_2_INDIVIDUALIZED = {"REGIMEN 2 INDIVIDUALIZED"};
+    
 }
