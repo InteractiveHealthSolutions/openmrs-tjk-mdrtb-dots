@@ -1375,6 +1375,9 @@ form {
 	document.getElementById('new_column').style.display = "none";
 	document.getElementById('old_column').style.display = "none";
 
+	sortSelect(document.getElementById('microscopyResult'));
+	
+
 	if(window.location.href.indexOf("labResultId") > -1) {
 		document.getElementById('old_column').style.display = "block";
 		document.getElementById("specimen_edit_span").style.display = "block";
@@ -1977,7 +1980,24 @@ form {
 		}
 		
 	}
-	  
+
+	function sortSelect(selElem) {
+	    var tmpAry = new Array();
+	    for (var i=0;i<selElem.options.length;i++) {
+	        tmpAry[i] = new Array();
+	        tmpAry[i][0] = selElem.options[i].text;
+	        tmpAry[i][1] = selElem.options[i].value;
+	    }
+	    tmpAry.sort();
+	    while (selElem.options.length > 0) {
+	        selElem.options[0] = null;
+	    }
+	    for (var i=0;i<tmpAry.length;i++) {
+	        var op = new Option(tmpAry[i][0], tmpAry[i][1]);
+	        selElem.options[i] = op;
+	    }
+	    return;
+	}
 
 
 </script>

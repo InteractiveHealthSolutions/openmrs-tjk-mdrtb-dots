@@ -451,12 +451,18 @@ function useMdrtbLoadingMessage(message) {
 			
 			<spring:message code="labmodule.search" />
 			
+			<table cellspacing="0px" cellpadding="0px">
+			<tr><td>
 			<input type="radio" onClick="setSearchOption()" name="searchVia" id="labTestId" value="labTestId" checked> <spring:message code="labmodule.labResult" />
+			</td></tr>
+			<tr><td>
 			<input type="radio" onClick="setSearchOption()" name="searchVia" id="suspect" value="suspect"><spring:message code="labmodule.search.suspect" />
-			<br>
+			</td></tr>
+			</table>
 			
 			<div id="testidSearchOptions">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<spring:message code="labmodule.search.searchVia" />
 				<input type="radio" onClick="setChangeOption()" name="search" id="testId" value="testId" checked> <spring:message code="labmodule.search.testId" />
 				<input type="radio" onClick="setChangeOption()" name="search" id="name" value="name"><spring:message code="labmodule.search.name" />

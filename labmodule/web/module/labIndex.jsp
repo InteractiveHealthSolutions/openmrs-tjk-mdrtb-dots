@@ -23,33 +23,40 @@
 
 
 <br/>
-<table>
-	<tr> <td valign='top'>
-			<table class="indexInner" >
-			
-				<col width="160">
-				<tr><td style="background-color:#8FABC7;padding:2px 2px 2px 2px;">
-					<b class="boxHeaderTwo" nowrap style="padding:0px 0px 0px 0px;">
-						<spring:message code="labmodule.dashboardTitle"/>&nbsp;&nbsp;
-					</b>
-				</td></tr>
-				
-				<tr><td>
-					<openmrs:hasPrivilege privilege="View Lab Entry">
-						<a href='javascript:;' onclick='showLabEntry()'><spring:message code="labmodule.labDataEntry" /></a><br/>
-					</openmrs:hasPrivilege>
-					
-					<openmrs:hasPrivilege privilege="View Lab Search">	
-						<a href='javascript:;' onclick='showLabSearch()'><spring:message code="labmodule.labSearch" /></a><br/>
-					</openmrs:hasPrivilege>
-					
-				    <br>
-					<a href="../labmodule/reporting/reports.form?type=org.openmrs.module.labmodule.reporting.data.LabReport"><spring:message code="labmodule.labReports" /></a><br/>
-				</td></tr>
-			
-			</table>
-		</td>
+
+
+<table class="indexInner" >	
+		<tr>
+			<td style="background-color:#8FABC7;padding:2px 2px 2px 2px;">
+				<b class="boxHeader" nowrap style="padding:0px 0px 0px 0px;">
+					<spring:message code="labmodule.dashboardTitle"/>&nbsp;&nbsp;
+				</b>
+			</td>
+		</tr>
 		
+		<tr>
+			<td>
+				<openmrs:hasPrivilege privilege="View Lab Entry">
+					<a href='javascript:;' onclick='showLabEntry()'><spring:message code="labmodule.labDataEntry" /></a>
+				</openmrs:hasPrivilege>
+			</td>
+			
+			<td>	
+				<openmrs:hasPrivilege privilege="View Lab Search">	
+					<a href='javascript:;' onclick='showLabSearch()'><spring:message code="labmodule.labSearch" /></a>
+				</openmrs:hasPrivilege>
+			</td>
+			
+			<!-- <td>
+				<a href="../labmodule/reporting/reports.form?type=org.openmrs.module.labmodule.reporting.data.LabReport"><spring:message code="labmodule.labReports" /></a>
+			</td> -->
+		</tr>
+			
+</table>
+		
+		<br><br>
+<table>		
+	<tr>	
 		<td id="mainFrame" valign='top'>
 			<div hidden id="labEntry">
 				<openmrs:portlet id="labFindPatient" url="labFindPatient" parameters="size=full|postURL=${pageContext.request.contextPath}/module/labmodule/lab/labEntry.form|showIncludeVoided=false|viewType=shortEdit" moduleId="labmodule"/>
@@ -85,7 +92,7 @@
 		document.getElementById('labSearch').style.display = "none"; 
 		document.getElementById('labEntry').style.display = "block";
 		document.getElementById('lastEncounters').style.display = "block";
-		document.getElementById("mainFrame").style.width = "50%";
+		document.getElementById("mainFrame").style.width = "60%";
 	}
 
 	function showLabSearch()
