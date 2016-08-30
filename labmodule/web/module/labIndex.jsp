@@ -24,7 +24,7 @@
 
 <br/>
 
-
+<div id="index">
 <table class="indexInner" >	
 		<tr>
 			<td style="background-color:#8FABC7;padding:2px 2px 2px 2px;">
@@ -51,10 +51,12 @@
 				<a href="../labmodule/reporting/reports.form?type=org.openmrs.module.labmodule.reporting.data.LabReport"><spring:message code="labmodule.labReports" /></a>
 			</td> -->
 		</tr>
-			
+				
 </table>
-		
-		<br><br>
+<br>
+<br>
+</div>
+				
 <table>		
 	<tr>	
 		<td id="mainFrame" valign='top'>
@@ -122,15 +124,18 @@
 <openmrs:hasPrivilege privilege="View Lab Entry">
 	<script  type="text/javascript">	
 		showLabEntry();
+		document.getElementById("index").style.display="none";	
 	</script>
 </openmrs:hasPrivilege>
 <openmrs:hasPrivilege privilege="View Lab Search">
 	<script  type="text/javascript">
 		showLabSearch();
+		document.getElementById("index").style.display="none";
 	</script>
 </openmrs:hasPrivilege>
 <openmrs:hasPrivilege privilege="Manage Lab">
 	<script  type="text/javascript">
 		hideAll();
+		document.getElementById("index").style.display="table";
 	</script>
 </openmrs:hasPrivilege>

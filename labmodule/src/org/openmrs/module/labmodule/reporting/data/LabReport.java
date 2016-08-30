@@ -132,8 +132,6 @@ public class LabReport implements ReportSpecification {
 	public ReportData evaluateReport(EvaluationContext context) {
 		
 		Location location = (Location) context.getParameterValue("location");
-		//Location location = (Location) context.getParameterValue("location");
-		// Just testing... GIT is not letting me commit this file :/
 		String oblast = (String) context.getParameterValue("oblast");
 		Date endDate = (Date)context.getParameterValue("endDate");
 		Date startDate = (Date)context.getParameterValue("startDate");
@@ -170,7 +168,7 @@ public class LabReport implements ReportSpecification {
 		CohortDefinition allLabResults = Cohorts.getAllLabResultDuring(startDate,endDate);
 		
 		Cohort test = null;
-		try {
+		/*try {
 					test = Context.getService(CohortDefinitionService.class).evaluate(allLabResults, new EvaluationContext());
 				} catch (EvaluationException e1) {
 					// TODO Auto-generated catch block
@@ -182,7 +180,7 @@ public class LabReport implements ReportSpecification {
 				Set<Integer> ids = test.getMemberIds();
 				for(Integer testid:ids) {
 					System.out.println(testid);
-				}
+				}*/
 		
 		   
 		CohortCrossTabDataSetDefinition d = new CohortCrossTabDataSetDefinition(); 

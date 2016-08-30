@@ -876,6 +876,9 @@ form {
 					<br>
 					<b class="boxHeader" style="margin:0px; width:100%"> <spring:message code="labmodule.labEntry.bacterioscopy"/> ( ${i.count} )
 					<span id="microscopy_edit_span_${i.count}" name="specimen_edit_span" style="float:right">
+						<openmrs:hasPrivilege privilege="Edit Test Result">
+							<img title="Edit" id="editMicroscopySpan_${i.count}" class="edit" onclick='editTest(this)' src="${pageContext.request.contextPath}/moduleResources/labmodule/edit.gif" alt="edit" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
+						</openmrs:hasPrivilege>
 						<openmrs:hasPrivilege privilege="Delete Test Result">
 							<img title="Delete" id="deleteMicroscopySpan_${i.count}" class="edit" onclick='deleteTest(this)' src="${pageContext.request.contextPath}/moduleResources/labmodule/delete.gif" alt="delete" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
 						</openmrs:hasPrivilege>
@@ -918,6 +921,59 @@ form {
 								
 			</table>
 			</form>
+			
+			<form hidden id="editMicroscopyResults_${i.count}" name="editMicroscopyResults_${i.count}" action="labEntry.form?patientId=${patientId}&submissionType=microscopy" method="post">
+			<table style="font-size: 13px">
+			
+			<tr>
+				<td>
+				
+					<input hidden type="text" name="labResultId" value="${labResult.id}">
+					<input hidden type="text" name="microscopyId" value="${microscopy.id}">
+					<input hidden type="text" name="provider" value="${labResult.provider.id}">
+					<input hidden type="text" name="lab" value="${labResult.location.locationId}">
+					<input hidden type="text" name="count" value="${i.count}">
+				
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.testDate"/>:</font>
+					&nbsp;
+					<openmrs_tag:dateField formFieldName="sampleDate_${i.count}" startValue="${microscopy.resultDate}"/>
+				</td>
+			</tr>
+								
+			<tr>
+				<td>
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.bacterioscopy.appearance"/>:</font>
+					&nbsp;
+					<select id="sampleAppearance_${i.count}" name="sampleAppearance_${i.count}">
+					<option hidden selected value=""></option>
+						<c:forEach var="appearance" items="${appearances}">
+							<option value="${appearance.answerConcept.id}" <c:if test="${appearance.answerConcept == microscopy.sampleApperence}">selected</c:if>>${appearance.answerConcept.displayString}</option>
+						</c:forEach>
+					</select>
+						
+					&nbsp;&nbsp;
+						
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.bacterioscopy.result"/>:</font>
+					&nbsp;
+					<select id="sampleResult_${i.count}" name="sampleResult_${i.count}">
+						<c:forEach var="result" items="${microscopyResults}">
+							<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == microscopy.sampleResult}">selected</c:if>>${result.answerConcept.displayString}</option>
+						</c:forEach>
+					</select>
+					
+				</td>
+			</tr>
+			
+			<tr> <td>
+			   <br>
+				<openmrs:hasPrivilege privilege="Edit Test Result">
+						<button type="button" id="updateMicroscopy_${i.count}" onclick='validateAndSubmitTest(this)'><spring:message code="mdrtb.save" text="Save"/></button>
+				</openmrs:hasPrivilege>
+				<button type="reset" id="cancelUpdateMicroscopy_${i.count}" onclick='cancelUpdate(this)'><spring:message code="mdrtb.cancel" text="Cancel"/></button>
+			</td></tr>
+								
+			</table>
+			</form>
 				
 		</c:forEach>
 	
@@ -932,8 +988,11 @@ form {
 						<br>
 						<b class="boxHeader" style="margin:0px; width:100%"> <spring:message code="labmodule.labEntry.xpert"/> ( ${i.count} )
 						<span id="xpert_edit_span_${i.count}" name="xpert_edit_span" style="float:right">
+							<openmrs:hasPrivilege privilege="Edit Test Result">
+						    	<img title="Edit" id="editXpertSpan_${i.count}" class="edit" onclick='editTest(this)' src="${pageContext.request.contextPath}/moduleResources/labmodule/edit.gif" alt="delete" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
+							</openmrs:hasPrivilege>
 						    <openmrs:hasPrivilege privilege="Delete Test Result">
-						    <img title="Delete" id="deleteXpertSpan_${i.count}" class="edit" onclick='deleteTest(this)' src="${pageContext.request.contextPath}/moduleResources/labmodule/delete.gif" alt="delete" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
+						    	<img title="Delete" id="deleteXpertSpan_${i.count}" class="edit" onclick='deleteTest(this)' src="${pageContext.request.contextPath}/moduleResources/labmodule/delete.gif" alt="delete" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
 							</openmrs:hasPrivilege>
 						</span>
 						</b>
@@ -980,6 +1039,66 @@ form {
 				
 				</table>
 				</form>
+				
+				<form hidden id="editXpertResults_${i.count}" name="editXpertResults_${i.count}" action="labEntry.form?patientId=${patientId}&submissionType=xpert" method="post">
+
+				<table style="font-size: 13px">
+				
+				<tr>
+					<td>
+					
+						<input hidden type="text" name="labResultId" value="${labResult.id}">
+						<input hidden type="text" name="xpertId" value="${xpert.id}">
+						<input hidden type="text" name="provider" value="${labResult.provider.id}">
+						<input hidden type="text" name="lab" value="${labResult.location.locationId}">
+						<input hidden type="text" name="count" value="${i.count}">
+						
+						<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.testDate"/>:</font>
+						&nbsp;
+						<openmrs_tag:dateField formFieldName="xpertTestDate_${i.count}" startValue="${xpert.resultDate}"/>
+					</td>
+				</tr>
+							
+				<tr>
+					<td>
+					
+						<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
+						&nbsp;
+						<select id="mtbXpertResult_${i.count}" name="mtbResult_${i.count}">
+								<c:forEach var="result" items="${mtbResults}">
+									<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == xpert.mtbBurden}">selected</c:if>>${result.answerConcept.displayString}</option>
+								</c:forEach>
+						</select>
+						
+						&nbsp;&nbsp;
+						<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.r"/>:</font>
+						&nbsp;
+						<select id = "rifXpertResult_${i.count}" name = "rifResult_${i.count}">
+								<c:forEach var="result" items="${rifResults}">
+									<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == xpert.rifResistance}">selected</c:if> >${result.answerConcept.displayString}</option>
+								</c:forEach>
+						</select>
+					</td>
+				</tr>
+							
+				<tr>
+					<td>
+						<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.errorCode"/>:</font>
+						&nbsp;
+						<input type="text"  size="10" name="xpertError_${i.count}" id="xpertError_${i.count}" value="${xpert.errorCode}">
+					</td>
+				</tr>
+				
+				<tr> <td>
+			   <br>
+				<openmrs:hasPrivilege privilege="Edit Test Result">
+						<button type="button" id="updateXpert_${i.count}" onclick='validateAndSubmitTest(this)'><spring:message code="mdrtb.save" text="Save"/></button>
+				</openmrs:hasPrivilege>
+				<button type="reset" id="cancelUpdateXpert_${i.count}" onclick='cancelUpdate(this)'><spring:message code="mdrtb.cancel" text="Cancel"/></button>
+			</td></tr>
+				
+				</table>
+				</form>
 				</td></tr>
 					
 		</c:forEach>
@@ -995,6 +1114,9 @@ form {
 					<br>
 					<b class="boxHeader" style="margin:0px; width:100%"> <spring:message code="labmodule.labEntry.hain"/> ( ${i.count} )
 					<span id="hain_edit_span_${i.count}" name="hain_edit_span" style="float:right">
+							<openmrs:hasPrivilege privilege="Edit Test Result">
+						    	<img title="Edit" id="editHainSpan_${i.count}" class="edit" onclick='editTest(this)' src="${pageContext.request.contextPath}/moduleResources/labmodule/edit.gif" alt="delete" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
+							</openmrs:hasPrivilege>
 							<openmrs:hasPrivilege privilege="Delete Test Result">
 							<img title="Delete" id="deleteHainSpan_${i.count}" class="edit" onclick='deleteTest(this)' src="${pageContext.request.contextPath}/moduleResources/labmodule/delete.gif" alt="delete" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
 							</openmrs:hasPrivilege>
@@ -1010,7 +1132,7 @@ form {
 			
 			<tr>
 				<td>
-				<input hidden type="text" name="labResultId" value="${labResult.id}">
+						<input hidden type="text" name="labResultId" value="${labResult.id}">
 						<input hidden type="text" name="id" value="${hain.id}">
 						
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.testDate"/>:</font>
@@ -1021,6 +1143,7 @@ form {
 						
 			<tr>
 				<td>
+				
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
 					&nbsp;
 					${hain.mtbBurden.displayString}
@@ -1037,6 +1160,64 @@ form {
 		  
 		  </table>
 		  </form>
+		  
+		  <form hidden id="editHainResults_${i.count}" name="editHainResults_${i.count}" action="labEntry.form?patientId=${patientId}&submissionType=hain" method="post">
+
+		<table style="font-size: 13px">
+			
+			<tr>
+				<td>
+						<input hidden type="text" name="labResultId" value="${labResult.id}">
+						<input hidden type="text" name="hainId" value="${hain.id}">
+						<input hidden type="text" name="provider" value="${labResult.provider.id}">
+						<input hidden type="text" name="lab" value="${labResult.location.locationId}">
+						<input hidden type="text" name="count" value="${i.count}">
+						
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.testDate"/>:</font>
+					&nbsp;
+					<openmrs_tag:dateField formFieldName="hainTestDate_${i.count}" startValue="${hain.resultDate}"/>
+				</td>
+			</tr>
+						
+			<tr>
+				<td>
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
+					&nbsp;
+					<select id="mtbHainResult_${i.count}" name="mtbResult_${i.count}">
+							<c:forEach var="result" items="${mtbResults}">
+								<option value="${result.answerConcept.id}"  <c:if test="${result.answerConcept == hain.mtbBurden}">selected</c:if>>${result.answerConcept.displayString}</option>
+							</c:forEach>
+					</select>
+					&nbsp;&nbsp;
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.r"/>:</font>
+					&nbsp;
+					<select id = "rifHainResult_${i.count}" name = "rifResult_${i.count}">
+							<c:forEach var="result" items="${rifResults}">
+								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain.rifResistance}">selected</c:if>>${result.answerConcept.displayString}</option>
+							</c:forEach>
+					</select>		
+					&nbsp;&nbsp;
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.h"/>:</font>
+					&nbsp;
+					<select id = "inhHainResult_${i.count}" name = "inhResult_${i.count}">
+							<c:forEach var="result" items="${inhResults}">
+								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain.inhResistance}">selected</c:if> >${result.answerConcept.displayString}</option>
+							</c:forEach>
+					</select>			
+				</td>
+		  </tr>
+		  
+		    <tr> <td>
+			   <br>
+				<openmrs:hasPrivilege privilege="Edit Test Result">
+						<button type="button" id="updateHain_${i.count}" onclick='validateAndSubmitTest(this)'><spring:message code="mdrtb.save" text="Save"/></button>
+				</openmrs:hasPrivilege>
+				<button type="reset" id="cancelUpdateHain_${i.count}" onclick='cancelUpdate(this)'><spring:message code="mdrtb.cancel" text="Cancel"/></button>
+			</td></tr>
+		  
+		  </table>
+		  </form>
+		  
 		  </td></tr>
 			
 		</c:forEach>
@@ -1052,6 +1233,9 @@ form {
 					<br>
 					<b class="boxHeader" style="margin:0px; width:100%"> <spring:message code="labmodule.labEntry.hain2"/> ( ${i.count} )
 					<span id="hain2_edit_span_${i.count}" name="hain2_edit_span" style="float:right">
+							<openmrs:hasPrivilege privilege="Edit Test Result">
+						    	<img title="Edit" id="editHain2Span_${i.count}" class="edit" onclick='editTest(this)' src="${pageContext.request.contextPath}/moduleResources/labmodule/edit.gif" alt="delete" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
+							</openmrs:hasPrivilege>
 							<openmrs:hasPrivilege privilege="Delete Test Result">
 							<img title="Delete" id="deleteHain2Span_${i.count}" class="edit" onclick='deleteTest(this)' src="${pageContext.request.contextPath}/moduleResources/labmodule/delete.gif" alt="delete" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
 							</openmrs:hasPrivilege>
@@ -1101,6 +1285,77 @@ form {
 			
 			</table>
 			</form>
+			
+			<form hidden id="edithain2Results_${i.count}" name="edithain2Results_${i.count}" action="labEntry.form?patientId=${patientId}&submissionType=hain2" method="post">
+
+			<table style="font-size: 13px">
+			
+			<tr>
+				<td>
+				
+						<input hidden type="text" name="labResultId" value="${labResult.id}">
+						<input hidden type="text" name="hain2Id" value="${hain2.id}">
+						<input hidden type="text" name="provider" value="${labResult.provider.id}">
+						<input hidden type="text" name="lab" value="${labResult.location.locationId}">
+						<input hidden type="text" name="count" value="${i.count}">
+						
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.hain2.analysisDate"/>:</font>
+					&nbsp;
+					<openmrs_tag:dateField formFieldName="hain2TestDate_${i.count}" startValue="${hain2.resultDate}"/>
+				</td>
+			</tr>
+							
+			<tr>
+				<td>
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
+					&nbsp;
+					<select id="mtbHain2Result_${i.count}" name="mtbResult_${i.count}">
+							<c:forEach var="result" items="${mtbResults}">
+								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain2.mtbBurden}">selected</c:if> >${result.answerConcept.displayString}</option>
+							</c:forEach>
+					</select>
+					&nbsp;&nbsp;
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.hain2.mox"/>:</font>
+					&nbsp;
+					<select id="moxHain2Result_${i.count}" name="moxResult_${i.count}">
+							<c:forEach var="result" items="${moxResults}">
+								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain2.moxResistance}">selected</c:if>>${result.answerConcept.displayString}</option>
+							</c:forEach>
+					</select>
+				</td>
+			</tr>
+							
+			<tr>
+				<td>
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.hain2.km"/>:</font>
+					&nbsp;
+					<select id="cmHain2Result_${i.count}" name="cmResult_${i.count}">
+							<c:forEach var="result" items="${cmResults}">
+								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain2.cmResistance}">selected</c:if>>${result.answerConcept.displayString}</option>
+							</c:forEach>
+					</select>
+					&nbsp;&nbsp;
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.hain2.e"/>:</font>
+					&nbsp;
+					<select id="erHain2Result_${i.count}" name="erResult_${i.count}">
+					     <option hidden selected value=""></option>
+							<c:forEach var="result" items="${eResults}">
+								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain2.erResistance}">selected</c:if>>${result.answerConcept.displayString}</option>
+							</c:forEach>
+					</select>
+				</td>
+			</tr> 
+			
+			 <tr> <td>
+			   <br>
+				<openmrs:hasPrivilege privilege="Edit Test Result">
+						<button type="button" id="updateHain2_${i.count}" onclick='validateAndSubmitTest(this)'><spring:message code="mdrtb.save" text="Save"/></button>
+				</openmrs:hasPrivilege>
+				<button type="reset" id="cancelUpdateHain2_${i.count}" onclick='cancelUpdate(this)'><spring:message code="mdrtb.cancel" text="Cancel"/></button>
+			</td></tr>
+			
+			</table>
+			</form>
 			</td></tr>
 		
 		</c:forEach>
@@ -1116,6 +1371,9 @@ form {
 					<br>
 					<b class="boxHeader" style="margin:0px; width:100%"> <spring:message code="labmodule.culture"/> ( ${i.count} )
 						<span id="culture_edit_span_${i.count}" name="culture_edit_span" style="float:right">
+								<openmrs:hasPrivilege privilege="Edit Test Result">
+						    	<img title="Edit" id="editCultureSpan_${i.count}" class="edit" onclick='editTest(this)' src="${pageContext.request.contextPath}/moduleResources/labmodule/edit.gif" alt="delete" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
+								</openmrs:hasPrivilege>
 								<openmrs:hasPrivilege privilege="Delete Test Result">
 								<img title="Delete" id="deleteCultureSpan_${i.count}" class="edit" onclick='deleteTest(this)' src="${pageContext.request.contextPath}/moduleResources/labmodule/delete.gif" alt="delete" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
 								</openmrs:hasPrivilege>
@@ -1146,6 +1404,49 @@ form {
 					${culture.result.displayString}
 				</td>
 			</tr> 
+			
+			</table>
+			</form>
+			
+			<form hidden id="editCultureResults_${i.count}" name="editCultureResults_${i.count}" action="labEntry.form?patientId=${patientId}&submissionType=culture" method="post">
+
+			<table style="font-size: 13px">
+			
+			<tr>
+				<td>
+						<input hidden type="text" name="labResultId" value="${labResult.id}">
+						<input hidden type="text" name="cultureId" value="${culture.id}">
+						<input hidden type="text" name="provider" value="${labResult.provider.id}">
+						<input hidden type="text" name="lab" value="${labResult.location.locationId}">
+						<input hidden type="text" name="count" value="${i.count}">
+						
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.testDate"/>:</font>
+					&nbsp;
+					<openmrs_tag:dateField formFieldName="cultureTestDate_${i.count}" startValue="${culture.resultDate}"/>
+				</td>
+			</tr>
+							
+			<tr>
+				<td>
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.culture.result"/>:</font>
+					&nbsp;
+					<select id="cultureResult_${i.count}" name="cultureResult_${i.count}">
+								<c:forEach var="result" items="${microscopyResults}">
+									<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == culture.result}">selected</c:if>>${result.answerConcept.displayString}</option>
+								</c:forEach>
+					</select>
+				</td>
+			</tr> 
+			
+			<tr> <td>
+			   <br>
+				<openmrs:hasPrivilege privilege="Edit Test Result">
+						<button type="button" id="updateCulture_${i.count}" onclick='validateAndSubmitTest(this)'><spring:message code="mdrtb.save" text="Save"/></button>
+				</openmrs:hasPrivilege>
+				<button type="reset" id="cancelUpdateCulture_${i.count}" onclick='cancelUpdate(this)'><spring:message code="mdrtb.cancel" text="Cancel"/></button>
+			</td></tr>
+			
+			
 			
 			</table>
 			</form>
@@ -1399,6 +1700,198 @@ form {
 	 	document.getElementById('peripheral_div').style.display = "none";
     } 
 
+	function validateAndSubmitTest(obj){
+
+		var theId = obj.id;
+		var idArray = theId.split("_");
+		
+		if(idArray[0] == 'updateMicroscopy'){
+
+			var e = document.getElementById('sampleDate_'+idArray[1]);
+			var sampleDate = e.value;
+			
+			e = document.getElementById('sampleAppearance_'+idArray[1]);
+			var sampleAppearance = e.options[e.selectedIndex].text;
+
+			e = document.getElementById('sampleResult_'+idArray[1]);
+			var sampleResult = e.options[e.selectedIndex].text;
+
+			var errorText = '';
+
+			if (sampleResult == '') {
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
+			}
+			if (sampleDate == '') {
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
+			}
+			else if(isFutureDate(sampleDate)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
+			if (sampleAppearance == '') {
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noAppearance' text='Please specify Sample Appearance.'/>" + "\n";
+			}
+
+			if(errorText == '') {
+				document.forms["editMicroscopyResults_"+idArray[1]].submit();
+			}
+			else{
+	
+				errorText = "Fix following error(s) to continue:\n" + errorText;
+				confirm(errorText); 
+				return false;
+			}
+			
+		}
+
+		else if(idArray[0] == 'updateXpert'){
+			
+			var e = document.getElementById('xpertTestDate_'+idArray[1]);
+			var resultDate = e.value;
+
+			e = document.getElementById('mtbXpertResult_'+idArray[1]);
+			var mtbResult = e.options[e.selectedIndex].value;
+
+			e = document.getElementById('rifXpertResult_'+idArray[1]);
+			var rifResult = e.options[e.selectedIndex].value;
+
+			e = document.getElementById('xpertError_'+idArray[1]);
+			var error = e.value;
+
+			var errorText = '';
+
+			if (mtbResult == '') {
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
+			}
+			if (resultDate == '') {
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
+			}
+			else if(isFutureDate(resultDate)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
+
+			if(errorText == '') {
+				document.forms["editXpertResults_"+idArray[1]].submit();
+			}
+			else{
+	
+				errorText = "Fix following error(s) to continue:\n" + errorText;
+				confirm(errorText); 
+				return false;
+			}
+			
+		}
+
+		else if (idArray[0] == 'updateHain'){
+
+			var e = document.getElementById('hainTestDate_'+idArray[1]);
+			var resultDate = e.value;
+
+			e = document.getElementById('mtbHainResult_'+idArray[1]);
+			var mtbResult = e.options[e.selectedIndex].value;
+
+			e = document.getElementById('rifHainResult_'+idArray[1]);
+			var rifResult = e.options[e.selectedIndex].value;
+
+			e = document.getElementById('inhHainResult_'+idArray[1]);
+			var inhResult = e.options[e.selectedIndex].value;
+
+			var errorText = '';
+			
+			if (mtbResult == '') {
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
+			}
+			if (resultDate == '') {
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
+			}
+			else if(isFutureDate(resultDate)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
+
+			if(errorText == '') {	
+				document.forms["editHainResults_"+idArray[1]].submit();
+			}
+			else{
+	
+				errorText = "Fix following error(s) to continue:\n" + errorText;
+				confirm(errorText); 
+				return false;
+			}	
+		}
+
+		else if(idArray[0] == 'updateHain2'){
+
+			var e = document.getElementById('hain2TestDate_'+idArray[1]);
+			var resultDate = e.value;
+
+			e = document.getElementById('mtbHain2Result_'+idArray[1]);
+			var mtbResult = e.options[e.selectedIndex].value;
+
+			e = document.getElementById('moxHain2Result_'+idArray[1]);
+			var moxResult = e.options[e.selectedIndex].value;
+
+			e = document.getElementById('cmHain2Result_'+idArray[1]);
+			var cmResult = e.options[e.selectedIndex].value;
+
+			e = document.getElementById('erHain2Result_'+idArray[1]);
+			var erResult = e.options[e.selectedIndex].value;
+			
+			var	errorText = '';
+			
+			if (mtbResult == '') {
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
+			}
+			if (resultDate == '') {
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
+			}
+			else if(isFutureDate(resultDate)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}	
+
+			if(errorText == '') {
+				document.forms["edithain2Results_"+idArray[1]].submit();
+			}
+			else{
+	
+				errorText = "Fix following error(s) to continue:\n" + errorText;
+				confirm(errorText); 
+				return false;
+			}	
+			
+		}
+
+		else if (idArray[0] == 'updateCulture'){
+
+			var e = document.getElementById('cultureTestDate_'+idArray[1]);
+			var resultDate = e.value;
+
+			e = document.getElementById('cultureResult_'+idArray[1]);
+			var result = e.options[e.selectedIndex].value;
+
+			if (result == '') {
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
+			}
+			if (resultDate == '') {
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
+			}
+			else if(isFutureDate(resultDate)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
+
+			var errorText = '';
+			
+			if(errorText == '') {
+				document.forms["editCultureResults_"+idArray[1]].submit();
+			}
+			else{
+	
+				errorText = "Fix following error(s) to continue:\n" + errorText;
+				confirm(errorText); 
+				return false;
+			}
+			
+		}
+
+	}
 	
 	function validateAndSubmit(obj) {
 
@@ -1594,7 +2087,6 @@ form {
 				return false;
 			}
 		}
-		
 	}	
 
 	// ON CLICK ...
@@ -1778,6 +2270,67 @@ form {
 
 	}
 
+	function editTest(obj){
+
+		var theId = obj.id;
+
+		var idArray = theId.split("_");
+
+		if(idArray[0] == 'editMicroscopySpan'){
+
+			document.getElementById("deleteMicroscopyResults_"+idArray[1]).style.display = "none";
+			document.getElementById("editMicroscopyResults_"+idArray[1]).style.display = "block";
+		}
+		else if(idArray[0] == 'editXpertSpan'){
+
+			document.getElementById("deleteXpertResults_"+idArray[1]).style.display = "none";
+			document.getElementById("editXpertResults_"+idArray[1]).style.display = "block";
+		}
+		else if(idArray[0] == 'editHainSpan'){
+
+			document.getElementById("deleteHainResults_"+idArray[1]).style.display = "none";
+			document.getElementById("editHainResults_"+idArray[1]).style.display = "block";
+		}
+		else if(idArray[0] == 'editHain2Span'){
+			document.getElementById("deletehain2Results_"+idArray[1]).style.display = "none";
+			document.getElementById("edithain2Results_"+idArray[1]).style.display = "block";
+		}
+		else if(idArray[0] == 'editCultureSpan'){
+			document.getElementById("deleteCultureResults_"+idArray[1]).style.display = "none";
+			document.getElementById("editCultureResults_"+idArray[1]).style.display = "block";
+		}
+		
+	}
+
+	function cancelUpdate(obj){
+
+		var theId = obj.id;
+
+		var idArray = theId.split("_");
+
+		if(idArray[0] == 'cancelUpdateMicroscopy'){
+			document.getElementById("deleteMicroscopyResults_"+idArray[1]).style.display = "block";
+			document.getElementById("editMicroscopyResults_"+idArray[1]).style.display = "none";
+		}
+		else if(idArray[0] == 'cancelUpdateXpert'){
+			document.getElementById("deleteXpertResults_"+idArray[1]).style.display = "block";
+			document.getElementById("editXpertResults_"+idArray[1]).style.display = "none";
+		}
+		else if(idArray[0] == 'cancelUpdateHain'){
+			document.getElementById("deleteHainResults_"+idArray[1]).style.display = "block";
+			document.getElementById("editHainResults_"+idArray[1]).style.display = "none";
+		}
+		else if(idArray[0] == 'cancelUpdateHain2'){
+			document.getElementById("deletehain2Results_"+idArray[1]).style.display = "block";
+			document.getElementById("edithain2Results_"+idArray[1]).style.display = "none";
+		}
+		else if(idArray[0] == 'cancelUpdateCulture'){
+			document.getElementById("deleteCultureResults_"+idArray[1]).style.display = "block";
+			document.getElementById("editCultureResults_"+idArray[1]).style.display = "none";
+		}
+		
+	}
+		
 	function deleteTest(obj){
 
 		var theId = obj.id;

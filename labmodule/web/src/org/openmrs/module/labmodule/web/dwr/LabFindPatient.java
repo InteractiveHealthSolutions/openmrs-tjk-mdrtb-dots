@@ -60,11 +60,12 @@ public class LabFindPatient {
                 String pi= Context.getAdministrationService().getGlobalProperty("mdrtb.primaryPatientIdentifierType");
         		if(p.getPatientIdentifier(pi) == null){
         			patientListItem.setPatientStatus("Suspect");
-        			patientList.add(patientListItem);
         		}
         		else{
         			patientListItem.setPatientStatus("Confirmed");
         		}
+        		
+        		patientList.add(patientListItem);
             	
             }
                             
@@ -155,7 +156,7 @@ public class LabFindPatient {
 				 }
 				 else{
 					patientListItem.setPatientStatus("Confirmed");
-					continue;
+					
 				 }
 	             
 	       		 patientListItem.setRecievedDate(e.getEncounterDatetime());
@@ -216,7 +217,6 @@ public class LabFindPatient {
 			 }
 			 else{
 				patientListItem.setPatientStatus("Confirmed");
-				continue;
 			 }
 			 
 			// make sure the correct patient identifier is set on the patient list item
@@ -273,7 +273,6 @@ public Collection findTestThroughDates(String dateFrom, String dateTo, boolean i
 		}
 		else{
 			patientListItem.setPatientStatus("Confirmed");
-			continue;
 		}
 		
         // make sure the correct patient identifier is set on the patient list item
@@ -323,7 +322,6 @@ public Collection findLatestEncounterByUserId(int userId, int numberOfEnc, boole
 				}
 				else{
 					patientListItem.setPatientStatus("Confirmed");
-					continue;
 				}
 			 
 			 LabResultImpl labResult = new LabResultImpl(e);

@@ -1061,7 +1061,10 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 		}
 		
 		// otherwise, go ahead and do the save
-		Context.getObsService().saveObs((Obs) microscopy.getTest(),"Updated...");
+		List<Obs> obsArray = Context.getObsService().findObsByGroupId(Integer.parseInt(microscopy.getId()));
+		
+		for(Obs o : obsArray)
+			Context.getObsService().saveObs(o, "Update Microscopy from Labmodule UI...");
 		
 	}
 	

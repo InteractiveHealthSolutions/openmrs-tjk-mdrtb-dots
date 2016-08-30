@@ -117,15 +117,13 @@ public class LabSpecimenController extends AbstractSpecimenController {
 					List<Microscopy> microscopyList = labResult.getMicroscopies();
 					for(Microscopy m : microscopyList){
 						if(Integer.parseInt(m.getId()) == microscopyId)
-							microscopy = m;
-						
+					    	Context.getService(TbService.class).deleteTest(Integer.parseInt(m.getId()));
 					}
+					microscopy = Context.getService(TbService.class).createMicroscopy(labResult);
 				}
 			}
 			
-		}	
-			
-		
+		}
 		
 		// it's okay if we return null here, as this attribute is only used on a post
 		return microscopy;
@@ -155,9 +153,11 @@ public class LabSpecimenController extends AbstractSpecimenController {
 					for(HAIN2 h : hainList){
 						
 						if(Integer.parseInt(h.getId()) == hain2Id)
-							hain2 = h;
+					    	Context.getService(TbService.class).deleteTest(Integer.parseInt(h.getId()));
 						
 					}
+					hain2 = Context.getService(TbService.class).createHAIN2(labResult);
+
 				}
 			}
 			
@@ -192,9 +192,11 @@ public class LabSpecimenController extends AbstractSpecimenController {
 					for(Culture c : culturesList){
 						
 						if(Integer.parseInt(c.getId()) == cultureId)
-							culture = c;
+					    	Context.getService(TbService.class).deleteTest(Integer.parseInt(c.getId()));
 						
 					}
+					culture = Context.getService(TbService.class).createCulture(labResult);
+
 				}
 			}
 			
@@ -255,11 +257,10 @@ public class LabSpecimenController extends AbstractSpecimenController {
 				else{
 					List<Xpert> xpertList = labResult.getXperts();
 					for(Xpert x : xpertList){
-						
 						if(Integer.parseInt(x.getId()) == xpertId)
-							xpert = x;
-						
+					    	Context.getService(TbService.class).deleteTest(Integer.parseInt(x.getId()));
 					}
+					xpert = Context.getService(TbService.class).createXpert(labResult);
 				}
 			}
 			
@@ -291,11 +292,10 @@ public class LabSpecimenController extends AbstractSpecimenController {
 				else{
 					List<HAIN> hainList = labResult.getHAINS();
 					for(HAIN h : hainList){
-						
 						if(Integer.parseInt(h.getId()) == hainId)
-							hain = h;
-						
+					    	Context.getService(TbService.class).deleteTest(Integer.parseInt(h.getId()));
 					}
+					hain = Context.getService(TbService.class).createHAIN(labResult);
 				}
 			}
 			
@@ -501,11 +501,24 @@ public class LabSpecimenController extends AbstractSpecimenController {
             						  @RequestParam(required = true, value = "lab") Location lab,
             						  @RequestParam(required = true, value = "provider") Person provider,
             						  HttpServletRequest request, ModelMap map, SessionStatus status) throws ParseException {	
+    	String xpertTestDate = "";
+    	String mtbResult = "";
+    	String rifResult = "";
+    	String xpertError = "";
     	
-    	String xpertTestDate = request.getParameter("xpertTestDate");
-    	String mtbResult = request.getParameter("mtbResult");
-    	String rifResult = request.getParameter("rifResult");
-    	String xpertError = request.getParameter("xpertError");
+    	if(request.getParameter("xpertTestDate") != null){
+	    	xpertTestDate = request.getParameter("xpertTestDate");
+	    	mtbResult = request.getParameter("mtbResult");
+	    	rifResult = request.getParameter("rifResult");
+	    	xpertError = request.getParameter("xpertError");
+    	}
+    	else{
+    		String count = request.getParameter("count");
+    		xpertTestDate = request.getParameter("xpertTestDate_"+count);
+	    	mtbResult = request.getParameter("mtbResult_"+count);
+	    	rifResult = request.getParameter("rifResult_"+count);
+	    	xpertError = request.getParameter("xpertError_"+count);
+    	}
     	
     	SimpleDateFormat dateFormat = Context.getDateFormat();
     	dateFormat.setLenient(false);
@@ -523,7 +536,6 @@ public class LabSpecimenController extends AbstractSpecimenController {
     		xpert.setErrorCode(xpertError);
 		}
     	
-		
 		// save the actual update
 		int id = Context.getService(TbService.class).saveXpert(xpert);
 			
@@ -556,9 +568,26 @@ public class LabSpecimenController extends AbstractSpecimenController {
             						  @RequestParam(required = true, value = "provider") Person provider,
             						  HttpServletRequest request, ModelMap map, SessionStatus status) throws ParseException {	
     	
-    	String sample1Date = request.getParameter("sampleDate");
-    	String sample1Appearance = request.getParameter("sampleAppearance");
-    	String sample1Result = request.getParameter("sampleResult");
+    	int id = 0;
+    	String sample1Date = "";
+    	String sample1Appearance = "";
+    	String sample1Result = "";
+    	
+    	if(request.getParameter("sampleDate") != null){
+    	
+	    	sample1Date = request.getParameter("sampleDate");
+	    	sample1Appearance = request.getParameter("sampleAppearance");
+	    	sample1Result = request.getParameter("sampleResult");
+	   
+    	}
+    	else{
+   
+    		String count = request.getParameter("count");
+    		sample1Date = request.getParameter("sampleDate_"+count);
+	    	sample1Appearance = request.getParameter("sampleAppearance_"+count);
+	    	sample1Result = request.getParameter("sampleResult_"+count);
+	  	
+    	}
     	
     	SimpleDateFormat dateFormat = Context.getDateFormat();
     	dateFormat.setLenient(false);
@@ -573,9 +602,9 @@ public class LabSpecimenController extends AbstractSpecimenController {
     		microscopy.setSampleResult(Context.getConceptService().getConcept(Integer.valueOf(sample1Result)));
 		}
     	
-		// save the actual update
-		int id = Context.getService(TbService.class).saveMicroscopy(microscopy);
-			
+    	// save the actual update
+    	id = Context.getService(TbService.class).saveMicroscopy(microscopy);
+    	
 		// clears the command object from the session
 		status.setComplete();
 		map.clear();
@@ -662,10 +691,19 @@ public class LabSpecimenController extends AbstractSpecimenController {
 										@RequestParam(required = true, value = "lab") Location lab,
 										@RequestParam(required = true, value = "provider") Person provider,
 										HttpServletRequest request, ModelMap map, SessionStatus status) throws ParseException {
-	                     
+	     
+    	String cultureDate = "";
+    	String cultureResult = "";
     	
-    	String cultureDate = request.getParameter("cultureTestDate");
-    	String cultureResult = request.getParameter("cultureResult");
+    	if(request.getParameter("cultureTestDate") != null){
+	        cultureDate = request.getParameter("cultureTestDate");
+	    	cultureResult = request.getParameter("cultureResult");
+    	}
+    	else{
+    		String count = request.getParameter("count");
+    		cultureDate = request.getParameter("cultureTestDate_"+count);
+	    	cultureResult = request.getParameter("cultureResult_"+count);
+    	}
     	
     	SimpleDateFormat dateFormat = Context.getDateFormat();
     	dateFormat.setLenient(false);
@@ -825,10 +863,24 @@ public class LabSpecimenController extends AbstractSpecimenController {
 									    @RequestParam(required = true, value = "provider") Person provider,
 									    HttpServletRequest request, ModelMap map, SessionStatus status) throws ParseException {	
     	
-    	String hainTestDate = request.getParameter("hainTestDate");
-    	String mtbResult = request.getParameter("mtbResult");
-    	String rifResult = request.getParameter("rifResult");
-    	String inhResult = request.getParameter("inhResult");
+    	String hainTestDate = "";
+    	String mtbResult = ""; 
+    	String rifResult = "";
+    	String inhResult = "";
+    	
+    	if(request.getParameter("hainTestDate") != null){
+	    	hainTestDate = request.getParameter("hainTestDate");
+	    	mtbResult = request.getParameter("mtbResult");
+	    	rifResult = request.getParameter("rifResult");
+	    	inhResult = request.getParameter("inhResult");
+    	}
+    	else{
+    		String count = request.getParameter("count");
+    		hainTestDate = request.getParameter("hainTestDate_"+count);
+	    	mtbResult = request.getParameter("mtbResult_"+count);
+	    	rifResult = request.getParameter("rifResult_"+count);
+	    	inhResult = request.getParameter("inhResult_"+count);
+    	}
     	
     	SimpleDateFormat dateFormat = Context.getDateFormat();
     	dateFormat.setLenient(false);
@@ -878,11 +930,27 @@ public class LabSpecimenController extends AbstractSpecimenController {
 									    @RequestParam(required = true, value = "provider") Person provider,
 									    HttpServletRequest request, ModelMap map, SessionStatus status) throws ParseException {	
     	
-    	String hainTestDate = request.getParameter("hain2TestDate");
-    	String mtbResult = request.getParameter("mtbResult");
-    	String moxResult = request.getParameter("moxResult");
-    	String cmResult = request.getParameter("cmResult");
-    	String erResult  = request.getParameter("erResult");
+    	String hainTestDate = "";
+    	String mtbResult = "";
+    	String moxResult = "";
+    	String cmResult = "";
+    	String erResult  = "";
+    	
+    	if(request.getParameter("hain2TestDate") != null){
+	    	hainTestDate = request.getParameter("hain2TestDate");
+	    	mtbResult = request.getParameter("mtbResult");
+	    	moxResult = request.getParameter("moxResult");
+	    	cmResult = request.getParameter("cmResult");
+	    	erResult  = request.getParameter("erResult");
+    	}
+    	else{
+    		String count = request.getParameter("count");
+    		hainTestDate = request.getParameter("hain2TestDate_"+count);
+	    	mtbResult = request.getParameter("mtbResult_"+count);
+	    	moxResult = request.getParameter("moxResult_"+count);
+	    	cmResult = request.getParameter("cmResult_"+count);
+	    	erResult  = request.getParameter("erResult_"+count);
+    	}
     	
     	SimpleDateFormat dateFormat = Context.getDateFormat();
     	dateFormat.setLenient(false);
