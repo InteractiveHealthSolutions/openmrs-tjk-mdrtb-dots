@@ -20,6 +20,11 @@ form {
 
 <openmrs:portlet url="mdrtbPatientHeader" id="mdrtbPatientHeader" moduleId="mdrtb" patientId="${patientId}"/>
 
+<a href="../lab/newPatient.form?patientId=${labResult.patient.id}"><spring:message code="labmodule.demographic" /></a>
+
+
+<br>
+<br>
 <h3> <spring:message code="labmodule.labDataEntry" /> </h3>
 
 <br>
@@ -162,7 +167,7 @@ form {
 					&nbsp;
 					${labResult.location.displayString}
 					&nbsp;&nbsp;
-					<font style="font-weight:bold"><spring:message code="mdrtb.labNumber" text="lab Number"/>:</font>
+					<font style="font-weight:bold"><spring:message code="labmodule.labEntry.labNumber" text="Number"/>:</font>
 					&nbsp;
 					${labResult.labNumber}
 				</td>
@@ -293,7 +298,7 @@ form {
 				
 			<tr>
 				<td>		
-					<font style="font-size:13px; font-weight:bold"><spring:message code="mdrtb.labNumber" text="lab Number"/>:</font>
+					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.labNumber" text="lab Number"/>:</font>
 					&nbsp;
 					<input type="text"  size="10" id="labNumber_e" name="labNumber_e" value="${labResult.labNumber}">
 				</td>
@@ -559,7 +564,7 @@ form {
 									<td>
 										<font style="font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
 										&nbsp;
-										<select id="mtbXpertResult" name="mtbResult">
+										<select id="mtbXpertResult" name="mtbResult" onChange="onChangeMtb(this)">
 										     <option hidden selected value=""></option>
 												<c:forEach var="result" items="${mtbResults}">
 													<option value="${result.answerConcept.id}">${result.answerConcept.displayString}</option>
@@ -568,7 +573,7 @@ form {
 										&nbsp;&nbsp;
 										<font style="font-weight:bold"><spring:message code="labmodule.labEntry.xpert.r"/>:</font>
 										&nbsp;
-										<select id = "rifXpertResult" name = "rifResult">
+										<select id = "rifXpertResult" name = "rifResult" disabled onChange="onChangeRif(this)">
 											<option hidden selected value=""></option>
 												<c:forEach var="result" items="${rifResults}">
 													<option value="${result.answerConcept.id}">${result.answerConcept.displayString}</option>
@@ -581,7 +586,7 @@ form {
 									<td>
 										<font style="font-weight:bold"><spring:message code="labmodule.labEntry.xpert.errorCode"/>:</font>
 										&nbsp;
-										<input type="text"  size="10" name="xpertError" id="xpertError">
+										<input type="text"  size="10" name="xpertError" id="xpertError" disabled>
 									</td>
 								</tr>
 								
@@ -641,7 +646,7 @@ form {
 									<td>
 										<font style="font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
 										&nbsp;
-										<select id="mtbHainResult" name="mtbResult">
+										<select id="mtbHainResult" name="mtbResult" onChange="onChangeMtb(this)">
 										     <option hidden selected value=""></option>
 												<c:forEach var="result" items="${mtbResults}">
 													<option value="${result.answerConcept.id}">${result.answerConcept.displayString}</option>
@@ -650,7 +655,7 @@ form {
 										&nbsp;&nbsp;
 										<font style="font-weight:bold"><spring:message code="labmodule.labEntry.xpert.r"/>:</font>
 										&nbsp;
-										<select id = "rifHainResult" name = "rifResult">
+										<select id = "rifHainResult" name = "rifResult" disabled>
 											<option hidden selected value=""></option>
 												<c:forEach var="result" items="${rifResults}">
 													<option value="${result.answerConcept.id}">${result.answerConcept.displayString}</option>
@@ -659,7 +664,7 @@ form {
 										&nbsp;&nbsp;
 										<font style="font-weight:bold"><spring:message code="labmodule.labEntry.xpert.h"/>:</font>
 										&nbsp;
-										<select id = "inhHainResult" name = "inhResult">
+										<select id = "inhHainResult" name = "inhResult" disabled>
 											<option hidden selected value=""></option>
 												<c:forEach var="result" items="${inhResults}">
 													<option value="${result.answerConcept.id}">${result.answerConcept.displayString}</option>
@@ -723,7 +728,7 @@ form {
 									<td>
 										<font style="font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
 										&nbsp;
-										<select id="mtbHain2Result" name="mtbResult">
+										<select id="mtbHain2Result" name="mtbResult" onChange="onChangeMtb(this)">
 										     <option hidden selected value=""></option>
 												<c:forEach var="result" items="${mtbResults}">
 													<option value="${result.answerConcept.id}">${result.answerConcept.displayString}</option>
@@ -732,7 +737,7 @@ form {
 										&nbsp;&nbsp;
 										<font style="font-weight:bold"><spring:message code="labmodule.labEntry.hain2.mox"/>:</font>
 										&nbsp;
-										<select id="moxHain2Result" name="moxResult">
+										<select id="moxHain2Result" name="moxResult" disabled>
 										     <option hidden selected value=""></option>
 												<c:forEach var="result" items="${moxResults}">
 													<option value="${result.answerConcept.id}">${result.answerConcept.displayString}</option>
@@ -745,7 +750,7 @@ form {
 									<td>
 										<font style="font-weight:bold"><spring:message code="labmodule.labEntry.hain2.km"/>:</font>
 										&nbsp;
-										<select id="cmHain2Result" name="cmResult">
+										<select id="cmHain2Result" name="cmResult" disabled>
 										     <option hidden selected value=""></option>
 												<c:forEach var="result" items="${cmResults}">
 													<option value="${result.answerConcept.id}">${result.answerConcept.displayString}</option>
@@ -754,7 +759,7 @@ form {
 										&nbsp;&nbsp;
 										<font style="font-weight:bold"><spring:message code="labmodule.labEntry.hain2.e"/>:</font>
 										&nbsp;
-										<select id="erHain2Result" name="erResult">
+										<select id="erHain2Result" name="erResult" disabled>
 										     <option hidden selected value=""></option>
 												<c:forEach var="result" items="${eResults}">
 													<option value="${result.answerConcept.id}">${result.answerConcept.displayString}</option>
@@ -1064,7 +1069,7 @@ form {
 					
 						<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
 						&nbsp;
-						<select id="mtbXpertResult_${i.count}" name="mtbResult_${i.count}">
+						<select id="mtbXpertResult_${i.count}" name="mtbResult_${i.count}" onChange="onChangeMtb(this)">
 								<c:forEach var="result" items="${mtbResults}">
 									<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == xpert.mtbBurden}">selected</c:if>>${result.answerConcept.displayString}</option>
 								</c:forEach>
@@ -1073,7 +1078,8 @@ form {
 						&nbsp;&nbsp;
 						<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.r"/>:</font>
 						&nbsp;
-						<select id = "rifXpertResult_${i.count}" name = "rifResult_${i.count}">
+						<select id = "rifXpertResult_${i.count}" name = "rifResult_${i.count}"  <c:if test="${xpert.rifResistance == null}"> disabled </c:if> onChange="onChangeRif(this)">
+								<option hidden value=""></option>
 								<c:forEach var="result" items="${rifResults}">
 									<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == xpert.rifResistance}">selected</c:if> >${result.answerConcept.displayString}</option>
 								</c:forEach>
@@ -1085,7 +1091,7 @@ form {
 					<td>
 						<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.errorCode"/>:</font>
 						&nbsp;
-						<input type="text"  size="10" name="xpertError_${i.count}" id="xpertError_${i.count}" value="${xpert.errorCode}">
+						<input type="text"  size="10" name="xpertError_${i.count}" id="xpertError_${i.count}" value="${xpert.errorCode}" <c:if test="${xpert.rifResistance == null}"> disabled </c:if>>
 					</td>
 				</tr>
 				
@@ -1183,7 +1189,7 @@ form {
 				<td>
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
 					&nbsp;
-					<select id="mtbHainResult_${i.count}" name="mtbResult_${i.count}">
+					<select id="mtbHainResult_${i.count}" name="mtbResult_${i.count}" onChange="onChangeMtb(this)">
 							<c:forEach var="result" items="${mtbResults}">
 								<option value="${result.answerConcept.id}"  <c:if test="${result.answerConcept == hain.mtbBurden}">selected</c:if>>${result.answerConcept.displayString}</option>
 							</c:forEach>
@@ -1191,7 +1197,8 @@ form {
 					&nbsp;&nbsp;
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.r"/>:</font>
 					&nbsp;
-					<select id = "rifHainResult_${i.count}" name = "rifResult_${i.count}">
+					<select id = "rifHainResult_${i.count}" name = "rifResult_${i.count}" <c:if test="${hain.rifResistance == null}"> disabled </c:if>>
+							<option hidden value=""></option>
 							<c:forEach var="result" items="${rifResults}">
 								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain.rifResistance}">selected</c:if>>${result.answerConcept.displayString}</option>
 							</c:forEach>
@@ -1199,7 +1206,8 @@ form {
 					&nbsp;&nbsp;
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.h"/>:</font>
 					&nbsp;
-					<select id = "inhHainResult_${i.count}" name = "inhResult_${i.count}">
+					<select id = "inhHainResult_${i.count}" name = "inhResult_${i.count}" <c:if test="${hain.inhResistance == null}"> disabled </c:if>>
+							<option hidden value=""></option>
 							<c:forEach var="result" items="${inhResults}">
 								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain.inhResistance}">selected</c:if> >${result.answerConcept.displayString}</option>
 							</c:forEach>
@@ -1309,7 +1317,7 @@ form {
 				<td>
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
 					&nbsp;
-					<select id="mtbHain2Result_${i.count}" name="mtbResult_${i.count}">
+					<select id="mtbHain2Result_${i.count}" name="mtbResult_${i.count}" onChange="onChangeMtb(this)">
 							<c:forEach var="result" items="${mtbResults}">
 								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain2.mtbBurden}">selected</c:if> >${result.answerConcept.displayString}</option>
 							</c:forEach>
@@ -1317,7 +1325,8 @@ form {
 					&nbsp;&nbsp;
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.hain2.mox"/>:</font>
 					&nbsp;
-					<select id="moxHain2Result_${i.count}" name="moxResult_${i.count}">
+					<select id="moxHain2Result_${i.count}" name="moxResult_${i.count}" <c:if test="${hain2.moxResistance == null}"> disabled </c:if> >
+							<option hidden value=""></option>
 							<c:forEach var="result" items="${moxResults}">
 								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain2.moxResistance}">selected</c:if>>${result.answerConcept.displayString}</option>
 							</c:forEach>
@@ -1329,7 +1338,8 @@ form {
 				<td>
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.hain2.km"/>:</font>
 					&nbsp;
-					<select id="cmHain2Result_${i.count}" name="cmResult_${i.count}">
+					<select id="cmHain2Result_${i.count}" name="cmResult_${i.count}" <c:if test="${hain2.cmResistance == null}"> disabled </c:if>>
+							<option hidden value=""></option>
 							<c:forEach var="result" items="${cmResults}">
 								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain2.cmResistance}">selected</c:if>>${result.answerConcept.displayString}</option>
 							</c:forEach>
@@ -1337,8 +1347,8 @@ form {
 					&nbsp;&nbsp;
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.hain2.e"/>:</font>
 					&nbsp;
-					<select id="erHain2Result_${i.count}" name="erResult_${i.count}">
-					     <option hidden selected value=""></option>
+					<select id="erHain2Result_${i.count}" name="erResult_${i.count}" <c:if test="${hain2.erResistance == null}"> disabled </c:if>>
+					     <option hidden value=""></option>
 							<c:forEach var="result" items="${eResults}">
 								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain2.erResistance}">selected</c:if>>${result.answerConcept.displayString}</option>
 							</c:forEach>
@@ -1677,7 +1687,9 @@ form {
 	document.getElementById('old_column').style.display = "none";
 
 	sortSelect(document.getElementById('microscopyResult'));
-	
+	sortSelect(document.getElementById('microscopyResult_e'));
+	sortSelect(document.getElementById('sampleResult'));
+	sortSelect(document.getElementById('cultureResult'));
 
 	if(window.location.href.indexOf("labResultId") > -1) {
 		document.getElementById('old_column').style.display = "block";
@@ -1716,6 +1728,9 @@ form {
 			e = document.getElementById('sampleResult_'+idArray[1]);
 			var sampleResult = e.options[e.selectedIndex].text;
 
+			e = document.getElementById('dateRecieve_e');
+			var dateRecieve = e.value;
+
 			var errorText = '';
 
 			if (sampleResult == '') {
@@ -1725,6 +1740,9 @@ form {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
 			}
 			else if(isFutureDate(sampleDate)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
+			else if (isDateBefore(resultDate,dateRecieve)){
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
 			}
 			if (sampleAppearance == '') {
@@ -1757,10 +1775,16 @@ form {
 			e = document.getElementById('xpertError_'+idArray[1]);
 			var error = e.value;
 
+			e = document.getElementById('dateRecieve_e');
+			var dateRecieve = e.value;
+
 			var errorText = '';
 
 			if (mtbResult == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
+			}
+			if(!document.getElementById('rifXpertResult_'+idArray[1]).disabled && rifResult == ''){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noRifResult' text='Please specify Rif Result.'/>" + "\n";
 			}
 			if (resultDate == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
@@ -1768,7 +1792,10 @@ form {
 			else if(isFutureDate(resultDate)){
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
 			}
-
+			else if (isDateBefore(resultDate,dateRecieve)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
+			
 			if(errorText == '') {
 				document.forms["editXpertResults_"+idArray[1]].submit();
 			}
@@ -1795,15 +1822,27 @@ form {
 			e = document.getElementById('inhHainResult_'+idArray[1]);
 			var inhResult = e.options[e.selectedIndex].value;
 
+			e = document.getElementById('dateRecieve_e');
+			var dateRecieve = e.value;
+
 			var errorText = '';
 			
 			if (mtbResult == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
 			}
+			if(!document.getElementById('rifHainResult_'+idArray[1]).disabled && rifResult == ''){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noRifResult' text='Please specify Rif Result.'/>" + "\n";
+			}
+			if(!document.getElementById('inhHainResult_'+idArray[1]).disabled && inhResult == ''){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noInhResult' text='Please specify inh Result.'/>" + "\n";
+			}
 			if (resultDate == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
 			}
 			else if(isFutureDate(resultDate)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
+			else if (isDateBefore(resultDate,dateRecieve)){
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
 			}
 
@@ -1834,16 +1873,31 @@ form {
 
 			e = document.getElementById('erHain2Result_'+idArray[1]);
 			var erResult = e.options[e.selectedIndex].value;
+
+			e = document.getElementById('dateRecieve_e');
+			var dateRecieve = e.value;
 			
 			var	errorText = '';
 			
 			if (mtbResult == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
 			}
+			if(!document.getElementById('moxHain2Result_'+idArray[1]).disabled && moxResult == ''){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMoxResult' text='Please specify MOX/OFX Result.'/>" + "\n";
+			}
+			if(!document.getElementById('cmHain2Result_'+idArray[1]).disabled && cmResult == ''){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noCmResult' text='Please specify Km/ Am/ Cm Result.'/>" + "\n";
+			}
+			if(!document.getElementById('erHain2Result_'+idArray[1]).disabled && erResult == ''){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noErResult' text='Please specify E Result.'/>" + "\n";
+			}
 			if (resultDate == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
 			}
 			else if(isFutureDate(resultDate)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
+			else if (isDateBefore(resultDate,dateRecieve)){
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
 			}	
 
@@ -1867,6 +1921,9 @@ form {
 			e = document.getElementById('cultureResult_'+idArray[1]);
 			var result = e.options[e.selectedIndex].value;
 
+			e = document.getElementById('dateRecieve_e');
+			var dateRecieve = e.value;
+
 			if (result == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
 			}
@@ -1874,6 +1931,9 @@ form {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
 			}
 			else if(isFutureDate(resultDate)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
+			else if (isDateBefore(resultDate,dateRecieve)){
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
 			}
 
@@ -2270,6 +2330,32 @@ form {
 
 	}
 
+	function isDateBefore(dateRecieve, dateCompare)
+	{
+		var dateR;
+		if(dateRecieve.includes("/")){
+			dateR = stringToDate(dateRecieve,"mm/dd/yyyy","/");	
+		}	
+		else if (dateRecieve.includes(".")){
+			dateR = stringToDate(dateRecieve,"dd.mm.yyyy",".");	
+		}	
+
+		var dateC;
+		if(dateCompare.includes("/")){
+			dateC = stringToDate(dateCompare,"mm/dd/yyyy","/");	
+		}	
+		else if (dateCompare.includes(".")){
+			dateC = stringToDate(dateCompare,"dd.mm.yyyy",".");	
+		}	
+		
+		if(dateC > dateR)
+			return true;
+		else 
+			return false;	
+
+	}
+
+
 	function editTest(obj){
 
 		var theId = obj.id;
@@ -2280,6 +2366,8 @@ form {
 
 			document.getElementById("deleteMicroscopyResults_"+idArray[1]).style.display = "none";
 			document.getElementById("editMicroscopyResults_"+idArray[1]).style.display = "block";
+
+			sortSelect(document.getElementById('sampleResult_'+idArray[i]));
 		}
 		else if(idArray[0] == 'editXpertSpan'){
 
@@ -2298,6 +2386,8 @@ form {
 		else if(idArray[0] == 'editCultureSpan'){
 			document.getElementById("deleteCultureResults_"+idArray[1]).style.display = "none";
 			document.getElementById("editCultureResults_"+idArray[1]).style.display = "block";
+
+			sortSelect(document.getElementById('cultureResult_'+idArray[i]));
 		}
 		
 	}
@@ -2404,8 +2494,14 @@ form {
 			e = document.getElementById('sampleDate');
 			var resultDate = e.value;
 
+			e = document.getElementById('dateRecieve_e');
+			var dateRecieve = e.value;
+
 			e = document.getElementById('sampleAppearance');
 			var appearance = e.options[e.selectedIndex].value;
+
+			e = document.getElementById('dateRecieve_e');
+			var dateRecieve = e.value;
 			
 			if (result == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
@@ -2414,6 +2510,9 @@ form {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
 			}
 			else if(isFutureDate(resultDate)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
+			else if (isDateBefore(resultDate,dateRecieve)){
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
 			}
 			if (appearance == '') {
@@ -2436,13 +2535,22 @@ form {
 			e = document.getElementById('xpertError');
 			var error = e.value;
 
+			e = document.getElementById('dateRecieve_e');
+			var dateRecieve = e.value;
+
 			if (mtbResult == '') {
-				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMtbResult' text='Please specify Microscopy Result.'/>" + "\n";
+			}
+			if(!document.getElementById('rifXpertResult').disabled && rifResult == ''){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noRifResult' text='Please specify Rif Result.'/>" + "\n";
 			}
 			if (resultDate == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
 			}
 			else if(isFutureDate(resultDate)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
+			else if (isDateBefore(resultDate,dateRecieve)){
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
 			}
 			
@@ -2462,15 +2570,27 @@ form {
 			e = document.getElementById('inhHainResult');
 			var inhResult = e.options[e.selectedIndex].value;
 
+			e = document.getElementById('dateRecieve_e');
+			var dateRecieve = e.value;
+
 			if (mtbResult == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
+			}
+			if(!document.getElementById('rifHainResult').disabled && rifResult == ''){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noRifResult' text='Please specify Rif Result.'/>" + "\n";
+			}
+			if(!document.getElementById('inhHainResult').disabled && inhResult == ''){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noInhResult' text='Please specify inh Result.'/>" + "\n";
 			}
 			if (resultDate == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
 			}
 			else if(isFutureDate(resultDate)){
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
-			}			
+			}	
+			else if (isDateBefore(resultDate,dateRecieve)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}		
 		}
 		else if (theId == 'addHain2Test'){
 			formName = "addHAIN2Results";
@@ -2490,8 +2610,20 @@ form {
 			e = document.getElementById('erHain2Result');
 			var erResult = e.options[e.selectedIndex].value;
 
+			e = document.getElementById('dateRecieve_e');
+			var dateRecieve = e.value;
+
 			if (mtbResult == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
+			}
+			if(!document.getElementById('moxHain2Result').disabled && moxResult == ''){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMoxResult' text='Please specify MOX/OFX Result.'/>" + "\n";
+			}
+			if(!document.getElementById('cmHain2Result').disabled && cmResult == ''){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noCmResult' text='Please specify Km/ Am/ Cm Result.'/>" + "\n";
+			}
+			if(!document.getElementById('erHain2Result').disabled && erResult == ''){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noErResult' text='Please specify E Result.'/>" + "\n";
 			}
 			if (resultDate == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
@@ -2499,6 +2631,9 @@ form {
 			else if(isFutureDate(resultDate)){
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
 			}	
+			else if (isDateBefore(resultDate,dateRecieve)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
 			
 		}
 		else if (theId == 'addCultureTest'){
@@ -2510,6 +2645,9 @@ form {
 			e = document.getElementById('cultureResult');
 			var result = e.options[e.selectedIndex].value;
 
+			e = document.getElementById('dateRecieve_e');
+			var dateRecieve = e.value;
+
 			if (result == '') {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noMicroscopyResult' text='Please specify Microscopy Result.'/>" + "\n";
 			}
@@ -2517,6 +2655,9 @@ form {
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.noDateResult' text='Please specify date Result.'/>" + "\n";
 			}
 			else if(isFutureDate(resultDate)){
+				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
+			}
+			else if (isDateBefore(resultDate,dateRecieve)){
 				errorText = errorText + "<spring:message code='labmodule.labEntry.errors.dateResultInFuture' text='The result date must not be in the future.'/>" + "\n";
 			}
 			
@@ -2538,18 +2679,337 @@ form {
 	    var tmpAry = new Array();
 	    for (var i=0;i<selElem.options.length;i++) {
 	        tmpAry[i] = new Array();
-	        tmpAry[i][0] = selElem.options[i].text;
-	        tmpAry[i][1] = selElem.options[i].value;
+	        tmpAry[i][0] = selElem.options[i].value;
+	        tmpAry[i][1] = selElem.options[i].text;
 	    }
 	    tmpAry.sort();
 	    while (selElem.options.length > 0) {
 	        selElem.options[0] = null;
 	    }
 	    for (var i=0;i<tmpAry.length;i++) {
-	        var op = new Option(tmpAry[i][0], tmpAry[i][1]);
+	        var op = new Option(tmpAry[i][1], tmpAry[i][0]);
 	        selElem.options[i] = op;
 	    }
 	    return;
+	}
+
+	function onChangeMtb(elem){
+
+		if(elem.id.includes('_')){
+
+			var theId = elem.id;
+			var idArray = theId.split("_");
+
+			if (elem.options[elem.selectedIndex].text.includes('(+)') ){
+
+				if(idArray[0] == 'mtbXpertResult'){
+				
+					enable('rifXpertResult_'+idArray[1]);
+	
+					var elemMtb = Document.getElementById('rifXpertResult_'+idArray[1]);
+					if(elemMtb.options[elemMtb.selectedIndex].text == 'ERROR' || elemMtb.options[elemMtb.selectedIndex].text.includes('\u0431')){
+						enable('xpertError_'+idArray[1]);
+					}
+					else{
+						disable('xpertError_'+idArray[1]);
+						document.getElementById('xpertError_'+idArray[1]).value = '';
+					}
+				}
+				else if(idArray[0] == 'mtbHainResult'){
+
+					enable('rifHainResult_'+idArray[1]);
+					enable('inhHainResult_'+idArray[1]);
+				}
+				else if (idArray[0] == 'mtbHain2Result'){
+					enable('moxHain2Result_'+idArray[1]);
+					enable('cmHain2Result_'+idArray[1]);
+					enable('erHain2Result_'+idArray[1]);
+				}
+				
+			}
+			else if (elem.options[elem.selectedIndex].text.includes('(-)')){
+				if(idArray[0] == 'mtbXpertResult'){
+					disable('rifXpertResult_'+idArray[1]);
+					disable('xpertError_'+idArray[1]);
+	
+					document.getElementById('xpertError_'+idArray[1]).value = '';
+					var element = document.getElementById('rifXpertResult_'+idArray[1]);
+					element.value = '';
+				}	
+				else if(idArray[0] == 'mtbHainResult'){
+					disable('rifHainResult_'+idArray[1]);
+					disable('inhHainResult_'+idArray[1]);
+
+					var element = document.getElementById('rifHainResult_'+idArray[1]);
+					element.value = '';
+
+					var element = document.getElementById('inhHainResult_'+idArray[1]);
+					element.value = '';
+				}
+				else if (idArray[0] == 'mtbHain2Result'){
+					disable('moxHain2Result_'+idArray[1]);
+					disable('cmHain2Result_'+idArray[1]);
+					disable('erHain2Result_'+idArray[1]);
+
+					var element = document.getElementById('moxHain2Result_'+idArray[1]);
+					element.value = '';
+
+					var element = document.getElementById('cmHain2Result_'+idArray[1]);
+					element.value = '';
+
+					var element = document.getElementById('erHain2Result_'+idArray[1]);
+					element.value = '';
+				}
+			}
+			else if (elem.options[elem.selectedIndex].text == 'ERROR' || elem.options[elem.selectedIndex].text.includes('\u0431')){
+				if(idArray[0] == 'mtbXpertResult'){
+					disable('rifXpertResult_'+idArray[1]);
+					enable('xpertError_'+idArray[1]);
+	
+					var element = document.getElementById('rifXpertResult_'+idArray[1]);
+					element.value = '';
+				}
+				else if(idArray[0] == 'mtbHainResult'){
+					disable('rifHainResult_'+idArray[1]);
+					disable('inhHainResult_'+idArray[1]);
+
+					var element = document.getElementById('rifHainResult_'+idArray[1]);
+					element.value = '';
+
+					var element = document.getElementById('inhHainResult_'+idArray[1]);
+					element.value = '';
+				}
+				else if (idArray[0] == 'mtbHain2Result'){
+					disable('moxHain2Result_'+idArray[1]);
+					disable('cmHain2Result_'+idArray[1]);
+					disable('erHain2Result_'+idArray[1]);
+
+					var element = document.getElementById('moxHain2Result_'+idArray[1]);
+					element.value = '';
+
+					var element = document.getElementById('cmHain2Result_'+idArray[1]);
+					element.value = '';
+
+					var element = document.getElementById('erHain2Result_'+idArray[1]);
+					element.value = '';
+				}
+			}
+			else{
+				if(idArray[0] == 'mtbXpertResult'){
+					disable('rifXpertResult_'+idArray[1]);
+					disable('xpertError_'+idArray[1]);
+	
+					document.getElementById('xpertError_'+idArray[1]).value = '';
+					var element = document.getElementById('rifXpertResult_'+idArray[1]);
+					element.value = '';
+				}
+				else if(idArray[0] == 'mtbHainResult'){
+					disable('rifHainResult_'+idArray[1]);
+					disable('inhHainResult_'+idArray[1]);
+
+					var element = document.getElementById('rifHainResult_'+idArray[1]);
+					element.value = '';
+
+					var element = document.getElementById('inhHainResult_'+idArray[1]);
+					element.value = '';
+				}
+
+				else if (idArray[0] == 'mtbHain2Result'){
+					disable('moxHain2Result_'+idArray[1]);
+					disable('cmHain2Result_'+idArray[1]);
+					disable('erHain2Result_'+idArray[1]);
+
+					var element = document.getElementById('moxHain2Result_'+idArray[1]);
+					element.value = '';
+
+					var element = document.getElementById('cmHain2Result_'+idArray[1]);
+					element.value = '';
+
+					var element = document.getElementById('erHain2Result_'+idArray[1]);
+					element.value = '';
+				}
+			}
+			
+		}
+		else{
+			if (elem.options[elem.selectedIndex].text.includes('(+)') ){
+
+				if(elem.id == 'mtbXpertResult'){
+					enable('rifXpertResult');
+	
+					var elemMtb = Document.getElementById('rifXpertResult');
+					if(elemMtb.options[elemMtb.selectedIndex].text == 'ERROR' || elemMtb.options[elemMtb.selectedIndex].text.includes('\u0431')){
+						enable('xpertError');
+					}
+					else{
+						disable('xpertError');
+						document.getElementById('xpertError').value = '';
+					}
+				}
+				else if (elem.id == 'mtbHainResult'){
+					enable('rifHainResult');
+					enable('inhHainResult');
+				}
+				else if (elem.id == 'mtbHain2Result'){
+					enable('moxHain2Result');
+					enable('cmHain2Result');
+					enable('erHain2Result');
+				}
+				
+			}
+			else if (elem.options[elem.selectedIndex].text.includes('(-)')){
+
+				if(elem.id == 'mtbXpertResult'){
+					disable('rifXpertResult');
+					disable('xpertError');
+	
+					document.getElementById('xpertError').value = '';
+					var element = document.getElementById('rifXpertResult');
+					element.value = '';
+				}
+				else if (elem.id == 'mtbHainResult'){
+					disable('rifHainResult');
+					disable('inhHainResult');
+
+					var element = document.getElementById('rifHainResult');
+					element.value = '';
+
+					var element = document.getElementById('inhHainResult');
+					element.value = '';
+				}
+				else if (elem.id == 'mtbHain2Result'){
+					disable('moxHain2Result');
+					disable('cmHain2Result');
+					disable('erHain2Result');
+
+					var element = document.getElementById('moxHain2Result');
+					element.value = '';
+
+					var element = document.getElementById('cmHain2Result');
+					element.value = '';
+
+					var element = document.getElementById('erHain2Result');
+					element.value = '';
+				}
+			}
+			else if (elem.options[elem.selectedIndex].text == 'ERROR' || elem.options[elem.selectedIndex].text.includes('\u0431')){
+
+				if(elem.id == 'mtbXpertResult'){
+					disable('rifXpertResult');
+					enable('xpertError');
+	
+					 var element = document.getElementById('rifXpertResult');
+					 element.value = '';
+				}
+				else if (elem.id == 'mtbHainResult'){
+					disable('rifHainResult');
+					disable('inhHainResult');
+
+					var element = document.getElementById('rifHainResult');
+					element.value = '';
+
+					var element = document.getElementById('inhHainResult');
+					element.value = '';
+				}
+				else if (elem.id == 'mtbHain2Result'){
+					disable('moxHain2Result');
+					disable('cmHain2Result');
+					disable('erHain2Result');
+
+					var element = document.getElementById('moxHain2Result');
+					element.value = '';
+
+					var element = document.getElementById('cmHain2Result');
+					element.value = '';
+
+					var element = document.getElementById('erHain2Result');
+					element.value = '';
+				}
+			}
+			else{
+				if(elem.id == 'mtbXpertResult'){
+					disable('rifXpertResult');
+					disable('xpertError');
+	
+					document.getElementById('xpertError').value = '';
+					var element = document.getElementById('rifXpertResult');
+					element.value = '';
+				}
+				else if (elem.id == 'mtbHainResult'){
+					disable('rifHainResult');
+					disable('inhHainResult');
+
+					var element = document.getElementById('rifHainResult');
+					element.value = '';
+
+					var element = document.getElementById('inhHainResult');
+					element.value = '';
+				}
+				else if (elem.id == 'mtbHain2Result'){
+					disable('moxHain2Result');
+					disable('cmHain2Result');
+					disable('erHain2Result');
+
+					var element = document.getElementById('moxHain2Result');
+					element.value = '';
+
+					var element = document.getElementById('cmHain2Result');
+					element.value = '';
+
+					var element = document.getElementById('erHain2Result');
+					element.value = '';
+				}
+			}
+		}
+	}
+
+	function onChangeRif(elem){
+
+		if(elem.id.includes('_')){
+
+			var theId = elem.id;
+			var idArray = theId.split("_");
+
+			if (elem.options[elem.selectedIndex].text == 'ERROR' || elem.options[elem.selectedIndex].text.includes('\u0431')){
+				enable('xpertError_'+idArray[1]);
+			}
+			else{
+
+				var elemRif = Document.getElementById('mtbXpertResult_'+idArray[1]);
+
+				if(elemRif.options[elemRif.selectedIndex].text == 'ERROR' || elemRif.options[elemRif.selectedIndex].text.includes('\u0431')){
+					enable('xpertError_'+idArray[1]);
+				}
+				else{
+					disable('xpertError_'+idArray[1]);
+					document.getElementById('xpertError_'+idArray[1]).value = '';
+				}
+			}
+			
+		}
+		else{
+			if (elem.options[elem.selectedIndex].text == 'ERROR' || elem.options[elem.selectedIndex].text.includes('\u0431')){
+				enable('xpertError');
+			}
+			else{
+				var elemRif = Document.getElementById('mtbXpertResult');
+
+				if(elemRif.options[elemRif.selectedIndex].text == 'ERROR' || elemRif.options[elemRif.selectedIndex].text.includes('\u0431')){
+					enable('xpertError');
+				}
+				else{
+					disable('xpertError');
+					document.getElementById('xpertError').value = '';
+				}
+			}
+		}
+	}
+
+	function disable(elementId) {
+	    document.getElementById(elementId).disabled=true;
+	}
+	function enable(elementId) {
+	    document.getElementById(elementId).disabled=false;
 	}
 
 

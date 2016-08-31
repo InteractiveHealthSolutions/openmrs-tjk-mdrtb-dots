@@ -44,7 +44,7 @@ form {
 					&nbsp;
 					${labResult.location.displayString}
 					&nbsp;&nbsp;
-					<font style="font-weight:bold"><spring:message code="mdrtb.labNumber" text="lab Number"/>:</font>
+					<font style="font-weight:bold"><spring:message code="labmodule.labEntry.labNumber" text="lab Number"/>:</font>
 					&nbsp;
 					${labResult.labNumber}
 				</td>
