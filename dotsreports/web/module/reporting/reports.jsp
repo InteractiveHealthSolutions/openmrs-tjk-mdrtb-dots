@@ -45,6 +45,15 @@
 							<input type="hidden" name="type" value="${type.name}"/>
 							<b>${report.name}</b><br/>
 							<span style="font-size:smaller;">${report.description}</span><br/><br/>
+							<b><spring:message code="dotsreports.oblast"/></b><br/>
+							<select name="oblast">
+								 <option value=""></option>
+								<c:forEach items="${oblasts}" var="o">
+									<option value="${o.id}">${o.name}</option>
+								</c:forEach>
+							</select>
+							
+							<br/> or <br/>
 							<c:forEach items="${report.parameters}" var="p">
 								<b>${p.label}:</b><br/>
 								<wgt:widget id="param-${p.name}" name="p.${p.name}" type="${p.type.name}" defaultValue="${parameters[p.name]}"/>
