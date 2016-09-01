@@ -61,6 +61,7 @@ import org.openmrs.module.labmodule.specimen.Xpert;
 import org.openmrs.module.labmodule.specimen.HAINImpl;
 import org.openmrs.module.labmodule.specimen.XpertImpl;
 import org.openmrs.module.labmodule.specimen.reporting.Oblast;
+import org.openmrs.module.labmodule.specimen.reporting.ReportUtil;
 import org.openmrs.module.reporting.common.ObjectUtil;
 
 public class TbServiceImpl extends BaseOpenmrsService implements TbService {
@@ -1131,6 +1132,11 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	}
     	return locationList;
     }
+    
+    public String generateReportFromQuery (String database, String reportName, String query, Boolean export)
+	{
+		return ReportUtil.generateReportFromQuery (database, reportName, query, export);
+	}
 
 
 }

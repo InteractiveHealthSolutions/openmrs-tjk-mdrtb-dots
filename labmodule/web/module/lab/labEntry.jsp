@@ -18,10 +18,7 @@ form {
 }
 </style>
 
-<openmrs:portlet url="mdrtbPatientHeader" id="mdrtbPatientHeader" moduleId="mdrtb" patientId="${patientId}"/>
-
-<a href="../lab/newPatient.form?patientId=${labResult.patient.id}"><spring:message code="labmodule.demographic" /></a>
-
+<openmrs:portlet url="labPatientHeader" id="labPatientHeader" moduleId="labmodule" patientId="${patientId}"/>
 
 <br>
 <br>

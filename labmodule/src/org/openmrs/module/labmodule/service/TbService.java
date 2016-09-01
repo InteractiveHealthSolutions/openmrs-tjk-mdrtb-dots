@@ -612,6 +612,7 @@ public interface TbService extends OpenmrsService {
     @Transactional 
     public void deleteTest(Integer testId);
     
-    
+    public String generateReportFromQuery (String database, String reportName, String query, Boolean export);
+  
 }
 

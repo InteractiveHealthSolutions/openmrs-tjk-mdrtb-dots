@@ -52,6 +52,15 @@
 	<classpathentry kind="lib" path="/openmrs-1.6.x/lib/slf4j/slf4j-log4j12-1.5.6.jar"/>
 	<classpathentry kind="lib" path="/openmrs-1.6.x/lib/mysql-connector-java/mysql-connector-java-5.1.7-bin.jar"/>
 	<classpathentry kind="lib" path="/openmrs-1.6.x/lib/spring-framework/spring-2.5.6.jar" sourcepath="/openmrs-source/spring-2.5.1-src.zip"/>
+	<classpathentry kind="lib" path="lib/jasperreports-4.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-applet-4.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-fonts-4.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jasperreports-javaflow-4.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.2.jar"/>
+	<classpathentry kind="lib" path="lib/iText-2.1.7.jar"/>
+	<classpathentry kind="lib" path="lib/iText-5.0.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib-common/openmrs-api-1.6.2.13894-dev.jar" sourcepath="/openmrs-1.6.x"/>
 	<classpathentry kind="lib" path="lib-common/tests-openmrs-api-1.6.2.13894-dev.jar"/>

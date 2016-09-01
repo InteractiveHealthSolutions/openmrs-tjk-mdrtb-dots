@@ -67,7 +67,12 @@ public class LabReportingController {
         @RequestParam(required=false, value="oblast") String oblast,
         HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 
-    	response.setContentType("text/html");
+    	
+    	
+    	String result = Context.getService(TbService.class).generateReportFromQuery("", "", "", false);
+    	String fileName = getFileName(result);
+		
+    	/*response.setContentType("text/html");
     	
 		try {
 			ReportSpecification report = type.newInstance();
@@ -99,7 +104,14 @@ public class LabReportingController {
 				response.getOutputStream().print(ste.toString());
 			}
 			response.getOutputStream().print("<span></body></html>");
-		}
+		}*/
     }
+    
+    private String getFileName (String result)
+	{
+		int i = result.lastIndexOf ('\\');
+		return result.substring (i+1);
+	}
+	
     
 }
