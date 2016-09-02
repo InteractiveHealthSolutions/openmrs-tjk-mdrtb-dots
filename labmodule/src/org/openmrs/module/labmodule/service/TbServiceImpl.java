@@ -1133,9 +1133,9 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	return locationList;
     }
     
-    public String generateReportFromQuery (String database, String reportName, String query, Boolean export)
+    public String generateReportFromQuery (String location, String year, String query, Boolean export)
 	{
-		return ReportUtil.generateReportFromQuery (database, reportName, query, export);
+		return ReportUtil.generateReportFromQuery (location, year, query, export);
 	}
 
 

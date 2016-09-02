@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	
 	<title>TB 07</title>
 </head>
 <body>
@@ -9,6 +10,8 @@
 			border {border: 1px solid #000000}
 </style>
 <div style="font-size:smaller; width:980px;">
+
+<input hidden type="text" id="fname" value=#filename#>
 
 <table border="0" width="100%">
 	<tbody>
@@ -213,4 +216,11 @@
 </div>
 
 </body>
+
+<script  type='text/javascript'>
+		alert('Hello...');
+		var fname = document.getElementById("fname").value;
+		alert('http://localhost:8080/reports/'+fname);
+		window.open('http://localhost:8080/reports/'+fname);
+</script>
 </html>

@@ -67,12 +67,7 @@ public class LabReportingController {
         @RequestParam(required=false, value="oblast") String oblast,
         HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 
-    	
-    	
-    	String result = Context.getService(TbService.class).generateReportFromQuery("", "", "", false);
-    	String fileName = getFileName(result);
-		
-    	/*response.setContentType("text/html");
+    	response.setContentType("text/html");
     	
 		try {
 			ReportSpecification report = type.newInstance();
@@ -86,6 +81,14 @@ public class LabReportingController {
 			
 			EvaluationContext context = report.validateAndCreateContext(parameters);
 			ReportData data = report.evaluateReport(context);
+			
+			Integer year = (Integer)data.getContext().getParameterValue("year");
+			String location = (String)data.getContext().getParameterValue("location");
+
+			String result = Context.getService(TbService.class).generateReportFromQuery(location, String.valueOf(year), "", false);
+			
+			data.getContext().addParameterValue("filename", result);
+			
 			RenderingMode mode = new RenderingMode(new LabPreviewReportRenderer(), "Preview", null, null);
 			if (format != null) {
 				for (RenderingMode m : report.getRenderingModes()) {
@@ -104,7 +107,7 @@ public class LabReportingController {
 				response.getOutputStream().print(ste.toString());
 			}
 			response.getOutputStream().print("<span></body></html>");
-		}*/
+		}
     }
     
     private String getFileName (String result)
