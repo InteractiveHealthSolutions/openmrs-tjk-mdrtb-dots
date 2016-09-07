@@ -385,23 +385,6 @@ public class Cohorts {
 		return cd;
 	}
 	
-	public static CohortDefinition getAllLabResultDuring(Date startDate, Date endDate){
-		StringBuilder q = new StringBuilder();
-		q.append("select 	e.patient_id ");
-		q.append("from		encounter e ");
-		q.append("where		e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " ");
-				
-		if (startDate != null) {
-			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
-		}
-		if (endDate != null) {
-			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
-		}
-		System.out.println("Query... ->>>" + q.toString());
-		return new SqlCohortDefinition(q.toString());
-	}
-	
-	
 	public static CohortDefinition getAllPulmonaryEver() {
 		StringBuilder q = new StringBuilder();
 		q.append("select 	o.person_id ");
@@ -705,4 +688,20 @@ public class Cohorts {
 		
 		return result.toString();
 	}
+	
+	 public static CohortDefinition getAllLabResultDuring(Date startDate, Date endDate){
+			StringBuilder q = new StringBuilder();
+			q.append("select 	e.patient_id ");
+			q.append("from		encounter e ");
+			q.append("where		e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " ");
+					
+			if (startDate != null) {
+				q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
+			}
+			if (endDate != null) {
+				q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
+			}
+			
+			return new SqlCohortDefinition(q.toString());
+		}
 }

@@ -609,10 +609,47 @@ public interface TbService extends OpenmrsService {
     /**
      * Deletes a smear, culture, or dst test
      */
+    
+    public Collection<Location> getPossibleLabs();
+    
     @Transactional 
     public void deleteTest(Integer testId);
     
-    public String generateReportFromQuery (String location, String year, String query, Boolean export);
+    public String getAllLabResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getAllMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getDiagnosticLabResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getDisgnosticMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getFollowupLabResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getFollowupMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getAllPositiveResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getPositiveDiagnosticResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getPositiveFollowupResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getAllPositiveMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getDiagnosticPositiveMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getFollowupPositiveMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getAllPHCResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getPositivePHCResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getRateDiagnosticMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getRateFollowupMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getSalivaDiagnosticMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    //public String generateReportFromQuery (String location, String year, String query, Boolean export);
   
 }
 

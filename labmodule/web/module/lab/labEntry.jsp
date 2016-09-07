@@ -1023,7 +1023,7 @@ form {
 					<td>
 						<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
 						&nbsp;
-						${xpert.mtbBurden.displayString}
+						${xpert.result.displayString}
 						&nbsp;&nbsp;
 						<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.r"/>:</font>
 						&nbsp;
@@ -1068,7 +1068,7 @@ form {
 						&nbsp;
 						<select id="mtbXpertResult_${i.count}" name="mtbResult_${i.count}" onChange="onChangeMtb(this)">
 								<c:forEach var="result" items="${mtbResults}">
-									<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == xpert.mtbBurden}">selected</c:if>>${result.answerConcept.displayString}</option>
+									<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == xpert.result}">selected</c:if>>${result.answerConcept.displayString}</option>
 								</c:forEach>
 						</select>
 						
@@ -1149,7 +1149,7 @@ form {
 				
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
 					&nbsp;
-					${hain.mtbBurden.displayString}
+					${hain.result.displayString}
 					&nbsp;&nbsp;
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.r"/>:</font>
 					&nbsp;
@@ -1188,7 +1188,7 @@ form {
 					&nbsp;
 					<select id="mtbHainResult_${i.count}" name="mtbResult_${i.count}" onChange="onChangeMtb(this)">
 							<c:forEach var="result" items="${mtbResults}">
-								<option value="${result.answerConcept.id}"  <c:if test="${result.answerConcept == hain.mtbBurden}">selected</c:if>>${result.answerConcept.displayString}</option>
+								<option value="${result.answerConcept.id}"  <c:if test="${result.answerConcept == hain.result}">selected</c:if>>${result.answerConcept.displayString}</option>
 							</c:forEach>
 					</select>
 					&nbsp;&nbsp;
@@ -1268,7 +1268,7 @@ form {
 				<td>
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.xpert.mtb"/>:</font>
 					&nbsp;
-					${hain2.mtbBurden.displayString}
+					${hain2.result.displayString}
 					&nbsp;&nbsp;
 					<font style="font-size:13px; font-weight:bold"><spring:message code="labmodule.labEntry.hain2.mox"/>:</font>
 					&nbsp;
@@ -1316,7 +1316,7 @@ form {
 					&nbsp;
 					<select id="mtbHain2Result_${i.count}" name="mtbResult_${i.count}" onChange="onChangeMtb(this)">
 							<c:forEach var="result" items="${mtbResults}">
-								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain2.mtbBurden}">selected</c:if> >${result.answerConcept.displayString}</option>
+								<option value="${result.answerConcept.id}" <c:if test="${result.answerConcept == hain2.result}">selected</c:if> >${result.answerConcept.displayString}</option>
 							</c:forEach>
 					</select>
 					&nbsp;&nbsp;

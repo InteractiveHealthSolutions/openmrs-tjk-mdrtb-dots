@@ -527,7 +527,7 @@ public class LabSpecimenController extends AbstractSpecimenController {
     		xpert.setResultDate(dateFormat.parse(xpertTestDate));
 		}
     	if (StringUtils.isNotBlank(mtbResult)) {
-    		xpert.setMtbBurden(Context.getConceptService().getConcept(Integer.valueOf(mtbResult)));
+    		xpert.setResult(Context.getConceptService().getConcept(Integer.valueOf(mtbResult)));
 		}
     	if (StringUtils.isNotBlank(rifResult)) {
     		xpert.setRifResistance(Context.getConceptService().getConcept(Integer.valueOf(rifResult)));
@@ -889,7 +889,7 @@ public class LabSpecimenController extends AbstractSpecimenController {
     		hain.setResultDate(dateFormat.parse(hainTestDate));
 		}
     	if (StringUtils.isNotBlank(mtbResult)) {
-    		hain.setMtbBurden(Context.getConceptService().getConcept(Integer.valueOf(mtbResult)));
+    		hain.setResult(Context.getConceptService().getConcept(Integer.valueOf(mtbResult)));
 		}
     	if (StringUtils.isNotBlank(rifResult)) {
     		hain.setRifResistance(Context.getConceptService().getConcept(Integer.valueOf(rifResult)));
@@ -959,7 +959,7 @@ public class LabSpecimenController extends AbstractSpecimenController {
     		hain.setResultDate(dateFormat.parse(hainTestDate));
 		}
     	if (StringUtils.isNotBlank(mtbResult)) {
-    		hain.setMtbBurden(Context.getConceptService().getConcept(Integer.valueOf(mtbResult)));
+    		hain.setResult(Context.getConceptService().getConcept(Integer.valueOf(mtbResult)));
 		}
     	if (StringUtils.isNotBlank(moxResult)) {
     		hain.setMoxResistance(Context.getConceptService().getConcept(Integer.valueOf(moxResult)));

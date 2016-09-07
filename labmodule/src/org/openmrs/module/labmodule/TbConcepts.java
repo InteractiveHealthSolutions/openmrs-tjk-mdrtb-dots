@@ -11,6 +11,8 @@ public class TbConcepts {
 	public final static String [] LAB_NO = {"Laboratory investigation number"};
 	public final static String [] INVESTIGATION_DATE = {"Investigation Date"};
 	public final static String [] REQUESTING_MEDICAL_FACILITY = {"Requesting medical facility"};
+	public final static String [] PHC = {"PHC Facilitiy"};
+	public final static String [] SALIVA = {"SALIVA"};
 	public final static String [] INVESTIGATION_PURPOSE = {"Purpose of investigation"};
 	public final static String [] BIOLOGICAL_SPECIMEN = {"Biological Specimen"};
 	public final static String [] PERIPHERAL_LAB_NO = {"Peripheral laboratory investigation number"};
@@ -116,6 +118,8 @@ public class TbConcepts {
     public final static String [] XPERT_MEDIUM = {"MEDIUM"};
     public final static String [] XPERT_LOW = {"LOW"};
     public final static String [] ISONIAZID_RESISTANCE = {"ISONIAZID RESISTANCE"};
+    public final static String [] POSITIVE_PLUS = {"Positive (+)"};
+    public final static String [] TEST_NOT_DONE = {"TEST NOT DONE"};
     
     public final static String [] COLONIES_IN_CONTROL = {"COLONIES IN CONTROL"};
     public final static String [] CONCENTRATION = {"CONCENTRATION"};

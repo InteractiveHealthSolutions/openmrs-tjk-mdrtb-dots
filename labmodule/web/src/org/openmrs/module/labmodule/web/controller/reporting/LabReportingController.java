@@ -82,12 +82,12 @@ public class LabReportingController {
 			EvaluationContext context = report.validateAndCreateContext(parameters);
 			ReportData data = report.evaluateReport(context);
 			
-			Integer year = (Integer)data.getContext().getParameterValue("year");
-			String location = (String)data.getContext().getParameterValue("location");
+			//Integer year = (Integer)data.getContext().getParameterValue("year");
+			//String location = (String)data.getContext().getParameterValue("location");
 
-			String result = Context.getService(TbService.class).generateReportFromQuery(location, String.valueOf(year), "", false);
+			//String result = Context.getService(TbService.class).generateReportFromQuery(location, String.valueOf(year), "", false);
 			
-			data.getContext().addParameterValue("filename", result);
+			//data.getContext().addParameterValue("filename", result);
 			
 			RenderingMode mode = new RenderingMode(new LabPreviewReportRenderer(), "Preview", null, null);
 			if (format != null) {
