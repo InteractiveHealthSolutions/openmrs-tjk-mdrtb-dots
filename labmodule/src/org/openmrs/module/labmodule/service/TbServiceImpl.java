@@ -442,13 +442,12 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 		for(Location loc : allLocations){
 			
 			String locName = loc.getName();
-			String[] locArray = locName.split(" ");
-			if(TbUtil.areRussianStringsEqual(locArray[0], "БЛ"))
+			if(locName.length() >= 2 && TbUtil.areRussianStringsEqual(locName.substring(0, 2), "БЛ"))
 				allLabs.add(loc);
-			else if(TbUtil.areRussianStringsEqual(locArray[0], "ОЦБТ"))
+			else if(locName.length() >= 2 && TbUtil.areRussianStringsEqual(locName.substring(0, 2),"ГЦ"))
 				allLabs.add(loc);
-			else if(TbUtil.areRussianStringsEqual(locName.substring(0, 1),"ГЦ"))
-				allLabs.add(loc);
+			else if(locName.length() >= 4 && TbUtil.areRussianStringsEqual(locName.substring(0, 4), "ОЦБТ"))
+				allLabs.add(loc);	
 			else if (TbUtil.areRussianStringsEqual(locName,"РЦЗНТ Душанбе"))
 				allLabs.add(loc);
 			else if (TbUtil.areRussianStringsEqual(locName,"НРЛ"))
