@@ -42,10 +42,19 @@
 				<openmrs:htmlInclude file="${file}" />
 			</c:forEach>
 		</openmrs:extensionPoint>
-
+ <%
+   if(org.openmrs.api.context.Context.getLocale().toString().equals("tj")) {
+ %>
+ <style> html *
+{
+   font-family: Times New Roman Tj !important;
+}
+</style>
+ <% } %>
 	</head>
 
 <body>
+
 	<div id="pageBody">
 		<div id="userBar">
 			<openmrs:authentication>
