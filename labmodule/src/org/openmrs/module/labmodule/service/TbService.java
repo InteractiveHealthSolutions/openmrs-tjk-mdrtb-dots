@@ -3,6 +3,7 @@ package org.openmrs.module.labmodule.service;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.openmrs.Concept;
@@ -648,6 +649,8 @@ public interface TbService extends OpenmrsService {
     public String getRateFollowupMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
     
     public String getSalivaDiagnosticMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
+    
+    public String getAverageWeeklyLoadPerLabTechnician(Date startDate, Date endDate, List<Location> locList);
     
     //public String generateReportFromQuery (String location, String year, String query, Boolean export);
   

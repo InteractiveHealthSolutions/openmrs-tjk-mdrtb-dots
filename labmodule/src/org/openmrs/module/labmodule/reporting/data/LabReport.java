@@ -232,6 +232,8 @@ public class LabReport implements ReportSpecification {
 			Float per5 = (Float.parseFloat(allDiagnosticSaliva)/Float.parseFloat(totalDiagnosticMicroscopyTest))*100;
 			context.addParameterValue("allMicroscopySalivaRateDiagnostoicTest", String.format("%.2f", per5) + "%"); 
 		}
+		String totalWeeklyLoad = Context.getService(TbService.class).getAverageWeeklyLoadPerLabTechnician(startDate, endDate, locList);
+		context.addParameterValue("totalWeeklyLoad", totalWeeklyLoad);
 		
 		Map<String,Date>dateMap = ReportUtil.getPeriodDates(year, "1", null);
 		startDate = dateMap.get("startDate");
@@ -313,6 +315,8 @@ public class LabReport implements ReportSpecification {
 			Float per5 = (Float.parseFloat(q1DiagnosticSaliva)/Float.parseFloat(q1DiagnosticMicroscopyTest))*100;
 			context.addParameterValue("q1MicroscopySalivaRateDiagnostoicTest", String.format("%.2f", per5) + "%"); 
 		}
+		String q1WeeklyLoad = Context.getService(TbService.class).getAverageWeeklyLoadPerLabTechnician(startDate, endDate, locList);
+		context.addParameterValue("q1WeeklyLoad", q1WeeklyLoad);
 		
 		dateMap = ReportUtil.getPeriodDates(year, "2", null);
 		startDate = dateMap.get("startDate");
@@ -394,6 +398,8 @@ public class LabReport implements ReportSpecification {
 			Float per5 = (Float.parseFloat(q2DiagnosticSaliva)/Float.parseFloat(q2DiagnosticMicroscopyTest))*100;
 			context.addParameterValue("q2MicroscopySalivaRateDiagnostoicTest", String.format("%.2f", per5) + "%"); 
 		}
+		String q2WeeklyLoad = Context.getService(TbService.class).getAverageWeeklyLoadPerLabTechnician(startDate, endDate, locList);
+		context.addParameterValue("q2WeeklyLoad", q2WeeklyLoad);
 		
 		dateMap = ReportUtil.getPeriodDates(year, "3", null);
 		startDate = dateMap.get("startDate");
@@ -475,6 +481,8 @@ public class LabReport implements ReportSpecification {
 			Float per5 = (Float.parseFloat(q3DiagnosticSaliva)/Float.parseFloat(q3DiagnosticMicroscopyTest))*100;
 			context.addParameterValue("q3MicroscopySalivaRateDiagnostoicTest", String.format("%.2f", per5) + "%"); 
 		}
+		String q3WeeklyLoad = Context.getService(TbService.class).getAverageWeeklyLoadPerLabTechnician(startDate, endDate, locList);
+		context.addParameterValue("q3WeeklyLoad", q3WeeklyLoad);
 		
 		dateMap = ReportUtil.getPeriodDates(year, "4", null);
 		startDate = dateMap.get("startDate");
@@ -556,6 +564,8 @@ public class LabReport implements ReportSpecification {
 			Float per5 = (Float.parseFloat(q4DiagnosticSaliva)/Float.parseFloat(q4DiagnosticMicroscopyTest))*100;
 			context.addParameterValue("q4MicroscopySalivaRateDiagnostoicTest", String.format("%.2f", per5) + "%"); 
 		}
+		String q4WeeklyLoad = Context.getService(TbService.class).getAverageWeeklyLoadPerLabTechnician(startDate, endDate, locList);
+		context.addParameterValue("q4WeeklyLoad", q4WeeklyLoad);
 		
 		if (!locList.isEmpty()){
 			List<CohortDefinition> cohortDefinitions = new ArrayList<CohortDefinition>();

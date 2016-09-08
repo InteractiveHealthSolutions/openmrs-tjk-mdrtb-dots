@@ -50,6 +50,11 @@
 			<td>
 				<a href="../labmodule/reporting/reports.form?type=org.openmrs.module.labmodule.reporting.data.LabReport"><spring:message code="labmodule.labReports" /></a>
 			</td>
+			
+			<td>
+				<a href="../labmodule/labListPatients.form"><spring:message code="labmodule.labReports" /></a>
+			</td>
+			
 		</tr>
 				
 </table>

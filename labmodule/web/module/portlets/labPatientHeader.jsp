@@ -5,6 +5,14 @@
 	<%-- Header showing preferred name, id, and treatment status --%>
 		<div id="patientHeader" class="boxHeader">
 		
+		<div align="right">
+		
+			<a href="newPatient.form?patientId=${model.patient.id}">
+				<img title="Edit" src="${pageContext.request.contextPath}/moduleResources/labmodule/edit.gif" alt="edit" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
+			</a>
+	
+		</div>
+		
 		<div id="patientHeaderPatientName">${model.patient.personName}</div>
 		<div id="patientHeaderPreferredIdentifier">
 			<c:if test="${!empty model.primaryIdentifier}">

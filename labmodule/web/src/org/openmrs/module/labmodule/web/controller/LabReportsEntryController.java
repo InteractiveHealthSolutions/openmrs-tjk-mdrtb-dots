@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class LabReportsListPatientsController {
+public class LabReportsEntryController {
 
     /** Logger for this class and subclasses */
     protected final Log log = LogFactory.getLog(getClass());

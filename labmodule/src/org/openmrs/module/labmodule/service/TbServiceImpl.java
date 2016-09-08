@@ -1,7 +1,9 @@
 package org.openmrs.module.labmodule.service;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -442,6 +444,16 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			String locName = loc.getName();
 			String[] locArray = locName.split(" ");
 			if(TbUtil.areRussianStringsEqual(locArray[0], "БЛ"))
+				allLabs.add(loc);
+			else if(TbUtil.areRussianStringsEqual(locArray[0], "ОЦБТ"))
+				allLabs.add(loc);
+			else if(TbUtil.areRussianStringsEqual(locName.substring(0, 1),"ГЦ"))
+				allLabs.add(loc);
+			else if (TbUtil.areRussianStringsEqual(locName,"РЦЗНТ Душанбе"))
+				allLabs.add(loc);
+			else if (TbUtil.areRussianStringsEqual(locName,"НРЛ"))
+				allLabs.add(loc);
+			else if (TbUtil.areRussianStringsEqual(locName,"НЛОЗ"))
 				allLabs.add(loc);
 		}
 		
@@ -1182,7 +1194,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 				
 			}
 			
-			q.append(" ) and l.voided = 0");
+			q.append(" ) and l.retired = 0");
 		}
 		
 		System.out.println(q.toString() + "<<<----");
@@ -1224,7 +1236,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 				
 			}
 			
-			q.append(" ) and l.voided = 0 ");
+			q.append(" ) and l.retired = 0 ");
 		}
 		
 		System.out.println(q.toString() + "<<<----");
@@ -1266,7 +1278,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 				
 			}
 			
-			q.append(" ) and l.voided = 0 ");
+			q.append(" ) and l.retired = 0 ");
 		}
 		
 		System.out.println(q.toString() + "<<<----");
@@ -1284,7 +1296,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 		q.append("( o1.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_NA) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_REPEATED) + ") ");
 		q.append("INNER JOIN obs o2 on o1.encounter_id = o2.encounter_id and o2.voided = 0 and o2.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
 		if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.voided = 0 ");
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1347,7 +1359,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 				
 			}
 			
-			q.append(" ) and l.voided = 0 ");
+			q.append(" ) and l.retired = 0 ");
 		}
 		
 		System.out.println(q.toString() + "<<<----");
@@ -1365,7 +1377,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 		q.append("( o1.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_123) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_4) + ") ");
 		q.append("INNER JOIN obs o2 on o1.encounter_id = o2.encounter_id and o2.voided = 0 and o2.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
 		if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.voided = 0 ");
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1405,7 +1417,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	q.append("(o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.CULTURE_RESULT) + " and !(o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ")) or ");
     	q.append("(o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and !(o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + "))) ");
     	if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.voided = 0 ");
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1447,7 +1459,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	q.append("INNER JOIN obs o1 on o.encounter_id = o1.encounter_id and o1.voided = 0 and ");
     	q.append("o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ( o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_NA) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_REPEATED) + ") ");
     	if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.voided = 0 ");
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1489,7 +1501,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	q.append("INNER JOIN obs o1 on o.encounter_id = o1.encounter_id and o1.voided = 0 and ");
     	q.append("o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ( o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_123) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_4) + ") ");
     	if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.voided = 0 ");
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1528,7 +1540,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	q.append("INNER JOIN obs o1 on o.encounter_id = o1.encounter_id and o1.voided = 0 and o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and ");
     	q.append("!(o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ") ");
     	if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.voided = 0 ");
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1569,7 +1581,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	q.append("INNER JOIN obs o3 on o2.encounter_id = o3.encounter_id and o3.voided = 0 and o3.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and ");
     	q.append("!(o3.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o3.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ") ");
     	if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.voided = 0 ");
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1610,7 +1622,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	q.append("INNER JOIN obs o3 on o2.encounter_id = o3.encounter_id and o3.voided = 0 and o3.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and ");
     	q.append("!(o3.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o3.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ") ");
     	if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.voided = 0 ");
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1673,7 +1685,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 				
 			}
 			
-			q.append(" ) and l.voided = 0 ");
+			q.append(" ) and l.retired = 0 ");
 		}
 		
 		System.out.println(q.toString() + "<<<----");
@@ -1693,7 +1705,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	q.append("(o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.CULTURE_RESULT) + " and !(o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ")) or ");
     	q.append("(o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and !(o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + "))) ");
     	if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.voided = 0 ");
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1731,7 +1743,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 		q.append("( o1.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_NA) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_REPEATED) + ") ");
 		q.append("INNER JOIN obs o2 on o1.encounter_id = o2.encounter_id and o2.voided = 0 and o2.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
 		if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.voided = 0 ");
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1781,7 +1793,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 		q.append("( o1.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_123) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_4) + ") ");
 		q.append("INNER JOIN obs o2 on o1.encounter_id = o2.encounter_id and o2.voided = 0 and o2.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
 		if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.voided = 0 ");
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1833,7 +1845,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 		q.append("INNER JOIN obs o3 on o2.encounter_id = o3.encounter_id and o3.voided = 0 and ");
 		q.append("o3.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.SPECIMEN_APPEARANCE) + " and o3.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.SALIVA) + " ");
 		if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.voided = 0 ");
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1862,6 +1874,57 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
 		
 		return String.valueOf(result.size());
+	}
+    
+    public String getAverageWeeklyLoadPerLabTechnician(Date startDate, Date endDate, List<Location> locList){
+    	StringBuilder q = new StringBuilder();
+		q.append("select u.user_id, count(e.encounter_id) ");
+		q.append("from users u ");
+		q.append("INNER JOIN openmrspih.user_role ur on u.user_id = ur.user_id and ur.role = 'Lab Technician' || ur.role = 'Lab Supervisor' ");
+		q.append("INNER JOIN openmrspih.encounter e on u.user_id = e.creator ");
+		if(!locList.isEmpty()){
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
+			
+			for(int i = 0; i<locList.size(); i++){
+				
+				Location loc = locList.get(i);
+				
+				if(i != 0)
+					q.append(" or ");
+				
+				q.append(" l.name = '" + loc.getName() + "'");
+				
+			}
+			
+			q.append(" ) ");
+		}
+		q.append("where e.encounter_type = 10 and e.voided = 0 ");
+		
+		if (startDate != null) {
+			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
+		}
+		if (endDate != null) {
+			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
+		}
+		q.append("group by u.user_id ");
+		
+		System.out.println(q.toString());
+		
+		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
+		
+		Map<String, String> mMap = new HashMap<String, String>();
+		mMap.put("size", String.valueOf(result.size()));
+		
+		Long sumOfLoad = new Long("0");
+		for(List<Object> obj : result){
+			
+			sumOfLoad = sumOfLoad + (Long)obj.get(1);
+			
+		}
+		
+		Double res = (double) (7 * sumOfLoad) / 365;
+		
+		return String.format("%.2f", res);
 	}
     
 //    public String generateReportFromQuery (String location, String year, String query, Boolean export)
