@@ -30,6 +30,9 @@ import org.openmrs.module.dotsreports.TbConcepts;
 import org.openmrs.module.dotsreports.exception.MdrtbAPIException;
 import org.openmrs.module.dotsreports.reporting.ReportSpecification;
 import org.openmrs.module.dotsreports.reporting.ReportUtil;
+import org.openmrs.module.dotsreports.service.TbService;
+import org.openmrs.module.dotsreports.Oblast;
+import org.openmrs.module.dotsreports.reporting.data.Cohorts;
 import org.openmrs.module.reporting.cohort.definition.AgeCohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.service.CohortDefinitionService;
@@ -68,9 +71,13 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 	public List<Parameter> getParameters() {
 		List<Parameter> l = new ArrayList<Parameter>();
 		l.add(new Parameter("location", Context.getMessageSourceService().getMessage("dotsreports.facility"), Location.class));
+	
+		
 		l.add(new Parameter("year", Context.getMessageSourceService().getMessage("dotsreports.year"), Integer.class));
 		//l.add(new Parameter("quarter", Context.getMessageSourceService().getMessage("mdrtb.quarter"), Integer.class));
-		l.add(new Parameter("quarter", Context.getMessageSourceService().getMessage("dotsreports.quarter"), String.class));
+		l.add(new Parameter("quarter", Context.getMessageSourceService().getMessage("dotsreports.quarterOptional"), String.class));
+		l.add(new Parameter("month", Context.getMessageSourceService().getMessage("dotsreports.monthOptional"), String.class));
+		//l.add(new Parameter("oblast", "Oblast", Oblast.class));
 		return l;
 	}
 	
@@ -95,11 +102,13 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 		Integer year = (Integer)parameters.get("year");
 		/*Integer quarter = (Integer)parameters.get("quarter");*/
 		String quarter = (String) parameters.get("quarter");
+		String oblast = (String) parameters.get("oblast");
+		String month = (String) parameters.get("month");
 		
-		if (quarter == null) {
-			throw new IllegalArgumentException(Context.getMessageSourceService().getMessage("dotsreports.error.pleaseEnterAQuarter"));
+		if (quarter == null && month==null) {
+			throw new IllegalArgumentException(Context.getMessageSourceService().getMessage("dotsreports.error.pleaseEnterAQuarterOrMonth"));
 		}
-		context.getParameterValues().putAll(ReportUtil.getPeriodDates(year, quarter, null));
+		context.getParameterValues().putAll(ReportUtil.getPeriodDates(year, quarter, month));
 		
 		Map<String,Object>pMap = context.getParameterValues();
 		Set<String> keySet = pMap.keySet();
@@ -118,22 +127,61 @@ public class DOTS07TJKUpdated implements ReportSpecification {
 		
 		ReportDefinition report = new ReportDefinition();
 		
+		//OBLAST
+		String oblast = (String) context.getParameterValue("oblast");
+		//\\OBLAST
+		
 		Location location = (Location) context.getParameterValue("location");
 		Date startDate = (Date)context.getParameterValue("startDate");
 		Date endDate = (Date)context.getParameterValue("endDate");
 		
+		//OBLAST
+		Oblast o = null;
+		if(!oblast.equals("") && location == null)
+			o =  Context.getService(TbService.class).getOblast(Integer.parseInt(oblast));
+		
+		List<Location> locList = new ArrayList<Location>();
+		if(o != null && location == null)
+			locList = Context.getService(TbService.class).getLocationsFromOblastName(o);
+		else if (location != null)
+			locList.add(location);
+		
+		if(location != null)
+			context.addParameterValue("location", location.getName()); 
+		else if(o != null)
+			context.addParameterValue("location", o.getName()); 
+		else
+			context.addParameterValue("location", "All"); 
+		//\\OBLAST
+		
+		
+		
 		// Base Cohort is confirmed mdr patients, in program, who started treatment during the quarter, optionally at location
 				Map<String, Mapped<? extends CohortDefinition>> baseCohortDefs = new LinkedHashMap<String, Mapped<? extends CohortDefinition>>();
 				
+				//OBLAST
+				if (!locList.isEmpty()){
+					List<CohortDefinition> cohortDefinitions = new ArrayList<CohortDefinition>();
+					for(Location loc : locList)
+						cohortDefinitions.add(Cohorts.getLocationFilter(loc, startDate, endDate));
+						
+					if(!cohortDefinitions.isEmpty()){
+						report.setBaseCohortDefinition(ReportUtil.getCompositionCohort("OR", cohortDefinitions), null);
+					}
+				}
 				
-				if (location != null) {
+			//\\OBLAST
+				
+				/*TO RESTORE!!!!!!!!!!!!!
+				 * if (location != null) {
 					//
 					CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate, true);
 					if (locationFilter != null) {
 						//baseCohortDefs.put("location", new Mapped(locationFilter, null));
 						report.setBaseCohortDefinition(locationFilter, null);
 					}	
-				}
+				}*/
+				
 				/*CohortDefinition baseCohort = ReportUtil.getCompositionCohort(baseCohortDefs, "AND");
 				report.setBaseCohortDefinition(baseCohort, null);*/
 				

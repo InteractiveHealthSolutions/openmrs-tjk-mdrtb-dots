@@ -22,12 +22,14 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.mdrtb.reporting.data.Cohorts;
+import org.openmrs.module.mdrtb.Oblast;
+import org.openmrs.module.mdrtb.service.MdrtbService;
 import org.openmrs.module.mdrtb.MdrtbConcepts;
 import org.openmrs.module.mdrtb.MdrtbConstants.TbClassification;
 import org.openmrs.module.mdrtb.exception.MdrtbAPIException;
 import org.openmrs.module.mdrtb.reporting.ReportSpecification;
 import org.openmrs.module.mdrtb.reporting.ReportUtil;
-import org.openmrs.module.mdrtb.service.MdrtbService;
 import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.DateObsCohortDefinition;
 import org.openmrs.module.reporting.dataset.definition.CohortCrossTabDataSetDefinition;
@@ -64,7 +66,9 @@ public class TB07TJK implements ReportSpecification {
 		l.add(new Parameter("location", Context.getMessageSourceService().getMessage("mdrtb.facility"), Location.class));
 		l.add(new Parameter("year", Context.getMessageSourceService().getMessage("mdrtb.year"), Integer.class));
 		//l.add(new Parameter("quarter", Context.getMessageSourceService().getMessage("mdrtb.quarter"), Integer.class));
-		l.add(new Parameter("quarter", Context.getMessageSourceService().getMessage("mdrtb.quarter"), String.class));
+		l.add(new Parameter("quarter", Context.getMessageSourceService().getMessage("mdrtb.quarterOptional"), String.class));
+		l.add(new Parameter("month", Context.getMessageSourceService().getMessage("mdrtb.monthOptional"), String.class));
+		
 		return l;
 	}
 	
@@ -75,6 +79,7 @@ public class TB07TJK implements ReportSpecification {
 		List<RenderingMode> l = new ArrayList<RenderingMode>();
 		l.add(ReportUtil.renderingModeFromResource("HTML", "org/openmrs/module/mdrtb/reporting/data/output/TB07" + 
 			(StringUtils.isNotBlank(Context.getLocale().getLanguage()) ? "_" + Context.getLocale().getLanguage() : "") + ".html"));
+		
 		return l;
 	}
 
@@ -87,10 +92,12 @@ public class TB07TJK implements ReportSpecification {
 		Integer year = (Integer)parameters.get("year");
 		/*Integer quarter = (Integer)parameters.get("quarter");*/
 		String quarter = (String) parameters.get("quarter");
-		if (quarter == null) {
-			throw new IllegalArgumentException(Context.getMessageSourceService().getMessage("mdrtb.error.pleaseEnterAQuarter"));
+		String oblast = (String) parameters.get("oblast");
+		String month = (String) parameters.get("month");
+		if (quarter == null && month==null) {
+			throw new IllegalArgumentException(Context.getMessageSourceService().getMessage("mdrtb.error.pleaseEnterAQuarterOrMonth"));
 		}
-		context.getParameterValues().putAll(ReportUtil.getPeriodDates(year, quarter, null));
+		context.getParameterValues().putAll(ReportUtil.getPeriodDates(year, quarter, month));
 		return context;
 	}
 	
@@ -101,34 +108,70 @@ public class TB07TJK implements ReportSpecification {
 		
 		ReportDefinition report = new ReportDefinition();
 		
+		//OBLAST
+				String oblast = (String) context.getParameterValue("oblast");
+				//\\OBLAST
+		
 		Location location = (Location) context.getParameterValue("location");
 		Date startDate = (Date)context.getParameterValue("startDate");
 		Date endDate = (Date)context.getParameterValue("endDate");
 		
+		//OBLAST
+				Oblast o = null;
+				if(!oblast.equals("") && location == null)
+					o =  Context.getService(MdrtbService.class).getOblast(Integer.parseInt(oblast));
+				
+				List<Location> locList = new ArrayList<Location>();
+				if(o != null && location == null)
+					locList = Context.getService(MdrtbService.class).getLocationsFromOblastName(o);
+				else if (location != null)
+					locList.add(location);
+				
+				if(location != null)
+					context.addParameterValue("location", location.getName()); 
+				else if(o != null)
+					context.addParameterValue("location", o.getName()); 
+				else
+					context.addParameterValue("location", "All"); 
+				//\\OBLAST
+		
 		// Set base cohort to patients assigned to passed location, if applicable
 		//CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate);
-		CohortDefinition locationFilter;
-		
-		if(location!=null)
-			//locationFilter = Cohorts.getTreatmentStartAndAddressFilterTJK(location.getCountyDistrict(), startDate, endDate);
-			locationFilter = ReportUtil.getCompositionCohort("AND", Cohorts.getLocationFilter(location, startDate, endDate),Cohorts.getStartedTreatmentFilter(startDate, endDate));
-		
-		else
-			locationFilter= Cohorts.getEnrolledInMDRProgramDuring(startDate, endDate);
-		
-		if (locationFilter != null) {
-			
-			report.setBaseCohortDefinition(locationFilter, null);
-		}
-		
-		
+				//OBLAST
+				if (!locList.isEmpty()){
+					List<CohortDefinition> cohortDefinitions = new ArrayList<CohortDefinition>();
+					for(Location loc : locList)
+						cohortDefinitions.add(Cohorts.getLocationFilter(loc, startDate, endDate));
+						
+					if(!cohortDefinitions.isEmpty()){
+						report.setBaseCohortDefinition(ReportUtil.getCompositionCohort("OR", cohortDefinitions), null);
+						//report.setBaseCohortDefinition(ReportUtil.getCompositionCohort("AND", Cohorts.getEnrolledInMDRProgramDuring(startDate, endDate), report.getBaseCohortDefinition().getParameterizable()));
+						//report.getBaseCohortDefinition().
+					}
+				}
+				
+//		CohortDefinition locationFilter;
+//		
+//		if(location!=null)
+//			//locationFilter = Cohorts.getTreatmentStartAndAddressFilterTJK(location.getCountyDistrict(), startDate, endDate);
+//			locationFilter = ReportUtil.getCompositionCohort("AND", Cohorts.getLocationFilter(location, startDate, endDate),Cohorts.getStartedTreatmentFilter(startDate, endDate));
+//		
+//		else
+//			locationFilter= Cohorts.getEnrolledInMDRProgramDuring(startDate, endDate);
+//		
+//		if (locationFilter != null) {
+//			
+//			report.setBaseCohortDefinition(locationFilter, null);
+//		}
+//		
+		CohortDefinition drtb = Cohorts.getEnrolledInMDRProgramDuring(startDate, endDate);
 
 		// Add the data set definitions
 		CohortCrossTabDataSetDefinition labResultDsd = new CohortCrossTabDataSetDefinition();
 		//CohortDefinition polydr = Cohorts.getPolydrDetectionFilter(startDate, endDate);
 		/*CohortDefinition mdr = Cohorts.getMdrDetectionFilter(startDate, endDate);
 		CohortDefinition xdr = Cohorts.getXdrDetectionFilter(startDate, endDate);*/
-		CohortDefinition totalDetected = locationFilter;
+		CohortDefinition totalDetected = drtb;
 		CohortDefinition mdrOnly = Cohorts.getResistanceTypeFilter(startDate, endDate,TbClassification.MDR_TB);
 		CohortDefinition xdr = Cohorts.getResistanceTypeFilter(startDate, endDate,TbClassification.XDR_TB);
 		CohortDefinition polydr = Cohorts.getResistanceTypeFilter(startDate, endDate,TbClassification.POLY_RESISTANT_TB);
@@ -136,6 +179,12 @@ public class TB07TJK implements ReportSpecification {
 		CohortDefinition prexdr = Cohorts.getResistanceTypeFilter(startDate, endDate,TbClassification.PRE_XDR_TB);
 		
 		CohortDefinition mdr = ReportUtil.getCompositionCohort("OR", mdrOnly,rr);
+		
+		 mdr = ReportUtil.getCompositionCohort("AND", mdr, drtb);
+		 polydr = ReportUtil.getCompositionCohort("AND", polydr, drtb);
+		 prexdr = ReportUtil.getCompositionCohort("AND", prexdr, drtb);
+		 xdr = ReportUtil.getCompositionCohort("AND", xdr, drtb);
+		 
 		// note that for the purpose of this report, the polydr, mdr, and xdr cohorts should be mutually exclusive
 		// that is, by the standard definition, any patients that are mdr or xdr are also polydr; but we 
 		// do not want to include the mdr and xdr patients in our poly count, hence why we use the "minus" method here
@@ -151,6 +200,7 @@ public class TB07TJK implements ReportSpecification {
 		CohortCrossTabDataSetDefinition treatmentDsd = new CohortCrossTabDataSetDefinition();
 		
 		CohortDefinition startedTreatment = Cohorts.getStartedTreatmentFilter(startDate, endDate);
+		startedTreatment = ReportUtil.getCompositionCohort("AND", startedTreatment, drtb);
 		
 		Map<String, CohortDefinition> groups = ReportUtil.getMdrtbPreviousTreatmentFilterSet(startDate, endDate);
 		

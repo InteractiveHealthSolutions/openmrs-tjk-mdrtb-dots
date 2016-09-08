@@ -36,6 +36,7 @@ import org.openmrs.api.context.Context;
 
 
 import org.openmrs.module.mdrtb.MdrtbConcepts;
+import org.openmrs.module.mdrtb.Oblast;
 import org.openmrs.module.mdrtb.MdrtbConstants.TbClassification;
 import org.openmrs.module.mdrtb.exception.MdrtbAPIException;
 import org.openmrs.module.mdrtb.reporting.ReportSpecification;
@@ -83,6 +84,7 @@ public class TB08TJK implements ReportSpecification {
 		l.add(new Parameter("month", Context.getMessageSourceService().getMessage("mdrtb.monthOptional"), Integer.class));*/
 		l.add(new Parameter("quarter", Context.getMessageSourceService().getMessage("mdrtb.quarterOptional"), String.class));
 		l.add(new Parameter("month", Context.getMessageSourceService().getMessage("mdrtb.monthOptional"), String.class));
+		
 		return l;
 	}
 	
@@ -107,6 +109,11 @@ public class TB08TJK implements ReportSpecification {
 		Integer month = (Integer) parameters.get("month");*/
 		String quarter = (String) parameters.get("quarter");
 		String month = (String) parameters.get("month");
+		String oblast = (String) parameters.get("oblast");
+		
+		if (quarter == null && month==null) {
+			throw new IllegalArgumentException(Context.getMessageSourceService().getMessage("mdrtb.error.pleaseEnterAQuarterOrMonth"));
+		}
 		context.getParameterValues().putAll(ReportUtil.getPeriodDates(year, quarter, month));
 		
 		return context;
@@ -120,9 +127,33 @@ public class TB08TJK implements ReportSpecification {
 		
 		ReportDefinition report = new ReportDefinition();
 		
+		//OBLAST
+		String oblast = (String) context.getParameterValue("oblast");
+		//\\OBLAST
+
+		
 		Location location = (Location) context.getParameterValue("location");
 		Date startDate = (Date)context.getParameterValue("startDate");
 		Date endDate = (Date)context.getParameterValue("endDate");
+		
+		//OBLAST
+		Oblast o = null;
+		if(!oblast.equals("") && location == null)
+			o =  Context.getService(MdrtbService.class).getOblast(Integer.parseInt(oblast));
+		
+		List<Location> locList = new ArrayList<Location>();
+		if(o != null && location == null)
+			locList = Context.getService(MdrtbService.class).getLocationsFromOblastName(o);
+		else if (location != null)
+			locList.add(location);
+		
+		if(location != null)
+			context.addParameterValue("location", location.getName()); 
+		else if(o != null)
+			context.addParameterValue("location", o.getName()); 
+		else
+			context.addParameterValue("location", "All"); 
+		//\\OBLAST
 		
 		// Base Cohort is patients who started treatment during year, optionally at location
 		Map<String, Mapped<? extends CohortDefinition>> baseCohortDefs = new LinkedHashMap<String, Mapped<? extends CohortDefinition>>();
@@ -134,7 +165,7 @@ public class TB08TJK implements ReportSpecification {
 			}
 		}*/
 		//baseCohortDefs.put("startedTreatment", new Mapped(Cohorts.getStartedTreatmentFilter(startDate, endDate), null));
-		if (location != null) {
+		/*if (location != null) {
 			CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate);
 			//CohortDefinition locationFilter = Cohorts.getTreatmentStartAndAddressFilterTJK(location.getCountyDistrict(), startDate, endDate);
 			if (locationFilter != null) {
@@ -144,13 +175,26 @@ public class TB08TJK implements ReportSpecification {
 		
 		else {
 			baseCohortDefs.put("startedTreatment", new Mapped(Cohorts.getStartedTreatmentFilter(startDate, endDate), null));
+		}*/
+		
+		//OBLAST
+		if (!locList.isEmpty()){
+			List<CohortDefinition> cohortDefinitions = new ArrayList<CohortDefinition>();
+			for(Location loc : locList)
+				cohortDefinitions.add(Cohorts.getLocationFilter(loc, startDate, endDate));
+				
+			if(!cohortDefinitions.isEmpty()){
+				report.setBaseCohortDefinition(ReportUtil.getCompositionCohort("OR", cohortDefinitions), null);
+				//report.setBaseCohortDefinition(ReportUtil.getCompositionCohort("AND", Cohorts.getEnrolledInMDRProgramDuring(startDate, endDate), report.getBaseCohortDefinition().getParameterizable()));
+				//report.getBaseCohortDefinition().
+			}
 		}
 		
 		/*CohortDefinition mdr = Cohorts.getMdrDetectionFilter(startDate, endDate);
 		CohortDefinition pdr = Cohorts.getMdrDetectionFilter(startDate, endDate);
 		CohortDefinition pdrOnly = ReportUtil.minus(pdr, mdr);*/
-		CohortDefinition baseCohort = ReportUtil.getCompositionCohort(baseCohortDefs, "AND");
-		report.setBaseCohortDefinition(baseCohort, null);
+		/*CohortDefinition baseCohort = ReportUtil.getCompositionCohort(baseCohortDefs, "AND");
+		report.setBaseCohortDefinition(baseCohort, null);*/
 		
 		CohortDefinition drtb = Cohorts.getEnrolledInMDRProgramDuring(startDate, endDate);
 		

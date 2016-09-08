@@ -2,6 +2,7 @@ package org.openmrs.module.dotsreports;
 
 import java.lang.reflect.Method;
 import java.text.Collator;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -461,7 +462,7 @@ public class TbUtil {
 	 * Utility method to return patients matching passed criteria. Difference between this and main method is that locations are matched by patient rayon
 	 * @return Cohort
 	 */
-	public static Cohort getDOTSPatientsTJK(String identifier, String name, /*String enrollment,*/ Location location, List<ProgramWorkflowState> states, Integer minage, Integer maxage, String gender, Integer year, String quarter) {
+	public static Cohort getDOTSPatientsTJK(String identifier, String name, /*String enrollment,*/ Location location, String oblast, List<ProgramWorkflowState> states, Integer minage, Integer maxage, String gender, Integer year, String quarter, String month) {
 		
 		
 		Cohort cohort = Context.getPatientSetService().getAllPatients();
@@ -471,7 +472,7 @@ public class TbUtil {
 		Date now = new Date();
 		Program tbProgram = ms.getTbProgram();
 		
-		Map<String, Date> dateMap = ReportUtil.getPeriodDates(year, quarter, null);
+		Map<String, Date> dateMap = ReportUtil.getPeriodDates(year, quarter, month);
 		
 		Date startDate = (Date)(dateMap.get("startDate"));
 		Date endDate = (Date)(dateMap.get("endDate"));
@@ -520,7 +521,7 @@ public class TbUtil {
 			cohort = Cohort.intersect(cohort, inStates);
 		}
 		
-		if (location != null) {
+		/*if (location != null) {
 			CohortDefinition lcd = Cohorts.getLocationFilter(location, null, null, false);
 			Cohort locationCohort;
             try {
@@ -530,7 +531,38 @@ public class TbUtil {
             	  throw new MdrtbAPIException("Unable to evalute location cohort",e);
             }
 			cohort = Cohort.intersect(cohort, locationCohort);
+		}*/
+		
+		Oblast o = null;
+		if(!oblast.equals("") && location == null)
+			o =  Context.getService(TbService.class).getOblast(Integer.parseInt(oblast));
+		
+		List<Location> locList = new ArrayList<Location>();
+		if(o != null && location == null)
+			locList = Context.getService(TbService.class).getLocationsFromOblastName(o);
+		else if (location != null)
+			locList.add(location);
+		
+		CohortDefinition temp = null;
+		CohortDefinition lcd = null;
+		
+		for(Location loc : locList) {
+			temp = Cohorts.getLocationFilter(loc, null,null,true);
+			if(lcd == null)
+				lcd = temp;
+			
+			else 
+				lcd = ReportUtil.getCompositionCohort("OR", lcd, temp);
 		}
+		
+		Cohort locationCohort;
+        try {
+            locationCohort = Context.getService(CohortDefinitionService.class).evaluate(lcd, new EvaluationContext());
+        }
+        catch (EvaluationException e) {
+        	  throw new MdrtbAPIException("Unable to evalute location cohort",e);
+        }
+		cohort = Cohort.intersect(cohort, locationCohort);
 		
 		/*// If Location is specified, limit to patients at this Location
 		if (location != null) {

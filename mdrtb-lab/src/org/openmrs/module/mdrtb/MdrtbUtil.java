@@ -2,6 +2,7 @@ package org.openmrs.module.mdrtb;
 
 import java.lang.reflect.Method;
 import java.text.Collator;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -29,10 +30,10 @@ import org.openmrs.Program;
 import org.openmrs.ProgramWorkflowState;
 import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.mdrtb.Oblast;
 import org.openmrs.module.mdrtb.reporting.definition.AgeAtMDRRegistrationCohortDefinition;
 import org.openmrs.module.mdrtb.reporting.ReportUtil;
 import org.openmrs.module.mdrtb.exception.MdrtbAPIException;
-import org.openmrs.module.mdrtb.program.MdrtbPatientProgram;
 import org.openmrs.module.mdrtb.regimen.Regimen;
 import org.openmrs.module.mdrtb.regimen.RegimenUtils;
 import org.openmrs.module.mdrtb.reporting.data.Cohorts;
@@ -456,7 +457,7 @@ public class MdrtbUtil {
 	 * Utility method to return patients matching passed criteria. Difference between this and main method is that locations are matched by patient rayon
 	 * @return Cohort
 	 */
-	public static Cohort getMdrPatientsTJK(String identifier, String name, /*String enrollment,*/ Location location, List<ProgramWorkflowState> states, Integer minage, Integer maxage, String gender, Integer year, String quarter) {
+	public static Cohort getMdrPatientsTJK(String identifier, String name, /*String enrollment,*/ Location location, String oblast, List<ProgramWorkflowState> states, Integer minage, Integer maxage, String gender, Integer year, String quarter, String month) {
 		
 		Cohort cohort = Context.getPatientSetService().getAllPatients();
 		
@@ -465,7 +466,7 @@ public class MdrtbUtil {
 		Date now = new Date();
 		Program mdrtbProgram = ms.getMdrtbProgram();
 		
-		Map<String, Date> dateMap = ReportUtil.getPeriodDates(year, quarter, null);
+		Map<String, Date> dateMap = ReportUtil.getPeriodDates(year, quarter, month);
 		
 		Date startDate = (Date)(dateMap.get("startDate"));
 		Date endDate = (Date)(dateMap.get("endDate"));
@@ -514,8 +515,39 @@ public class MdrtbUtil {
 			cohort = Cohort.intersect(cohort, inStates);
 		}
 		
+		Oblast o = null;
+		if(!oblast.equals("") && location == null)
+			o =  Context.getService(MdrtbService.class).getOblast(Integer.parseInt(oblast));
+		
+		List<Location> locList = new ArrayList<Location>();
+		if(o != null && location == null)
+			locList = Context.getService(MdrtbService.class).getLocationsFromOblastName(o);
+		else if (location != null)
+			locList.add(location);
+		
+		CohortDefinition temp = null;
+		CohortDefinition lcd = null;
+		
+		for(Location loc : locList) {
+			temp = Cohorts.getLocationFilter(loc, null,null);
+			if(lcd == null)
+				lcd = temp;
+			
+			else 
+				lcd = ReportUtil.getCompositionCohort("OR", lcd, temp);
+		}
+		
+		Cohort locationCohort;
+        try {
+            locationCohort = Context.getService(CohortDefinitionService.class).evaluate(lcd, new EvaluationContext());
+        }
+        catch (EvaluationException e) {
+        	  throw new MdrtbAPIException("Unable to evalute location cohort",e);
+        }
+		cohort = Cohort.intersect(cohort, locationCohort);
+		
 		// If Location is specified, limit to patients at this Location
-				if (location != null) {
+				/*if (location != null) {
 					CohortDefinition lcd = Cohorts.getLocationFilter(location, now, now);
 					Cohort locationCohort;
 		            try {
@@ -525,7 +557,7 @@ public class MdrtbUtil {
 		            	  throw new MdrtbAPIException("Unable to evalute location cohort",e);
 		            }
 					cohort = Cohort.intersect(cohort, locationCohort);
-				}
+				}*/
 		
 		/*// If Location is specified, limit to patients at this Location
 		if (location != null) {

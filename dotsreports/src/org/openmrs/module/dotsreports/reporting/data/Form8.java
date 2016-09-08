@@ -26,10 +26,12 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.dotsreports.Oblast;
 import org.openmrs.module.dotsreports.TbConcepts;
 import org.openmrs.module.dotsreports.exception.MdrtbAPIException;
 import org.openmrs.module.dotsreports.reporting.ReportSpecification;
 import org.openmrs.module.dotsreports.reporting.ReportUtil;
+import org.openmrs.module.dotsreports.service.TbService;
 import org.openmrs.module.reporting.cohort.definition.AgeCohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
 import org.openmrs.module.reporting.dataset.definition.CohortCrossTabDataSetDefinition;
@@ -95,6 +97,7 @@ public class Form8 implements ReportSpecification {
 		/*Integer quarter = (Integer)parameters.get("quarter");*/
 		
 		String quarter = (String)parameters.get("quarter");
+		String oblast = (String) parameters.get("oblast");
 		context.getParameterValues().putAll(ReportUtil.getPeriodDates(year, quarter, null));
 		Map<String,Object>pMap = context.getParameterValues();
 		Set<String> keySet = pMap.keySet();
@@ -117,17 +120,48 @@ public class Form8 implements ReportSpecification {
 		Date startDate = (Date)context.getParameterValue("startDate");
 		Date endDate = (Date)context.getParameterValue("endDate");
 		
+		//OBLAST
+				String oblast = (String) context.getParameterValue("oblast");
+				//\\OBLAST
+				
+				Oblast o = null;
+				if(!oblast.equals("") && location == null)
+					o =  Context.getService(TbService.class).getOblast(Integer.parseInt(oblast));
+				
+				List<Location> locList = new ArrayList<Location>();
+				if(o != null && location == null)
+					locList = Context.getService(TbService.class).getLocationsFromOblastName(o);
+				else if (location != null)
+					locList.add(location);
+				
+				if(location != null)
+					context.addParameterValue("location", location.getName()); 
+				else if(o != null)
+					context.addParameterValue("location", o.getName()); 
+				else
+					context.addParameterValue("location", "All"); 
+				//\\OBLAST
+		
 		// Base Cohort is confirmed mdr patients, in program, who started treatment during the quarter, optionally at location
 				Map<String, Mapped<? extends CohortDefinition>> baseCohortDefs = new LinkedHashMap<String, Mapped<? extends CohortDefinition>>();
 				
+				if (!locList.isEmpty()){
+					List<CohortDefinition> cohortDefinitions = new ArrayList<CohortDefinition>();
+					for(Location loc : locList)
+						cohortDefinitions.add(Cohorts.getLocationFilter(loc, startDate, endDate));
+						
+					if(!cohortDefinitions.isEmpty()){
+						report.setBaseCohortDefinition(ReportUtil.getCompositionCohort("OR", cohortDefinitions), null);
+					}
+				}
 				
-				if (location != null) {
+				/*if (location != null) {
 					CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate, false);//Cohorts.getLocationFilterTJK(location.getCountyDistrict(), startDate, endDate);
 					if (locationFilter != null) {
 						//baseCohortDefs.put("location", new Mapped(locationFilter, null));
 						report.setBaseCohortDefinition(locationFilter, null);
 					}	
-				}
+				}*/
 				/*CohortDefinition baseCohort = ReportUtil.getCompositionCohort(baseCohortDefs, "AND");
 				report.setBaseCohortDefinition(baseCohort, null);*/
 		

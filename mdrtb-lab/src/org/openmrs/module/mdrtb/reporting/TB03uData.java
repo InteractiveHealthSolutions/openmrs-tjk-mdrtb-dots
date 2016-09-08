@@ -1,4 +1,4 @@
-package org.openmrs.module.dotsreports.reporting;
+package org.openmrs.module.mdrtb.reporting;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.HashMap;
 import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
 
-public class TB03Data {
+public class TB03uData {
 	
 	private Patient patient;
 	private String identifier;
@@ -87,7 +87,7 @@ public class TB03Data {
    
     
     
-	public TB03Data() {
+	public TB03uData() {
 		// TODO Auto-generated constructor stub
 		dstResults = new HashMap<String,String>();
 	}
@@ -663,7 +663,7 @@ public class TB03Data {
 	}
 
 	public String getDstOfx() {
-		return dstOfx;
+		return dstResults.get("OFX");
 	}
 
 	public void setDstOfx(String dstOfx) {

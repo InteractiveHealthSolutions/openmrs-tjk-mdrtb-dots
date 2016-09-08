@@ -222,6 +222,10 @@ public class TbConcepts {
     public final static String [] TREATMENT_CENTER_FOR_IP = {"TREATMENT CENTER FOR IP"};
     public final static String [] TREATMENT_CENTER_FOR_CP = {"TREATMENT CENTER FOR CP"};
  	public final static String [] TUBERCULOSIS_PATIENT_CATEGORY = {"TUBERCULOSIS PATIENT CATEGORY"};
+ 	
+ 	public final static String[] REGIMEN_1_NEW = {"REGIMEN 1 NEW"};
+ 	public final static String[] REGIMEN_1_RETREATMENT = {"REGIMEN 1 TREATMENT"};
+ 	
     
 
 }

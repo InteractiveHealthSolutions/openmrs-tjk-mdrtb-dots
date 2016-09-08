@@ -247,6 +247,10 @@ public class SpecimenGroupImpl implements Specimen {
     public Concept getType() {
 	    return this.specimens.get(0).getType();
     }
+    
+    public Double getMonthOfTreatment() {
+    	return this.specimens.get(0).getMonthOfTreatment();
+    }
 
     public void removeScannedLabReport(ScannedLabReport report) {
     	throw new RuntimeException("Illegal attempt to access removeScannedLabReport method of SpecimenGroupImpl. SpecimenGroupImpl should be used for get access only.");

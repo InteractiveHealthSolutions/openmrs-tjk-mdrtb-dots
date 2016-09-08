@@ -2,19 +2,7 @@
 <%@ include file="../dotsHeader.jsp"%>
 
 
-
-<c:if test="${locale == 'tj'}">
-<style> html *
-{
-   font-family: Times New Roman Tj !important;
-}
-</style>
-</c:if>
-
 <style>
- 
- 
- 
 th.rotate {
   /* Something you can count on */
   height: 350px;
@@ -27,7 +15,7 @@ th.rotate {
 th.rotate > div {
   transform: 
     /* Magic Numbers */
-    translate(0px, 120px)
+    translate(0px, 100px)
     /* 45 is really 360 - 45 */
     rotate(270deg);
   width: 30px;
@@ -145,8 +133,6 @@ var tableToExcel = (function() {
 </script>
 </head>
 <body>
-
-
 <input type="button" onclick="tableToExcel('tb03', 'TB03')" value="Export to Excel" />
 <table border=".5pt" id="tb03">
   
@@ -334,7 +320,7 @@ var tableToExcel = (function() {
   <td rowspan="2" align="center">${ row.dstLzd }</td>
  <td rowspan="2" align="center">${ row.dstCfz }</td>
  <td rowspan="2" align="center">${ row.dstBdq}</td>
- <td rowspan="2" align="center">${ row.dstDlm }</td>
+ <td rowspan="2"align="center">${ row.dstDlm }</td>
   
   <td rowspan="2">${row.drugResistance }</td>
   <c:choose>
@@ -406,6 +392,5 @@ var tableToExcel = (function() {
 </c:forEach>
 
 </table>
-<c:if test="${locale == 'tj' }"></font></c:if>
 
 <%@ include file="../dotsFooter.jsp"%>

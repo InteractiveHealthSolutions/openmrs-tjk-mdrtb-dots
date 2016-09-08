@@ -15,6 +15,7 @@ import org.openmrs.Person;
 import org.openmrs.Program;
 import org.openmrs.ProgramWorkflowState;
 import org.openmrs.api.OpenmrsService;
+import org.openmrs.module.mdrtb.Oblast;
 import org.openmrs.module.mdrtb.program.MdrtbPatientProgram;
 import org.openmrs.module.mdrtb.specimen.Culture;
 import org.openmrs.module.mdrtb.specimen.Dst;
@@ -467,7 +468,11 @@ public interface MdrtbService extends OpenmrsService {
     @Transactional(readOnly=true)
     public Collection<ConceptAnswer> getPossibleXpertMtbBurdens();
     
+    public List<Oblast> getOblasts();
+
+    public Oblast getOblast(Integer oblastId);
     
+    public List<Location> getLocationsFromOblastName(Oblast oblast);
     
 }
 

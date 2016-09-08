@@ -1,8 +1,9 @@
 ﻿<html>
 	<head>
-		<title>TB-08u</title>
+		<title>ТБ-08у</title>
 	</head>
 	<body>
+	<font face="Times New Roman Tj">
 		<style>
 			th {vertical-align:middle; text-align:center;}
 			th, td {font-size:smaller;}
@@ -10,47 +11,51 @@
 		<div style="font-size:smaller; width:980px;">
 			<table width="100%"><tr>
 				<td width="100%" align="left" style="font-size:14px; font-weight:bold;">
-					Квартальный отчет о результатах лечения больных ЛУ ТБ <br/>
-					(заполняется после 24 - 36 месяцев от последней даты квартала или года начала лечения)
+					Њисоботи семоња оиди натиљањои табобати беморони гирифтори шакли мутобиќгаша <br/>
+                    (баъди 24 - 36 моњи табобат аз анљоми санаи семоња ва ё соли табобат пур карда мешавад)<br/>
 				</td>
-				<td width="100%" align="right" style="font-size:14px; font-weight:bold;">ТБ 08y</td>
+				<td width="100%" align="right" style="font-size:14px; font-weight:bold;">ТБ08у</td>
+				
 			</tr></table>
 			<br/><br/>
+			
+			
 			<center>
 			<table width="100%" border="1">
 				<tr>
-				    <td>Наименование учреждения: ________________  <br/>  
-				    Область/район:  #location#<br/>
-					ФИО координатора по ТБ:   _________________<br/>
-					Дата отчета:  ____________________
+				    <td>Номгўи муассиса: ________________<br/>
+					Вилоят/шањр/ноњия:  #location#<br/>
+					Ному насаби њамоњангсоз:  ________________<br/>
+					Имзо: ___________________________
 				</td>
 				
-				<td valign="top">Случаи выявленные за #quarter# квартал #year# года (#startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#)<br/>
-					Date of Report: #generationDate|dd/MMM/yyyy#</td>
+				<td valign="top">Њодисањои дарёфтгардида дар семоњаи #quarter# соли  #year# (#startDate|dd/MMM/yyyy# - #endDate|dd/MMM/yyyy#)<br/>
+					Санаи њисобот: #generationDate|dd/MMM/yyyy#</td>
 				</tr>
 			</table>
 			</center>
 			<br/><br/>
 			<table border="1" cellpadding="5" width="100%">
 				<tr>
-					<th rowspan="2" colspan="2" align="center">Регистрационная группа</th>
-					<th rowspan="2" align="center">Было<br/>зарегист-<br/>рировано</th>
-					<th rowspan="2" align="center">Излечен</th>
-					<th rowspan="2" align="center">Лечение<br/>завершено</th>
-					<th rowspan="2" align="center">Успешное<br/>лечение<br/>(излечен +<br/>лечение<br/>завершено)</th>
-					<th colspan="2" align="center">Умер</th>
-					<th rowspan="2" align="center">Неэффективное<br/>лечение</th>
-					<th rowspan="2" align="center">Потерян для<br/>последующего<br/>наблюдения</th>
+					<th rowspan="2" colspan="2">Гурўњи<br/>ќайд</th>
+					<th rowspan="2">Баќайд<br/>гирифта<br/>шуд</th>
+					<th rowspan="2" >Шифо<br/>ёфт</th>
+					<th rowspan="2" >Табобатро<br/>ба анљом<br/>расонд</th>
+					<th rowspan="2" >Табобати<br/>босамар<br/>(Шифо<br/>ёфт+табобатро<br/>ба анљом<br/>расонд)</th>
+					<th colspan="2">Фавт</th>
+					<th rowspan="2" >Табобати<br/>бенатиља</th>
+					<th rowspan="2" >Аз назорати<br/>минбаъда дур<br/>шуд</th>
 					
 					
-					<th rowspan="2" align="center">Результат не<br/>оценен<br/>(продолжают<br/>лечение и<br/>переведены)</th>
-					<th rowspan="2" align="center">Всего</th>
+					<th rowspan="2" >Натиљагирї<br/>карда нашуд<br/>(табобатро<br/>давом дода<br/>истодаанд ё ин<br/>ки гузаронида<br/>шуд) </th>
+					<th rowspan="2">Њамагї</th>
 				</tr>
 				<tr>
-					<th align="center">от ТБ</th>
-					<th align="center">от других причин</th>
+					<th>от ТБ</th>
+					<th>от других<br/>причин</th>
 				</tr>
 				
+				</tr>
 				<tr>
 					<td colspan="2">Новый случай</td>
 					<td>#results.New.Registered#</td>
@@ -76,7 +81,7 @@
 					<td>#results.New.ColTotal#</td>
 				</tr>
 				<tr>
-					<td rowspan="2" align="center">Рецидив после лечения по<br/>режиму</td>
+					<td align="center" rowspan="2">Хурўљ пас аз табобат бо<br/>рељаи</td>
 					<td align="center">I</td>
 					<td>#results.Relapse1.Registered#</td>
 					
@@ -118,17 +123,17 @@
 					
 					<td>#results.Relapse2.Defaulted#</td>
 					
-					
+				
 					
 					<td>#results.Relapse2.StillEnrolled#</td>
 					
 					<td>#results.Relapse2.ColTotal#</td>
 				</tr>
 				<tr>
-					<td rowspan="2" align="center">После отрыва от режима</td>
+					<td align="center" rowspan="2">Баъди кандашавї пас аз<br/> табобат бо рељаи</td>
 					<td align="center">I</td>
 					<td>#results.AfterDefault1.Registered#</td>
-				
+					
 					<td>#results.AfterDefault1.Cured#</td>
 					
 					<td>#results.AfterDefault1.TreatmentCompleted#</td>
@@ -151,7 +156,6 @@
 				</tr>
 				<tr>
 					<td align="center">II</td>
-		
 					<td>#results.AfterDefault2.Registered#</td>
 					
 					<td>#results.AfterDefault2.Cured#</td>
@@ -175,10 +179,10 @@
 					<td>#results.AfterDefault2.ColTotal#</td>
 				</tr>
 				<tr>
-					<td rowspan="2" align="center">После неэффективного<br/>лечения по режиму</td>
+					<td align="center" rowspan="2">Баъди табобати бенатиља<br/>пас аз табобат бо рељаи</td>
 					<td align="center">I</td>
 					<td>#results.AfterFailure1.Registered#</td>
-				
+					
 					<td>#results.AfterFailure1.Cured#</td>
 					
 					<td>#results.AfterFailure1.TreatmentCompleted#</td>
@@ -196,11 +200,10 @@
 					
 					
 					<td>#results.AfterFailure1.StillEnrolled#</td>
-					
+					s
 					<td>#results.AfterFailure1.ColTotal#</td>
 				</tr>
 				<tr>
-					
 					<td align="center">II</td>
 					<td>#results.AfterFailure2.Registered#</td>
 					
@@ -217,7 +220,7 @@
 					<td>#results.AfterFailure2.Failed#</td>
 					
 					<td>#results.AfterFailure2.Defaulted#</td>
-				
+					
 					
 					
 					<td>#results.AfterFailure2.StillEnrolled#</td>
@@ -226,7 +229,7 @@
 				</tr>
 				
 				<tr>
-					<td colspan="2">Другие</td>
+					<td colspan="2">Дигарњо</td>
 					<td>#results.Other.Registered#</td>
 					
 					<td>#results.Other.Cured#</td>
@@ -251,7 +254,7 @@
 				</tr>
 				
 				<tr>
-					<td colspan="2">Итого</td>
+					<td colspan="2">Њамагї</td>
 					<td>#results.Total.Registered#</td>
 					
 					<td>#results.Total.Cured#</td>
@@ -261,7 +264,7 @@
 					<td>#results.Total.SuccessfulTreatment#</td>
 					
 					<td>#results.Total.DiedTB#</td>
-				
+					
 					<td>#results.Total.DiedNonTB#</td>
 					
 					<td>#results.Total.Failed#</td>
@@ -276,10 +279,10 @@
 				</tr>
 				
 				
-					
 				
 				
 			</table>
 		</div>
+		</font>
 	</body>
 </html>

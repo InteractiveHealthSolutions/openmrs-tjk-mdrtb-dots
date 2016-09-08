@@ -47,6 +47,18 @@
 			var openmrsContextPath = '${pageContext.request.contextPath}';
 			var $j = jQuery.noConflict();
 		</script>
+		 <style> html *
+ <%
+   if(org.openmrs.api.context.Context.getLocale().toString().equals("tj")) {
+ %>
+ <style> 
+ html *
+{
+   font-family: Times New Roman Tj !important;
+}
+</style>
+ <% } %>
+</style>
 	</head>
 
 <body>

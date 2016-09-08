@@ -33,9 +33,11 @@ import org.apache.commons.lang.StringUtils;
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.mdrtb.MdrtbConcepts;
+import org.openmrs.module.mdrtb.Oblast;
 import org.openmrs.module.mdrtb.exception.MdrtbAPIException;
 import org.openmrs.module.mdrtb.reporting.ReportSpecification;
 import org.openmrs.module.mdrtb.reporting.ReportUtil;
+import org.openmrs.module.mdrtb.service.MdrtbService;
 import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
 import org.openmrs.module.reporting.dataset.definition.CohortCrossTabDataSetDefinition;
 import org.openmrs.module.reporting.evaluation.EvaluationContext;
@@ -100,6 +102,7 @@ public class DSTReportTJK implements ReportSpecification {
 		/*Integer quarter = (Integer) parameters.get("quarter");
 		Integer month = (Integer) parameters.get("month");*/
 		String quarter = (String) parameters.get("quarter");
+		String oblast = (String) parameters.get("oblast");
 		String month = (String) parameters.get("month");
 		context.getParameterValues().putAll(ReportUtil.getPeriodDates(year, quarter, month));
 		
@@ -114,9 +117,32 @@ public class DSTReportTJK implements ReportSpecification {
 		
 		ReportDefinition report = new ReportDefinition();
 		
+		//OBLAST
+		String oblast = (String) context.getParameterValue("oblast");
+		//\\OBLAST
+		
 		Location location = (Location) context.getParameterValue("location");
 		Date startDate = (Date)context.getParameterValue("startDate");
 		Date endDate = (Date)context.getParameterValue("endDate");
+		
+		//OBLAST
+		Oblast o = null;
+		if(!oblast.equals("") && location == null)
+			o =  Context.getService(MdrtbService.class).getOblast(Integer.parseInt(oblast));
+		
+		List<Location> locList = new ArrayList<Location>();
+		if(o != null && location == null)
+			locList = Context.getService(MdrtbService.class).getLocationsFromOblastName(o);
+		else if (location != null)
+			locList.add(location);
+		
+		if(location != null)
+			context.addParameterValue("location", location.getName()); 
+		else if(o != null)
+			context.addParameterValue("location", o.getName()); 
+		else
+			context.addParameterValue("location", "All"); 
+		//\\OBLAST
 		
 		// Base Cohort is patients who started treatment during year, optionally at location
 		Map<String, Mapped<? extends CohortDefinition>> baseCohortDefs = new LinkedHashMap<String, Mapped<? extends CohortDefinition>>();
@@ -128,7 +154,7 @@ public class DSTReportTJK implements ReportSpecification {
 			}
 		}*/
 		//baseCohortDefs.put("startedTreatment", new Mapped(Cohorts.getStartedTreatmentFilter(startDate, endDate), null));
-		if (location != null) {
+		/*if (location != null) {
 			CohortDefinition locationFilter = Cohorts.getLocationFilter(location, startDate, endDate);
 			//CohortDefinition locationFilter = Cohorts.getTreatmentStartAndAddressFilterTJK(location.getCountyDistrict(), startDate, endDate);
 			if (locationFilter != null) {
@@ -138,9 +164,24 @@ public class DSTReportTJK implements ReportSpecification {
 		
 		else {
 			baseCohortDefs.put("startedTreatment", new Mapped(Cohorts.getStartedTreatmentFilter(startDate, endDate), null));
+		}*/
+		
+		//OBLAST
+		if (!locList.isEmpty()){
+			List<CohortDefinition> cohortDefinitions = new ArrayList<CohortDefinition>();
+			for(Location loc : locList)
+				cohortDefinitions.add(Cohorts.getLocationFilter(loc, startDate, endDate));
+				
+			if(!cohortDefinitions.isEmpty()){
+				report.setBaseCohortDefinition(ReportUtil.getCompositionCohort("OR", cohortDefinitions), null);
+				//report.setBaseCohortDefinition(ReportUtil.getCompositionCohort("AND", Cohorts.getEnrolledInMDRProgramDuring(startDate, endDate), report.getBaseCohortDefinition().getParameterizable()));
+				//report.getBaseCohortDefinition().
+			}
 		}
-		CohortDefinition baseCohort = ReportUtil.getCompositionCohort(baseCohortDefs, "AND");
-		report.setBaseCohortDefinition(baseCohort, null);
+		
+		//CohortDefinition baseCohort = ReportUtil.getCompositionCohort(baseCohortDefs, "AND");
+		
+		//report.setBaseCohortDefinition(ReportUtil.getCompositionCohort("AND",baseCohort,) null);
 		
 		CohortCrossTabDataSetDefinition dsd = new CohortCrossTabDataSetDefinition();
 		

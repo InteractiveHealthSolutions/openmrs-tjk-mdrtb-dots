@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.openmrs.api.context.Context;
+import org.openmrs.module.mdrtb.Oblast;
 import org.openmrs.module.htmlwidgets.web.WidgetUtil;
 import org.openmrs.module.mdrtb.reporting.PreviewReportRenderer;
 import org.openmrs.module.mdrtb.reporting.ReportSpecification;
@@ -22,6 +24,7 @@ import org.openmrs.module.mdrtb.reporting.data.WHOForm05;
 import org.openmrs.module.mdrtb.reporting.data.WHOForm05TJK;
 import org.openmrs.module.mdrtb.reporting.data.WHOForm07;
 import org.openmrs.module.mdrtb.reporting.data.WHOForm07TJK;
+import org.openmrs.module.mdrtb.service.MdrtbService;
 import org.openmrs.module.reporting.evaluation.EvaluationContext;
 import org.openmrs.module.reporting.evaluation.parameter.Parameter;
 import org.openmrs.module.reporting.report.ReportData;
@@ -55,6 +58,9 @@ public class ReportingController {
 		if (type != null) {
 			model.addAttribute("report", type.newInstance());
 		}
+		
+		List<Oblast> oblasts = Context.getService(MdrtbService.class).getOblasts();
+		model.addAttribute("oblasts", oblasts);
     }
     
 	/**
@@ -64,6 +70,7 @@ public class ReportingController {
 	public void render(
         @RequestParam(required=true, value="type") Class<? extends ReportSpecification> type,
         @RequestParam(required=false, value="format") String format,
+        @RequestParam(required=false, value="oblast") String oblast,
         HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 
     	response.setContentType("text/html");
@@ -75,7 +82,7 @@ public class ReportingController {
 				Object val = WidgetUtil.getFromRequest(request, "p."+p.getName(), p.getType(), p.getCollectionType());
 				parameters.put(p.getName(), val);
 			}
-			
+			parameters.put("oblast",oblast);
 			EvaluationContext context = report.validateAndCreateContext(parameters);
 			ReportData data = report.evaluateReport(context);
 			RenderingMode mode = new RenderingMode(new PreviewReportRenderer(), "Preview", null, null);

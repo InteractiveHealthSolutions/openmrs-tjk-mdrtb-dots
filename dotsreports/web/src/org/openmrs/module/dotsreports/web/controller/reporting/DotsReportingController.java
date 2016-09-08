@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.openmrs.api.context.Context;
 import org.openmrs.module.dotsreports.reporting.DotsPreviewReportRenderer;
 import org.openmrs.module.dotsreports.reporting.ReportSpecification;
 import org.openmrs.module.dotsreports.reporting.data.DOTS07TJK;
@@ -20,6 +21,8 @@ import org.openmrs.module.dotsreports.reporting.data.Form8;
 import org.openmrs.module.dotsreports.reporting.data.DOTS10TJK;
 
 import org.openmrs.module.htmlwidgets.web.WidgetUtil;
+import org.openmrs.module.dotsreports.service.TbService;
+import org.openmrs.module.dotsreports.Oblast;
 import org.openmrs.module.reporting.evaluation.EvaluationContext;
 import org.openmrs.module.reporting.evaluation.parameter.Parameter;
 import org.openmrs.module.reporting.report.ReportData;
@@ -53,6 +56,9 @@ public class DotsReportingController {
 		if (type != null) {
 			model.addAttribute("report", type.newInstance());
 		}
+		
+		List<Oblast> oblasts = Context.getService(TbService.class).getOblasts();
+		model.addAttribute("oblasts", oblasts);
     }
     
 	/**
@@ -62,6 +68,7 @@ public class DotsReportingController {
 	public void render(
         @RequestParam(required=true, value="type") Class<? extends ReportSpecification> type,
         @RequestParam(required=false, value="format") String format,
+        @RequestParam(required=false, value="oblast") String oblast,
         HttpServletRequest request, HttpServletResponse response, ModelMap model) throws Exception {
 
     	response.setContentType("text/html");
@@ -73,6 +80,7 @@ public class DotsReportingController {
 				Object val = WidgetUtil.getFromRequest(request, "p."+p.getName(), p.getType(), p.getCollectionType());
 				parameters.put(p.getName(), val);
 			}
+			parameters.put("oblast",oblast);
 			
 			EvaluationContext context = report.validateAndCreateContext(parameters);
 			ReportData data = report.evaluateReport(context);

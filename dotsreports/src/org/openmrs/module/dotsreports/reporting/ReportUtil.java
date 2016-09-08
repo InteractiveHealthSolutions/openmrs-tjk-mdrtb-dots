@@ -95,6 +95,44 @@ public class ReportUtil {
 		return d;
 	}
 	
+
+	public static CohortDefinition getCompositionCohort(String operator, List<CohortDefinition> definitions) {
+		if (definitions.size() == 1) {
+			return definitions.get(0);
+		}
+		CompositionCohortDefinition d = new CompositionCohortDefinition();
+		StringBuilder s = new StringBuilder();
+		int i = 1;
+		for (CohortDefinition cd : definitions) {
+			if (cd != null) {
+				d.addSearch(""+i, cd, null);
+				if (s.length() > 0) {
+					s.append(" " + operator + " ");
+				}
+				s.append(i++);
+			}
+		}
+		d.setCompositionString(s.toString());
+		return d;
+	}
+	
+	/*public static CohortDefinition getCompositionCohort(String string, List<CohortDefinition> cohortDefinitions) {
+		if (string.size() == 1) {
+			return string.values().iterator().next().getParameterizable();
+		}
+		CompositionCohortDefinition d = new CompositionCohortDefinition();
+		StringBuilder s = new StringBuilder();
+		for (Map.Entry<String, Mapped<? extends CohortDefinition>> cd : string.entrySet()) {
+			d.addSearch(cd.getKey(), cd.getValue().getParameterizable(), cd.getValue().getParameterMappings());
+			if (s.length() > 0) {
+				s.append(" " + cohortDefinitions + " ");
+			}
+			s.append(cd.getKey());
+		}
+		d.setCompositionString(s.toString());
+		return d;
+	}*/
+	
 	public static CohortDefinition getCompositionCohort(String operator, CohortDefinition... definitions) {
 		if (definitions.length == 1) {
 			return definitions[0];
@@ -210,6 +248,16 @@ public class ReportUtil {
 	
 	public static Map<String, Date> getPeriodDates(Integer year, String quarter, String month) {
 		
+		if(quarter!=null && quarter.length()==0)
+				quarter = null;
+		
+		if(month!=null && month.length()==0)
+			month = null;
+		
+		System.out.println("YEAR:" + year);
+		System.out.println("QTR:" + quarter);
+		System.out.println("MONTH:" + month);
+		
 		// Validate input and construct start and end months
 		int startMonth =1;
 		int endMonth = 12;
@@ -248,74 +296,75 @@ public class ReportUtil {
 			if (quarter != null) {
 		
 			
-			if (month != null) {
-				throw new IllegalArgumentException("Please enter either a quarter or a month");
-			}
+				if (month != null) {
+					throw new IllegalArgumentException("Please enter either a quarter or a month");
+				}
 			
-			String[] quarters = quarter.split("-");
-			if(quarters==null || quarters.length==0 || quarters.length>2) {
-				throw new IllegalArgumentException("Please enter either a single quarter (e.g. 3 or a range (e.g. 2-4)");
-			}
-			int startQuarter = 0;
-			int endQuarter = 0;
+				String[] quarters = quarter.split("-");
+				if(quarters==null || quarters.length==0 || quarters.length>2) {
+					throw new IllegalArgumentException("Please enter either a single quarter (e.g. 3 or a range (e.g. 2-4)");
+				}
+				int startQuarter = 0;
+				int endQuarter = 0;
 			
-			try {
-				startQuarter = Integer.parseInt(quarters[0]);
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				throw new IllegalArgumentException("Please enter either a single quarter (e.g. 3 or a range (e.g. 2-4)");
-			}
-			endQuarter = startQuarter;
+				try {
+					startQuarter = Integer.parseInt(quarters[0]);
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					throw new IllegalArgumentException("Please enter either a single quarter (e.g. 3 or a range (e.g. 2-4)");
+				}
+				endQuarter = startQuarter;
 			
-			if(quarters.length==2) {
-				endQuarter= Integer.parseInt(quarters[1]);
-			}
+				if(quarters.length==2) {
+					endQuarter= Integer.parseInt(quarters[1]);
+				}
 			
-			if(startQuarter > endQuarter) {
-				throw new IllegalArgumentException("Start quarter must be less than end quarter");
-			}
+				if(startQuarter > endQuarter) {
+					throw new IllegalArgumentException("Start quarter must be less than end quarter");
+				}
 			
-			/*endMonth = quarter*3;
-			startMonth = endMonth-2;*/
-			startDate = 26;
-			endDate = 25;
-			if(startQuarter==1) {
-				startMonth = 12;
-				endMonth = 3;
-				startYear = year.intValue()-1;
-			}
+				/*endMonth = quarter*3;
+				startMonth = endMonth-2;*/
+				startDate = 26;
+				endDate = 25;
+				if(startQuarter==1) {
+					startMonth = 12;
+					endMonth = 3;
+					startYear = year.intValue()-1;
+				}
 			
-			else if(startQuarter==2) {
-				startMonth = 3;
-				endMonth = 6;
-			}
-
-			else if(startQuarter==3) {
-				startMonth = 6;
-				endMonth = 9;
-			}
-
-			else if(startQuarter==4) {
-				startMonth = 9;
-				endMonth = 12;
-			}
-			
-			if(startQuarter!=endQuarter) {
-				
-				if(endQuarter==2) {
+				else if(startQuarter==2) {
+					startMonth = 3;
 					endMonth = 6;
 				}
-				
-				else if(endQuarter==3) {
+
+				else if(startQuarter==3) {
+					startMonth = 6;
 					endMonth = 9;
 				}
-				
-				else if(endQuarter==4) {
+
+				else if(startQuarter==4) {
+					startMonth = 9;
 					endMonth = 12;
 				}
 			
+				if(startQuarter!=endQuarter) {
+					
+					if(endQuarter==2) {
+						endMonth = 6;
+					}
+				
+					else if(endQuarter==3) {
+						endMonth = 9;
+					}
+				
+					else if(endQuarter==4) {
+						endMonth = 12;
+					}
+			
+				}
 			}
-		}
+			
 		if (month != null) {
 			
 			String[] months = month.split("-");

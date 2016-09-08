@@ -1,5 +1,6 @@
 package org.openmrs.module.dotsreports.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -35,6 +36,7 @@ import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.dotsreports.MdrtbConceptMap;
 import org.openmrs.module.dotsreports.TbConcepts;
 import org.openmrs.module.dotsreports.TbUtil;
+import org.openmrs.module.dotsreports.Oblast;
 import org.openmrs.module.dotsreports.comparator.PatientProgramComparator;
 import org.openmrs.module.dotsreports.comparator.PersonByNameComparator;
 import org.openmrs.module.dotsreports.exception.MdrtbAPIException;
@@ -538,4 +540,70 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	
     	return dao.getAllRayonsTJK();
     }
+    
+    @Override
+	public List<Oblast> getOblasts(){
+		
+		List<Oblast> oblastList = new ArrayList<Oblast>();
+		
+		List<List<Object>> result = Context.getAdministrationService().executeSQL("Select address_hierarchy_entry_id, name from address_hierarchy_entry where level_id = 2", true);
+		for (List<Object> temp : result) {
+			Integer id = 0;
+			String name = "";
+	        for (int i = 0; i < temp.size(); i++) {
+	        	Object value = temp.get(i);
+	            if (value != null) {
+	            	
+	            	if(i == 0)
+	            		id = (Integer) value;
+	            	else if (i == 1)
+	            		name = (String) value;
+	            }
+	        }
+	        oblastList.add(new Oblast(name, id));
+	    }
+		
+		return oblastList;
+	}
+	
+	public Oblast getOblast(Integer oblastId){
+		Oblast oblast = null;
+				
+		List<List<Object>> result = Context.getAdministrationService().executeSQL("Select address_hierarchy_entry_id, name from address_hierarchy_entry where level_id = 2 and address_hierarchy_entry_id = " +  oblastId, true);
+		for (List<Object> temp : result) {
+			Integer id = 0;
+			String name = "";
+	        for (int i = 0; i < temp.size(); i++) {
+	        	Object value = temp.get(i);
+	            if (value != null) {
+	            	
+	            	if(i == 0)
+	            		id = (Integer) value;
+	            	else if (i == 1)
+	            		name = (String) value;
+	            }
+	        }
+	        oblast = new Oblast(name, id);
+	        break;
+	    }
+
+		return oblast;
+	}
+	
+    public List<Location> getLocationsFromOblastName(Oblast oblast){
+    	List<Location> locationList = new ArrayList<Location>();
+    	
+    	List<Location> locations = Context.getLocationService().getAllLocations(false);
+    	
+    	for(Location loc : locations){
+    		    		
+    		if(loc.getStateProvince() != null){
+	    		if(loc.getStateProvince().equals(oblast.getName()))
+	    			locationList.add(loc);
+    		}
+    	}
+    	return locationList;
+    }
+    
+    
 }

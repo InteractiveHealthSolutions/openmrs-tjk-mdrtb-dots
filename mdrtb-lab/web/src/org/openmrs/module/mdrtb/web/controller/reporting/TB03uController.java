@@ -1,4 +1,4 @@
-package org.openmrs.module.dotsreports.web.controller.reporting;
+package org.openmrs.module.mdrtb.web.controller.reporting;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,21 +25,21 @@ import org.openmrs.Patient;
 import org.openmrs.Person;
 import org.openmrs.api.ConceptService;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.dotsreports.MdrtbConceptMap;
-import org.openmrs.module.dotsreports.MdrtbConstants;
-import org.openmrs.module.dotsreports.Oblast;
-import org.openmrs.module.dotsreports.TbConcepts;
-import org.openmrs.module.dotsreports.TbUtil;
-import org.openmrs.module.dotsreports.reporting.ReportUtil;
-import org.openmrs.module.dotsreports.reporting.TB03Data;
-import org.openmrs.module.dotsreports.reporting.TB03Util;
-import org.openmrs.module.dotsreports.service.TbService;
-import org.openmrs.module.dotsreports.specimen.Culture;
-import org.openmrs.module.dotsreports.specimen.Dst;
-import org.openmrs.module.dotsreports.specimen.DstResult;
-import org.openmrs.module.dotsreports.specimen.HAIN;
-import org.openmrs.module.dotsreports.specimen.Smear;
-import org.openmrs.module.dotsreports.specimen.Xpert;
+import org.openmrs.module.mdrtb.MdrtbConceptMap;
+import org.openmrs.module.mdrtb.MdrtbConstants;
+import org.openmrs.module.mdrtb.Oblast;
+import org.openmrs.module.mdrtb.MdrtbConcepts;
+import org.openmrs.module.mdrtb.MdrtbUtil;
+import org.openmrs.module.mdrtb.reporting.ReportUtil;
+import org.openmrs.module.mdrtb.reporting.TB03uData;
+import org.openmrs.module.mdrtb.reporting.TB03uUtil;
+import org.openmrs.module.mdrtb.service.MdrtbService;
+import org.openmrs.module.mdrtb.specimen.Culture;
+import org.openmrs.module.mdrtb.specimen.Dst;
+import org.openmrs.module.mdrtb.specimen.DstResult;
+import org.openmrs.module.mdrtb.specimen.HAIN;
+import org.openmrs.module.mdrtb.specimen.Smear;
+import org.openmrs.module.mdrtb.specimen.Xpert;
 /*import org.openmrs.module.mdrtbdrugforecast.DrugCount;
 import org.openmrs.module.mdrtbdrugforecast.MdrtbDrugStock;
 import org.openmrs.module.mdrtbdrugforecast.MdrtbUtil;
@@ -75,7 +75,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 
-public class TB03Controller {
+public class TB03uController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -92,7 +92,7 @@ public class TB03Controller {
     
        
         List<Location> locations = Context.getLocationService().getAllLocations();//ms = (MdrtbDrugForecastService) Context.getService(MdrtbDrugForecastService.class);
-        List<Oblast> oblasts = Context.getService(TbService.class).getOblasts();
+        List<Oblast> oblasts = Context.getService(MdrtbService.class).getOblasts();
         //drugSets =  ms.getMdrtbDrugs();
         
        
@@ -115,7 +115,7 @@ public class TB03Controller {
             @RequestParam(value="month", required=false) String month,
             ModelMap model) throws EvaluationException {
     	
-    	Cohort patients = TbUtil.getDOTSPatientsTJK(null, null, location, oblast, null, null, null, null,year,quarter,month);
+    	Cohort patients = MdrtbUtil.getMdrPatientsTJK(null, null, location, oblast, null, null, null, null,year,quarter,month);
     	Map<String, Date> dateMap = ReportUtil.getPeriodDates(year, quarter, month);
 		
 		Date startDate = (Date)(dateMap.get("startDate"));
@@ -127,7 +127,7 @@ public class TB03Controller {
     	
     	
     	Set<Integer> idSet = patients.getMemberIds();
-    	ArrayList<TB03Data> patientSet  = new ArrayList<TB03Data>();
+    	ArrayList<TB03uData> patientSet  = new ArrayList<TB03uData>();
     	SimpleDateFormat sdf = new SimpleDateFormat();
     	
     	ArrayList<Person> patientList = new ArrayList<Person>();
@@ -137,8 +137,8 @@ public class TB03Controller {
     	Integer codId = null;
     	List<Obs> obsList = null;
     	
-    	Concept reg1New = Context.getService(TbService.class).getConcept(TbConcepts.REGIMEN_1_NEW);
-    	Concept reg1Rtx = Context.getService(TbService.class).getConcept(TbConcepts.REGIMEN_1_RETREATMENT);
+    	Concept reg1New = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.REGIMEN_1_NEW);
+    	Concept reg1Rtx = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.REGIMEN_1_RETREATMENT);
     	
     	sdf.applyPattern("dd.MM.yyyy");
     	for (Integer i : idSet) {
@@ -146,7 +146,7 @@ public class TB03Controller {
          	conceptQuestionList.clear();
          	conceptAnswerList.clear();
     		
-    		TB03Data tb03Data = new TB03Data();
+    		TB03uData tb03Data = new TB03uData();
     		tb03Data.setReg1New(Boolean.FALSE);
     		tb03Data.setReg1Rtx(Boolean.FALSE);
     	    Patient patient = Context.getPatientService().getPatient(i);
@@ -179,7 +179,7 @@ public class TB03Controller {
     	    tb03Data.setDateOfBirth(sdf.format(patient.getBirthdate()));
     	    
     	    //AGE AT TB03 Registration
-    	    Concept q = Context.getService(TbService.class).getConcept(TbConcepts.AGE_AT_DOTS_REGISTRATION);
+    	    Concept q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.AGE_AT_DOTS_REGISTRATION);
     	    
     	    conceptQuestionList.add(q);
     	    
@@ -188,7 +188,7 @@ public class TB03Controller {
     	    	tb03Data.setAgeAtTB03Registration(obsList.get(0).getValueNumeric().intValue());
     	    
     	    //TX CENTER FOR IP
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CENTER_FOR_IP);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.TREATMENT_CENTER_FOR_IP);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -197,7 +197,7 @@ public class TB03Controller {
     	    	tb03Data.setIntensivePhaseFacility(obsList.get(0).getValueCoded().getName().getName());
     	    
     	    //TX CENTER FOR CP
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CENTER_FOR_CP);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.TREATMENT_CENTER_FOR_CP);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -206,7 +206,7 @@ public class TB03Controller {
     	    	tb03Data.setContinuationPhaseFacility(obsList.get(0).getValueCoded().getName().getName());
     	    
     	    //DOTS TREATMENT REGIMEN
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.TUBERCULOSIS_PATIENT_CATEGORY);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.TUBERCULOSIS_PATIENT_CATEGORY);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -215,7 +215,7 @@ public class TB03Controller {
     	    	tb03Data.setTreatmentRegimen(obsList.get(0).getValueCoded().getName().getName());
     	    
     	    //DATE OF TB03 TREATMENT START
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.DOTS_TREATMENT_START_DATE);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.MDR_TREATMENT_START_DATE);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -224,7 +224,7 @@ public class TB03Controller {
     	    	tb03Data.setTb03TreatmentStartDate(sdf.format(obsList.get(0).getValueDatetime()));
     	    
     	  //SITE OF DISEASE (P/EP)
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.ANATOMICAL_SITE_OF_TB);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.ANATOMICAL_SITE_OF_TB);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -233,7 +233,7 @@ public class TB03Controller {
     	    	tb03Data.setSiteOfDisease(obsList.get(0).getValueCoded().getName().getShortName());
     	    
     	  //HIV TEST RESULT
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.RESULT_OF_HIV_TEST);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.RESULT_OF_HIV_TEST);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -242,7 +242,7 @@ public class TB03Controller {
     	    	tb03Data.setHivTestResult(obsList.get(0).getValueCoded().getName().getName());
 
     	    //DATE OF HIV TEST
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.DATE_OF_HIV_TEST);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.DATE_OF_HIV_TEST);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -251,7 +251,7 @@ public class TB03Controller {
     	    	tb03Data.setHivTestDate(sdf.format(obsList.get(0).getValueDatetime()));
     	    
     	  //DATE OF ART START
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.DATE_OF_ART_TREATMENT_START);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.DATE_OF_ART_TREATMENT_START);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -260,7 +260,7 @@ public class TB03Controller {
     	    	tb03Data.setArtStartDate(sdf.format(obsList.get(0).getValueDatetime()));
     	    
     	  //DATE OF CP START
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.DATE_OF_PCT_TREATMENT_START);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.DATE_OF_PCT_TREATMENT_START);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -271,7 +271,7 @@ public class TB03Controller {
     	    
     	    
     	    //REGISTRATION GROUP
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.PATIENT_GROUP);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.PATIENT_GROUP);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -285,7 +285,7 @@ public class TB03Controller {
     	    
     	    //DIAGNOSTIC SMEAR
     	    
-    	    Smear diagnosticSmear = TB03Util.getDiagnosticSmear(patient);
+    	    Smear diagnosticSmear = TB03uUtil.getDiagnosticSmear(patient);
     	    if(diagnosticSmear!=null) {
     	    		if(diagnosticSmear.getResult()!=null) 
     	    			tb03Data.setDiagnosticSmearResult(diagnosticSmear.getResult().getName().getShortName());
@@ -297,7 +297,7 @@ public class TB03Controller {
     	    
     	    
     	    //DIAGNOSTIC XPERT
-    	    Xpert firstXpert = TB03Util.getFirstXpert(patient);
+    	    Xpert firstXpert = TB03uUtil.getFirstXpert(patient);
     	    if(firstXpert!=null) {
     	    	if(firstXpert.getResult()!=null)
     	    		tb03Data.setXpertMTBResult(firstXpert.getResult().getName().getShortName());
@@ -312,7 +312,7 @@ public class TB03Controller {
     	    
     	    
     	    //DIAGNOSTIC HAIN
-    	    HAIN firstHAIN = TB03Util.getFirstHAIN(patient);
+    	    HAIN firstHAIN = TB03uUtil.getFirstHAIN(patient);
     	    if(firstHAIN!=null) {
     	    	if(firstHAIN.getResult()!=null)
     	    		tb03Data.setHainMTBResult(firstHAIN.getResult().getName().getShortName());
@@ -327,7 +327,7 @@ public class TB03Controller {
     	    }
     	    
     	    //DIAGNOSTIC CULTURE
-    	    Culture diagnosticCulture  = TB03Util.getDiagnosticCulture(patient);
+    	    Culture diagnosticCulture  = TB03uUtil.getDiagnosticCulture(patient);
     	    if(diagnosticCulture!=null) {
     	    	if(diagnosticCulture.getResult()!=null)
     	    		tb03Data.setCultureResult(diagnosticCulture.getResult().getName().getShortName());
@@ -340,7 +340,7 @@ public class TB03Controller {
     	   
     	    
     	    //DST
-    	    Dst firstDst = TB03Util.getDiagnosticDST(patient);
+    	    Dst firstDst = TB03uUtil.getDiagnosticDST(patient);
     	    
     	    if(firstDst!=null) {
     	    	if(firstDst.getDateCollected()!=null)
@@ -367,7 +367,7 @@ public class TB03Controller {
     	    
     	    //DRUG RESISTANCE
     	    
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.RESISTANCE_TYPE);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.RESISTANCE_TYPE);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -381,7 +381,7 @@ public class TB03Controller {
     	    
     	    //first check patient regimen
     	    Smear followupSmear = null;
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.TUBERCULOSIS_PATIENT_CATEGORY);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.TUBERCULOSIS_PATIENT_CATEGORY);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -395,7 +395,7 @@ public class TB03Controller {
     	    		
     	    		tb03Data.setReg1New(Boolean.TRUE);
     	    		
-    	    		followupSmear = TB03Util.getFollowupSmear(patient, 2);
+    	    		followupSmear = TB03uUtil.getFollowupSmear(patient, 2);
     	    	    if(followupSmear!=null) {
     	    	    		if(followupSmear.getResult()!=null) 
     	    	    			tb03Data.setMonth2SmearResult(followupSmear.getResult().getName().getShortName());
@@ -405,7 +405,7 @@ public class TB03Controller {
     	    	    		tb03Data.setMonth2TestNumber(followupSmear.getSpecimenId());
     	    	    }
     	    	    
-    	    	    followupSmear = TB03Util.getFollowupSmear(patient, 3);
+    	    	    followupSmear = TB03uUtil.getFollowupSmear(patient, 3);
     	    	    if(followupSmear!=null) {
     	    	    		if(followupSmear.getResult()!=null) 
     	    	    			tb03Data.setMonth3SmearResult(followupSmear.getResult().getName().getShortName());
@@ -415,7 +415,7 @@ public class TB03Controller {
     	    	    		tb03Data.setMonth3TestNumber(followupSmear.getSpecimenId());
     	    	    }
     	    	    
-    	    	    followupSmear = TB03Util.getFollowupSmear(patient, 5);
+    	    	    followupSmear = TB03uUtil.getFollowupSmear(patient, 5);
     	    	    if(followupSmear!=null) {
     	    	    		if(followupSmear.getResult()!=null) 
     	    	    			tb03Data.setMonth5SmearResult(followupSmear.getResult().getName().getShortName());
@@ -425,7 +425,7 @@ public class TB03Controller {
     	    	    		tb03Data.setMonth5TestNumber(followupSmear.getSpecimenId());
     	    	    }
     	    	    
-    	    	    followupSmear = TB03Util.getFollowupSmear(patient, 6);
+    	    	    followupSmear = TB03uUtil.getFollowupSmear(patient, 6);
     	    	    if(followupSmear!=null) {
     	    	    		if(followupSmear.getResult()!=null) 
     	    	    			tb03Data.setMonth6SmearResult(followupSmear.getResult().getName().getShortName());
@@ -438,7 +438,7 @@ public class TB03Controller {
     	    	
     	    	else if(regimenConceptId.equals(reg1Rtx.getConceptId())) {
     	    		tb03Data.setReg1Rtx(Boolean.TRUE);
-    	    		 followupSmear = TB03Util.getFollowupSmear(patient, 3);
+    	    		 followupSmear = TB03uUtil.getFollowupSmear(patient, 3);
      	    	    if(followupSmear!=null) {
      	    	    		if(followupSmear.getResult()!=null) 
      	    	    			tb03Data.setMonth3SmearResult(followupSmear.getResult().getName().getShortName());
@@ -448,7 +448,7 @@ public class TB03Controller {
      	    	    		tb03Data.setMonth3TestNumber(followupSmear.getSpecimenId());
      	    	    }
     	    	    
-    	    	    followupSmear = TB03Util.getFollowupSmear(patient, 4);
+    	    	    followupSmear = TB03uUtil.getFollowupSmear(patient, 4);
     	    	    if(followupSmear!=null) {
     	    	    		if(followupSmear.getResult()!=null) 
     	    	    			tb03Data.setMonth4SmearResult(followupSmear.getResult().getName().getShortName());
@@ -458,7 +458,7 @@ public class TB03Controller {
     	    	    		tb03Data.setMonth4TestNumber(followupSmear.getSpecimenId());
     	    	    }
     	    	    
-    	    	    followupSmear = TB03Util.getFollowupSmear(patient, 5);
+    	    	    followupSmear = TB03uUtil.getFollowupSmear(patient, 5);
     	    	    if(followupSmear!=null) {
     	    	    		if(followupSmear.getResult()!=null) 
     	    	    			tb03Data.setMonth5SmearResult(followupSmear.getResult().getName().getShortName());
@@ -468,7 +468,7 @@ public class TB03Controller {
     	    	    		tb03Data.setMonth5TestNumber(followupSmear.getSpecimenId());
     	    	    }
     	    	    
-    	    	    followupSmear = TB03Util.getFollowupSmear(patient, 8);
+    	    	    followupSmear = TB03uUtil.getFollowupSmear(patient, 8);
     	    	    if(followupSmear!=null) {
     	    	    		if(followupSmear.getResult()!=null) 
     	    	    			tb03Data.setMonth8SmearResult(followupSmear.getResult().getName().getShortName());
@@ -483,7 +483,7 @@ public class TB03Controller {
     	    //TX OUTCOME
     	    //CHECK CAUSE OF DEATH
     	   
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.CAUSE_OF_DEATH);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.CAUSE_OF_DEATH);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -491,7 +491,7 @@ public class TB03Controller {
     	    if(obsList.size()>0 && obsList.get(0)!=null)
     	    {	
     	    	codId = obsList.get(0).getValueCoded().getConceptId();
-    	    	if(codId.equals(Context.getService(TbService.class).getConcept(TbConcepts.DEATH_BY_TB).getConceptId()))
+    	    	if(codId.equals(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.DEATH_BY_TB).getConceptId()))
     	    		tb03Data.setDiedOfTB(true);
     	    	else
     	    		tb03Data.setDiedOfTB(false);
@@ -504,7 +504,7 @@ public class TB03Controller {
     	    	
     	    
     	    
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.TB_TX_OUTCOME);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.MDR_TB_TX_OUTCOME);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -515,7 +515,7 @@ public class TB03Controller {
     	    
     	    //NOTES
     	    
-    	    q = Context.getService(TbService.class).getConcept(TbConcepts.CLINICIAN_NOTES);
+    	    q = Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.CLINICIAN_NOTES);
     	    conceptQuestionList.clear();
     	    conceptQuestionList.add(q);
     	    
@@ -534,7 +534,6 @@ public class TB03Controller {
     	Integer num = patients.getSize();
     	model.addAttribute("num", num);
     	model.addAttribute("patientSet", patientSet);
-    	model.addAttribute("locale", Context.getLocale().toString());
         return "/module/dotsreports/reporting/tb03Results";
     }
     

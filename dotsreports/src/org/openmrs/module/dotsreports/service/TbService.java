@@ -21,6 +21,7 @@ import org.openmrs.module.dotsreports.specimen.Culture;
 import org.openmrs.module.dotsreports.specimen.Dst;
 import org.openmrs.module.dotsreports.specimen.Smear;
 import org.openmrs.module.dotsreports.specimen.Specimen;
+import org.openmrs.module.dotsreports.Oblast;
 /*import org.openmrs.module.mdrtb.specimen.ScannedLabReport;*/
 import org.springframework.transaction.annotation.Transactional;
 
@@ -336,5 +337,10 @@ public interface TbService extends OpenmrsService {
     public List<TbPatientProgram> getAllMdrtbPatientProgramsEnrolledInDateRange(Date startDate,
 			Date endDate);
     
+	 public List<Oblast> getOblasts();
+
+	    public Oblast getOblast(Integer oblastId);
+	    
+	    public List<Location> getLocationsFromOblastName(Oblast oblast);
 }
 

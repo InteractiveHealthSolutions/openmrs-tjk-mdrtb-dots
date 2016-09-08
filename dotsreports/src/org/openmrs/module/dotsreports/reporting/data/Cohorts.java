@@ -53,6 +53,7 @@ import org.openmrs.module.dotsreports.reporting.definition.TypeOfDiagnosisCohort
 import org.openmrs.module.dotsreports.reporting.definition.DotsTreatmentStartedCohortDefinition;
 import org.openmrs.module.dotsreports.reporting.definition.DotsBacResultAfterTreatmentStartedCohortDefinition.Result;
 import org.openmrs.module.dotsreports.service.TbService;
+import org.openmrs.module.dotsreports.reporting.definition.DOTSProgramLocationListCohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.CompositionCohortDefinition;
 import org.openmrs.module.reporting.cohort.definition.EncounterCohortDefinition;
@@ -757,6 +758,20 @@ public class Cohorts {
 	
 	public static CohortDefinition startedPCTDuring(Date startDate, Date endDate) {
 		return ReportUtil.getDateObsCohort(TimeModifier.ANY, Context.getService(TbService.class).getConcept(TbConcepts.DATE_OF_PCT_TREATMENT_START), startDate, endDate);
+	}
+	
+	public static CohortDefinition getLocationFilter(Location location, Date startDate, Date endDate) {
+		if (location != null) {
+			DOTSProgramLocationListCohortDefinition cd = new DOTSProgramLocationListCohortDefinition();
+			cd.setLocation(location);
+			cd.setStartDate(startDate);
+			cd.setEndDate(endDate);
+			
+			
+			return cd;
+		}
+		
+		return null;
 	}
 	
 }

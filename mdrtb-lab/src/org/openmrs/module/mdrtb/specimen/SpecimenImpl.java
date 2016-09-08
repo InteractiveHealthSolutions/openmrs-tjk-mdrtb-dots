@@ -301,6 +301,18 @@ public class SpecimenImpl implements Specimen {
 		}
 	}
 	
+	public Double getMonthOfTreatment() {
+		Obs obs = MdrtbUtil.getObsFromEncounter(Context.getService(MdrtbService.class).getConcept(MdrtbConcepts.MONTH_OF_TREATMENT), encounter);
+		
+		if(obs == null) {
+			return null;
+		}
+		
+		else
+			return obs.getValueNumeric();
+	}
+	
+	
 	public void removeScannedLabReport(ScannedLabReport report) {
 		((ScannedLabReportImpl) report).voidScannedLabReport();
 	}

@@ -108,6 +108,7 @@ public class MdrtbConcepts {
     public final static String [] DST_CONTAMINATED = {"DST CONTAMINATED"};
     public final static String [] SCANNED_LAB_REPORT = {"SCANNED LAB REPORT"};
     public final static String [] DAYS_TO_POSITIVITY = {"DAYS TO POSITIVITY"};
+    public final static String [] MONTH_OF_TREATMENT = {"MONTH OF TREATMENT"};
     
     // Lab Results
     public final static String [] STRONGLY_POSITIVE = {"STRONGLY POSITIVE"};
