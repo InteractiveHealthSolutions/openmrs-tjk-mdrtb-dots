@@ -1162,9 +1162,9 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	return locationList;
     }
     
-    public String getAllLabResultDuring(Date startDate, Date endDate, List<Location> locList){
+    public String getAllPatientTestedDuring(Date startDate, Date endDate, List<Location> locList){
 		StringBuilder q = new StringBuilder();
-		q.append("select distinct(e.encounter_id)  ");
+		q.append("select distinct(e.patient_id)  ");
 		q.append("from encounter e ");
 		if(!locList.isEmpty())
 			q.append(" , location l ");
@@ -1196,33 +1196,23 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			q.append(" ) and l.retired = 0");
 		}
 		
-		System.out.println(q.toString() + "<<<----");
+		System.out.println("PATIENT TESTED -> " + q.toString());
 		
 		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
 		
 		return String.valueOf(result.size());
 	}
     
-    public String getAllMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
-		StringBuilder q = new StringBuilder();
-		q.append("select distinct(e.encounter_id)  ");
-		q.append("from encounter e, obs o ");
-		if(!locList.isEmpty())
-			q.append(" , location l ");
-		q.append("where		e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " ");
-		q.append("and o.encounter_id = e.encounter_id and o.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) +" ");
-				
-		q.append("and e.voided = 0 and o.voided = 0 ");
-		
-		if (startDate != null) {
-			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
-		}
-		if (endDate != null) {
-			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
-		}
-		
-		if(!locList.isEmpty()){
-			q.append("and e.location_id = l.location_id and ( ");
+    public String getAllPositivePatientDuring(Date startDate, Date endDate, List<Location> locList){
+    	StringBuilder q = new StringBuilder();
+    	q.append("select distinct(e.patient_id) ");
+    	q.append("from encounter e ");
+    	q.append("INNER JOIN obs o on e.encounter_id = o.encounter_id and o.voided = 0 and ");
+    	q.append("((o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MTB_RESULT) + " and o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.POSITIVE_PLUS) + ") or ");
+    	q.append("(o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.CULTURE_RESULT) + " and !(o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ")) or ");
+    	q.append("(o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and !(o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + "))) ");
+    	if(!locList.isEmpty()){
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
 				
@@ -1235,19 +1225,27 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 				
 			}
 			
-			q.append(" ) and l.retired = 0 ");
+			q.append(" ) ");
 		}
-		
-		System.out.println(q.toString() + "<<<----");
+    	q.append("where e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " and e.voided = 0 ");
+    	if (startDate != null) {
+			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
+		}
+		if (endDate != null) {
+			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
+		}
+    	
+    	System.out.println("POSITIVE PATIENT -> " + q.toString());
 		
 		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
 		
 		return String.valueOf(result.size());
-	}
+    	
+    }
     
-    public String getDiagnosticLabResultDuring(Date startDate, Date endDate, List<Location> locList){
+    public String getAllDiagnosticPatientTestedDuring(Date startDate, Date endDate, List<Location> locList){
     	StringBuilder q = new StringBuilder();
-		q.append("select distinct(e.encounter_id)  ");
+		q.append("select distinct(e.patient_id)  ");
 		q.append("from encounter e, obs o ");
 		if(!locList.isEmpty())
 			q.append(" , location l ");
@@ -1280,21 +1278,24 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			q.append(" ) and l.retired = 0 ");
 		}
 		
-		System.out.println(q.toString() + "<<<----");
+		System.out.println("DIAGNOSTIC PATIENT TESTED -> " + q.toString());
 		
 		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
 		
 		return String.valueOf(result.size());
 	}
     
-    public String getDisgnosticMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
+    public String getPositiveDiagnosticPatientDuring(Date startDate, Date endDate, List<Location> locList){
     	StringBuilder q = new StringBuilder();
-		q.append("select distinct(e.encounter_id)  ");
-		q.append("from encounter e ");
-		q.append("INNER JOIN obs o1 on e.encounter_id = o1.encounter_id and o1.voided = 0 and o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ");
-		q.append("( o1.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_NA) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_REPEATED) + ") ");
-		q.append("INNER JOIN obs o2 on o1.encounter_id = o2.encounter_id and o2.voided = 0 and o2.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
-		if(!locList.isEmpty()){
+    	q.append("select distinct(e.patient_id) ");
+    	q.append("from encounter e ");
+    	q.append("INNER JOIN obs o on e.encounter_id = o.encounter_id and o.voided = 0 and ");
+    	q.append("((o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MTB_RESULT) + " and o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.POSITIVE_PLUS) + ") or ");
+    	q.append("(o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.CULTURE_RESULT) + " and !(o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ")) or ");
+    	q.append("(o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and !(o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + "))) ");
+    	q.append("INNER JOIN obs o1 on o.encounter_id = o1.encounter_id and o1.voided = 0 and ");
+    	q.append("o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ( o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_NA) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_REPEATED) + ") ");
+    	if(!locList.isEmpty()){
 			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
 			
 			for(int i = 0; i<locList.size(); i++){
@@ -1310,25 +1311,25 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			
 			q.append(" ) ");
 		}
-		q.append("where e.encounter_type = 10 and e.voided = 0 ");
-		
-		if (startDate != null) {
+    	q.append("where e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " and e.voided = 0 ");
+    	if (startDate != null) {
 			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
 		}
 		if (endDate != null) {
 			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
 		}
-		
-		System.out.println(q.toString() + "<<<----");
+    	
+    	System.out.println("DIAGNOSTIC POSITIVE PATIENT -> " + q.toString());
 		
 		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
 		
 		return String.valueOf(result.size());
-	}
+    	
+    }
     
-    public String getFollowupLabResultDuring(Date startDate, Date endDate, List<Location> locList){
+    public String getAllFollowupPatientTestedDuring(Date startDate, Date endDate, List<Location> locList){
     	StringBuilder q = new StringBuilder();
-		q.append("select distinct(e.encounter_id)  ");
+		q.append("select distinct(e.patient_id)  ");
 		q.append("from encounter e, obs o ");
 		if(!locList.isEmpty())
 			q.append(" , location l ");
@@ -1361,137 +1362,16 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			q.append(" ) and l.retired = 0 ");
 		}
 		
-		System.out.println(q.toString() + "<<<----");
+		System.out.println("FOLLOW-UP PATIENT TESTED -> " + q.toString());
 		
 		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
 		
 		return String.valueOf(result.size());
 	}
     
-    public String getFollowupMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
+    public String getPositiveFollowupPatientDuring(Date startDate, Date endDate, List<Location> locList){
     	StringBuilder q = new StringBuilder();
-		q.append("select distinct(e.encounter_id) ");
-		q.append("from encounter e ");
-		q.append("INNER JOIN obs o1 on e.encounter_id = o1.encounter_id and o1.voided = 0 and o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ");
-		q.append("( o1.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_123) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_4) + ") ");
-		q.append("INNER JOIN obs o2 on o1.encounter_id = o2.encounter_id and o2.voided = 0 and o2.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
-		if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
-			
-			for(int i = 0; i<locList.size(); i++){
-				
-				Location loc = locList.get(i);
-				
-				if(i != 0)
-					q.append(" or ");
-				
-				q.append(" l.name = '" + loc.getName() + "'");
-				
-			}
-			
-			q.append(" ) ");
-		}
-
-		q.append("where e.encounter_type = 10 and e.voided = 0 ");
-		if (startDate != null) {
-			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
-		}
-		if (endDate != null) {
-			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
-		}
-		
-		System.out.println(q.toString() + "<<<----");
-		
-		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
-		
-		return String.valueOf(result.size());
-	}
-    
-    public String getAllPositiveResultDuring(Date startDate, Date endDate, List<Location> locList){
-    	StringBuilder q = new StringBuilder();
-    	q.append("select distinct(e.encounter_id) ");
-    	q.append("from encounter e ");
-    	q.append("INNER JOIN obs o on e.encounter_id = o.encounter_id and o.voided = 0 and ");
-    	q.append("((o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MTB_RESULT) + " and o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.POSITIVE_PLUS) + ") or ");
-    	q.append("(o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.CULTURE_RESULT) + " and !(o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ")) or ");
-    	q.append("(o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and !(o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + "))) ");
-    	if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
-			
-			for(int i = 0; i<locList.size(); i++){
-				
-				Location loc = locList.get(i);
-				
-				if(i != 0)
-					q.append(" or ");
-				
-				q.append(" l.name = '" + loc.getName() + "'");
-				
-			}
-			
-			q.append(" ) ");
-		}
-    	q.append("where e.encounter_type = 10 and e.voided = 0 ");
-    	if (startDate != null) {
-			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
-		}
-		if (endDate != null) {
-			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
-		}
-    	
-    	System.out.println(q.toString() + "<<<----");
-		
-		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
-		
-		return String.valueOf(result.size());
-    	
-    }
-    
-    public String getPositiveDiagnosticResultDuring(Date startDate, Date endDate, List<Location> locList){
-    	StringBuilder q = new StringBuilder();
-    	q.append("select distinct(e.encounter_id) ");
-    	q.append("from encounter e ");
-    	q.append("INNER JOIN obs o on e.encounter_id = o.encounter_id and o.voided = 0 and ");
-    	q.append("((o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MTB_RESULT) + " and o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.POSITIVE_PLUS) + ") or ");
-    	q.append("(o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.CULTURE_RESULT) + " and !(o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ")) or ");
-    	q.append("(o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and !(o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + "))) ");
-    	q.append("INNER JOIN obs o1 on o.encounter_id = o1.encounter_id and o1.voided = 0 and ");
-    	q.append("o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ( o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_NA) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_REPEATED) + ") ");
-    	if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
-			
-			for(int i = 0; i<locList.size(); i++){
-				
-				Location loc = locList.get(i);
-				
-				if(i != 0)
-					q.append(" or ");
-				
-				q.append(" l.name = '" + loc.getName() + "'");
-				
-			}
-			
-			q.append(" ) ");
-		}
-    	q.append("where e.encounter_type = 10 and e.voided = 0 ");
-    	if (startDate != null) {
-			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
-		}
-		if (endDate != null) {
-			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
-		}
-    	
-    	System.out.println(q.toString() + "<<<----");
-		
-		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
-		
-		return String.valueOf(result.size());
-    	
-    }
-    
-    public String getPositiveFollowupResultDuring(Date startDate, Date endDate, List<Location> locList){
-    	StringBuilder q = new StringBuilder();
-    	q.append("select distinct(e.encounter_id) ");
+    	q.append("select distinct(e.patient_id) ");
     	q.append("from encounter e ");
     	q.append("INNER JOIN obs o on e.encounter_id = o.encounter_id and o.voided = 0 and ");
     	q.append("((o.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MTB_RESULT) + " and o.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.POSITIVE_PLUS) + ") or ");
@@ -1515,7 +1395,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			
 			q.append(" ) ");
 		}
-    	q.append("where e.encounter_type = 10 and e.voided = 0 ");
+    	q.append("where e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " and e.voided = 0 ");
     	if (startDate != null) {
 			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
 		}
@@ -1523,7 +1403,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
 		}
     	
-    	System.out.println(q.toString() + "<<<----");
+    	System.out.println("DIAGNOSTIC ALL PATIENT TESTED -> " + q.toString());
 		
 		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
 		
@@ -1531,136 +1411,15 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     	
     }
     
-    public String getAllPositiveMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
-    	StringBuilder q = new StringBuilder();
-    	q.append("select distinct(e.encounter_id) ");
-    	q.append("from encounter e ");
-    	q.append("INNER JOIN obs o on e.encounter_id = o.encounter_id and o.voided = 0 and o.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
-    	q.append("INNER JOIN obs o1 on o.encounter_id = o1.encounter_id and o1.voided = 0 and o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and ");
-    	q.append("!(o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ") ");
-    	if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
-			
-			for(int i = 0; i<locList.size(); i++){
-				
-				Location loc = locList.get(i);
-				
-				if(i != 0)
-					q.append(" or ");
-				
-				q.append(" l.name = '" + loc.getName() + "'");
-				
-			}
-			
-			q.append(" ) ");
-		}
-    	q.append("where e.encounter_type = 10 and e.voided = 0 ");
-    	if (startDate != null) {
-			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
-		}
-		if (endDate != null) {
-			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
-		}
-    	
-    	System.out.println(q.toString() + "<<<----");
-		
-		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
-		
-		return String.valueOf(result.size());
-    	
-    }
-    
-    public String getDiagnosticPositiveMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
-    	StringBuilder q = new StringBuilder();
-    	q.append("select distinct(e.encounter_id) ");
-    	q.append("from encounter e ");
-    	q.append("INNER JOIN obs o1 on e.encounter_id = o1.encounter_id and o1.voided = 0 ");
-    	q.append("and o1.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ( o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_NA) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_REPEATED) + ") ");
-    	q.append("INNER JOIN obs o2 on o1.encounter_id = o2.encounter_id and o2.voided = 0 and o2.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
-    	q.append("INNER JOIN obs o3 on o2.encounter_id = o3.encounter_id and o3.voided = 0 and o3.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and ");
-    	q.append("!(o3.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o3.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ") ");
-    	if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
-			
-			for(int i = 0; i<locList.size(); i++){
-				
-				Location loc = locList.get(i);
-				
-				if(i != 0)
-					q.append(" or ");
-				
-				q.append(" l.name = '" + loc.getName() + "'");
-				
-			}
-			
-			q.append(" ) ");
-		}
-    	q.append("where e.encounter_type = 10 and e.voided = 0 ");
-    	if (startDate != null) {
-			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
-		}
-		if (endDate != null) {
-			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
-		}
-    	
-    	System.out.println(q.toString() + "<<<----");
-		
-		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
-		
-		return String.valueOf(result.size());
-  
-    }
-    
-    public String getFollowupPositiveMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
-    	StringBuilder q = new StringBuilder();
-    	q.append("select distinct(e.encounter_id) ");
-    	q.append("from encounter e ");
-    	q.append("INNER JOIN obs o1 on e.encounter_id = o1.encounter_id and o1.voided = 0 ");
-    	q.append("and o1.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ( o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_123) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_4) + ") ");
-    	q.append("INNER JOIN obs o2 on o1.encounter_id = o2.encounter_id and o2.voided = 0 and o2.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
-    	q.append("INNER JOIN obs o3 on o2.encounter_id = o3.encounter_id and o3.voided = 0 and o3.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and ");
-    	q.append("!(o3.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o3.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ") ");
-    	if(!locList.isEmpty()){
-			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
-			
-			for(int i = 0; i<locList.size(); i++){
-				
-				Location loc = locList.get(i);
-				
-				if(i != 0)
-					q.append(" or ");
-				
-				q.append(" l.name = '" + loc.getName() + "'");
-				
-			}
-			
-			q.append(" ) ");
-		}
-    	q.append("where e.encounter_type = 10 and e.voided = 0 ");
-    	if (startDate != null) {
-			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
-		}
-		if (endDate != null) {
-			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
-		}
-    	
-    	System.out.println(q.toString() + "<<<----");
-		
-		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
-		
-		return String.valueOf(result.size());
-  
-    }
-    
-    public String getAllPHCResultDuring(Date startDate, Date endDate, List<Location> locList){
+    public String getAllMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
 		StringBuilder q = new StringBuilder();
-		q.append("select distinct(e.encounter_id)  ");
+		q.append("select distinct(o.obs_id)  ");
 		q.append("from encounter e, obs o ");
 		if(!locList.isEmpty())
 			q.append(" , location l ");
 		q.append("where		e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " ");
-		q.append("and o.encounter_id = e.encounter_id and o.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.REQUESTING_MEDICAL_FACILITY) +" ");
-		q.append("and o.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.PHC) +" ");		
+		q.append("and o.encounter_id = e.encounter_id and o.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) +" ");
+				
 		q.append("and e.voided = 0 and o.voided = 0 ");
 		
 		if (startDate != null) {
@@ -1687,7 +1446,246 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			q.append(" ) and l.retired = 0 ");
 		}
 		
-		System.out.println(q.toString() + "<<<----");
+		System.out.println("MICROSCOPY RESULT -> " + q.toString());
+		
+		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
+		
+		return String.valueOf(result.size());
+	}
+    
+    public String getAllPositiveMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
+    	StringBuilder q = new StringBuilder();
+    	q.append("select distinct(o1.obs_group_id) ");
+    	q.append("from encounter e ");
+    	q.append("INNER JOIN obs o on e.encounter_id = o.encounter_id and o.voided = 0 and o.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
+    	q.append("INNER JOIN obs o1 on o.obs_id = o1.obs_group_id and o1.voided = 0 and o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and ");
+    	q.append("!(o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ") ");
+    	if(!locList.isEmpty()){
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
+			
+			for(int i = 0; i<locList.size(); i++){
+				
+				Location loc = locList.get(i);
+				
+				if(i != 0)
+					q.append(" or ");
+				
+				q.append(" l.name = '" + loc.getName() + "'");
+				
+			}
+			
+			q.append(" ) ");
+		}
+    	q.append("where e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " and e.voided = 0 ");
+    	if (startDate != null) {
+			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
+		}
+		if (endDate != null) {
+			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
+		}
+    	
+    	System.out.println("ALL POSITIVE MICROSCOPY -> " + q.toString());
+		
+		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
+		
+		return String.valueOf(result.size());
+    	
+    }
+    
+    public String getDiagnosticMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
+    	StringBuilder q = new StringBuilder();
+		q.append("select distinct(o2.obs_id)  ");
+		q.append("from encounter e ");
+		q.append("INNER JOIN obs o1 on e.encounter_id = o1.encounter_id and o1.voided = 0 and o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ");
+		q.append("( o1.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_NA) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_REPEATED) + ") ");
+		q.append("INNER JOIN obs o2 on o1.encounter_id = o2.encounter_id and o2.voided = 0 and o2.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
+		if(!locList.isEmpty()){
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
+			
+			for(int i = 0; i<locList.size(); i++){
+				
+				Location loc = locList.get(i);
+				
+				if(i != 0)
+					q.append(" or ");
+				
+				q.append(" l.name = '" + loc.getName() + "'");
+				
+			}
+			
+			q.append(" ) ");
+		}
+		q.append("where e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " and e.voided = 0 ");
+		
+		if (startDate != null) {
+			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
+		}
+		if (endDate != null) {
+			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
+		}
+		
+		System.out.println("DIAGNOSTIC MICROSCOPY RESULT ->" + q.toString());
+		
+		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
+		
+		return String.valueOf(result.size());
+	}
+    
+    public String getDiagnosticPositiveMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
+    	StringBuilder q = new StringBuilder();
+    	q.append("select distinct(o3.obs_id) ");
+    	q.append("from encounter e ");
+    	q.append("INNER JOIN obs o1 on e.encounter_id = o1.encounter_id and o1.voided = 0 ");
+    	q.append("and o1.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ( o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_NA) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_REPEATED) + ") ");
+    	q.append("INNER JOIN obs o2 on o1.encounter_id = o2.encounter_id and o2.voided = 0 and o2.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
+    	q.append("INNER JOIN obs o3 on o2.obs_id = o3.obs_group_id and o3.voided = 0 and o3.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and ");
+    	q.append("!(o3.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o3.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ") ");
+    	if(!locList.isEmpty()){
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
+			
+			for(int i = 0; i<locList.size(); i++){
+				
+				Location loc = locList.get(i);
+				
+				if(i != 0)
+					q.append(" or ");
+				
+				q.append(" l.name = '" + loc.getName() + "'");
+				
+			}
+			
+			q.append(" ) ");
+		}
+    	q.append("where e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " and e.voided = 0 ");
+    	if (startDate != null) {
+			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
+		}
+		if (endDate != null) {
+			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
+		}
+    	
+    	System.out.println("DIAGNOSTIC POSITIVE MICROSCOPY RESULT ->" + q.toString());
+		
+		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
+		
+		return String.valueOf(result.size());
+  
+    }
+    
+    public String getFollowupMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
+    	StringBuilder q = new StringBuilder();
+		q.append("select distinct(o2.obs_id) ");
+		q.append("from encounter e ");
+		q.append("INNER JOIN obs o1 on e.encounter_id = o1.encounter_id and o1.voided = 0 and o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ");
+		q.append("( o1.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_123) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_4) + ") ");
+		q.append("INNER JOIN obs o2 on o1.encounter_id = o2.encounter_id and o2.voided = 0 and o2.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
+		if(!locList.isEmpty()){
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
+			
+			for(int i = 0; i<locList.size(); i++){
+				
+				Location loc = locList.get(i);
+				
+				if(i != 0)
+					q.append(" or ");
+				
+				q.append(" l.name = '" + loc.getName() + "'");
+				
+			}
+			
+			q.append(" ) ");
+		}
+
+		q.append("where e.encounter_type =  " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + "  and e.voided = 0 ");
+		if (startDate != null) {
+			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
+		}
+		if (endDate != null) {
+			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
+		}
+		
+		System.out.println("FOLLOWUP MICROSCOPY RESULT ->"+ q.toString());
+		
+		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
+		
+		return String.valueOf(result.size());
+	}
+    
+    
+    
+    public String getFollowupPositiveMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
+    	StringBuilder q = new StringBuilder();
+    	q.append("select distinct(o3.obs_id) ");
+    	q.append("from encounter e ");
+    	q.append("INNER JOIN obs o1 on e.encounter_id = o1.encounter_id and o1.voided = 0 ");
+    	q.append("and o1.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ( o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_123) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_4) + ") ");
+    	q.append("INNER JOIN obs o2 on o1.encounter_id = o2.encounter_id and o2.voided = 0 and o2.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " ");
+    	q.append("INNER JOIN obs o3 on o2.obs_id = o3.obs_group_id and o3.voided = 0 and o3.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_RESULT) + " and ");
+    	q.append("!(o3.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.NEGATIVE) + " or o3.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TEST_NOT_DONE) + ") ");
+    	if(!locList.isEmpty()){
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
+			
+			for(int i = 0; i<locList.size(); i++){
+				
+				Location loc = locList.get(i);
+				
+				if(i != 0)
+					q.append(" or ");
+				
+				q.append(" l.name = '" + loc.getName() + "'");
+				
+			}
+			
+			q.append(" ) ");
+		}
+    	q.append("where e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " and e.voided = 0 ");
+    	if (startDate != null) {
+			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
+		}
+		if (endDate != null) {
+			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
+		}
+    	
+    	System.out.println("FOLLOWUP POSITIVE MICROSCOPY RESULT ->" + q.toString());
+		
+		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
+		
+		return String.valueOf(result.size());
+  
+    }
+    
+    public String getAllPHCResultDuring(Date startDate, Date endDate, List<Location> locList){
+		StringBuilder q = new StringBuilder();
+		q.append("select distinct(o1.obs_id)  ");
+		q.append("from encounter e ");
+    	q.append("INNER JOIN obs o on e.encounter_id = o.encounter_id and o.voided = 0 and o.concept_id = "+ Context.getService(TbService.class).getConcept(TbConcepts.REQUESTING_MEDICAL_FACILITY) +" and o.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.PHC) +" ");
+    	q.append("INNER JOIN obs o1 on o.encounter_id = o1.encounter_id and o1.voided and (o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.MICROSCOPY_CONSTRUCT) + " || o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.XPERT_CONSTRUCT) + " ");
+    	q.append("|| o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.HAIN_CONSTRUCT) + " ||o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.HAIN_2_CONSTRUCT) + " || o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.CULTURE_CONSTRUCT) + ") ");
+    	if(!locList.isEmpty()){
+			q.append("INNER JOIN location l on e.location_id = l.location_id and l.retired = 0 and ( ");
+			
+			for(int i = 0; i<locList.size(); i++){
+				
+				Location loc = locList.get(i);
+				
+				if(i != 0)
+					q.append(" or ");
+				
+				q.append(" l.name = '" + loc.getName() + "'");
+				
+			}
+			
+			q.append(" ) ");
+		}
+    	q.append("where e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " and e.voided = 0 ");
+    	if (startDate != null) {
+			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
+		}
+		if (endDate != null) {
+			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
+		}
+		
+		System.out.println("PHC ALL RESULTS" + q.toString());
 		
 		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
 		
@@ -1719,7 +1717,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			
 			q.append(" ) ");
 		}
-    	q.append("where e.encounter_type = 10 and e.voided = 0 ");
+    	q.append("where e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " and e.voided = 0 ");
     	if (startDate != null) {
 			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
 		}
@@ -1727,16 +1725,16 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			q.append("and	e.encounter_datetime <= '" + DateUtil.formatDate(endDate, "yyyy-MM-dd") + "' ");
 		}
     	
-    	System.out.println(q.toString() + "<<<----");
+		System.out.println("PHC POSITIVE RESULTS" + q.toString());
 		
 		List<List<Object>> result = Context.getAdministrationService().executeSQL(q.toString(), true);
 		
 		return String.valueOf(result.size());
 	}
     
-    public String getRateDiagnosticMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
+    public String getRatioDiagnosticMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
     	StringBuilder q = new StringBuilder();
-		q.append("select count(distinct(e.encounter_id))/count(distinct(e.patient_id))  ");
+		q.append("select count(distinct(o1.obs_id))/count(distinct(e.patient_id))  ");
 		q.append("from encounter e ");
 		q.append("INNER JOIN obs o1 on e.encounter_id = o1.encounter_id and o1.voided = 0 and o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ");
 		q.append("( o1.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_NA) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.DIAGNOSTICS_REPEATED) + ") ");
@@ -1757,7 +1755,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			
 			q.append(" ) ");
 		}
-		q.append("where e.encounter_type = 10 and e.voided = 0 ");
+		q.append("where e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " and e.voided = 0 ");
 		
 		if (startDate != null) {
 			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
@@ -1786,7 +1784,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
     
     public String getRateFollowupMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList){
     	StringBuilder q = new StringBuilder();
-		q.append("select count(distinct(e.encounter_id))/count(distinct(e.patient_id))  ");
+		q.append("select count(distinct(o1.obs_id))/count(distinct(e.patient_id))  ");
 		q.append("from encounter e ");
 		q.append("INNER JOIN obs o1 on e.encounter_id = o1.encounter_id and o1.voided = 0 and o1.concept_id = " + Context.getService(TbService.class).getConcept(TbConcepts.INVESTIGATION_PURPOSE) + " and ");
 		q.append("( o1.value_coded = "+ Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_123) + " or o1.value_coded = " + Context.getService(TbService.class).getConcept(TbConcepts.TREATMENT_CONTROL_CAT_4) + ") ");
@@ -1807,7 +1805,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			
 			q.append(" ) ");
 		}
-		q.append("where e.encounter_type = 10 and e.voided = 0 ");
+		q.append("where e.encounter_type = " + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " and e.voided = 0 ");
 		
 		if (startDate != null) {
 			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
@@ -1859,7 +1857,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			
 			q.append(" ) ");
 		}
-		q.append("where e.encounter_type = 10 and e.voided = 0 ");
+		q.append("where e.encounter_type =  "  + Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() +" and e.voided = 0 ");
 		
 		if (startDate != null) {
 			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
@@ -1897,7 +1895,7 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 			
 			q.append(" ) ");
 		}
-		q.append("where e.encounter_type = 10 and e.voided = 0 ");
+		q.append("where e.encounter_type = " +Context.getEncounterService().getEncounterType(Context.getAdministrationService().getGlobalProperty("labmodule.test_result_encounter_type")).getId() + " and e.voided = 0 ");
 		
 		if (startDate != null) {
 			q.append("and	e.encounter_datetime >= '" + DateUtil.formatDate(startDate, "yyyy-MM-dd") + "' ");
@@ -1926,9 +1924,8 @@ public List<TbPatientProgram> getTbPatientPrograms(Patient patient) {
 		return String.format("%.2f", res);
 	}
     
-//    public String generateReportFromQuery (String location, String year, String query, Boolean export)
-//	{
-//		return ReportUtil.generateReportFromQuery (location, year, query, export);
-//	}
+    public Collection<Location> getAllLocations(){
+		return Context.getLocationService().getAllLocations();
+	}
  
 }

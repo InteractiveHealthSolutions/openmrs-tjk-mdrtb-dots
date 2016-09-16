@@ -616,23 +616,23 @@ public interface TbService extends OpenmrsService {
     @Transactional 
     public void deleteTest(Integer testId);
     
-    public String getAllLabResultDuring(Date startDate, Date endDate, List<Location> locList);
+    public String getAllPatientTestedDuring(Date startDate, Date endDate, List<Location> locList);
     
     public String getAllMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
     
-    public String getDiagnosticLabResultDuring(Date startDate, Date endDate, List<Location> locList);
+    public String getAllDiagnosticPatientTestedDuring(Date startDate, Date endDate, List<Location> locList);
     
-    public String getDisgnosticMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
+    public String getDiagnosticMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
     
-    public String getFollowupLabResultDuring(Date startDate, Date endDate, List<Location> locList);
+    public String getAllFollowupPatientTestedDuring(Date startDate, Date endDate, List<Location> locList);
     
     public String getFollowupMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
     
-    public String getAllPositiveResultDuring(Date startDate, Date endDate, List<Location> locList);
+    public String getAllPositivePatientDuring(Date startDate, Date endDate, List<Location> locList);
     
-    public String getPositiveDiagnosticResultDuring(Date startDate, Date endDate, List<Location> locList);
+    public String getPositiveDiagnosticPatientDuring(Date startDate, Date endDate, List<Location> locList);
     
-    public String getPositiveFollowupResultDuring(Date startDate, Date endDate, List<Location> locList);
+    public String getPositiveFollowupPatientDuring(Date startDate, Date endDate, List<Location> locList);
     
     public String getAllPositiveMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
     
@@ -644,7 +644,7 @@ public interface TbService extends OpenmrsService {
     
     public String getPositivePHCResultDuring(Date startDate, Date endDate, List<Location> locList);
     
-    public String getRateDiagnosticMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
+    public String getRatioDiagnosticMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
     
     public String getRateFollowupMicroscopyResultDuring(Date startDate, Date endDate, List<Location> locList);
     
@@ -652,6 +652,7 @@ public interface TbService extends OpenmrsService {
     
     public String getAverageWeeklyLoadPerLabTechnician(Date startDate, Date endDate, List<Location> locList);
     
+    public Collection<Location> getAllLocations();
     //public String generateReportFromQuery (String location, String year, String query, Boolean export);
   
 }

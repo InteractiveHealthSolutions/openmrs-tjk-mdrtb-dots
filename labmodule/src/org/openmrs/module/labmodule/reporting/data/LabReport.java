@@ -156,133 +156,48 @@ public class LabReport implements ReportSpecification {
 		
 		ReportDefinition report = new ReportDefinition(); 
 		
-		String totalTest = Context.getService(TbService.class).getAllLabResultDuring(startDate, endDate, locList);
-		context.addParameterValue("totalTest", totalTest); 
-		String totalMicroscopy = Context.getService(TbService.class).getAllMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("totalMicroscopy", totalMicroscopy); 
-		String totalDiagnosticTest = Context.getService(TbService.class).getDiagnosticLabResultDuring(startDate, endDate, locList);
-		context.addParameterValue("totalDiagnosticTest", totalDiagnosticTest); 
-		String totalDiagnosticMicroscopyTest = Context.getService(TbService.class).getDisgnosticMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("totalDiagnosticMicroscopyTest", totalDiagnosticMicroscopyTest); 
-		String totalFollowupTest = Context.getService(TbService.class).getFollowupLabResultDuring(startDate, endDate, locList);
-		context.addParameterValue("totalFollowupTest", totalFollowupTest); 
-		String totalFollowupMicroscopyTest = Context.getService(TbService.class).getFollowupMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("totalFollowupMicroscopyTest", totalFollowupMicroscopyTest); 
-		String allPositiveTest = Context.getService(TbService.class).getAllPositiveResultDuring(startDate, endDate, locList);
-		context.addParameterValue("allPositiveTest", allPositiveTest); 
-		if(allPositiveTest.equals("0") || totalTest.equals("0"))
-			context.addParameterValue("allPercentageTest", "-"); 
-		else{
-			Float per = (Float.parseFloat(allPositiveTest)/Float.parseFloat(totalTest))*100;
-			context.addParameterValue("allPercentageTest", String.format("%.2f", per) + "%"); 
-		}
-		String allPositiveDiagnosticTest = Context.getService(TbService.class).getPositiveDiagnosticResultDuring(startDate, endDate, locList);
-		context.addParameterValue("allPositiveDiagnosticTest", allPositiveDiagnosticTest); 
-		if(allPositiveDiagnosticTest.equals("0") || totalDiagnosticTest.equals("0"))
-			context.addParameterValue("allDiagnosticPercentageTest", "-"); 
-		else{
-			Float per1 = (Float.parseFloat(allPositiveDiagnosticTest)/Float.parseFloat(totalDiagnosticTest))*100;
-			context.addParameterValue("allDiagnosticPercentageTest", String.format("%.2f", per1) + "%"); 
-		}
-		String allPositiveFollowupTest = Context.getService(TbService.class).getPositiveFollowupResultDuring(startDate, endDate, locList);
-		context.addParameterValue("allPositiveFollowupTest", allPositiveFollowupTest);
-		if(allPositiveFollowupTest.equals("0") || totalFollowupTest.equals("0"))
-			context.addParameterValue("allFollowupPercentageTest", "-"); 
-		else{
-			Float per2 = (Float.parseFloat(allPositiveFollowupTest)/Float.parseFloat(totalFollowupTest))*100;
-			context.addParameterValue("allFollowupPercentageTest", String.format("%.2f", per2) + "%"); 
-		}
-		String allPositiveMicroscopyTest = Context.getService(TbService.class).getAllPositiveMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("allPositiveMicroscopyTest", allPositiveMicroscopyTest); 
-		if(allPositiveMicroscopyTest.equals("0") || totalMicroscopy.equals("0"))
-			context.addParameterValue("allPositiveMicroscopyPercentageTest",  "-"); 
-		else{
-			Float per3 = (Float.parseFloat(allPositiveMicroscopyTest)/Float.parseFloat(totalMicroscopy))*100;
-			context.addParameterValue("allPositiveMicroscopyPercentageTest", String.format("%.2f", per3) + "%"); 
-		}
-		String allPositiveMicroscopyDiagnosticTest = Context.getService(TbService.class).getDiagnosticPositiveMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("allPositiveMicroscopyDiagnosticTest", allPositiveMicroscopyDiagnosticTest);
-		if(allPositiveMicroscopyDiagnosticTest.equals("0") || totalDiagnosticMicroscopyTest.equals("0"))
-			context.addParameterValue("allPositiveMicroscopyPercentageDiagnosticTest",  "-"); 
-		else{
-			Float per4 = (Float.parseFloat(allPositiveMicroscopyDiagnosticTest)/Float.parseFloat(totalDiagnosticMicroscopyTest))*100;
-			context.addParameterValue("allPositiveMicroscopyPercentageDiagnosticTest", String.format("%.2f", per4) + "%"); 
-		}
-		String allPositiveMicroscopyFollowupTest = Context.getService(TbService.class).getFollowupPositiveMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("allPositiveMicroscopyFollowupTest", allPositiveMicroscopyFollowupTest);
-		if(allPositiveMicroscopyFollowupTest.equals("0") || totalFollowupMicroscopyTest.equals("0"))
-			context.addParameterValue("allPositiveMicroscopyPercentageFollowupTest",   "-"); 
-		else{
-			Float per5 = (Float.parseFloat(allPositiveMicroscopyFollowupTest)/Float.parseFloat(totalFollowupMicroscopyTest))*100;
-			context.addParameterValue("allPositiveMicroscopyPercentageFollowupTest", String.format("%.2f", per5) + "%"); 
-		}
-		String allPHCTest = Context.getService(TbService.class).getAllPHCResultDuring(startDate, endDate, locList);
-		context.addParameterValue("allPHCTest", allPHCTest);
-		String allPositivePHCTest = Context.getService(TbService.class).getPositivePHCResultDuring(startDate, endDate, locList);
-		context.addParameterValue("allPositivePHCTest", allPositivePHCTest);
-		String allDiagnosticRatio = Context.getService(TbService.class).getRateDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("allDiagnosticRatio", allDiagnosticRatio);
-		String allFollowupRatio = Context.getService(TbService.class).getRateFollowupMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("allFollowupRatio", allFollowupRatio);
-		String allDiagnosticSaliva = Context.getService(TbService.class).getSalivaDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("allDiagnosticSaliva", allDiagnosticSaliva);
-		if(allDiagnosticSaliva.equals("0") || totalDiagnosticMicroscopyTest.equals("0"))
-			context.addParameterValue("allMicroscopySalivaRateDiagnostoicTest",   "-"); 
-		else{
-			Float per5 = (Float.parseFloat(allDiagnosticSaliva)/Float.parseFloat(totalDiagnosticMicroscopyTest))*100;
-			context.addParameterValue("allMicroscopySalivaRateDiagnostoicTest", String.format("%.2f", per5) + "%"); 
-		}
-		String totalWeeklyLoad = Context.getService(TbService.class).getAverageWeeklyLoadPerLabTechnician(startDate, endDate, locList);
-		context.addParameterValue("totalWeeklyLoad", totalWeeklyLoad);
 		
 		Map<String,Date>dateMap = ReportUtil.getPeriodDates(year, "1", null);
 		startDate = dateMap.get("startDate");
 		endDate = dateMap.get("endDate");
 		
-		String q1Test = Context.getService(TbService.class).getAllLabResultDuring(startDate, endDate, locList);
+		String q1Test = Context.getService(TbService.class).getAllPatientTestedDuring(startDate, endDate, locList);
 		context.addParameterValue("q1Test", q1Test); 
-		String q1Microscopy = Context.getService(TbService.class).getAllMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("q1Microscopy", q1Microscopy); 
-		String q1DiagnosticTest = Context.getService(TbService.class).getDiagnosticLabResultDuring(startDate, endDate, locList);
+		String q1DiagnosticTest = Context.getService(TbService.class).getAllDiagnosticPatientTestedDuring(startDate, endDate, locList);
 		context.addParameterValue("q1DiagnosticTest", q1DiagnosticTest); 
-		String q1DiagnosticMicroscopyTest = Context.getService(TbService.class).getDisgnosticMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("q1DiagnosticMicroscopyTest", q1DiagnosticMicroscopyTest); 
-		String q1FollowupTest = Context.getService(TbService.class).getFollowupLabResultDuring(startDate, endDate, locList);
+		String q1FollowupTest = Context.getService(TbService.class).getAllFollowupPatientTestedDuring(startDate, endDate, locList);
 		context.addParameterValue("q1FollowupTest", q1FollowupTest); 
-		String q1FollowupMicroscopyTest = Context.getService(TbService.class).getFollowupMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("q1FollowupMicroscopyTest", q1FollowupMicroscopyTest); 
-		String q1PositiveTest = Context.getService(TbService.class).getAllPositiveResultDuring(startDate, endDate, locList);
-		context.addParameterValue("q1PositiveTest", q1PositiveTest); 
+		String q1PositiveTest = Context.getService(TbService.class).getAllPositivePatientDuring(startDate, endDate, locList);
+		context.addParameterValue("q1PositiveTest", q1PositiveTest);
+		
 		if(q1PositiveTest.equals("0") || q1Test.equals("0"))
 			context.addParameterValue("q1PercentageTest", "-"); 
 		else{
 			Float per = (Float.parseFloat(q1PositiveTest)/Float.parseFloat(q1Test))*100;
 			context.addParameterValue("q1PercentageTest", String.format("%.2f", per) + "%"); 
 		}
-		String q1PositiveDiagnosticTest = Context.getService(TbService.class).getPositiveDiagnosticResultDuring(startDate, endDate, locList);
+		String q1Microscopy = Context.getService(TbService.class).getAllMicroscopyResultDuring(startDate, endDate, locList);
+		context.addParameterValue("q1Microscopy", q1Microscopy); 
+		String q1PositiveMicroscopyTest = Context.getService(TbService.class).getAllPositiveMicroscopyResultDuring(startDate, endDate, locList);
+		context.addParameterValue("q1PositiveMicroscopyTest", q1PositiveMicroscopyTest);
+		if(q1PositiveMicroscopyTest.equals("0") || q1Microscopy.equals("0"))
+			context.addParameterValue("q1PositiveMicroscopyPercentageTest",  "-"); 
+		else{
+			Float per = (Float.parseFloat(q1PositiveMicroscopyTest)/Float.parseFloat(q1Microscopy))*100;
+			context.addParameterValue("q1PositiveMicroscopyPercentageTest", String.format("%.2f", per) + "%"); 
+		}
+		
+		
+		String q1PositiveDiagnosticTest = Context.getService(TbService.class).getPositiveDiagnosticPatientDuring(startDate, endDate, locList);
 		context.addParameterValue("q1PositiveDiagnosticTest", q1PositiveDiagnosticTest); 
 		if(q1PositiveDiagnosticTest.equals("0") || q1DiagnosticTest.equals("0"))
 			context.addParameterValue("q1DiagnosticPercentageTest", "-"); 
 		else{
-			Float per1 = (Float.parseFloat(q1PositiveDiagnosticTest)/Float.parseFloat(q1DiagnosticTest))*100;
-			context.addParameterValue("q1DiagnosticPercentageTest", String.format("%.2f", per1) + "%"); 
+			Float per = (Float.parseFloat(q1PositiveDiagnosticTest)/Float.parseFloat(q1DiagnosticTest))*100;
+			context.addParameterValue("q1DiagnosticPercentageTest", String.format("%.2f", per) + "%"); 
 		}
-		String q1PositiveFollowupTest = Context.getService(TbService.class).getPositiveFollowupResultDuring(startDate, endDate, locList);
-		context.addParameterValue("q1PositiveFollowupTest", q1PositiveFollowupTest);
-		if(q1PositiveFollowupTest.equals("0") || q1FollowupTest.equals("0"))
-			context.addParameterValue("q1FollowupPercentageTest", "-"); 
-		else{
-			Float per2 = (Float.parseFloat(q1PositiveFollowupTest)/Float.parseFloat(q1FollowupTest))*100;
-			context.addParameterValue("q1FollowupPercentageTest", String.format("%.2f", per2) + "%"); 
-		}
-		String q1PositiveMicroscopyTest = Context.getService(TbService.class).getAllPositiveMicroscopyResultDuring(startDate, endDate, locList);
-		context.addParameterValue("q1PositiveMicroscopyTest", q1PositiveMicroscopyTest); 
-		if(q1PositiveMicroscopyTest.equals("0") || q1Microscopy.equals("0"))
-			context.addParameterValue("q1PositiveMicroscopyPercentageTest",  "-"); 
-		else{
-			Float per3 = (Float.parseFloat(q1PositiveMicroscopyTest)/Float.parseFloat(q1Microscopy))*100;
-			context.addParameterValue("q1PositiveMicroscopyPercentageTest", String.format("%.2f", per3) + "%"); 
-		}
+		String q1DiagnosticMicroscopyTest = Context.getService(TbService.class).getDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
+		context.addParameterValue("q1DiagnosticMicroscopyTest", q1DiagnosticMicroscopyTest); 
 		String q1PositiveMicroscopyDiagnosticTest = Context.getService(TbService.class).getDiagnosticPositiveMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q1PositiveMicroscopyDiagnosticTest", q1PositiveMicroscopyDiagnosticTest);
 		if(q1PositiveMicroscopyDiagnosticTest.equals("0") || q1DiagnosticMicroscopyTest.equals("0"))
@@ -291,6 +206,17 @@ public class LabReport implements ReportSpecification {
 			Float per4 = (Float.parseFloat(q1PositiveMicroscopyDiagnosticTest)/Float.parseFloat(q1DiagnosticMicroscopyTest))*100;
 			context.addParameterValue("q1PositiveMicroscopyPercentageDiagnosticTest", String.format("%.2f", per4) + "%"); 
 		}
+		
+		String q1PositiveFollowupTest = Context.getService(TbService.class).getPositiveFollowupPatientDuring(startDate, endDate, locList);
+		context.addParameterValue("q1PositiveFollowupTest", q1PositiveFollowupTest);
+		if(q1PositiveFollowupTest.equals("0") || q1FollowupTest.equals("0"))
+			context.addParameterValue("q1FollowupPercentageTest", "-"); 
+		else{
+			Float per2 = (Float.parseFloat(q1PositiveFollowupTest)/Float.parseFloat(q1FollowupTest))*100;
+			context.addParameterValue("q1FollowupPercentageTest", String.format("%.2f", per2) + "%"); 
+		}
+		String q1FollowupMicroscopyTest = Context.getService(TbService.class).getFollowupMicroscopyResultDuring(startDate, endDate, locList);
+		context.addParameterValue("q1FollowupMicroscopyTest", q1FollowupMicroscopyTest); 
 		String q1PositiveMicroscopyFollowupTest = Context.getService(TbService.class).getFollowupPositiveMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q1PositiveMicroscopyFollowupTest", q1PositiveMicroscopyFollowupTest);
 		if(q1PositiveMicroscopyFollowupTest.equals("0") || q1FollowupMicroscopyTest.equals("0"))
@@ -303,7 +229,7 @@ public class LabReport implements ReportSpecification {
 		context.addParameterValue("q1PHCTest", q1PHCTest);
 		String q1PositivePHCTest = Context.getService(TbService.class).getPositivePHCResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q1PositivePHCTest", q1PositivePHCTest);
-		String q1DiagnosticRatio = Context.getService(TbService.class).getRateDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
+		String q1DiagnosticRatio = Context.getService(TbService.class).getRatioDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q1DiagnosticRatio", q1DiagnosticRatio);
 		String q1FollowupRatio = Context.getService(TbService.class).getRateFollowupMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q1FollowupRatio", q1FollowupRatio);
@@ -322,19 +248,19 @@ public class LabReport implements ReportSpecification {
 		startDate = dateMap.get("startDate");
 		endDate = dateMap.get("endDate");
 		
-		String q2Test = Context.getService(TbService.class).getAllLabResultDuring(startDate, endDate, locList);
+		String q2Test = Context.getService(TbService.class).getAllPatientTestedDuring(startDate, endDate, locList);
 		context.addParameterValue("q2Test", q2Test); 
 		String q2Microscopy = Context.getService(TbService.class).getAllMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q2Microscopy", q2Microscopy); 
-		String q2DiagnosticTest = Context.getService(TbService.class).getDiagnosticLabResultDuring(startDate, endDate, locList);
+		String q2DiagnosticTest = Context.getService(TbService.class).getAllDiagnosticPatientTestedDuring(startDate, endDate, locList);
 		context.addParameterValue("q2DiagnosticTest", q2DiagnosticTest); 
-		String q2DiagnosticMicroscopyTest = Context.getService(TbService.class).getDisgnosticMicroscopyResultDuring(startDate, endDate, locList);
+		String q2DiagnosticMicroscopyTest = Context.getService(TbService.class).getDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q2DiagnosticMicroscopyTest", q2DiagnosticMicroscopyTest); 
-		String q2FollowupTest = Context.getService(TbService.class).getFollowupLabResultDuring(startDate, endDate, locList);
+		String q2FollowupTest = Context.getService(TbService.class).getAllFollowupPatientTestedDuring(startDate, endDate, locList);
 		context.addParameterValue("q2FollowupTest", q2FollowupTest); 
 		String q2FollowupMicroscopyTest = Context.getService(TbService.class).getFollowupMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q2FollowupMicroscopyTest", q2FollowupMicroscopyTest); 
-		String q2PositiveTest = Context.getService(TbService.class).getAllPositiveResultDuring(startDate, endDate, locList);
+		String q2PositiveTest = Context.getService(TbService.class).getAllPositivePatientDuring(startDate, endDate, locList);
 		context.addParameterValue("q2PositiveTest", q2PositiveTest); 
 		if(q2PositiveTest.equals("0") || q2Test.equals("0"))
 			context.addParameterValue("q2PercentageTest", "-"); 
@@ -342,7 +268,7 @@ public class LabReport implements ReportSpecification {
 			Float per = (Float.parseFloat(q2PositiveTest)/Float.parseFloat(q2Test))*100;
 			context.addParameterValue("q2PercentageTest", String.format("%.2f", per) + "%"); 
 		}
-		String q2PositiveDiagnosticTest = Context.getService(TbService.class).getPositiveDiagnosticResultDuring(startDate, endDate, locList);
+		String q2PositiveDiagnosticTest = Context.getService(TbService.class).getPositiveDiagnosticPatientDuring(startDate, endDate, locList);
 		context.addParameterValue("q2PositiveDiagnosticTest", q2PositiveDiagnosticTest); 
 		if(q2PositiveDiagnosticTest.equals("0") || q2DiagnosticTest.equals("0"))
 			context.addParameterValue("q2DiagnosticPercentageTest", "-"); 
@@ -350,7 +276,7 @@ public class LabReport implements ReportSpecification {
 			Float per1 = (Float.parseFloat(q2PositiveDiagnosticTest)/Float.parseFloat(q2DiagnosticTest))*100;
 			context.addParameterValue("q2DiagnosticPercentageTest", String.format("%.2f", per1) + "%"); 
 		}
-		String q2PositiveFollowupTest = Context.getService(TbService.class).getPositiveFollowupResultDuring(startDate, endDate, locList);
+		String q2PositiveFollowupTest = Context.getService(TbService.class).getPositiveFollowupPatientDuring(startDate, endDate, locList);
 		context.addParameterValue("q2PositiveFollowupTest", q2PositiveFollowupTest);
 		if(q2PositiveFollowupTest.equals("0") || q2FollowupTest.equals("0"))
 			context.addParameterValue("q2FollowupPercentageTest", "-"); 
@@ -386,7 +312,7 @@ public class LabReport implements ReportSpecification {
 		context.addParameterValue("q2PHCTest", q2PHCTest);
 		String q2PositivePHCTest = Context.getService(TbService.class).getPositivePHCResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q2PositivePHCTest", q2PositivePHCTest);
-		String q2DiagnosticRatio = Context.getService(TbService.class).getRateDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
+		String q2DiagnosticRatio = Context.getService(TbService.class).getRatioDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q2DiagnosticRatio", q2DiagnosticRatio);
 		String q2FollowupRatio = Context.getService(TbService.class).getRateFollowupMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q2FollowupRatio", q2FollowupRatio);
@@ -405,19 +331,19 @@ public class LabReport implements ReportSpecification {
 		startDate = dateMap.get("startDate");
 		endDate = dateMap.get("endDate");
 		
-		String q3Test = Context.getService(TbService.class).getAllLabResultDuring(startDate, endDate, locList);
+		String q3Test = Context.getService(TbService.class).getAllPatientTestedDuring(startDate, endDate, locList);
 		context.addParameterValue("q3Test", q3Test); 
 		String q3Microscopy = Context.getService(TbService.class).getAllMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q3Microscopy", q3Microscopy); 
-		String q3DiagnosticTest = Context.getService(TbService.class).getDiagnosticLabResultDuring(startDate, endDate, locList);
+		String q3DiagnosticTest = Context.getService(TbService.class).getAllDiagnosticPatientTestedDuring(startDate, endDate, locList);
 		context.addParameterValue("q3DiagnosticTest", q3DiagnosticTest); 
-		String q3DiagnosticMicroscopyTest = Context.getService(TbService.class).getDisgnosticMicroscopyResultDuring(startDate, endDate, locList);
+		String q3DiagnosticMicroscopyTest = Context.getService(TbService.class).getDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q3DiagnosticMicroscopyTest", q3DiagnosticMicroscopyTest); 
-		String q3FollowupTest = Context.getService(TbService.class).getFollowupLabResultDuring(startDate, endDate, locList);
+		String q3FollowupTest = Context.getService(TbService.class).getAllFollowupPatientTestedDuring(startDate, endDate, locList);
 		context.addParameterValue("q3FollowupTest", q3FollowupTest); 
 		String q3FollowupMicroscopyTest = Context.getService(TbService.class).getFollowupMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q3FollowupMicroscopyTest", q3FollowupMicroscopyTest); 
-		String q3PositiveTest = Context.getService(TbService.class).getAllPositiveResultDuring(startDate, endDate, locList);
+		String q3PositiveTest = Context.getService(TbService.class).getAllPositivePatientDuring(startDate, endDate, locList);
 		context.addParameterValue("q3PositiveTest", q3PositiveTest); 
 		if(q3PositiveTest.equals("0") || q3Test.equals("0"))
 			context.addParameterValue("q3PercentageTest", "-"); 
@@ -425,7 +351,7 @@ public class LabReport implements ReportSpecification {
 			Float per = (Float.parseFloat(q3PositiveTest)/Float.parseFloat(q3Test))*100;
 			context.addParameterValue("q3PercentageTest", String.format("%.2f", per) + "%"); 
 		}
-		String q3PositiveDiagnosticTest = Context.getService(TbService.class).getPositiveDiagnosticResultDuring(startDate, endDate, locList);
+		String q3PositiveDiagnosticTest = Context.getService(TbService.class).getPositiveDiagnosticPatientDuring(startDate, endDate, locList);
 		context.addParameterValue("q3PositiveDiagnosticTest", q3PositiveDiagnosticTest); 
 		if(q3PositiveDiagnosticTest.equals("0") || q3DiagnosticTest.equals("0"))
 			context.addParameterValue("q3DiagnosticPercentageTest", "-"); 
@@ -433,7 +359,7 @@ public class LabReport implements ReportSpecification {
 			Float per1 = (Float.parseFloat(q3PositiveDiagnosticTest)/Float.parseFloat(q3DiagnosticTest))*100;
 			context.addParameterValue("q3DiagnosticPercentageTest", String.format("%.2f", per1) + "%"); 
 		}
-		String q3PositiveFollowupTest = Context.getService(TbService.class).getPositiveFollowupResultDuring(startDate, endDate, locList);
+		String q3PositiveFollowupTest = Context.getService(TbService.class).getPositiveFollowupPatientDuring(startDate, endDate, locList);
 		context.addParameterValue("q3PositiveFollowupTest", q3PositiveFollowupTest);
 		if(q3PositiveFollowupTest.equals("0") || q3FollowupTest.equals("0"))
 			context.addParameterValue("q3FollowupPercentageTest", "-"); 
@@ -469,7 +395,7 @@ public class LabReport implements ReportSpecification {
 		context.addParameterValue("q3PHCTest", q3PHCTest);
 		String q3PositivePHCTest = Context.getService(TbService.class).getPositivePHCResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q3PositivePHCTest", q3PositivePHCTest);
-		String q3DiagnosticRatio = Context.getService(TbService.class).getRateDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
+		String q3DiagnosticRatio = Context.getService(TbService.class).getRatioDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q3DiagnosticRatio", q3DiagnosticRatio);
 		String q3FollowupRatio = Context.getService(TbService.class).getRateFollowupMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q3FollowupRatio", q3FollowupRatio);
@@ -488,19 +414,19 @@ public class LabReport implements ReportSpecification {
 		startDate = dateMap.get("startDate");
 		endDate = dateMap.get("endDate");
 		
-		String q4Test = Context.getService(TbService.class).getAllLabResultDuring(startDate, endDate, locList);
+		String q4Test = Context.getService(TbService.class).getAllPatientTestedDuring(startDate, endDate, locList);
 		context.addParameterValue("q4Test", q4Test); 
 		String q4Microscopy = Context.getService(TbService.class).getAllMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q4Microscopy", q4Microscopy); 
-		String q4DiagnosticTest = Context.getService(TbService.class).getDiagnosticLabResultDuring(startDate, endDate, locList);
+		String q4DiagnosticTest = Context.getService(TbService.class).getAllDiagnosticPatientTestedDuring(startDate, endDate, locList);
 		context.addParameterValue("q4DiagnosticTest", q4DiagnosticTest); 
-		String q4DiagnosticMicroscopyTest = Context.getService(TbService.class).getDisgnosticMicroscopyResultDuring(startDate, endDate, locList);
+		String q4DiagnosticMicroscopyTest = Context.getService(TbService.class).getDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q4DiagnosticMicroscopyTest", q4DiagnosticMicroscopyTest); 
-		String q4FollowupTest = Context.getService(TbService.class).getFollowupLabResultDuring(startDate, endDate, locList);
+		String q4FollowupTest = Context.getService(TbService.class).getFollowupMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q4FollowupTest", q4FollowupTest); 
 		String q4FollowupMicroscopyTest = Context.getService(TbService.class).getFollowupMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q4FollowupMicroscopyTest", q4FollowupMicroscopyTest); 
-		String q4PositiveTest = Context.getService(TbService.class).getAllPositiveResultDuring(startDate, endDate, locList);
+		String q4PositiveTest = Context.getService(TbService.class).getAllPositivePatientDuring(startDate, endDate, locList);
 		context.addParameterValue("q4PositiveTest", q4PositiveTest); 
 		if(q4PositiveTest.equals("0") || q4Test.equals("0"))
 			context.addParameterValue("q4PercentageTest", "-"); 
@@ -508,7 +434,7 @@ public class LabReport implements ReportSpecification {
 			Float per = (Float.parseFloat(q4PositiveTest)/Float.parseFloat(q4Test))*100;
 			context.addParameterValue("q4PercentageTest", String.format("%.2f", per) + "%"); 
 		}
-		String q4PositiveDiagnosticTest = Context.getService(TbService.class).getPositiveDiagnosticResultDuring(startDate, endDate, locList);
+		String q4PositiveDiagnosticTest = Context.getService(TbService.class).getPositiveDiagnosticPatientDuring(startDate, endDate, locList);
 		context.addParameterValue("q4PositiveDiagnosticTest", q4PositiveDiagnosticTest); 
 		if(q4PositiveDiagnosticTest.equals("0") || q4DiagnosticTest.equals("0"))
 			context.addParameterValue("q4DiagnosticPercentageTest", "-"); 
@@ -516,7 +442,7 @@ public class LabReport implements ReportSpecification {
 			Float per1 = (Float.parseFloat(q4PositiveDiagnosticTest)/Float.parseFloat(q4DiagnosticTest))*100;
 			context.addParameterValue("q4DiagnosticPercentageTest", String.format("%.2f", per1) + "%"); 
 		}
-		String q4PositiveFollowupTest = Context.getService(TbService.class).getPositiveFollowupResultDuring(startDate, endDate, locList);
+		String q4PositiveFollowupTest = Context.getService(TbService.class).getPositiveFollowupPatientDuring(startDate, endDate, locList);
 		context.addParameterValue("q4PositiveFollowupTest", q4PositiveFollowupTest);
 		if(q4PositiveFollowupTest.equals("0") || q4FollowupTest.equals("0"))
 			context.addParameterValue("q4FollowupPercentageTest", "-"); 
@@ -552,7 +478,7 @@ public class LabReport implements ReportSpecification {
 		context.addParameterValue("q4PHCTest", q4PHCTest);
 		String q4PositivePHCTest = Context.getService(TbService.class).getPositivePHCResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q4PositivePHCTest", q4PositivePHCTest);
-		String q4DiagnosticRatio = Context.getService(TbService.class).getRateDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
+		String q4DiagnosticRatio = Context.getService(TbService.class).getRatioDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q4DiagnosticRatio", q4DiagnosticRatio);
 		String q4FollowupRatio = Context.getService(TbService.class).getRateFollowupMicroscopyResultDuring(startDate, endDate, locList);
 		context.addParameterValue("q4FollowupRatio", q4FollowupRatio);
@@ -566,6 +492,94 @@ public class LabReport implements ReportSpecification {
 		}
 		String q4WeeklyLoad = Context.getService(TbService.class).getAverageWeeklyLoadPerLabTechnician(startDate, endDate, locList);
 		context.addParameterValue("q4WeeklyLoad", q4WeeklyLoad);
+		
+		Float totalTest = Float.parseFloat(q4Test) + Float.parseFloat(q3Test) + Float.parseFloat(q2Test) + Float.parseFloat(q1Test);
+		context.addParameterValue("totalTest", String.format("%.0f", totalTest)); 
+		Float allPositiveTest = Float.parseFloat(q4PositiveTest) + Float.parseFloat(q3PositiveTest) + Float.parseFloat(q2PositiveTest) + Float.parseFloat(q1PositiveTest);
+		context.addParameterValue("allPositiveTest", String.format("%.0f", allPositiveTest)); 
+		if(allPositiveTest == 0 || totalTest == 0)
+			context.addParameterValue("allPercentageTest", "-"); 
+		else{
+			Float per = (allPositiveTest/totalTest)*100;
+			context.addParameterValue("allPercentageTest", String.format("%.2f", per) + "%"); 
+		}
+		
+		Float totalMicroscopy = Float.parseFloat(q4Microscopy) + Float.parseFloat(q3Microscopy) + Float.parseFloat(q2Microscopy) + Float.parseFloat(q1Microscopy);
+		context.addParameterValue("totalMicroscopy", String.format("%.0f", totalMicroscopy));
+		Float allPositiveMicroscopyTest = Float.parseFloat(q4PositiveMicroscopyTest) + Float.parseFloat(q3PositiveMicroscopyTest) + Float.parseFloat(q2PositiveMicroscopyTest) + Float.parseFloat(q1PositiveMicroscopyTest);
+		context.addParameterValue("allPositiveMicroscopyTest", String.format("%.0f", allPositiveMicroscopyTest)); 
+		if(allPositiveMicroscopyTest == 0 || totalMicroscopy == 0)
+			context.addParameterValue("allPositiveMicroscopyPercentageTest",  "-"); 
+		else{
+			Float per3 = (allPositiveMicroscopyTest/totalMicroscopy)*100;
+			context.addParameterValue("allPositiveMicroscopyPercentageTest", String.format("%.2f", per3) + "%"); 
+		}
+		Float totalDiagnosticTest = Float.parseFloat(q4DiagnosticTest) + Float.parseFloat(q3DiagnosticTest) + Float.parseFloat(q2DiagnosticTest) + Float.parseFloat(q1DiagnosticTest);
+		context.addParameterValue("totalDiagnosticTest", String.format("%.0f", totalDiagnosticTest)); 
+		Float allPositiveDiagnosticTest = Float.parseFloat(q4PositiveDiagnosticTest) + Float.parseFloat(q3PositiveDiagnosticTest) + Float.parseFloat(q2PositiveDiagnosticTest) + Float.parseFloat(q1PositiveDiagnosticTest);
+		context.addParameterValue("allPositiveDiagnosticTest", String.format("%.0f", allPositiveDiagnosticTest)); 
+		if(allPositiveDiagnosticTest == 0 || totalDiagnosticTest == 0)
+			context.addParameterValue("allDiagnosticPercentageTest", "-"); 
+		else{
+			Float per1 = (allPositiveDiagnosticTest/totalDiagnosticTest)*100;
+			context.addParameterValue("allDiagnosticPercentageTest", String.format("%.2f", per1) + "%"); 
+		}
+		Float totalDiagnosticMicroscopyTest = Float.parseFloat(q4DiagnosticMicroscopyTest) + Float.parseFloat(q3DiagnosticMicroscopyTest) + Float.parseFloat(q2DiagnosticMicroscopyTest) + Float.parseFloat(q1DiagnosticMicroscopyTest);
+		context.addParameterValue("totalDiagnosticMicroscopyTest", String.format("%.0f", totalDiagnosticMicroscopyTest)); 
+		Float allPositiveMicroscopyDiagnosticTest = Float.parseFloat(q4PositiveMicroscopyDiagnosticTest) + Float.parseFloat(q3PositiveMicroscopyDiagnosticTest) + Float.parseFloat(q2PositiveMicroscopyDiagnosticTest) + Float.parseFloat(q1PositiveMicroscopyDiagnosticTest);
+		context.addParameterValue("allPositiveMicroscopyDiagnosticTest", String.format("%.0f", allPositiveMicroscopyDiagnosticTest));
+		if(allPositiveMicroscopyDiagnosticTest == 0 || totalDiagnosticMicroscopyTest == 0)
+			context.addParameterValue("allPositiveMicroscopyPercentageDiagnosticTest",  "-"); 
+		else{
+			Float per4 = (allPositiveMicroscopyDiagnosticTest/totalDiagnosticMicroscopyTest)*100;
+			context.addParameterValue("allPositiveMicroscopyPercentageDiagnosticTest", String.format("%.2f", per4) + "%"); 
+		}
+		
+		Float totalFollowupTest = Float.parseFloat(q4FollowupTest) + Float.parseFloat(q3FollowupTest) + Float.parseFloat(q2FollowupTest) + Float.parseFloat(q1FollowupTest);
+		context.addParameterValue("totalFollowupTest", String.format("%.0f", totalFollowupTest)); 
+		Float allPositiveFollowupTest = Float.parseFloat(q4PositiveFollowupTest) + Float.parseFloat(q3PositiveFollowupTest) + Float.parseFloat(q2PositiveFollowupTest) + Float.parseFloat(q1PositiveFollowupTest);
+		context.addParameterValue("allPositiveFollowupTest", String.format("%.0f", allPositiveFollowupTest));
+		if(allPositiveFollowupTest == 0 || totalFollowupTest == 0)
+			context.addParameterValue("allFollowupPercentageTest", "-"); 
+		else{
+			Float per2 = (allPositiveFollowupTest/totalFollowupTest)*100;
+			context.addParameterValue("allFollowupPercentageTest", String.format("%.2f", per2) + "%"); 
+		}	
+		Float totalFollowupMicroscopyTest = Float.parseFloat(q4FollowupMicroscopyTest) + Float.parseFloat(q3FollowupMicroscopyTest) + Float.parseFloat(q2FollowupMicroscopyTest) + Float.parseFloat(q1FollowupMicroscopyTest);
+		context.addParameterValue("totalFollowupMicroscopyTest", String.format("%.0f", totalFollowupMicroscopyTest)); 
+		Float allPositiveMicroscopyFollowupTest = Float.parseFloat(q4PositiveMicroscopyFollowupTest) + Float.parseFloat(q3PositiveMicroscopyFollowupTest) + Float.parseFloat(q2PositiveMicroscopyFollowupTest) + Float.parseFloat(q1PositiveMicroscopyFollowupTest);
+		context.addParameterValue("allPositiveMicroscopyFollowupTest",  String.format("%.0f", allPositiveMicroscopyFollowupTest));
+		if(allPositiveMicroscopyFollowupTest == 0|| totalFollowupMicroscopyTest == 0)
+			context.addParameterValue("allPositiveMicroscopyPercentageFollowupTest",   "-"); 
+		else{
+			Float per5 = (allPositiveMicroscopyFollowupTest/totalFollowupMicroscopyTest)*100;
+			context.addParameterValue("allPositiveMicroscopyPercentageFollowupTest", String.format("%.2f", per5) + "%"); 
+		}
+		
+		Float allPHCTest = Float.parseFloat(q4PHCTest) + Float.parseFloat(q3PHCTest) + Float.parseFloat(q2PHCTest) + Float.parseFloat(q1PHCTest);
+		context.addParameterValue("allPHCTest",  String.format("%.0f",allPHCTest));
+		Float allPositivePHCTest = Float.parseFloat(q4PositivePHCTest) + Float.parseFloat(q3PositivePHCTest) + Float.parseFloat(q2PositivePHCTest) + Float.parseFloat(q1PositivePHCTest);
+		context.addParameterValue("allPositivePHCTest",  String.format("%.0f",allPositivePHCTest));
+		
+		dateMap = ReportUtil.getPeriodDates(year, null, null);
+		startDate = dateMap.get("startDate");
+		endDate = dateMap.get("endDate");
+		
+		String allDiagnosticRatio = Context.getService(TbService.class).getRatioDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
+		context.addParameterValue("allDiagnosticRatio", allDiagnosticRatio);
+		String allFollowupRatio = Context.getService(TbService.class).getRateFollowupMicroscopyResultDuring(startDate, endDate, locList);
+		context.addParameterValue("allFollowupRatio", allFollowupRatio);
+		String allDiagnosticSaliva = Context.getService(TbService.class).getSalivaDiagnosticMicroscopyResultDuring(startDate, endDate, locList);
+		context.addParameterValue("allDiagnosticSaliva", allDiagnosticSaliva);
+		if(allDiagnosticSaliva.equals("0") || totalDiagnosticMicroscopyTest.equals("0"))
+			context.addParameterValue("allMicroscopySalivaRateDiagnostoicTest",   "-"); 
+		else{
+			Float per5 = (Float.parseFloat(allDiagnosticSaliva)/totalDiagnosticMicroscopyTest)*100;
+			context.addParameterValue("allMicroscopySalivaRateDiagnostoicTest", String.format("%.2f", per5) + "%"); 
+		}
+		String totalWeeklyLoad = Context.getService(TbService.class).getAverageWeeklyLoadPerLabTechnician(startDate, endDate, locList);
+		context.addParameterValue("totalWeeklyLoad", totalWeeklyLoad);
+		
 		
 		if (!locList.isEmpty()){
 			List<CohortDefinition> cohortDefinitions = new ArrayList<CohortDefinition>();
