@@ -52,7 +52,7 @@
 			</td>
 			
 			 <td>
-				<a href="../labmodule/reporting/labListPatients.form"><spring:message code="labmodule.labReports" /></a>
+				<a href="../labmodule/reporting/labListPatients.form"><spring:message code="labmodule.customLabReports" /></a>
 			</td>
 			 
 		</tr>
