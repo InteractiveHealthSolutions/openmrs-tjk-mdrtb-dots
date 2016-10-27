@@ -132,8 +132,8 @@ public abstract class AbstractSpecimenController {
 	}
 	
 	@ModelAttribute("locations")
-	public Collection<Location> getPossibleLabs() {
-		return Context.getService(TbService.class).getPossibleLabs();
+	public Collection<Location> getPossibleLocations() {
+		return Context.getService(TbService.class).getAllLocations();
 	}
 	
 	@ModelAttribute("appearances")

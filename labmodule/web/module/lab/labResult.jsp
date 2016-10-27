@@ -28,6 +28,9 @@ form {
 	<b class="boxHeader" style="margin:0px">
 		&nbsp;
 		<spring:message code="labmodule.labEntry.title" text="TB 05"/>
+		<span id="specimen_edit_span" name="specimen_edit_span" style="float:right">
+		    <A HREF="javascript:window.print()">Click to Print This Page</A>
+		</span> 
 	</b>
 	
 	<div class="box" id="" style="margin:0px">

@@ -90,7 +90,7 @@ public abstract class AbstractListController {
 	
 	@ModelAttribute("labs")
 	public Collection<Location> getAllLabs() {
-		return Context.getService(TbService.class).getPossibleLabs();
+		return Context.getService(TbService.class).getAllLocations();
 	}
 	
 	@ModelAttribute("appearances")

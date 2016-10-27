@@ -157,12 +157,13 @@ public class NewPatientFormController extends SimpleFormController {
 					log.debug("preferred: " + pref);
 				}
 				
-				Location loc = Context.getLocationService().getLocation(shortPatient.getAddress().getCountyDistrict());
+				Location loc = Context.getLocationService().getLocationByUuid("d1be51a0-d15b-4fd1-9815-d5f4a52dd0de");
+				//Location loc = Context.getLocationService().getLocation(shortPatient.getAddress().getCountyDistrict());
 				
 				long date = System.currentTimeMillis ();
-				String id = String.valueOf (date) + " - " + Context.getAuthenticatedUser().getId();
+				String id = String.valueOf(date) + " - " + Context.getAuthenticatedUser().getId();
 				
-                String patientIdentifier = Context.getAdministrationService().getGlobalProperty("labmodule.primaryPatientIdentifierType");
+                String patientIdentifier = "Suspect Id";
                 PatientIdentifierType pit = ps.getPatientIdentifierTypeByName(patientIdentifier);
                 PatientIdentifier pi = new PatientIdentifier(id, pit, loc);
                 newIdentifiers.add(pi);

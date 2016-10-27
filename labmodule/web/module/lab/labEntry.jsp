@@ -144,6 +144,8 @@ form {
 		&nbsp;
 		<spring:message code="mdrtb.specimenDetails" text="Specimen Details"/>
 		<span id="specimen_edit_span" name="specimen_edit_span" style="float:right">
+		    <A HREF="javascript:window.print()">Click to Print This Page</A>
+		    &nbsp;&nbsp;
 			<openmrs:hasPrivilege privilege="Edit Test Result">
 				<img title="Edit" id='editSpecimenDetailButton' onclick="onClick(this)" src="${pageContext.request.contextPath}/moduleResources/labmodule/edit.gif" alt="edit" border="0" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='default'"/>
 			</openmrs:hasPrivilege>

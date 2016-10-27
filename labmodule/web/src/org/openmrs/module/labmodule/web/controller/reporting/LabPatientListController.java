@@ -461,12 +461,12 @@ public class LabPatientListController extends AbstractListController{
 		            
 		            if(c != null){
 			            mMap.put("cultureResultDate", c.getResultDate() == null ? "" : df.format(c.getResultDate()));
-		        	    mMap.put("cultureResult", c.getResult().getName());
+		        	    mMap.put("cultureResult", c.getResult() == null ? "" : c.getResult().getName());
 		            }
 		            
 		            if(h2 != null){
 			            mMap.put("hain2ResultDate", h2.getResultDate() == null ? "" : df.format(h2.getResultDate()));
-		        	    mMap.put("hain2MtbResult", h2.getResult().getName());
+		        	    mMap.put("hain2MtbResult", h2.getResult() == null ? "" : h2.getResult().getName());
 		        	    mMap.put("hain2MoxResult", h2.getMoxResistance() == null ? "" : h2.getMoxResistance().getName());
 		        	    mMap.put("hain2CmResult",  h2.getCmResistance() == null ? "" : h2.getCmResistance().getName());
 		        	    mMap.put("hain2ErResult",  h2.getErResistance() == null ? "" : h2.getErResistance().getName());
@@ -474,34 +474,34 @@ public class LabPatientListController extends AbstractListController{
 		            
 		            if(h != null){
 	        	    	mMap.put("hainResultDate", h.getResultDate() == null ? "" : df.format(h.getResultDate()));
-		        	    mMap.put("hainMtbResult", h.getResult().getName());
+		        	    mMap.put("hainMtbResult",  h.getResult() == null ? "" : h.getResult().getName());
 		        	    mMap.put("hainRifResult", h.getRifResistance() == null ? "" : h.getRifResistance().getName());
 		        	    mMap.put("hainInhResult",  h.getInhResistance() == null ? "" : h.getInhResistance().getName());
 	        	    }
 		            
 		            if(x != null){
 	        	    	mMap.put("xpertResultDate", x.getResultDate() == null ? "" : df.format(x.getResultDate()));
-		        	    mMap.put("xpertMtbResult", x.getResult().getName());
+		        	    mMap.put("xpertMtbResult", x.getResult() == null ? "" : x.getResult());
 		        	    mMap.put("xpertRifResult", x.getRifResistance() == null ? "" : x.getRifResistance().getName());
 		        	    mMap.put("xpertErrorCode",  x.getErrorCode());
 	        	    }
 		            
 		            if(m1 != null){
 	        	    	mMap.put("microscopyResultDate_1", m1.getResultDate() == null ? "" : df.format(m1.getResultDate()));
-		        	    mMap.put("sampleAppearence_1", m1.getSampleApperence().getName());
-		        	    mMap.put("sampleResult_1", m1.getSampleResult().getName());
+		        	    mMap.put("sampleAppearence_1", m1.getSampleApperence() ==  null ? "" : m1.getSampleApperence().getName());
+		        	    mMap.put("sampleResult_1", m1.getSampleResult() == null ? "" : m1.getSampleResult().getName());
 	        	    }
 		            
 		            if(m2 != null){
 	        	    	mMap.put("microscopyResultDate_2", m2.getResultDate() == null ? "" : df.format(m2.getResultDate()));
-		        	    mMap.put("sampleAppearence_2", m2.getSampleApperence().getName());
-		        	    mMap.put("sampleResult_2", m2.getSampleResult().getName());
+		        	    mMap.put("sampleAppearence_2", m2.getSampleApperence() ==  null ? "" :  m2.getSampleApperence().getName());
+		        	    mMap.put("sampleResult_2", m2.getSampleResult() == null ? "" : m2.getSampleResult().getName());
 	        	    }
 		            
 		            if(m3 != null){
 	        	    	mMap.put("microscopyResultDate_3", m3.getResultDate() == null ? "" : df.format(m3.getResultDate()));
-		        	    mMap.put("sampleAppearence_3", m3.getSampleApperence().getName());
-		        	    mMap.put("sampleResult_3",m3.getSampleResult().getName());
+		        	    mMap.put("sampleAppearence_3", m3.getSampleResult() == null ? "" : m3.getSampleApperence().getName());
+		        	    mMap.put("sampleResult_3",m3.getSampleResult() == null ? "" : m3.getSampleResult().getName());
 	        	    }
 		            
 		            data.add(mMap);
@@ -880,7 +880,7 @@ public class LabPatientListController extends AbstractListController{
 		        	    
 		        	    if(h2 != null){
 				            mMap.put("hain2ResultDate", h2.getResultDate() == null ? "" : df.format(h2.getResultDate()));
-			        	    mMap.put("hain2MtbResult", h2.getResult().getName());
+			        	    mMap.put("hain2MtbResult", h2.getResult() == null ? "" : h2.getResult().getName());
 			        	    mMap.put("hain2MoxResult", h2.getMoxResistance() == null ? "" : h2.getMoxResistance().getName());
 			        	    mMap.put("hain2CmResult",  h2.getCmResistance() == null ? "" : h2.getCmResistance().getName());
 			        	    mMap.put("hain2ErResult",  h2.getErResistance() == null ? "" : h2.getErResistance().getName());
@@ -888,34 +888,34 @@ public class LabPatientListController extends AbstractListController{
 		        	    
 		        	    if(h != null){
 		        	    	mMap.put("hainResultDate", h.getResultDate() == null ? "" : df.format(h.getResultDate()));
-			        	    mMap.put("hainMtbResult", h.getResult().getName());
+			        	    mMap.put("hainMtbResult", h.getResult() == null ? "" : h.getResult().getName());
 			        	    mMap.put("hainRifResult", h.getRifResistance() == null ? "" : h.getRifResistance().getName());
 			        	    mMap.put("hainInhResult",  h.getInhResistance() == null ? "" : h.getInhResistance().getName());
 		        	    }
 		        	    
 		        	    if(x != null){
 		        	    	mMap.put("xpertResultDate", x.getResultDate() == null ? "" : df.format(x.getResultDate()));
-			        	    mMap.put("xpertMtbResult", x.getResult().getName());
+			        	    mMap.put("xpertMtbResult", x.getResult() == null ? "" : x.getResult().getName());
 			        	    mMap.put("xpertRifResult", x.getRifResistance() == null ? "" : x.getRifResistance().getName());
 			        	    mMap.put("xpertErrorCode",  x.getErrorCode());
 		        	    }
 		        	    
 		        	    if(m1 != null){
 		        	    	mMap.put("microscopyResultDate_1", m1.getResultDate() == null ? "" : df.format(m1.getResultDate()));
-			        	    mMap.put("sampleAppearence_1", m1.getSampleApperence().getName());
-			        	    mMap.put("sampleResult_1", m1.getSampleResult().getName());
+			        	    mMap.put("sampleAppearence_1", m1.getSampleApperence() == null ? "" : m1.getSampleApperence().getName());
+			        	    mMap.put("sampleResult_1", m1.getSampleResult() == null ? "" : m1.getSampleResult().getName());
 		        	    }
 			            
 			            if(m2 != null){
 		        	    	mMap.put("microscopyResultDate_2", m2.getResultDate() == null ? "" : df.format(m2.getResultDate()));
-			        	    mMap.put("sampleAppearence_2", m2.getSampleApperence().getName());
-			        	    mMap.put("sampleResult_2", m2.getSampleResult().getName());
+			        	    mMap.put("sampleAppearence_2",  m2.getSampleApperence() == null ? "" : m2.getSampleApperence().getName());
+			        	    mMap.put("sampleResult_2", m2.getSampleResult() == null ? "" : m2.getSampleResult().getName());
 		        	    }
 			            
 			            if(m3 != null){
 		        	    	mMap.put("microscopyResultDate_3", m3.getResultDate() == null ? "" : df.format(m3.getResultDate()));
-			        	    mMap.put("sampleAppearence_3", m3.getSampleApperence().getName());
-			        	    mMap.put("sampleResult_3",m3.getSampleResult().getName());
+			        	    mMap.put("sampleAppearence_3",  m3.getSampleApperence() == null ? "" : m3.getSampleApperence().getName());
+			        	    mMap.put("sampleResult_3", m3.getSampleResult() == null ? "" : m3.getSampleResult().getName());
 		        	    }
 		        	    
 			            data.add(mMap);
